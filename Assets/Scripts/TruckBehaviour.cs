@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public class TruckMovement : MonoBehaviour
+public class TruckBehaviour : MonoBehaviour
 {
     public PathCreator pathCreator;
     public EndOfPathInstruction end;
