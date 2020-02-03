@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,11 @@ public class TowerBehaviour : MonoBehaviour
     // Handles tower cooldown
     void Update()
     {
-        if (!_readyToFire)
+        if (_readyToFire)
+        {
+            AttemptToShoot();
+        }
+        else
         {
             _timeElapsedSinceLastFire += Time.deltaTime;
 
@@ -47,36 +52,17 @@ public class TowerBehaviour : MonoBehaviour
         }
     }
 
-    // Shoots a bullet at target in range if ready to fire
-    void LateUpdate()
+    void AttemptToShoot()
     {
-        if (_readyToFire && collidersThisFrame.Count != 0)
+        if (collidersThisFrame.Count != 0)
         {
-            Vector3 target = new Vector3(Single.MaxValue, Single.MaxValue, Single.MaxValue);
-            float nearestDistance = Single.MaxValue;
-
-            foreach (Collider c in collidersThisFrame)
-            {
-                GameObject dicks = c.gameObject;
-                TruckStats truckStats = dicks.GetComponent<TruckStats>();
-
-                if (truckStats != null)
-                {
-                    if (target == new Vector3(Single.MaxValue, Single.MaxValue, Single.MaxValue))
-                    {
-                        target = dicks.transform.position;
-                        nearestDistance = Vector3.Distance(dicks.transform.position, _turretPosition);
-                    }
-                    else
-                    {
-                        if (Vector3.Distance(dicks.transform.position, _turretPosition) < nearestDistance)
-                        {
-                            nearestDistance = Vector3.Distance(dicks.transform.position, _turretPosition);
-                            target = dicks.transform.position;
-                        }
-                    }
-                }
-            }
+            Vector3 target = collidersThisFrame.Select(c => c.gameObject)
+                                               .Where(o => o.GetComponent<AbstractDamageReceiver>() != null)
+                                               .Where(o => o.GetComponent<AbstractDamageReceiver>().Alignment != this.Alignment)
+                                               .Aggregate((a, b)
+                                                           => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
+                                                              ? a : b)
+                                               .transform.position;
 
             _readyToFire = false;
             collidersThisFrame.Clear();
