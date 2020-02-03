@@ -20,7 +20,8 @@ public class TowerBehaviour : MonoBehaviour
     Vector3 _turretPosition;
 
     List<Collider> collidersThisFrame = new List<Collider>();
-    
+
+    Transform _gimbal;
 
     // Sets up the Sphere Collider to detect trucks
     void Start()
@@ -31,11 +32,28 @@ public class TowerBehaviour : MonoBehaviour
         _sphereCollider.isTrigger = true;
 
         _turretPosition = transform.position + TurretDisplacement;
+
+        _gimbal = gameObject.transform.Find("Model").Find("Gimbal");
     }
 
     // Handles tower cooldown
     void Update()
     {
+        // Tower Gimbal follows nearest target
+        if (collidersThisFrame.Count != 0)
+        {
+            // Find the closest target
+            Vector3 target 
+                = collidersThisFrame.Select(c => c.gameObject)
+                                    .Where(o => o.GetComponent<AbstractDamageReceiver>() != null)
+                                    .Where(o => o.GetComponent<AbstractDamageReceiver>().Alignment != this.Alignment)
+                                    .Aggregate((a, b)
+                                                => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
+                                                                    ? a : b)
+                                                .transform.position;
+            _gimbal.transform.rotation = Quaternion.LookRotation(target - _turretPosition, Vector3.up);
+        }
+
         if (_readyToFire)
         {
             AttemptToShoot();
