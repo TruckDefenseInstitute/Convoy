@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class TruckDamageReceiver : AbstractDamageReceiver
 {
-    public int MaxHP;
-    int _remaningHP;
+    
 }

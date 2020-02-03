@@ -56,12 +56,14 @@ public class TowerBehaviour : MonoBehaviour
     {
         if (collidersThisFrame.Count != 0)
         {
-            Vector3 target = collidersThisFrame.Select(c => c.gameObject)
-                                               .Where(o => o.GetComponent<AbstractDamageReceiver>() != null)
-                                               .Where(o => o.GetComponent<AbstractDamageReceiver>().Alignment != this.Alignment)
-                                               .Aggregate((a, b)
-                                                           => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
-                                                              ? a : b)
+            // Find the closest target
+            Vector3 target 
+                = collidersThisFrame.Select(c => c.gameObject)
+                                    .Where(o => o.GetComponent<AbstractDamageReceiver>() != null)
+                                    .Where(o => o.GetComponent<AbstractDamageReceiver>().Alignment != this.Alignment)
+                                    .Aggregate((a, b)
+                                               => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
+                                                                   ? a : b)
                                                .transform.position;
 
             _readyToFire = false;
@@ -75,7 +77,6 @@ public class TowerBehaviour : MonoBehaviour
         collidersThisFrame.Add(collider);
     }
 
-    // 
     void Shoot(Vector3 targetPosition)
     {
         BulletBehaviour bullet = Instantiate(Bullet, _turretPosition, Quaternion.identity).GetComponent<BulletBehaviour>();
