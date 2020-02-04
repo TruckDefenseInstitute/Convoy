@@ -48,6 +48,12 @@ ExportedObj/
 *.pdb.meta
 *.mdb.meta
 
+# Ignore: name DOT meta
+*.meta
+
+# Include: name DOT extension DOT meta
+!*.*.meta
+
 # Unity3D generated file on crash reports
 sysinfo.txt
 
