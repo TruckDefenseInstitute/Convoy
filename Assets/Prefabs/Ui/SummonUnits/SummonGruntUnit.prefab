@@ -232,7 +232,7 @@ MonoBehaviour:
         m_MethodName: Summon
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8768435936176865786, guid: cd47b823cf5ba94428ea1dbca7b37983,
+          m_ObjectArgument: {fileID: 6362585048228943889, guid: e3b764d8840908a4fb6cb78c600b6974,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0

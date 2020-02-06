@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // The following class is meant for SummonUnitsManager Object only. 
 public class SummonUnits : MonoBehaviour {
+
+    void Awake() {
+        // This is for testing purposes only
+        // SceneManager.LoadScene("UiOverlay", LoadSceneMode.Additive);
+    }
 
     void Start() {
         
