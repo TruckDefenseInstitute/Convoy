@@ -38,17 +38,24 @@ public class TowerBehaviour : MonoBehaviour
     void Update()
     {
         // Tower Gimbal follows nearest target
-        if (collidersThisFrame.Count != 0)
+        Collider[] hitColliders = Physics.OverlapSphere(_turretPosition, Range);
+
+        if (hitColliders.Length != 0)
         {
-            // Find the closest target
-            Vector3 target 
-                = collidersThisFrame.Select(c => c.gameObject)
-                                    .Where(o => o.GetComponent<AbstractDamageReceiver>() != null)
-                                    .Where(o => o.GetComponent<AbstractDamageReceiver>().Alignment != this.Alignment)
-                                    .Aggregate((a, b)
+            var potentialTargets = hitColliders.Select(c => c.gameObject)
+                                               .Where(o => o.GetComponent<DamageReceiver>() != null)
+                                               .Where(o => o.GetComponent<DamageReceiver>().Alignment != this.Alignment);
+
+            if (potentialTargets.FirstOrDefault() == null)
+            {
+                return;
+            }
+
+            Vector3 target = potentialTargets.Aggregate((a, b)
                                                 => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
-                                                                    ? a : b)
-                                                .transform.position;
+                                                                   ? a : b)
+                                             .transform.position;
+
             _gimbal.transform.rotation = Quaternion.LookRotation(target - _turretPosition, Vector3.up);
         }
 
