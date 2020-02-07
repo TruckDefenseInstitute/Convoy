@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 815191111194859874}
   - component: {fileID: 815191111194859805}
   - component: {fileID: 815191111194859804}
-  - component: {fileID: 815191111194859875}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -80,20 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &815191111194859875
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815191111194859873}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &815191111465476180
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,9 +88,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 815191111465476181}
-  - component: {fileID: 815191111465476183}
+  - component: {fileID: 491932669789279218}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: HomingMissileTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +111,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &815191111465476183
+--- !u!114 &491932669789279218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,17 +120,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 815191111465476180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 247442c1e223d724bb1c992f14b280ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 007e2b17bea2835428ba2662b35e03a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Alignment: 1
-  Bullet: {fileID: 4543606844387734615, guid: 53ccaba706d732246b834269deb2b8bf, type: 3}
-  Damage: 0
-  Speed: 70
-  Range: 70
-  Cooldown: 0.25
+  Projectile: {fileID: 4543606844387734615, guid: 715532a80081cd647845338393734db5,
+    type: 3}
+  Range: 50
+  Cooldown: 1
   Gimbal: {fileID: 3779609573763052823}
-  BulletSpawn: {fileID: 7860516559845503954}
+  ProjectileSpawn: {fileID: 7860516559845503954}
 --- !u!1 &815191111789147231
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +173,6 @@ GameObject:
   - component: {fileID: 5675855065787308029}
   - component: {fileID: 1937869938340446930}
   - component: {fileID: 7214721971642093929}
-  - component: {fileID: 5703406778566934363}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -258,20 +241,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &5703406778566934363
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3111487468710611549}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &3779609573763052823
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +252,6 @@ GameObject:
   - component: {fileID: 4659155437833770667}
   - component: {fileID: 6000777885438065539}
   - component: {fileID: 8649841209434813796}
-  - component: {fileID: 2311513373957308552}
   m_Layer: 0
   m_Name: Gimbal
   m_TagString: Untagged
@@ -354,19 +322,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2311513373957308552
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3779609573763052823}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7860516559845503954
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2218708549503578109}
   m_Layer: 0
-  m_Name: BulletSpawn
+  m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
