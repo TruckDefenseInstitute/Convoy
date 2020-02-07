@@ -12,19 +12,25 @@ public class TowerBehaviour : MonoBehaviour
     // Range of Tower
     public float Range;
 
-    // Fire Rate
-    public float Cooldown;
+    // Gimbal of Tower
+    public float GimbalRotationSpeed;
+    public GameObject Gimbal;
 
     // Projectile of Tower
+    public float MaxShootAngle;
     public GameObject Projectile;
     public GameObject ProjectileSpawn;
 
-    // Gimbal of Tower
-    public GameObject Gimbal;
+    // ShootStateCoroutine durations
+    public float ShootDuration;
+    public float CooldownDuration;
 
+    enum ShootState
+    {
+        Ready, Shooting, Cooldown
+    }
 
-
-    bool _canShoot = true;
+    ShootState _shootState;
 
     // Targets in Tower range
     HashSet<DamageReceiver> _targets = new HashSet<DamageReceiver>();
@@ -54,11 +60,41 @@ public class TowerBehaviour : MonoBehaviour
             return;
         }
 
-        // Tower Gimbal follows nearest target
-        Gimbal.transform.rotation = Quaternion.LookRotation(target.transform.position - Gimbal.transform.position);
+        if (_shootState != ShootState.Shooting)
+        {
+            // Rotate forward vector towards target
+            Vector3 d = target.transform.position - Gimbal.transform.position;
+            Vector3 f = Vector3.RotateTowards(Gimbal.transform.forward, d, GimbalRotationSpeed * Time.deltaTime, 0);
+            Gimbal.transform.rotation = Quaternion.LookRotation(f);
+        }
 
-        // Try to shoot
-        StartCoroutine(Shoot(target));
+        // Shooting
+        // ShootStateCoroutine is not ready
+        if (_shootState != ShootState.Ready)
+        {
+            return;
+        }
+
+        // Gimbal is aiming too far from target
+        if (Vector3.Angle(Gimbal.transform.forward, target.transform.position - Gimbal.transform.position) > MaxShootAngle)
+        {
+            return;
+        }
+
+        ProjectileBehaviour projectile = Instantiate(Projectile, ProjectileSpawn.transform.position, Gimbal.transform.rotation)
+            .GetComponent<ProjectileBehaviour>();
+
+        if (projectile == null)
+        {
+            throw new Exception("Projectile does not have 'ProjectileBehaviour' component.");
+        }
+
+        // Pass information to projectile
+        projectile.Init(Alignment, target, ShootDuration);
+        _shootState = ShootState.Shooting;
+
+        // Start ShootStateCoroutine
+        StartCoroutine(ShootStateCoroutine());
     }
 
     DamageReceiver GetNearestTarget()
@@ -66,7 +102,8 @@ public class TowerBehaviour : MonoBehaviour
         // Clean null (destroyed) _targets
         _targets.RemoveWhere(projectile => projectile == null);
 
-        if (_targets.Count == 0) {
+        if (_targets.Count == 0)
+        {
             return null;
         }
 
@@ -78,38 +115,28 @@ public class TowerBehaviour : MonoBehaviour
         );
     }
 
-    IEnumerator Shoot(DamageReceiver target)
+    IEnumerator ShootStateCoroutine()
     {
-        if (!_canShoot) {
-            yield break;
-        }
+        // Delay
+        yield return new WaitForSeconds(ShootDuration);
+        _shootState = ShootState.Cooldown;
 
-        ProjectileBehaviour projectile = Instantiate(Projectile, ProjectileSpawn.transform.position, Gimbal.transform.rotation)
-            .GetComponent<ProjectileBehaviour>();
-
-        if (projectile == null) {
-            throw new Exception("Projectile does not have 'ProjectileBehaviour' component.");
-        }
-
-        // Pass information to projectile
-        projectile.Init(Alignment, target);
-
-        _canShoot = false;
-
-        // Delay before setting _canShoot to true
-        yield return new WaitForSeconds(Cooldown);
-        _canShoot = true;
+        // Delay
+        yield return new WaitForSeconds(CooldownDuration);
+        _shootState = ShootState.Ready;
     }
 
     void OnTriggerEnter(Collider other)
     {
         DamageReceiver d = other.GetComponent<DamageReceiver>();
 
-        if (d == null) {
+        if (d == null)
+        {
             return;
         }
 
-        if (d.Alignment != this.Alignment) {
+        if (d.Alignment != this.Alignment)
+        {
             _targets.Add(d);
         }
     }
@@ -118,16 +145,11 @@ public class TowerBehaviour : MonoBehaviour
     {
         DamageReceiver d = other.GetComponent<DamageReceiver>();
 
-        if (d == null) {
+        if (d == null)
+        {
             return;
         }
 
         _targets.Remove(d);
-    }
-
-    IEnumerator ExecuteAfterDelay(Action action, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        action();
     }
 }

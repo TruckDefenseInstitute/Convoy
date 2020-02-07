@@ -5,17 +5,17 @@ using UnityEngine;
 public class DamageReceiver : MonoBehaviour
 {
     public Alignment Alignment;
-    public int MaxHP;
-    public int RemainingHP;
+    public float MaxHP;
+    public float RemainingHP;
 
     public Alignment GetAlignment()
     {
         return Alignment;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        int predictedHP = RemainingHP - damage;
+        float predictedHP = RemainingHP - damage;
 
         RemainingHP = predictedHP <= 0 ? 0 : predictedHP;
 

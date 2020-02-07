@@ -18,8 +18,9 @@ public class HomingProjectileBehaviour : ProjectileBehaviour
 
     void Update()
     {
-        if (Target != null) {
-            _targetDirection = (Target.transform.position - transform.position).normalized;
+        if (Target != null)
+        {
+            _targetDirection = Target.transform.position - transform.position;
         }
 
         // Rotate forward vector towards target
@@ -44,9 +45,11 @@ public class HomingProjectileBehaviour : ProjectileBehaviour
     {
         DamageReceiver d = other.GetComponent<DamageReceiver>();
 
-        if (d == null) {
+        if (d == null)
+        {
             // Collider is some terrain
-            if (!other.isTrigger) {
+            if (!other.isTrigger)
+            {
                 Destroy(gameObject);
             }
             return;

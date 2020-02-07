@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 815191111465476181}
   - component: {fileID: 491932669789279218}
   m_Layer: 0
-  m_Name: BulletTower
+  m_Name: LaserTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,11 +128,11 @@ MonoBehaviour:
   GimbalRotationSpeed: 2
   Gimbal: {fileID: 3779609573763052823}
   MaxShootAngle: 1
-  Projectile: {fileID: 4543606844387734615, guid: 53ccaba706d732246b834269deb2b8bf,
+  Projectile: {fileID: 4543606844387734615, guid: 38f05da556d7e0149a8c928d01aaa561,
     type: 3}
   ProjectileSpawn: {fileID: 7860516559845503954}
-  ShootDuration: 0.1
-  CooldownDuration: 0.25
+  ShootDuration: 0.2
+  CooldownDuration: 1
 --- !u!1 &815191111789147231
 GameObject:
   m_ObjectHideFlags: 0

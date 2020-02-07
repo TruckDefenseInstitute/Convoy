@@ -5,18 +5,12 @@ public class BulletProjectileBehaviour : ProjectileBehaviour
     public float Velocity;
     public float MaxTravelDistance;
 
-    Vector3 _targetDirection;
     float _distanceTravelled;
-
-    void Start()
-    {
-        _targetDirection = (Target.transform.position - transform.position).normalized;
-    }
 
     void Update()
     {
         float d = Velocity * Time.deltaTime;
-        transform.position += _targetDirection * d;
+        transform.position += transform.forward * d;
         _distanceTravelled += d;
 
         if (_distanceTravelled > MaxTravelDistance)
@@ -29,9 +23,11 @@ public class BulletProjectileBehaviour : ProjectileBehaviour
     {
         DamageReceiver d = other.GetComponent<DamageReceiver>();
 
-        if (d == null) {
+        if (d == null)
+        {
             // Collider is some terrain
-            if (!other.isTrigger) {
+            if (!other.isTrigger)
+            {
                 Destroy(gameObject);
             }
             return;

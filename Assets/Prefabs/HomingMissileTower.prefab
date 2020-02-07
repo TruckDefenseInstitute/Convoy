@@ -124,12 +124,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alignment: 1
+  Range: 50
+  GimbalRotationSpeed: 2
+  Gimbal: {fileID: 3779609573763052823}
+  MaxShootAngle: 1
   Projectile: {fileID: 4543606844387734615, guid: 715532a80081cd647845338393734db5,
     type: 3}
-  Range: 50
-  Cooldown: 1
-  Gimbal: {fileID: 3779609573763052823}
   ProjectileSpawn: {fileID: 7860516559845503954}
+  ShootDuration: 0.1
+  CooldownDuration: 1
 --- !u!1 &815191111789147231
 GameObject:
   m_ObjectHideFlags: 0
