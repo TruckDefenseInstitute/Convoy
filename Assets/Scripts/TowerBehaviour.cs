@@ -6,16 +6,19 @@ using UnityEngine;
 
 public class TowerBehaviour : MonoBehaviour
 {
+    // Bullet Stats
     public Alignment Alignment;
     public GameObject Bullet;
+    public int Damage;
     public float Range;
     public float Speed;
-    SphereCollider _sphereCollider;
 
+    // Fire Rate
     public float Cooldown;
     bool _readyToFire = true;
     float _timeElapsedSinceLastFire;
-    
+
+    // Fire Position
     public Vector3 TurretDisplacement;
     Vector3 _turretPosition;
 
@@ -26,11 +29,6 @@ public class TowerBehaviour : MonoBehaviour
     // Sets up the Sphere Collider to detect trucks
     void Start()
     {
-        _sphereCollider = gameObject.AddComponent<SphereCollider>();
-        _sphereCollider.center = new Vector3(transform.position.x, 0, transform.position.z);
-        _sphereCollider.radius = Range;
-        _sphereCollider.isTrigger = true;
-
         _turretPosition = transform.position + TurretDisplacement;
 
         _gimbal = gameObject.transform.Find("Model").Find("Gimbal");
@@ -72,33 +70,36 @@ public class TowerBehaviour : MonoBehaviour
 
     void AttemptToShoot()
     {
-        if (collidersThisFrame.Count != 0)
+        Collider[] hitColliders = Physics.OverlapSphere(_turretPosition, Range);
+
+        if (hitColliders.Length == 0)
         {
-            // Find the closest target
-            Vector3 target 
-                = collidersThisFrame.Select(c => c.gameObject)
-                                    .Where(o => o.GetComponent<AbstractDamageReceiver>() != null)
-                                    .Where(o => o.GetComponent<AbstractDamageReceiver>().Alignment != this.Alignment)
-                                    .Aggregate((a, b)
-                                               => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
-                                                                   ? a : b)
-                                               .transform.position;
-
-            _readyToFire = false;
-            collidersThisFrame.Clear();
-            Shoot(target);
+            return;
         }
-    }
 
-    void OnTriggerStay(Collider collider)
-    {
-        collidersThisFrame.Add(collider);
+        var potentialTargets = hitColliders.Select(c => c.gameObject)
+                                           .Where(o => o.GetComponent<DamageReceiver>() != null)
+                                           .Where(o => o.GetComponent<DamageReceiver>().Alignment != this.Alignment);
+
+        if (potentialTargets.FirstOrDefault() == null)
+        {
+            return;
+        }
+
+        Vector3 target = potentialTargets.Aggregate((a, b)
+                                            => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
+                                                               ? a : b)
+                                         .transform.position;
+
+        _readyToFire = false;
+        Shoot(target);
     }
 
     void Shoot(Vector3 targetPosition)
     {
         BulletBehaviour bullet = Instantiate(Bullet, _turretPosition, Quaternion.identity).GetComponent<BulletBehaviour>();
 
+        bullet.Damage = Damage;
         bullet.Alignment = Alignment;
         bullet.Range = Range;
         bullet.Speed = Speed;

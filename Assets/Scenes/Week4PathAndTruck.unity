@@ -641,7 +641,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Truck 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6128081002336150864, guid: 60ddb7c804a42df4ba6f00d02171191f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 60ddb7c804a42df4ba6f00d02171191f, type: 3}
 --- !u!1001 &815191110898130780
 PrefabInstance:
@@ -650,6 +651,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 815191111194859875, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 815191111465476180, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
         type: 3}
       propertyPath: m_Name
@@ -709,6 +715,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 815191111465476183, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
+        type: 3}
+      propertyPath: Damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 815191111465476183, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
+        type: 3}
+      propertyPath: TurretDisplacement.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 815191111465476183, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
+        type: 3}
+      propertyPath: Speed
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65bd0bbd82da9004a8256ccd1bbd274f, type: 3}
