@@ -724,7 +724,7 @@ PrefabInstance:
     - target: {fileID: 815191111465476183, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
         type: 3}
       propertyPath: TurretDisplacement.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 815191111465476183, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
         type: 3}
