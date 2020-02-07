@@ -1,19 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 // The following class is meant for SummonUnitsManager Object only. 
 public class SummonUnits : MonoBehaviour {
-
-    void Awake() {
-        // This is for testing purposes only
-        // SceneManager.LoadScene("UiOverlay", LoadSceneMode.Additive);
-    }
-
-    void Start() {
-        
-    }
 
     void Update() {
         
@@ -28,4 +18,5 @@ public class SummonUnits : MonoBehaviour {
                 new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f)), 
                 Quaternion.identity);
     }
+
 }

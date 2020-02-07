@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ForTestingAdditive/UiTest.unity
+    guid: 8eee73d639bd68c40b330b56f3f7b24e
+  - enabled: 1
+    path: Assets/Scenes/ForTestingAdditive/UiOverlay.unity
+    guid: a65a723fd6befae4e9bd9241c9395871
   m_configObjects: {}
