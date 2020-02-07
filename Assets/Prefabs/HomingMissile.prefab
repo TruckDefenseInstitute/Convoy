@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  Range: 100
   InitialVelocity: 5
   Acceleration: 5
   RotationSpeed: 1
+  MaxTravelDistance: 100
 --- !u!54 &-110845850188423219
 Rigidbody:
   m_ObjectHideFlags: 0

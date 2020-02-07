@@ -2,10 +2,10 @@
 
 public class HomingProjectileBehaviour : ProjectileBehaviour
 {
-    public float Range;
     public float InitialVelocity;
     public float Acceleration;
     public float RotationSpeed;
+    public float MaxTravelDistance;
 
     Vector3 _targetDirection;
     float _velocity;
@@ -34,7 +34,7 @@ public class HomingProjectileBehaviour : ProjectileBehaviour
         transform.position += transform.forward * d;
         _distanceTravelled += d;
 
-        if (_distanceTravelled > Range)
+        if (_distanceTravelled > MaxTravelDistance)
         {
             Destroy(gameObject);
         }

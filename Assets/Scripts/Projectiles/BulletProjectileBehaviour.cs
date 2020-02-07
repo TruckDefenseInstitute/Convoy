@@ -2,8 +2,8 @@
 
 public class BulletProjectileBehaviour : ProjectileBehaviour
 {
-    public float Range;
     public float Velocity;
+    public float MaxTravelDistance;
 
     Vector3 _targetDirection;
     float _distanceTravelled;
@@ -19,7 +19,7 @@ public class BulletProjectileBehaviour : ProjectileBehaviour
         transform.position += _targetDirection * d;
         _distanceTravelled += d;
 
-        if (_distanceTravelled > Range)
+        if (_distanceTravelled > MaxTravelDistance)
         {
             Destroy(gameObject);
         }

@@ -60,8 +60,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  Range: 100
   Velocity: 50
+  MaxTravelDistance: 100
 --- !u!54 &599833886284835886
 Rigidbody:
   m_ObjectHideFlags: 0

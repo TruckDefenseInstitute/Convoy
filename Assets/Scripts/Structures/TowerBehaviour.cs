@@ -7,9 +7,7 @@ using UnityEngine;
 // Structure which shoots projectiles
 public class TowerBehaviour : MonoBehaviour
 {
-    // Projectile Stats
     public Alignment Alignment;
-    public GameObject Projectile;
 
     // Range of Tower
     public float Range;
@@ -17,9 +15,12 @@ public class TowerBehaviour : MonoBehaviour
     // Fire Rate
     public float Cooldown;
 
+    // Projectile of Tower
+    public GameObject Projectile;
+    public GameObject ProjectileSpawn;
+
     // Gimbal of Tower
     public GameObject Gimbal;
-    public GameObject ProjectileSpawn;
 
 
 
