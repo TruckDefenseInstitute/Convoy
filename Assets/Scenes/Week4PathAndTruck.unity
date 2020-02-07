@@ -669,7 +669,7 @@ PrefabInstance:
     - target: {fileID: 815191111465476181, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 815191111465476181, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
         type: 3}
@@ -730,6 +730,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Speed
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301028222671774235, guid: 65bd0bbd82da9004a8256ccd1bbd274f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65bd0bbd82da9004a8256ccd1bbd274f, type: 3}

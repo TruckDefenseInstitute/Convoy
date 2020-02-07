@@ -10,106 +10,107 @@ public class TowerBehaviour : MonoBehaviour
     public Alignment Alignment;
     public GameObject Bullet;
     public int Damage;
-    public float Range;
     public float Speed;
+
+    // Range of Tower
+    public float Range;
 
     // Fire Rate
     public float Cooldown;
-    bool _readyToFire = true;
-    float _timeElapsedSinceLastFire;
 
-    // Fire Position
-    public Vector3 TurretDisplacement;
-    Vector3 _turretPosition;
+    // Gimbal of Tower
+    public GameObject Gimbal;
+    public GameObject BulletSpawn;
 
-    List<Collider> collidersThisFrame = new List<Collider>();
 
-    Transform _gimbal;
 
-    // Sets up the Sphere Collider to detect trucks
+    bool _canShoot = true;
+
+    // Targets in Tower range
+    HashSet<GameObject> _targets = new HashSet<GameObject>();
+
+    // Tower range collider
+    SphereCollider _rangeCollider;
+
     void Start()
     {
-        _turretPosition = transform.position + TurretDisplacement;
-
-        _gimbal = gameObject.transform.Find("Model").Find("Gimbal");
+        // Set up the Tower's range sphere collider
+        _rangeCollider = gameObject.AddComponent<SphereCollider>();
+        _rangeCollider.radius = Range;
     }
 
-    // Handles tower cooldown
     void Update()
     {
+        // Update nearest target
+        GameObject target = GetNearestTarget();
+
+        if (target == null)
+        {
+            return;
+        }
+
         // Tower Gimbal follows nearest target
-        Collider[] hitColliders = Physics.OverlapSphere(_turretPosition, Range);
+        Gimbal.transform.rotation = Quaternion.LookRotation(target.transform.position - Gimbal.transform.position, Vector3.up);
 
-        if (hitColliders.Length != 0)
-        {
-            var potentialTargets = hitColliders.Select(c => c.gameObject)
-                                               .Where(o => o.GetComponent<DamageReceiver>() != null)
-                                               .Where(o => o.GetComponent<DamageReceiver>().Alignment != this.Alignment);
-
-            if (potentialTargets.FirstOrDefault() == null)
-            {
-                return;
-            }
-
-            Vector3 target = potentialTargets.Aggregate((a, b)
-                                                => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
-                                                                   ? a : b)
-                                             .transform.position;
-
-            _gimbal.transform.rotation = Quaternion.LookRotation(target - _turretPosition, Vector3.up);
-        }
-
-        if (_readyToFire)
-        {
-            AttemptToShoot();
-        }
-        else
-        {
-            _timeElapsedSinceLastFire += Time.deltaTime;
-
-            if (_timeElapsedSinceLastFire >= Cooldown)
-            {
-                _timeElapsedSinceLastFire = 0;
-                _readyToFire = true;
-            }
-        }
+        // Try to shoot
+        StartCoroutine(Shoot(target.transform.position));
     }
 
-    void AttemptToShoot()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(_turretPosition, Range);
+    GameObject GetNearestTarget() {
+        // Clean null (destroyed) _targets
+        _targets.RemoveWhere(o => o == null);
 
-        if (hitColliders.Length == 0)
-        {
-            return;
+        if (_targets.Count == 0) {
+            return null;
         }
 
-        var potentialTargets = hitColliders.Select(c => c.gameObject)
-                                           .Where(o => o.GetComponent<DamageReceiver>() != null)
-                                           .Where(o => o.GetComponent<DamageReceiver>().Alignment != this.Alignment);
-
-        if (potentialTargets.FirstOrDefault() == null)
-        {
-            return;
-        }
-
-        Vector3 target = potentialTargets.Aggregate((a, b)
-                                            => Vector3.Distance(_turretPosition, a.transform.position) < Vector3.Distance(_turretPosition, b.transform.position)
-                                                               ? a : b)
-                                         .transform.position;
-
-        _readyToFire = false;
-        Shoot(target);
+        // Accumulate and return nearest target
+        return _targets.Aggregate(
+            (a, b) => Vector3.Distance(transform.position, a.transform.position)
+                    < Vector3.Distance(transform.position, b.transform.position)
+                    ? a : b
+        );
     }
 
-    void Shoot(Vector3 targetPosition)
+    IEnumerator Shoot(Vector3 targetPosition)
     {
-        BulletBehaviour bullet = Instantiate(Bullet, _turretPosition, Quaternion.identity).GetComponent<BulletBehaviour>();
+        if (!_canShoot) {
+            yield break;
+        }
+
+        BulletBehaviour bullet = Instantiate(Bullet, BulletSpawn.transform.position, Quaternion.identity).GetComponent<BulletBehaviour>();
 
         bullet.Damage = Damage;
         bullet.Alignment = Alignment;
         bullet.Range = Range;
         bullet.Speed = Speed;
-        bullet.Direction = (targetPosition - _turretPosition).normalized;
+        bullet.Direction = (targetPosition - BulletSpawn.transform.position).normalized;
+
+        _canShoot = false;
+
+        // Delay before setting _canShoot to true
+        yield return new WaitForSeconds(Cooldown);
+        _canShoot = true;
+    }
+
+    void OnTriggerEnter(Collider other) {
+        DamageReceiver d = other.GetComponent<DamageReceiver>();
+
+        if (d == null) {
+            return;
+        }
+
+        if (d.Alignment != this.Alignment) {
+            _targets.Add(d.gameObject);
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        _targets.Remove(other.gameObject);
+    }
+
+    IEnumerator ExecuteAfterDelay(Action action, float delay) {
+        yield return new WaitForSeconds(delay);
+        action();
     }
 }
