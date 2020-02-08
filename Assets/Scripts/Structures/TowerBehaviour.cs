@@ -66,7 +66,7 @@ public class TowerBehaviour : MonoBehaviour, IDamageReceiver
         if (_shootState != ShootState.Shooting)
         {
             // Rotate forward vector towards target
-            Vector3 d = target.transform.position - Gimbal.transform.position;
+            Vector3 d = target.DamageTarget.transform.position - Gimbal.transform.position;
             Vector3 f = Vector3.RotateTowards(Gimbal.transform.forward, d, GimbalRotationSpeed * Time.deltaTime, 0);
             Gimbal.transform.rotation = Quaternion.LookRotation(f);
         }
@@ -79,7 +79,7 @@ public class TowerBehaviour : MonoBehaviour, IDamageReceiver
         }
 
         // Gimbal is aiming too far from target
-        if (Vector3.Angle(Gimbal.transform.forward, target.transform.position - Gimbal.transform.position) > MaxShootAngle)
+        if (Vector3.Angle(Gimbal.transform.forward, target.DamageTarget.transform.position - Gimbal.transform.position) > MaxShootAngle)
         {
             return;
         }

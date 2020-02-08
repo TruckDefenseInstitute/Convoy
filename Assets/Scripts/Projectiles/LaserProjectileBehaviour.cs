@@ -5,21 +5,21 @@ public class LaserProjectileBehaviour : ProjectileBehaviour
 {
     public LineRenderer LineRenderer;
 
-    Vector3 _position;
-
     void Start()
     {
         StartCoroutine(DestroyCoroutine());
-        _position = Target.transform.position;
+
+        // Setup LineRenderer
+        LineRenderer.SetPosition(0, transform.position);
+        LineRenderer.SetPosition(1, transform.position);
+
+        Raycast(transform.position);
     }
 
-    void Update()
+    void Raycast(Vector3 v)
     {
-        LineRenderer.SetPosition(0, transform.position);
-        LineRenderer.SetPosition(1, _position);
-
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(v, transform.forward, out hit))
         {
             DamageReceiver d = hit.collider.GetComponent<DamageReceiver>();
 
@@ -40,8 +40,16 @@ public class LaserProjectileBehaviour : ProjectileBehaviour
                 // Damage over time
                 // Ensure that enemy will recieve 'Damage' total damage
                 d.TakeDamage(Damage / ShootDuration * Time.deltaTime);
+                LineRenderer.SetPosition(1, hit.point);
+                return;
             }
+
+            // Hit some trigger, continue raycasting
+            Raycast(hit.point);
+            return;
         }
+
+        LineRenderer.SetPosition(1, v);
     }
 
     IEnumerator DestroyCoroutine()

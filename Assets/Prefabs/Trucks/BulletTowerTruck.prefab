@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5651794155141112888}
   - component: {fileID: 4074527175784384025}
   - component: {fileID: 91973730465255364}
+  - component: {fileID: 8215906330500961311}
   m_Layer: 0
   m_Name: BulletTowerTruck
   m_TagString: Untagged
@@ -81,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   end: 2
+  InitialDistance: 0
   Speed: 5
   Health: 100
 --- !u!114 &5651794155141112888
@@ -98,6 +100,7 @@ MonoBehaviour:
   Alignment: 0
   Collider: {fileID: 4074527175784384025}
   Behaviour: {fileID: 7995015862875935197}
+  DamageTarget: {fileID: 5698439475158082400}
 --- !u!65 &4074527175784384025
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127,6 +130,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8215906330500961311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7995015862875935199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007e2b17bea2835428ba2662b35e03a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Alignment: 0
+  Range: 50
+  GimbalRotationSpeed: 2
+  Gimbal: {fileID: 6632356899330052703}
+  MaxShootAngle: 1
+  Projectile: {fileID: 4543606844387734615, guid: 53ccaba706d732246b834269deb2b8bf,
+    type: 3}
+  ProjectileSpawn: {fileID: 391577588982125722}
+  ShootDuration: 0.1
+  CooldownDuration: 0.2
+  Health: 0
 --- !u!1001 &7528052186348136264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,10 +247,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4512083803785747875, guid: a1b2667359cd84c4690489d527126c51, type: 3}
+    - {fileID: 2032873526498115487, guid: a1b2667359cd84c4690489d527126c51, type: 3}
+    - {fileID: 3916973455716851306, guid: a1b2667359cd84c4690489d527126c51, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a1b2667359cd84c4690489d527126c51, type: 3}
 --- !u!4 &7145277928523597597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 815191111465476181, guid: a1b2667359cd84c4690489d527126c51,
+    type: 3}
+  m_PrefabInstance: {fileID: 7528052186348136264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6632356899330052703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3779609573763052823, guid: a1b2667359cd84c4690489d527126c51,
+    type: 3}
+  m_PrefabInstance: {fileID: 7528052186348136264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &391577588982125722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7860516559845503954, guid: a1b2667359cd84c4690489d527126c51,
     type: 3}
   m_PrefabInstance: {fileID: 7528052186348136264}
   m_PrefabAsset: {fileID: 0}
@@ -304,6 +344,12 @@ PrefabInstance:
 --- !u!4 &1859465987516222627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7995015862875935198, guid: 60ddb7c804a42df4ba6f00d02171191f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8591222016391388541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5698439475158082400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4048395650383642141, guid: 60ddb7c804a42df4ba6f00d02171191f,
     type: 3}
   m_PrefabInstance: {fileID: 8591222016391388541}
   m_PrefabAsset: {fileID: 0}

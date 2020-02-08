@@ -6,26 +6,31 @@ public class TruckBehaviour : MonoBehaviour, IDamageReceiver
     public PathCreator pathCreator;
     public EndOfPathInstruction end;
 
+    public float InitialDistance;
     public float Speed;
-    float _distanceTravelled;
 
     // Health
     public float Health;
 
+    float _distanceTravelled;
+
     void Start()
     {
-        transform.position = pathCreator.path.GetPoint(0);
+        // transform.position = pathCreator.path.GetPointAtDistance(_distanceTravelled);
+        _distanceTravelled = InitialDistance;
     }
 
     void Update()
     {
-        _distanceTravelled += Speed * Time.deltaTime;
+        float d = Speed * Time.deltaTime;
 
-        // Set truck position
-        transform.position = pathCreator.path.GetPointAtDistance(_distanceTravelled, end);
+        Vector3 v1 = pathCreator.path.GetPointAtDistance(_distanceTravelled, end);
+        _distanceTravelled += d;
+        Vector3 v2 = pathCreator.path.GetPointAtDistance(_distanceTravelled, end);
 
-        // Set truck rotation
-        transform.rotation = pathCreator.path.GetRotationAtDistance(_distanceTravelled, end);
+        // Set truck position & rotation
+        transform.position = v2;
+        transform.rotation = Quaternion.LookRotation(v2 - v1);
     }
 
     public void Damage(float damage)

@@ -6,6 +6,7 @@ public class DamageReceiver : MonoBehaviour
     public Alignment Alignment;
     public Collider Collider;
     public MonoBehaviour Behaviour;
+    public GameObject DamageTarget;
 
     public void TakeDamage(float damage)
     {

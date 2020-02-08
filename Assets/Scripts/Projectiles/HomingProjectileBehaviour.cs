@@ -20,7 +20,7 @@ public class HomingProjectileBehaviour : ProjectileBehaviour
     {
         if (Target != null)
         {
-            _targetDirection = Target.transform.position - transform.position;
+            _targetDirection = Target.DamageTarget.transform.position - transform.position;
         }
 
         // Rotate forward vector towards target
