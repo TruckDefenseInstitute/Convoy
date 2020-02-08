@@ -22,11 +22,12 @@ public class GameControl : MonoBehaviour
     Vector3 _endingPoint;
 
     // Used in Idle, Multiselect and Selected
-    List<AllyBehaviour> _selectedAllies = new List<AllyBehaviour>();    
+    List<AllyBehaviour> _selectedAllies = new List<AllyBehaviour>(); 
     
     // Used in storing 
     List<AllyBehaviour>[] _markedUnitsMemory;
     public KeyCode RecordingButton;
+    public UiOverlayManager UiOverlayManager;
     
     KeyCode[] _numberKeyMap = { KeyCode.Alpha0,  KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
     bool _numberKeyPressed = false;
@@ -68,6 +69,7 @@ public class GameControl : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     MultiselectLeftMouseUp();
+                    UiOverlayManager.selectAllyUnits(_selectedAllies); // Temp add
                 }
                 break;
 
@@ -84,6 +86,7 @@ public class GameControl : MonoBehaviour
                     if (_numberKeyPressed)
                     {
                         SwitchToRecordedAllies();
+                        UiOverlayManager.selectAllyUnits(_selectedAllies); // Temp add
                     }
                 }
 
@@ -97,6 +100,7 @@ public class GameControl : MonoBehaviour
                 }
                 break;
         }
+
     }
 
     void IdentifyPressedNumberKey()
@@ -174,8 +178,8 @@ public class GameControl : MonoBehaviour
         Physics.Raycast(mouseToWorldRay, out hit);
         _endingPoint = hit.point;
 
-        Debug.Log(_startingPoint);
-        Debug.Log(_endingPoint);
+        // Debug.Log(_startingPoint);
+        // Debug.Log(_endingPoint);
 
         Vector3 midpoint = Vector3.Lerp(_startingPoint, _endingPoint, 0.5f);
         Vector3 extents = new Vector3(Mathf.Abs(_startingPoint.x - midpoint.x), 20, Mathf.Abs(_startingPoint.z - midpoint.z));

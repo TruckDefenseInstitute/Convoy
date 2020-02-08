@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class UnitControlSystem : MonoBehaviour
-{
-
+public class UnitControlSystem : MonoBehaviour {
     public Unit selectedUnit;
+    
+    [SerializeField]
+    private List<GameObject> inGameUnitSlotList;
 
     // Update is called once per frame
     void Update() {
@@ -22,6 +23,9 @@ public class UnitControlSystem : MonoBehaviour
                 } else {
                     //If we clicked on a Selectable, we don't want to enable our SelectionBox
                     selectedUnit = selectedObject;
+                    
+                    // The selected Unit of its type will be displayed on the UI
+                    // inGameUnitSlotList.Add(new )
                 }
             }
         }
