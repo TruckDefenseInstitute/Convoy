@@ -9,7 +9,7 @@ public abstract class ProjectileBehaviour : MonoBehaviour
     protected DamageReceiver Target;
     protected float ShootDuration;
 
-    public void Init( Alignment alignment, DamageReceiver target, float duration)
+    public void Init(Alignment alignment, DamageReceiver target, float duration)
     {
         this.Alignment = alignment;
         this.Target = target;
