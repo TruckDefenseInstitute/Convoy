@@ -1,34 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class DamageReceiver : MonoBehaviour
 {
     public Alignment Alignment;
-    public float MaxHP;
-    public float RemainingHP;
-
-    public Alignment GetAlignment()
-    {
-        return Alignment;
-    }
+    public Collider Collider;
+    public MonoBehaviour Behaviour;
 
     public void TakeDamage(float damage)
     {
-        float predictedHP = RemainingHP - damage;
-
-        RemainingHP = predictedHP <= 0 ? 0 : predictedHP;
-
-        if (RemainingHP == 0)
+        IDamageReceiver d = Behaviour as IDamageReceiver;
+        if (d == null)
         {
-            Die();
+            throw new Exception("Behaviour does not implement 'IDamageReceiver'.");
         }
-    }
-
-    private void Die()
-    {
-            Debug.Log(gameObject.name + " is ded!");
-            gameObject.transform.root.gameObject.SetActive(false);
-            Destroy(gameObject.transform.root.gameObject);
+        d.Damage(damage);
     }
 }

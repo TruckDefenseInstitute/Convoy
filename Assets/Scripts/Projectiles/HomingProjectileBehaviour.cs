@@ -55,7 +55,9 @@ public class HomingProjectileBehaviour : ProjectileBehaviour
             return;
         }
 
-        if (d.Alignment != Alignment)
+        // The collider belongs to DamageReceiver
+        // DamageReceiver is not on the same Team
+        if (d.Collider == other && d.Alignment != Alignment)
         {
             d.TakeDamage(Damage);
             Destroy(gameObject);

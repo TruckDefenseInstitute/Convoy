@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  Velocity: 50
+  Velocity: 100
   MaxTravelDistance: 100
 --- !u!54 &599833886284835886
 Rigidbody:

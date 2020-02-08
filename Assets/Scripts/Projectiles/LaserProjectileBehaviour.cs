@@ -33,7 +33,9 @@ public class LaserProjectileBehaviour : ProjectileBehaviour
                 return;
             }
 
-            if (d.Alignment != Alignment)
+            // The collider belongs to DamageReceiver
+            // DamageReceiver is not on the same Team
+            if (d.Collider == hit.collider && d.Alignment != Alignment)
             {
                 // Damage over time
                 // Ensure that enemy will recieve 'Damage' total damage

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Structure which shoots projectiles
-public class TowerBehaviour : MonoBehaviour
+public class TowerBehaviour : MonoBehaviour, IDamageReceiver
 {
     public Alignment Alignment;
 
@@ -24,6 +24,9 @@ public class TowerBehaviour : MonoBehaviour
     // ShootStateCoroutine durations
     public float ShootDuration;
     public float CooldownDuration;
+
+    // Health
+    public float Health;
 
     enum ShootState
     {
@@ -135,7 +138,7 @@ public class TowerBehaviour : MonoBehaviour
             return;
         }
 
-        if (d.Alignment != this.Alignment)
+        if (d.Collider == other && d.Alignment != this.Alignment)
         {
             _targets.Add(d);
         }
@@ -151,5 +154,14 @@ public class TowerBehaviour : MonoBehaviour
         }
 
         _targets.Remove(d);
+    }
+
+    public void Damage(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

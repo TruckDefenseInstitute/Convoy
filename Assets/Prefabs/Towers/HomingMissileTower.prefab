@@ -88,9 +88,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 815191111465476181}
-  - component: {fileID: 491932669789279218}
+  - component: {fileID: 2627475373983564200}
+  - component: {fileID: 5030544573012029757}
   m_Layer: 0
-  m_Name: LaserTower
+  m_Name: HomingMissileTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +112,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &491932669789279218
+--- !u!65 &2627475373983564200
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815191111465476180}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 4.5, z: 3}
+  m_Center: {x: 0, y: 2.25, z: 0}
+--- !u!114 &5030544573012029757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,16 +137,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007e2b17bea2835428ba2662b35e03a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Alignment: 1
+  Alignment: 0
   Range: 50
   GimbalRotationSpeed: 2
   Gimbal: {fileID: 3779609573763052823}
   MaxShootAngle: 1
-  Projectile: {fileID: 4543606844387734615, guid: 38f05da556d7e0149a8c928d01aaa561,
+  Projectile: {fileID: 4543606844387734615, guid: 715532a80081cd647845338393734db5,
     type: 3}
   ProjectileSpawn: {fileID: 7860516559845503954}
-  ShootDuration: 0.2
+  ShootDuration: 0.1
   CooldownDuration: 1
+  Health: 0
 --- !u!1 &815191111789147231
 GameObject:
   m_ObjectHideFlags: 0
