@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /*
 This code is currently unfinished! It does not check that selected units are alive!!!
@@ -59,7 +60,7 @@ public class GameControl : MonoBehaviour
                     SwitchToRecordedAllies();
                 }
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && IsPointerNotOverUI())
                 {
                     IdleLeftMouseDown();
                 }
@@ -86,18 +87,19 @@ public class GameControl : MonoBehaviour
                     if (_numberKeyPressed)
                     {
                         SwitchToRecordedAllies();
-                        UiOverlayManager.selectAllyUnits(_selectedAllies); // Temp add
                     }
                 }
 
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(1) && IsPointerNotOverUI())
                 {
                     SelectedRightMouseDown();
                 }
-                else if (Input.GetMouseButton(0))
+                else if (Input.GetMouseButton(0) && IsPointerNotOverUI())
                 {
                     SelectedLeftMouseDown();
                 }
+
+                UiOverlayManager.selectAllyUnits(_selectedAllies); // Temp add
                 break;
         }
 
@@ -233,7 +235,19 @@ public class GameControl : MonoBehaviour
         _gameControlState = GameControlState.Idle;
         Debug.Log("Now Entering Idle");
     }
+
+
+    private bool IsPointerNotOverUI() {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count == 0;
+    }
+    
 }
+
+
 
 /*
 Spaghetti Code Forever!!!

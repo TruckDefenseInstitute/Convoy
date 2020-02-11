@@ -43,7 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf65c0c25584e145ada8430860641df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inGameUiCanvas: {fileID: 2224974588261895952, guid: de852a3669572ab46a2a192a3e637e1d,
-    type: 3}
-  _deployedUnitSlot: {fileID: 1087091839352869456, guid: 0ae3f930e1ba8bd4fb072420d076b40c,
-    type: 3}
+  _inGameUiCanvas: {fileID: 0}
