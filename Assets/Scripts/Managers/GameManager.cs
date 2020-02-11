@@ -57,45 +57,30 @@ public class GameManager : MonoBehaviour
         switch (_gameControlState)
         {
             case GameControlState.Idle:
-                if (_numberKeyPressed)
-                {
-                    SwitchToRecordedAllies();
-                }
+                if (_numberKeyPressed) SwitchToRecordedAllies();
 
-                if (Input.GetMouseButton(0))
-                {
-                    IdleLeftMouseDown();
-                }
+                if (Input.GetMouseButton(0)) IdleLeftMouseDown();
                 break;
 
             case GameControlState.Multiselect:                
-                if (Input.GetMouseButtonUp(0))
-                {
-                    MultiselectLeftMouseUp();
-                }
+                if (Input.GetMouseButtonUp(0)) MultiselectLeftMouseUp();
                 break;
 
             case GameControlState.Selected:
                 if(Input.GetKey(RecordingButton))
                 {
-                    if (_numberKeyPressed)
-                    {
-                        RecordCurrentlySelectedAllies();
-                    }
+                    if (_numberKeyPressed) RecordCurrentlySelectedAllies();
                 }
                 else
                 {
-                    if (_numberKeyPressed)
-                    {
-                        SwitchToRecordedAllies();
-                    }
+                    if (_numberKeyPressed) SwitchToRecordedAllies();
                 }
 
                 if (Input.GetMouseButtonDown(1))
                 {
                     SelectedRightMouseDown();
                 }
-                else if (Input.GetMouseButton(0))
+                else if (Input.GetMouseButtonDown(0))
                 {
                     SelectedLeftMouseDown();
                 }
@@ -145,7 +130,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Saved " + _alphanum);
     }
 
-
     void IdleLeftMouseDown()
     {
         Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -158,22 +142,35 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        GameObject go = hit.collider.gameObject;
+        Collider[]  hitColliders = Physics.OverlapSphere(hit.point, 1f);
 
-        if (go == null || go.GetComponent<AllyBehaviour>() == null)  // Hit Ground or non-ally unit
+        if (hitColliders.Length == 0)
+        {
+            return;
+        }
+
+        var potentialAllies = hitColliders.Where(c => c.gameObject != null)
+                                          .Select(c => c.gameObject)
+                                          .Where(go => go != null)
+                                          .Where(go => go.GetComponent<AllyBehaviour>() != null);
+
+        if (potentialAllies.Count() == 0)
         {
             _startingPoint = hit.point;
             _gameControlState = GameControlState.Multiselect;
-            Debug.Log("Now entering multi-selecting");
+            Debug.Log("Now entering multi-select");
+            return;
         }
-        else  // Hit Unit
-        {
-            _selectedAllies.Add(go);
-            _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+                
+        GameObject closestAlly = potentialAllies.Aggregate((a, b) => Vector3.Distance(hit.point, a.transform.position)
+                                                                   < Vector3.Distance(hit.point, b.transform.position)
+                                                                   ? a : b);
 
-            _gameControlState = GameControlState.Selected;
-            Debug.Log("Now entering selected");
-        }
+        _selectedAllies.Add(closestAlly);
+        _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+
+        _gameControlState = GameControlState.Selected;
+        Debug.Log("Now entering selected");
     }
 
     void MultiselectLeftMouseUp()
