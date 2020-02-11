@@ -153,6 +153,11 @@ public class GameManager : MonoBehaviour
 
         Physics.Raycast(mouseToWorldRay, out hit);
 
+        if (hit.collider == null)
+        {
+            return;
+        }
+
         GameObject go = hit.collider.gameObject;
 
         if (go == null || go.GetComponent<AllyBehaviour>() == null)  // Hit Ground or non-ally unit
