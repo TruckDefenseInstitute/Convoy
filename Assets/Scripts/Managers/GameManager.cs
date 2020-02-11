@@ -6,7 +6,7 @@ using UnityEngine;
 /*
 This code is currently unfinished! It does not check that selected units are alive!!!
 */
-public class GameControl : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     enum GameControlState
     {
