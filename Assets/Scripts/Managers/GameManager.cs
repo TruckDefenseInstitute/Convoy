@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /*
 This code is currently unfinished! It does not check that selected units are alive!!!
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     GameControlState _gameControlState = GameControlState.Idle;
 
     UnitCommandManager _unitCommandManager;
+
+    UiOverlayManager _uiOverlayManager;
 
     // Used in Multiselect
     Vector3 _startingPoint;
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _uiOverlayManager = GameObject.Find("UiOverlayManager").GetComponent<UiOverlayManager>();
         _unitCommandManager = new UnitCommandManager();
 
         _startingPoint = new Vector3();
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
             case GameControlState.Idle:
                 if (_numberKeyPressed) SwitchToRecordedAllies();
 
-                if (Input.GetMouseButton(0)) IdleLeftMouseDown();
+                if (Input.GetMouseButton(0) && IsPointerNotOverUI()) IdleLeftMouseDown();
                 break;
 
             case GameControlState.Multiselect:                
@@ -76,11 +80,11 @@ public class GameManager : MonoBehaviour
                     if (_numberKeyPressed) SwitchToRecordedAllies();
                 }
 
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(1) && IsPointerNotOverUI())
                 {
                     SelectedRightMouseDown();
                 }
-                else if (Input.GetMouseButtonDown(0))
+                else if (Input.GetMouseButtonDown(0) && IsPointerNotOverUI())
                 {
                     SelectedLeftMouseDown();
                 }
@@ -118,6 +122,8 @@ public class GameManager : MonoBehaviour
         {
             _selectedAllies = _markedUnitsMemory[_alphanum];
             _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+            _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+
             _gameControlState = GameControlState.Selected;
             Debug.Log("Loaded " + _alphanum);
             Debug.Log("Now entering selected");
@@ -168,6 +174,7 @@ public class GameManager : MonoBehaviour
 
         _selectedAllies.Add(closestAlly);
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+        _uiOverlayManager.SelectAllyUnits(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
         Debug.Log("Now entering selected");
@@ -206,7 +213,9 @@ public class GameManager : MonoBehaviour
         }
 
         _selectedAllies = potentialAllies.ToList();
+        
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+        _uiOverlayManager.SelectAllyUnits(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
         Debug.Log("Now entering selected");
@@ -236,8 +245,19 @@ public class GameManager : MonoBehaviour
     {
         _selectedAllies = new List<GameObject>();
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+        _uiOverlayManager.SelectAllyUnits(_selectedAllies);
         _gameControlState = GameControlState.Idle;
         Debug.Log("Now Entering Idle");
+    }
+
+    // Make clciking such that it is on the Ui, not on the unit
+    private bool IsPointerNotOverUI() 
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count == 0;
     }
 }
 
