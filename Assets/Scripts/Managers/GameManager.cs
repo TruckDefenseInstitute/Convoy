@@ -155,10 +155,13 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        var potentialAllies = hitColliders.Where(c => c.gameObject != null)
-                                          .Select(c => c.gameObject)
-                                          .Where(go => go != null)
-                                          .Where(go => go.GetComponent<AllyBehaviour>() != null);
+        // todo to beautify
+        var potentialAllies = hitColliders.Select(c => c.transform.parent)
+                                          .Where(t => t != null)
+                                          .Where(t => t.GetComponent<Unit>() != null)
+                                          .Select(t => t.GetComponent<Unit>())
+                                          .Where(u => u.Alignment == Alignment.Friendly && u.IsControllable)
+                                          .Select(u => u.gameObject);
 
         if (potentialAllies.Count() == 0)
         {
@@ -201,10 +204,13 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        var potentialAllies = hitColliders.Where(c => c.gameObject != null)
-                                          .Select(c => c.gameObject)
-                                          .Where(go => go != null)
-                                          .Where(go => go.GetComponent<AllyBehaviour>() != null);
+        // todo to beautify
+        var potentialAllies = hitColliders.Select(c => c.transform.parent)
+                                          .Where(t => t != null)
+                                          .Where(t => t.GetComponent<Unit>() != null)
+                                          .Select(t => t.GetComponent<Unit>())
+                                          .Where(u => u.Alignment == Alignment.Friendly && u.IsControllable)
+                                          .Select(u => u.gameObject);
 
         if (potentialAllies.FirstOrDefault() == null)
         {
@@ -238,7 +244,12 @@ public class GameManager : MonoBehaviour
 
         Physics.Raycast(mouseToWorldRay, out hit);
 
-        _unitCommandManager.DirectSelectedUnits(hit);
+        // todo beautify
+        if (Input.GetKey(KeyCode.Space)) {
+            _unitCommandManager.DirectSelectedUnits(hit, MovementMode.AMove);
+        } else {
+            _unitCommandManager.DirectSelectedUnits(hit, MovementMode.Move);
+        }
     }
 
     void SelectedLeftMouseDown()
