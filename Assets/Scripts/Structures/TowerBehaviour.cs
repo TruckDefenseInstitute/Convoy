@@ -47,10 +47,6 @@ public class TowerBehaviour : MonoBehaviour, IDamageReceiver
         _rangeCollider = gameObject.AddComponent<SphereCollider>();
         _rangeCollider.radius = Range;
         _rangeCollider.isTrigger = true;
-
-        // Tower range is a Kinematic Rigidbody Trigger Collider
-        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
     }
 
     void Update()
