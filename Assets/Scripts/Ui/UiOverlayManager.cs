@@ -11,7 +11,7 @@ public class UiOverlayManager : MonoBehaviour {
 
     private Vector2 _mouseStartPos;
     private RectTransform _selectionBoxTransform;
-    private List<AllyBehaviour> previousAllyList;
+    private List<GameObject> _previousAllyList;
 
     void Start() {
         // Game Objects
@@ -58,36 +58,41 @@ public class UiOverlayManager : MonoBehaviour {
         _selectionBox.SetActive(false);
     }
 
-    public void selectAllyUnits(List<AllyBehaviour> allyList) {
+    public void SelectAllyUnits(List<GameObject> allyList) {
+        Debug.Log("First phase0");
+
+        Debug.Log(allyList == null);
+
+        Debug.Log("Second Phase");
         if(allyList == null) {
             return;
         }
         
-        // Idk why this part doesn't work
+        // TODO: Idk why this part doesn't work
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
 
         foreach(Transform unitSlot in _deployedUnitsPanel.transform) {
             unitSlot.gameObject.SetActive(false);
         }
 
-        if(previousAllyList != null) {
-            foreach(AllyBehaviour selectedAlly in previousAllyList) {
+        if(_previousAllyList != null) {
+            foreach (GameObject selectedAlly in _previousAllyList) {
                 if(selectedAlly != null) {
-                    selectedAlly.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    selectedAlly.transform.GetChild(0).gameObject.SetActive(false);
                 }
             }
         }
 
         int currentSlot = 0;
-        foreach (AllyBehaviour selectedAlly in allyList) {
+        foreach (GameObject selectedAlly in allyList) {
             if(currentSlot < 12) {
                 GameObject deployedUnitSlot = _deployedUnitsPanel.transform.GetChild(currentSlot).gameObject;
                 deployedUnitSlot.SetActive(true);
                 currentSlot++;    
             }
-            selectedAlly.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            selectedAlly.transform.GetChild(0).gameObject.SetActive(true);
         }
 
-        previousAllyList = allyList;
+        _previousAllyList = allyList;
     }
 }

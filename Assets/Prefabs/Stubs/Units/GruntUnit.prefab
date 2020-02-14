@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &447141057007605395
 Transform:
   m_ObjectHideFlags: 0
@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 5585895627678813485}
   - component: {fileID: 5585895627678813486}
   - component: {fileID: 5585895627678813482}
-  - component: {fileID: 5585895627678813481}
   - component: {fileID: 5585895627678813480}
   - component: {fileID: 5585895627678813463}
   m_Layer: 0
@@ -203,18 +202,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5585895627678813481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5585895627678813487}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b4667d398fffbd46a33ecd82b1f8d9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5585895627678813480
 MonoBehaviour:
   m_ObjectHideFlags: 0
