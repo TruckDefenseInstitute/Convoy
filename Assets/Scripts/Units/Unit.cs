@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Unit : MonoBehaviour, IDamageReceiver {
+//[RequireComponent(typeof(Seeker))]
+//[RequireComponent(typeof(RVOController))]
+//[RequireComponent(typeof(RichAI))]
+//[RequireComponent(typeof(RTSAvoidance))]
+public class Unit : MonoBehaviour {
     public Alignment Alignment;
     public bool IsControllable;
 
@@ -18,23 +22,16 @@ public class Unit : MonoBehaviour, IDamageReceiver {
 
     public float DetectionRange;
     public float LoseVisionMultiplier = 1.1f;
+    public float MoveSpeed = 10f;
     // in degrees
     public float MaxRotatingSpeed = 360;
-
-    // todo move to scriptableobject/projectile
-
-    //in degrees
-    public float MaxShootAngle = 5;
-    public float AttackRange;
-    public float AttackDamage;
-    public float AimTime = 0.5f;
-    public float CooldownTime = 0.5f;
 
     IAstarAI _aiRef;
     RVOController _rvoRef;
     RTSAvoidance _avoidanceRef;
     MovementMode _movementMode = MovementMode.AMove;
     SphereCollider _rangeCollider;
+    Weapon _weaponRef;
 
     Unit _focusTarget;
 
@@ -46,28 +43,35 @@ public class Unit : MonoBehaviour, IDamageReceiver {
 
     public void Move(RaycastHit hit, MovementMode mode) {
         _aiRef.destination = hit.point;
-        // this is hack, refactor if necessary
-        ((RichAI)(_aiRef)).rotationSpeed = MaxRotatingSpeed;
-        _movementMode = mode;
-        _rvoRef.velocity *= _rvoRef.locked ? 0 : 1;
+        _aiRef.SearchPath();
+        if (_weaponRef.CanMoveWhileAttacking) {
+            _movementMode = MovementMode.AMove;
+        } else {
+            _movementMode = mode;
+        }
         _rvoRef.locked = false;
-        Debug.DrawLine(hit.point, hit.point + new Vector3(0,10,0));
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _aiRef = GetComponent<IAstarAI>();
-        _rvoRef = GetComponent<RVOController>();
-        _avoidanceRef = GetComponent<RTSAvoidance>();
-        _avoidanceRef.ReachedDestinationCallback += GuardStance;
-
+        if (TryGetComponent<IAstarAI>(out _aiRef)) {
+            _aiRef.maxSpeed = MoveSpeed;
+        }
+        TryGetComponent<RVOController>(out _rvoRef);
+        if (TryGetComponent<RTSAvoidance>(out _avoidanceRef)) {
+            _avoidanceRef.ReachedDestinationCallback += GuardStance;
+        }
+        
         _rangeCollider = gameObject.AddComponent<SphereCollider>();
         _rangeCollider.radius = DetectionRange;
         _rangeCollider.isTrigger = true;
 
         Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
         rigidbody.isKinematic = true;
+
+        _weaponRef = GetComponent<Weapon>();
+        _weaponRef.RotationSpeed = _weaponRef.CanMoveWhileAttacking ? _weaponRef.RotationSpeed : MaxRotatingSpeed;
     }
 
     // Update is called once per frame
@@ -86,6 +90,7 @@ public class Unit : MonoBehaviour, IDamageReceiver {
             if (_focusTarget != null) {
                 if ((_focusTarget.transform.position - transform.position).magnitude > DetectionRange * LoseVisionMultiplier) {
                     _focusTarget = null;
+                    _weaponRef.LoseAim();
                 }
             }
 
@@ -104,32 +109,56 @@ public class Unit : MonoBehaviour, IDamageReceiver {
                 var distanceToFocus = (_focusTarget.transform.position - transform.position).magnitude;
 
                 // move to target if outside attack range
-                if (distanceToFocus > AttackRange) {
+                if (distanceToFocus > _weaponRef.AttackRange) {
                     _rvoRef.locked = false;
                     _aiRef.destination = _focusTarget.transform.position;
                 } else {
                     // attack if inside range
-                    _rvoRef.velocity = Vector3.zero;
-                    _aiRef.destination = transform.position;
-                    _rvoRef.locked = true;
-                    Vector3 d = _focusTarget.transform.position - transform.position;
-                    Vector3 f = Vector3.RotateTowards(
-                        transform.forward,
-                        d, 
-                        Mathf.Deg2Rad * MaxRotatingSpeed * Time.deltaTime,
-                        0);
-                    transform.rotation = Quaternion.LookRotation(f, Vector3.up);
-                    if (Vector3.Angle(transform.forward, d) <= MaxShootAngle) { // within angles
-                        Attack(_focusTarget);
+                    _weaponRef.AimAt(_focusTarget);
+                    if (!_weaponRef.CanMoveWhileAttacking) {
+                        _aiRef.destination = transform.position;
+                        _rvoRef.locked = true;
+                    }
+                    if (!_weaponRef.CanMoveWhileAttacking) {
+                    }
+                }
+            } else if (_weaponRef.CanMoveWhileAttacking){ // rotate turret back to forwards
+                _weaponRef.ResetRotation(transform.forward);
+            }
+
+
+        } else { // possibly a turret or maybe a truck?
+            float minDist = DetectionRange;
+
+            // check if lost vision
+            if (_focusTarget != null) {
+                if ((_focusTarget.transform.position - transform.position).magnitude > DetectionRange) {
+                    _focusTarget = null;
+                }
+            }
+
+            // looks for closest target
+            if (_focusTarget == null) {
+                foreach (var unit in _targets) {
+                    var dist = (unit.transform.position - transform.position).magnitude;
+                    if (dist < minDist) {
+                        _focusTarget = unit;
+                        minDist = dist;
                     }
                 }
             }
+
+            if (_focusTarget != null) {
+                var distanceToFocus = (_focusTarget.transform.position - transform.position).magnitude;
+                
+                // attack if inside range
+                _weaponRef.AimAt(_focusTarget);
+                if (!_weaponRef.CanMoveWhileAttacking && _aiRef != null) {
+                    _aiRef.destination = transform.position;
+                    _rvoRef.locked = true;
+                }
+            }
         }
-    }
-    void Attack(Unit other) {
-        // spawn projectiles if needed
-        // todo
-        other.TakeDamage(new DamageMetadata(AttackDamage, DamageType.Basic));
     }
 
     public void TakeDamage(DamageMetadata dm) {
@@ -159,10 +188,5 @@ public class Unit : MonoBehaviour, IDamageReceiver {
         }
 
         _targets.Remove(u);
-    }
-
-    public void Damage(float damage) {
-        // todo change
-        TakeDamage(new DamageMetadata(damage, DamageType.Basic));
     }
 }

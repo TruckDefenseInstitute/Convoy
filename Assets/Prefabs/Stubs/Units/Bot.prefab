@@ -105,9 +105,9 @@ GameObject:
   - component: {fileID: 4383708903684389633}
   - component: {fileID: 4383708903684389632}
   - component: {fileID: 4383708903684389658}
-  - component: {fileID: 4383708903684389635}
   - component: {fileID: -8924670451544731157}
   - component: {fileID: 6473359827835476500}
+  - component: {fileID: 3353436151041177550}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -223,18 +223,6 @@ MonoBehaviour:
   funnelSimplification: 0
   slowWhenNotFacingTarget: 0
   animCompatibility: {fileID: 0}
---- !u!114 &4383708903684389635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4383708903684389645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309e98fa9ac1e9f4fb45c8228563bbf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8924670451544731157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,16 +250,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alignment: 0
-  IsControllable: 0
+  IsControllable: 1
   Name: Bot
   MaxHealth: 10
   Health: 10
-  DetectionRange: 7
+  DetectionRange: 12
   LoseVisionMultiplier: 1.1
-  AttackRange: 5
+  MaxRotatingSpeed: 360
+--- !u!114 &3353436151041177550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383708903684389645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde37e16d33307740925f949114f43bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationSpeed: 360
+  RotationRoot: {fileID: 4383708903684389634}
+  MaxShootAngle: 5
+  AttackRange: 10
   AttackDamage: 1
-  AimTime: 0.5
-  CooldownTime: 0.5
+  AimTime: 0.2
+  CooldownTime: 0.8
+  CanMoveWhileAttacking: 0
 --- !u!1 &6860236780928763210
 GameObject:
   m_ObjectHideFlags: 0
