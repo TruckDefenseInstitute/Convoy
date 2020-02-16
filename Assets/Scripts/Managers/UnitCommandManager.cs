@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class UnitCommandManager
 {
-    List<AllyBehaviour> _selectedAllies = new List<AllyBehaviour>();
+    List<Unit> _selectedAllies = new List<Unit>();
 
     public void ChangeSelectedAllies(List<GameObject> gameObjectList)
     {
-        _selectedAllies = gameObjectList.Select(go => go.GetComponent<AllyBehaviour>()).ToList();
+        _selectedAllies = gameObjectList.Select(go => go.GetComponent<Unit>()).ToList();
     }
 
-    public void DirectSelectedUnits(RaycastHit hit)
+    public void DirectSelectedUnits(RaycastHit hit, MovementMode mode)
     {
-        _selectedAllies.ForEach(ab => ab.Move(hit));
+        _selectedAllies.ForEach(ab => ab.Move(hit, mode));
     }
 }
