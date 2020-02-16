@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5255315256829858745}
   - component: {fileID: 531588763534801136}
-  - component: {fileID: 4921566993339215153}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,24 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f659230fe25ebf44290cf07a18a11ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiOverlayManager: {fileID: 7065461173274612548, guid: c032a58a001bb0343a26d131286f2ebe,
-    type: 3}
   RecordingButton: 32
---- !u!114 &4921566993339215153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354755794662205186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e6b13793e3cd54cbc4c5fc7a4b3379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panSpeed: 20
-  panBorderThickness: 10
-  panLimit: {x: 50, y: 40}
-  scrollSpeed: 20
-  minY: 20
-  maxY: 100
