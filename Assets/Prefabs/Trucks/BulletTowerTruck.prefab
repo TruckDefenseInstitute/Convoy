@@ -821,14 +821,14 @@ MonoBehaviour:
   centerBackingField: 1
   locked: 0
   lockWhenNotMoving: 0
-  agentTimeHorizon: 2
+  agentTimeHorizon: 0
   obstacleTimeHorizon: 2
   maxNeighbours: 10
   layer: 1
   collidesWith: -1
   wallAvoidForce: 1
   wallAvoidFalloff: 1
-  priority: 0
+  priority: 1
   debug: 0
 --- !u!114 &5068385913482050830
 MonoBehaviour:

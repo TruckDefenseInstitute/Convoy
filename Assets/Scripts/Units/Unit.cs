@@ -42,6 +42,7 @@ public class Unit : MonoBehaviour {
     Weapon _weaponRef;
 
     Unit _focusTarget;
+    bool _attacking = false;
 
     HashSet<Unit> _targets = new HashSet<Unit>();
 
@@ -51,6 +52,10 @@ public class Unit : MonoBehaviour {
     }
 
     public void NextDestination() {
+        if (_attacking) {
+            return;
+        }
+
         if (_shiftMoveQueue.Count > 0) {
             _shiftMoveQueue.Dequeue();
         }
@@ -157,6 +162,7 @@ public class Unit : MonoBehaviour {
                 if ((_focusTarget.transform.position - transform.position).magnitude > DetectionRange * LoseVisionMultiplier || !_focusTarget.IsAlive()) {
                     _focusTarget = null;
                     _weaponRef.LoseAim();
+                    _attacking = false;
                 }
             }
 
@@ -191,7 +197,8 @@ public class Unit : MonoBehaviour {
                     if (!_weaponRef.CanMoveWhileAttacking || distanceToFocus <= _weaponRef.AttackRange * AMoveStopDistMultiplier) {
                         // lock only if cannot attack while moving
                         if (_movementMode != MovementMode.Move) {
-                            _rvoRef.locked = true;
+                            _attacking = true;
+                            _aiRef.destination = transform.position;
                         }
                     }
                 }
