@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /*
 This code is currently unfinished! It does not check that selected units are alive!!!
 */
-public class GameManager : MonoBehaviour
+public class UnitControlAndSelectionManager : MonoBehaviour
 {
     enum GameControlState
     {
