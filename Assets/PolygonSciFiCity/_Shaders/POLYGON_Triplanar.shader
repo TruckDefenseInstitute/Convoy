@@ -29,7 +29,7 @@ Shader "SyntyStudios/Triplanar"
 			#undef WorldNormalVector
 			#define INTERNAL_DATA half3 internalSurfaceTtoW0; half3 internalSurfaceTtoW1; half3 internalSurfaceTtoW2;
 			#define WorldReflectionVector(data,normal) reflect (data.worldRefl, half3(dot(data.internalSurfaceTtoW0,normal), dot(data.internalSurfaceTtoW1,normal), dot(data.internalSurfaceTtoW2,normal)))
-			#define WorldNormalVector(data,normal) fixed3(dot(data.internalSurfaceTtoW0,normal), dot(data.internalSurfaceTtoW1,normal), dot(data.internalSurfaceTtoW2,normal))
+			#define WorldNormalVector(data,normal) half3(dot(data.internalSurfaceTtoW0,normal), dot(data.internalSurfaceTtoW1,normal), dot(data.internalSurfaceTtoW2,normal))
 		#endif
 		struct Input
 		{
@@ -50,10 +50,10 @@ Shader "SyntyStudios/Triplanar"
 		uniform float4 _EmissionColor;
 
 
-		inline float4 TriplanarSamplingCF( sampler2D topTexMap, sampler2D midTexMap, sampler2D botTexMap, float3 worldPos, float3 worldNormal, float falloff, float tilling, float3 index )
+		inline float4 TriplanarSamplingCF( sampler2D topTexMap, sampler2D midTexMap, sampler2D botTexMap, float3 worldPos, float3 worldNormal, float falloff, float tilling, float3 normalScale, float3 index )
 		{
 			float3 projNormal = ( pow( abs( worldNormal ), falloff ) );
-			projNormal /= projNormal.x + projNormal.y + projNormal.z;
+			projNormal /= ( projNormal.x + projNormal.y + projNormal.z ) + 0.00001;
 			float3 nsign = sign( worldNormal );
 			float negProjNormalY = max( 0, projNormal.y * -nsign.y );
 			projNormal.y = max( 0, projNormal.y * nsign.y );
@@ -72,7 +72,7 @@ Shader "SyntyStudios/Triplanar"
 			float2 uv_Texture = i.uv_texcoord * _Texture_ST.xy + _Texture_ST.zw;
 			float3 ase_worldPos = i.worldPos;
 			float3 ase_worldNormal = WorldNormalVector( i, float3( 0, 0, 1 ) );
-			float4 triplanar1 = TriplanarSamplingCF( _Overlay, _Overlay, _Overlay, ase_worldPos, ase_worldNormal, _FallOff, _Tiling, float3(0,0,0) );
+			float4 triplanar1 = TriplanarSamplingCF( _Overlay, _Overlay, _Overlay, ase_worldPos, ase_worldNormal, _FallOff, _Tiling, float3( 1,1,1 ), float3(0,0,0) );
 			float4 temp_cast_0 = (_DirtAmount).xxxx;
 			float4 clampResult17 = clamp( triplanar1 , temp_cast_0 , float4( 1,1,1,0 ) );
 			o.Albedo = ( tex2D( _Texture, uv_Texture ) * clampResult17 ).rgb;
@@ -122,10 +122,10 @@ Shader "SyntyStudios/Triplanar"
 				UNITY_TRANSFER_INSTANCE_ID( v, o );
 				Input customInputData;
 				float3 worldPos = mul( unity_ObjectToWorld, v.vertex ).xyz;
-				fixed3 worldNormal = UnityObjectToWorldNormal( v.normal );
-				fixed3 worldTangent = UnityObjectToWorldDir( v.tangent.xyz );
-				fixed tangentSign = v.tangent.w * unity_WorldTransformParams.w;
-				fixed3 worldBinormal = cross( worldNormal, worldTangent ) * tangentSign;
+				half3 worldNormal = UnityObjectToWorldNormal( v.normal );
+				half3 worldTangent = UnityObjectToWorldDir( v.tangent.xyz );
+				half tangentSign = v.tangent.w * unity_WorldTransformParams.w;
+				half3 worldBinormal = cross( worldNormal, worldTangent ) * tangentSign;
 				o.tSpace0 = float4( worldTangent.x, worldBinormal.x, worldNormal.x, worldPos.x );
 				o.tSpace1 = float4( worldTangent.y, worldBinormal.y, worldNormal.y, worldPos.y );
 				o.tSpace2 = float4( worldTangent.z, worldBinormal.z, worldNormal.z, worldPos.z );
@@ -134,7 +134,7 @@ Shader "SyntyStudios/Triplanar"
 				TRANSFER_SHADOW_CASTER_NORMALOFFSET( o )
 				return o;
 			}
-			fixed4 frag( v2f IN
+			half4 frag( v2f IN
 			#if !defined( CAN_SKIP_VPOS )
 			, UNITY_VPOS_TYPE vpos : VPOS
 			#endif
@@ -145,7 +145,7 @@ Shader "SyntyStudios/Triplanar"
 				UNITY_INITIALIZE_OUTPUT( Input, surfIN );
 				surfIN.uv_texcoord = IN.customPack1.xy;
 				float3 worldPos = float3( IN.tSpace0.w, IN.tSpace1.w, IN.tSpace2.w );
-				fixed3 worldViewDir = normalize( UnityWorldSpaceViewDir( worldPos ) );
+				half3 worldViewDir = normalize( UnityWorldSpaceViewDir( worldPos ) );
 				surfIN.worldPos = worldPos;
 				surfIN.worldNormal = float3( IN.tSpace0.z, IN.tSpace1.z, IN.tSpace2.z );
 				surfIN.internalSurfaceTtoW0 = IN.tSpace0.xyz;
@@ -166,20 +166,20 @@ Shader "SyntyStudios/Triplanar"
 	CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
-Version=14501
-2567;34;2546;1524;1501.224;883.9599;1.07;True;True
-Node;AmplifyShaderEditor.TexturePropertyNode;2;-514,-296;Float;True;Property;_Overlay;Overlay;0;0;Create;True;0;None;9e88b336bd16b1e4b99de75f486126c1;False;white;Auto;0;1;SAMPLER2D;0
-Node;AmplifyShaderEditor.RangedFloatNode;4;-485,63;Float;False;Property;_FallOff;FallOff;1;0;Create;True;0;0;5.01;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;3;-489.21,-60.51;Float;False;Property;_Tiling;Tiling;2;0;Create;True;0;0;6.24;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.TriplanarNode;1;-163.14,-299.8202;Float;True;Cylindrical;World;False;Top Texture 0;_TopTexture0;white;1;None;Mid Texture 0;_MidTexture0;white;-1;None;Bot Texture 0;_BotTexture0;white;0;None;Triplanar Sampler;False;8;0;SAMPLER2D;;False;5;FLOAT;1;False;1;SAMPLER2D;;False;6;FLOAT;0;False;2;SAMPLER2D;;False;7;FLOAT;0;False;3;FLOAT;1;False;4;FLOAT;1;False;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;15;-8.573858,-73.96994;Float;False;Property;_DirtAmount;DirtAmount;6;0;Create;True;0;1;0;0.5;1.2;0;1;FLOAT;0
-Node;AmplifyShaderEditor.ClampOpNode;17;283.535,-264.4308;Float;False;3;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT4;1,1,1,0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.ColorNode;11;68.00011,303;Float;False;Property;_EmissionColor;EmissionColor;5;0;Create;True;0;0,0,0,0;0.1878804,0.6724138,0.6296608,1;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;9;-282.9999,207;Float;True;Property;_Emission;Emission;3;0;Create;True;0;84508b93f15f2b64386ec07486afc7a3;80ee511a5808d8d499a8ca850b8a2129;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;1;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;7;-535.8401,-519.7598;Float;True;Property;_Texture;Texture;4;0;Create;True;0;84508b93f15f2b64386ec07486afc7a3;2f94f6bda2ac07743b44aa2ea4b791e1;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;1;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Version=16200
+2567;32;2546;1397;1501.224;816.0149;1.07;True;False
+Node;AmplifyShaderEditor.RangedFloatNode;3;-489.21,-60.51;Float;False;Property;_Tiling;Tiling;2;0;Create;True;0;0;False;0;0;6.24;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.TexturePropertyNode;2;-514,-296;Float;True;Property;_Overlay;Overlay;0;0;Create;True;0;0;False;0;None;9e88b336bd16b1e4b99de75f486126c1;False;white;Auto;Texture2D;0;1;SAMPLER2D;0
+Node;AmplifyShaderEditor.RangedFloatNode;4;-485,63;Float;False;Property;_FallOff;FallOff;1;0;Create;True;0;0;False;0;0;5.01;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;15;-156.2343,6.280043;Float;False;Property;_DirtAmount;DirtAmount;6;0;Create;True;0;0;False;0;1;0;0.5;1.2;0;1;FLOAT;0
+Node;AmplifyShaderEditor.TriplanarNode;1;-163.14,-299.8202;Float;True;Cylindrical;World;False;Top Texture 0;_TopTexture0;white;1;None;Mid Texture 0;_MidTexture0;white;-1;None;Bot Texture 0;_BotTexture0;white;0;None;Triplanar Sampler;False;9;0;SAMPLER2D;;False;5;FLOAT;1;False;1;SAMPLER2D;;False;6;FLOAT;0;False;2;SAMPLER2D;;False;7;FLOAT;0;False;8;FLOAT3;1,1,1;False;3;FLOAT;1;False;4;FLOAT;1;False;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;11;68.00011,303;Float;False;Property;_EmissionColor;EmissionColor;5;0;Create;True;0;0;False;0;0,0,0,0;0.1878804,0.6724138,0.6296608,1;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;7;-535.8401,-519.7598;Float;True;Property;_Texture;Texture;4;0;Create;True;0;0;False;0;84508b93f15f2b64386ec07486afc7a3;84508b93f15f2b64386ec07486afc7a3;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;1;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;9;-282.9999,207;Float;True;Property;_Emission;Emission;3;0;Create;True;0;0;False;0;84508b93f15f2b64386ec07486afc7a3;80ee511a5808d8d499a8ca850b8a2129;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;1;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ClampOpNode;17;322.0553,-304.0211;Float;False;3;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT4;1,1,1,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;8;636.5526,-465.2808;Float;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;10;237.0001,114;Float;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;716.0014,-25.1995;Float;False;True;2;Float;ASEMaterialInspector;0;0;Standard;SyntyStudios/Triplanar;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Back;0;0;False;0;0;False;0;Opaque;0.5;True;True;0;False;Opaque;;Geometry;All;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;False;0;255;255;0;0;0;0;0;0;0;0;False;2;15;10;25;False;0.5;True;0;Zero;Zero;0;Zero;Zero;OFF;OFF;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;0;0;False;0;0;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
+Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;716.0014,-25.1995;Float;False;True;2;Float;ASEMaterialInspector;0;0;Standard;SyntyStudios/Triplanar;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Back;0;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;0;Opaque;0.5;True;True;0;False;Opaque;;Geometry;All;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;True;0;0;False;-1;0;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
 WireConnection;1;0;2;0
 WireConnection;1;1;2;0
 WireConnection;1;2;2;0
@@ -194,4 +194,4 @@ WireConnection;10;1;11;0
 WireConnection;0;0;8;0
 WireConnection;0;2;10;0
 ASEEND*/
-//CHKSM=B6B6556774C96287EE64A207A6CFB5D9DF4AB90F
+//CHKSM=EB6B4A204CCF3BCDCFAB8D6684B8C64D4663B314
