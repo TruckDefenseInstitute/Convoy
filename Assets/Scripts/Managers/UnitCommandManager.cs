@@ -12,8 +12,10 @@ public class UnitCommandManager
         _selectedAllies = gameObjectList.Select(go => go.GetComponent<Unit>()).ToList();
     }
 
-    public void DirectSelectedUnits(RaycastHit hit, MovementMode mode)
-    {
+    public void DirectSelectedUnits(RaycastHit hit, MovementMode mode) {
         _selectedAllies.ForEach(ab => ab.Move(hit, mode));
+    }
+    public void ShiftDirectSelectedUnits(RaycastHit hit, MovementMode mode) {
+        _selectedAllies.ForEach(ab => ab.ShiftMove(hit, mode));
     }
 }

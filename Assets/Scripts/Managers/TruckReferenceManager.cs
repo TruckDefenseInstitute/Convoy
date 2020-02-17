@@ -8,7 +8,7 @@ public class TruckReferenceManager : MonoBehaviour
     public List<string> truckPrefabNames = new List<string>();
 
     GameObject _truckGameObject;
-    TruckBehaviour _truckBehaviour;
+    Truck _truckBehaviour;
     Transform _truckTransform;
 
     void Start()
@@ -29,7 +29,7 @@ public class TruckReferenceManager : MonoBehaviour
         }
 
         _truckTransform = _truckGameObject.transform;
-        _truckBehaviour = _truckGameObject.GetComponent<TruckBehaviour>();
+        _truckBehaviour = _truckGameObject.GetComponent<Truck>();
     }
 
     public Vector3 GetTruckPosition()
