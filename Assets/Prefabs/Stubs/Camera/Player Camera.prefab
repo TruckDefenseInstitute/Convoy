@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1257909448294920101}
   - component: {fileID: 1257909448294920102}
   - component: {fileID: 1257909448294920103}
-  - component: {fileID: 1257909448294920096}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -103,16 +102,3 @@ MonoBehaviour:
   scrollSpeed: 20
   minY: 20
   maxY: 100
---- !u!114 &1257909448294920096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257909448294920097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4028ba0d8a02f4f940445eea5f4a7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedUnit: {fileID: 0}
