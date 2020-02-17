@@ -4,23 +4,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UiToGameManager : MonoBehaviour {
-    
+    /// Right now you might be wondering - why the heck is this thing static?
+    /// Thanks to how Unity's EventSystem works, when the Summon method below gets
+    /// called from the UI button, it's not the method of the instance in the Hierarchy
+    /// that gets called, but another instance living somewhere else. The workaround 
+    /// for this is to make this thing static, so that all copies get the same reference to
+    /// a TruckReferenceManager. Sounds retarded? I agree. That's why,
+    /// ANYTIME YOU FIND A BETTER WORKAROUND, JUST YEET THIS CODE INTO THE SUN THANKS.
+    static TruckReferenceManager _truckReferenceManager;
+
     void Awake() {
         SceneManager.LoadScene("UiOverlay", LoadSceneMode.Additive);
+        _truckReferenceManager = gameObject.GetComponent<TruckReferenceManager>();
     }
 
-    void Update() {
-        
-    }
-
-    
     // To used by the button from SummonUnitsButton Object
     public void Summon(GameObject unit) {
         // Summon Unit from truck here
+        Vector3 currentTruckPosition = _truckReferenceManager.GetTruckPosition();
+        Vector3 divergence = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
 
-        // This is a temporary item, delete below when necessary
-        Instantiate(unit, 
-                new Vector3(Random.Range(-10.0f, 10.0f), 0, Random.Range(-10.0f, 10.0f)), 
-                Quaternion.identity);
+        Instantiate(unit, currentTruckPosition + divergence, Quaternion.identity);
     }
 }
