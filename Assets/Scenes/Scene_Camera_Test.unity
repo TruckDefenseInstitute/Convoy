@@ -978,7 +978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f659230fe25ebf44290cf07a18a11ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiToGameManager: {fileID: 0}
   RecordingButton: 32
 --- !u!1 &1040802758
 GameObject:
