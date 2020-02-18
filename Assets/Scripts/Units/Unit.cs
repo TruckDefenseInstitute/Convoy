@@ -221,7 +221,7 @@ public class Unit : MonoBehaviour {
             _targets.RemoveWhere(u => !u.IsAlive());
             _targets.RemoveWhere(u => u == null);
             foreach (var unit in _targets) {
-                var dist = (unit.transform.position - transform.position).magnitude;
+                var dist = DistanceIgnoreY(unit.transform.position, transform.position);
                 if (dist < minDist) {
                     _focusTarget = unit;
                     minDist = dist;
@@ -240,7 +240,7 @@ public class Unit : MonoBehaviour {
 
         // if have target
         if (_focusTarget != null) {
-            var distanceToFocus = (_focusTarget.transform.position - transform.position).magnitude;
+            var distanceToFocus = DistanceIgnoreY(_focusTarget.transform.position, transform.position);
 
             // move to target if outside attack range
             if (distanceToFocus > _weaponRef.AttackRange) {
@@ -278,25 +278,15 @@ public class Unit : MonoBehaviour {
     }
 
     void StationaryAttackLogic() {
-        float minDist = DetectionRange;
-
-        // looks for closest target
-        if (_focusTarget == null) {
-            _targets.RemoveWhere(u => u == null);
-            foreach (var unit in _targets) {
-                var dist = (unit.transform.position - transform.position).magnitude;
-                if (dist < minDist) {
-                    _focusTarget = unit;
-                    minDist = dist;
-                }
-            }
-        }
+        AcquireClosestTarget();
 
         if (_focusTarget != null) {
-            var distanceToFocus = (_focusTarget.transform.position - transform.position).magnitude;
+            var distanceToFocus = DistanceIgnoreY(_focusTarget.transform.position, transform.position);
 
-            // attack if inside range
-            _weaponRef.AimAt(_focusTarget);
+            if (distanceToFocus <= _weaponRef.AttackRange) {
+                // attack if inside range
+                _weaponRef.AimAt(_focusTarget);
+            }
         }
     }
 
@@ -306,9 +296,11 @@ public class Unit : MonoBehaviour {
             return;
         }
         
-        // check if lost vision
+        // check if lost vision or target is dead
         if (_focusTarget != null) {
-            if ((_focusTarget.transform.position - transform.position).magnitude > DetectionRange * LoseVisionMultiplier || !_focusTarget.IsAlive()) {
+            if (!_focusTarget.IsAlive()
+                || DistanceIgnoreY(_focusTarget.transform.position, transform.position) > DetectionRange * (_aiRef != null ? LoseVisionMultiplier : 1)
+                ) {
                 _focusTarget = null;
                 _weaponRef.LoseAim();
                 _attacking = false;
@@ -343,7 +335,7 @@ public class Unit : MonoBehaviour {
             if (_following != null && _following.IsAlive()) {
                 // keep between 5 - 8 units from target 
                 if (_movementMode == MovementMode.Follow) {
-                    var dist = Vector3.Distance(transform.position, _following.transform.position);
+                    var dist = DistanceIgnoreY(transform.position, _following.transform.position);
                     if (dist <= 5) {
                         _aiRef.destination = transform.position;
                     } else if(dist >= 8) {
@@ -374,10 +366,13 @@ public class Unit : MonoBehaviour {
     }
 
     void Die() {
-        transform.rotation = Quaternion.Euler(0, 0, 90);
-        _aiRef.canSearch = false;
-        GetComponentInChildren<Collider>().enabled = false;
         // Play death animation etc etc
+        if (_aiRef != null) {
+            _aiRef.canSearch = false;
+        }
+        if (_rvoRef != null) {
+            _rvoRef.locked = true;
+        }
         transform.rotation = Quaternion.Euler(0, 0, 90);
 
         if (this.Alignment == Alignment.Friendly)
@@ -390,6 +385,12 @@ public class Unit : MonoBehaviour {
 
     void Destroy() {
         Destroy(gameObject);
+    }
+
+    float DistanceIgnoreY(Vector3 a, Vector3 b) {
+        a.y = 0;
+        b.y = 0;
+        return Vector3.Distance(a, b);
     }
 
     void OnTriggerEnter(Collider other) {

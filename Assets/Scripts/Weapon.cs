@@ -63,7 +63,13 @@ public class Weapon : MonoBehaviour {
     void TryAttack() {
         if (_aimTimeLeft >= AimTime && _cooldownLeft >= CooldownTime) {
             // todo instantiate projectile
-            Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
+            GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
+            // todo change
+            try {
+                go.GetComponent<HitscanProjectile>().Distance = (_target.transform.position - RotationRoot.position).magnitude;
+            } catch (Exception e) {
+
+            }
             _target.TakeDamage(new DamageMetadata(AttackDamage, DamageType.Basic));
             _cooldownLeft = 0;
         }

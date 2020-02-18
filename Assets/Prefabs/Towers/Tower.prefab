@@ -440,7 +440,7 @@ MonoBehaviour:
   RotationRoot: {fileID: 1181580795899471974}
   MaxShootAngle: 5
   DamageType: 0
-  AttackRange: 10
+  AttackRange: 15
   AttackDamage: 1
   AimTime: 0.2
   CooldownTime: 0.8
