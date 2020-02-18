@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 1774539447061380261}
   - component: {fileID: 138635446}
   - component: {fileID: 138635445}
+  - component: {fileID: 1755561174}
   m_Layer: 0
   m_Name: Barracks
   m_TagString: Untagged
@@ -176,6 +177,19 @@ MonoBehaviour:
   cutsAddedGeom: 1
   updateRotationDistance: 10
   useRotationAndScale: 0
+--- !u!114 &1755561174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774539447061380260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 211df391cb34fa1479b42a627e395bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitToSpawn: {fileID: 0}
 --- !u!1 &1774539447354309443
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class BarracksBehaviour : MonoBehaviour
 
         Vector3 finalDisplacement = GetVectorRotatedAboutYAxis(initialDisplacement, barracksYAxisRotation);
         spawnPosition = gameObject.transform.position + finalDisplacement;
+        Instantiate(unitToSpawn, spawnPosition, Quaternion.identity);
     }
 
     // Update is called once per frame
