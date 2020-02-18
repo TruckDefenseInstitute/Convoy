@@ -253,7 +253,6 @@ MonoBehaviour:
   IsControllable: 1
   Name: Bot
   MaxHealth: 10
-  Health: 10
   DetectionRange: 12
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
