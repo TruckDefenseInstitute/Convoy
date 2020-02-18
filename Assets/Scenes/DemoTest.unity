@@ -186,7 +186,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 90
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 0
@@ -493,7 +493,7 @@ RectTransform:
   m_Children:
   - {fileID: 1958882608}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -969,7 +969,7 @@ PrefabInstance:
     - target: {fileID: 5255315256829858745, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5255315256829858745, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
@@ -1211,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 5318384293257334272, guid: a4deeaf3a80300a4b9e0e72b07e512b3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5318384293257334272, guid: a4deeaf3a80300a4b9e0e72b07e512b3,
         type: 3}
@@ -1553,7 +1553,7 @@ Transform:
   - {fileID: 1272485942}
   - {fileID: 156932537}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1224148235
 GameObject:
@@ -2392,7 +2392,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!4 &1554409014 stripped
 Transform:
@@ -2833,6 +2833,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1228799298866194138, guid: a4deeaf3a80300a4b9e0e72b07e512b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3228337820823662358, guid: a4deeaf3a80300a4b9e0e72b07e512b3,
         type: 3}
       propertyPath: Alignment
@@ -3372,7 +3377,6 @@ MonoBehaviour:
   IsControllable: 1
   Name: Tank?
   MaxHealth: 100
-  Health: 100
   DetectionRange: 15
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -3528,7 +3532,7 @@ PrefabInstance:
     - target: {fileID: 4277780759849592826, guid: c839921b1bd684946911052649131d34,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4277780759849592826, guid: c839921b1bd684946911052649131d34,
         type: 3}
@@ -3568,7 +3572,7 @@ Transform:
   - {fileID: 1181580796006626770}
   - {fileID: 2114191619}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5318384293699507131
 GameObject:
