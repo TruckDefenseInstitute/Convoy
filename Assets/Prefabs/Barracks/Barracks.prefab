@@ -188,7 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 211df391cb34fa1479b42a627e395bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitToSpawn: {fileID: 0}
+  unitToSpawn: {fileID: 4383708903684389645, guid: d0d6178463c2dac45909ce95d743fd51,
+    type: 3}
   CooldownTime: 5
 --- !u!1 &1774539447354309443
 GameObject:

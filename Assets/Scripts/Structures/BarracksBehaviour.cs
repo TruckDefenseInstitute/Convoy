@@ -33,6 +33,7 @@ public class BarracksBehaviour : MonoBehaviour
             _cooldownLeft = 0;
 
             Unit unitScript = Instantiate(unitToSpawn, spawnPosition, Quaternion.identity).GetComponent<Unit>();
+            unitScript.Alignment = Alignment.Hostile;
             unitScript.Move(_truckReferenceManager.GetTruckPosition(), MovementMode.AMove);
         }
         else
