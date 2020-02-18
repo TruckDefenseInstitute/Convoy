@@ -4890,6 +4890,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3353436151041177550, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: AimTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353436151041177550, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: CooldownTime
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4383708903684389634, guid: d0d6178463c2dac45909ce95d743fd51,
         type: 3}
       propertyPath: m_LocalPosition.x
