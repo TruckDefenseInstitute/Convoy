@@ -245,10 +245,16 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         Physics.Raycast(mouseToWorldRay, out hit);
 
         // todo beautify
+        MovementMode mm;
         if (Input.GetKey(KeyCode.Space)) {
-            _unitCommandManager.DirectSelectedUnits(hit, MovementMode.AMove);
+            mm = MovementMode.AMove;
         } else {
-            _unitCommandManager.DirectSelectedUnits(hit, MovementMode.Move);
+            mm = MovementMode.Move;
+        }
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            _unitCommandManager.ShiftDirectSelectedUnits(hit, mm);
+        } else {
+            _unitCommandManager.DirectSelectedUnits(hit, mm);
         }
     }
 

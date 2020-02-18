@@ -217,7 +217,7 @@ MonoBehaviour:
   acceleration: 20
   rotationSpeed: 720
   slowdownTime: 0.5
-  endReachedDistance: 0.01
+  endReachedDistance: 1
   wallForce: 3
   wallDist: 1
   funnelSimplification: 0
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84137426a3da644e9584fc4793c1e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  densityFraction: 0.3
-  returnAfterBeingPushedAway: 1
+  densityFraction: 0.5
+  returnAfterBeingPushedAway: 0
 --- !u!114 &6473359827835476500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +255,9 @@ MonoBehaviour:
   MaxHealth: 10
   Health: 10
   DetectionRange: 12
+  AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
+  MoveSpeed: 10
   MaxRotatingSpeed: 360
 --- !u!114 &3353436151041177550
 MonoBehaviour:
@@ -272,11 +274,13 @@ MonoBehaviour:
   RotationSpeed: 360
   RotationRoot: {fileID: 4383708903684389634}
   MaxShootAngle: 5
+  DamageType: 0
   AttackRange: 10
   AttackDamage: 1
   AimTime: 0.2
   CooldownTime: 0.8
   CanMoveWhileAttacking: 0
+  Projectile: {fileID: 0}
 --- !u!1 &6860236780928763210
 GameObject:
   m_ObjectHideFlags: 0
