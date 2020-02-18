@@ -63,13 +63,13 @@ public class Weapon : MonoBehaviour {
     void TryAttack() {
         if (_aimTimeLeft >= AimTime && _cooldownLeft >= CooldownTime) {
             // todo instantiate projectile
-            GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
+            GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, Quaternion.LookRotation(_target.transform.position - RotationRoot.position));
             // todo change
             try {
                 var proj = go.GetComponent<HitscanProjectile>();
+                proj.Damage = AttackDamage;
                 proj.Distance = (_target.transform.position - RotationRoot.position).magnitude;
                 proj.Target = _target.gameObject;
-                Invoke("HitTheOtherGuy", proj.Distance / proj.Speed);
             } catch (Exception e) {
 
             }
@@ -81,11 +81,5 @@ public class Weapon : MonoBehaviour {
         a.y = 0;
         b.y = 0;
         return Vector3.Angle(a, b);
-    }
-
-    void HitTheOtherGuy() {
-        if (_target != null) {
-            _target.TakeDamage(new DamageMetadata(AttackDamage, DamageType.Basic));
-        }
     }
 }

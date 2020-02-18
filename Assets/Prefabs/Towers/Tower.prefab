@@ -445,7 +445,7 @@ MonoBehaviour:
   AimTime: 0.2
   CooldownTime: 0.8
   CanMoveWhileAttacking: 0
-  Projectile: {fileID: 4782702623140585449, guid: e2d84ef6cdcb8f046b68fe2c20d72d54,
+  Projectile: {fileID: 5223907511035474348, guid: 8e1945fdaa2a98b40accffa1a3a4b12f,
     type: 3}
   ProjectileSpawnPoint: {fileID: 5169249549756388002}
 --- !u!114 &5318384293257334273

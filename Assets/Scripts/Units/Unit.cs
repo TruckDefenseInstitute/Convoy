@@ -48,6 +48,8 @@ public class Unit : MonoBehaviour {
     // in degrees
     public float MaxRotatingSpeed = 360;
 
+    public GameObject EffectSpawningPoint;
+
     IAstarAI _aiRef;
     Queue<Command> _shiftQueue = new Queue<Command>();
     Vector3 _guardPosition;
