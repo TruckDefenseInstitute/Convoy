@@ -689,6 +689,10 @@ PrefabInstance:
       propertyPath: unitToSpawn
       value: 
       objectReference: {fileID: 1259934917}
+    - target: {fileID: 1755561174, guid: 703e6e655e225404782c95238413521c, type: 3}
+      propertyPath: CooldownTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1774539447061380260, guid: 703e6e655e225404782c95238413521c,
         type: 3}
       propertyPath: m_Name
@@ -697,7 +701,7 @@ PrefabInstance:
     - target: {fileID: 1774539447061380261, guid: 703e6e655e225404782c95238413521c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 60
+      value: 6.7
       objectReference: {fileID: 0}
     - target: {fileID: 1774539447061380261, guid: 703e6e655e225404782c95238413521c,
         type: 3}
@@ -707,7 +711,7 @@ PrefabInstance:
     - target: {fileID: 1774539447061380261, guid: 703e6e655e225404782c95238413521c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40
+      value: 29.2
       objectReference: {fileID: 0}
     - target: {fileID: 1774539447061380261, guid: 703e6e655e225404782c95238413521c,
         type: 3}

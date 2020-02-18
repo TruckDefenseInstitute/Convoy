@@ -6,6 +6,10 @@ using UnityEngine;
 public class BarracksBehaviour : MonoBehaviour
 {
     public GameObject unitToSpawn;
+    
+    public float CooldownTime;
+    float _cooldownLeft;
+
     Vector3 spawnPosition;
 
     // Start is called before the first frame update
@@ -16,13 +20,21 @@ public class BarracksBehaviour : MonoBehaviour
 
         Vector3 finalDisplacement = GetVectorRotatedAboutYAxis(initialDisplacement, barracksYAxisRotation);
         spawnPosition = gameObject.transform.position + finalDisplacement;
-        Instantiate(unitToSpawn, spawnPosition, Quaternion.identity);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (_cooldownLeft >= CooldownTime)
+        {
+            Instantiate(unitToSpawn, spawnPosition, Quaternion.identity);
+            _cooldownLeft = 0;
+        }
+        else
+        {
+            _cooldownLeft = _cooldownLeft + Time.deltaTime;
+        }
     }
 
     Vector3 GetVectorRotatedAboutYAxis(Vector3 vector, float degrees)
