@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitToSpawn: {fileID: 0}
+  CooldownTime: 5
 --- !u!1 &1774539447354309443
 GameObject:
   m_ObjectHideFlags: 0

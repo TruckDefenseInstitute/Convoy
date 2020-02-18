@@ -9,18 +9,20 @@ public class BarracksBehaviour : MonoBehaviour
     
     public float CooldownTime;
     float _cooldownLeft;
-
     Vector3 spawnPosition;
+
+    TruckReferenceManager _truckReferenceManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        _truckReferenceManager = GameObject.Find("GameManager").GetComponent<TruckReferenceManager>();
+
         float barracksYAxisRotation = gameObject.transform.rotation.eulerAngles.y;
         Vector3 initialDisplacement = new Vector3(7f, 0f, 0f);
 
         Vector3 finalDisplacement = GetVectorRotatedAboutYAxis(initialDisplacement, barracksYAxisRotation);
         spawnPosition = gameObject.transform.position + finalDisplacement;
-        
     }
 
     // Update is called once per frame
@@ -28,8 +30,10 @@ public class BarracksBehaviour : MonoBehaviour
     {
         if (_cooldownLeft >= CooldownTime)
         {
-            Instantiate(unitToSpawn, spawnPosition, Quaternion.identity);
             _cooldownLeft = 0;
+
+            Unit unitScript = Instantiate(unitToSpawn, spawnPosition, Quaternion.identity).GetComponent<Unit>();
+            unitScript.Move(_truckReferenceManager.GetTruckPosition(), MovementMode.AMove);
         }
         else
         {
