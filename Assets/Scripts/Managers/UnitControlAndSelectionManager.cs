@@ -276,6 +276,26 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count == 0;
     }
+
+    public void ReportUnitDead(GameObject deadGameObject)
+    {
+        _selectedAllies = _selectedAllies.Where(go => go != deadGameObject)
+                                         .ToList();
+
+        _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+        _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        
+        if (_selectedAllies.Count == 0)
+        {
+            _gameControlState = GameControlState.Idle;
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            _markedUnitsMemory[i] = _markedUnitsMemory[i].Where(go => go != deadGameObject)
+                                                         .ToList();
+        }
+    }
 }
 
 /*
