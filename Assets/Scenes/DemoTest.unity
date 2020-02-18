@@ -668,6 +668,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
         type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
       propertyPath: Alignment
       value: 1
       objectReference: {fileID: 0}
@@ -675,6 +680,16 @@ PrefabInstance:
         type: 3}
       propertyPath: Name
       value: Enemy Bot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0d6178463c2dac45909ce95d743fd51, type: 3}
@@ -1555,6 +1570,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1158027548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5068385913482050824, guid: e95d85a6d1cbd4e4dbedf9756ab4d0bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1975515637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1224148235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
         type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
       propertyPath: Alignment
       value: 1
       objectReference: {fileID: 0}
@@ -1848,6 +1874,37 @@ PrefabInstance:
       propertyPath: DetectionRange
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 531588763534801136, guid: 7dc9ec88f5f9254409fe980876638477,
+        type: 3}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReportUnitDead
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473359827835476500, guid: d0d6178463c2dac45909ce95d743fd51,
+        type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1158027548}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0d6178463c2dac45909ce95d743fd51, type: 3}
 --- !u!4 &1272485942 stripped
@@ -2290,7 +2347,6 @@ GameObject:
   - component: {fileID: 1493164156}
   - component: {fileID: 1493164155}
   - component: {fileID: 1493164154}
-  - component: {fileID: 1493164153}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -2298,19 +2354,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1493164153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493164152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f659230fe25ebf44290cf07a18a11ee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RecordingButton: 32
 --- !u!114 &1493164154
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -257,8 +257,14 @@ public class Unit : MonoBehaviour {
     }
 
     void Die() {
-        transform.rotation = Quaternion.Euler(0, 0, 90);
         // Play death animation etc etc
+        transform.rotation = Quaternion.Euler(0, 0, 90);
+
+        if (this.Alignment == Alignment.Friendly)
+        {
+            GameObject.Find("GameManager").GetComponent<UnitControlAndSelectionManager>().ReportUnitDead(gameObject);
+        }
+
         Invoke("Destroy", 2);
     }
 
