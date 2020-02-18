@@ -1,4 +1,6 @@
 ﻿public enum MovementMode {
     Move,
-    AMove
+    AMove,
+    Follow,
+    Attack
 }

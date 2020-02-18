@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour {
     Unit _target;
 
     public GameObject Projectile;
+    public Transform ProjectileSpawnPoint;
 
     public void LoseAim() {
         _target = null;
@@ -32,6 +33,7 @@ public class Weapon : MonoBehaviour {
             _aimTimeLeft = 0;
         }
         Vector3 d = u.transform.position - RotationRoot.position;
+        d.y = 0;
         Vector3 f = Vector3.RotateTowards(
             RotationRoot.forward,
             d,
@@ -39,7 +41,7 @@ public class Weapon : MonoBehaviour {
             0);
         RotationRoot.rotation = Quaternion.LookRotation(f, Vector3.up);
 
-        if (Vector3.Angle(RotationRoot.forward, d) <= MaxShootAngle) { // within angles
+        if (AngleIgnoreY(RotationRoot.forward, d) <= MaxShootAngle) { // within angles
             TryAttack();
         }
     }
@@ -60,9 +62,16 @@ public class Weapon : MonoBehaviour {
 
     void TryAttack() {
         if (_aimTimeLeft >= AimTime && _cooldownLeft >= CooldownTime) {
-            // todo instantiate projectile        
+            // todo instantiate projectile
+            Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
             _target.TakeDamage(new DamageMetadata(AttackDamage, DamageType.Basic));
             _cooldownLeft = 0;
         }
+    }
+
+    float AngleIgnoreY(Vector3 a, Vector3 b) {
+        a.y = 0;
+        b.y = 0;
+        return Vector3.Angle(a, b);
     }
 }
