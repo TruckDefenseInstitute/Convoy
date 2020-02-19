@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: -8924670451544731157}
   - component: {fileID: 6473359827835476500}
   - component: {fileID: 3353436151041177550}
+  - component: {fileID: 6458255254071434888}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -269,12 +270,13 @@ MonoBehaviour:
   Alignment: 0
   IsControllable: 1
   Name: Bot
-  MaxHealth: 10
-  DetectionRange: 12
+  MaxHealth: 450
+  DetectionRange: 30
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
-  MoveSpeed: 10
+  MoveSpeed: 5.7
   MaxRotatingSpeed: 360
+  EffectSpawningPoint: {fileID: 0}
 --- !u!114 &3353436151041177550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,14 +293,29 @@ MonoBehaviour:
   RotationRoot: {fileID: 4383708903684389634}
   MaxShootAngle: 5
   DamageType: 0
-  AttackRange: 10
-  AttackDamage: 1
+  AttackDamage: 54
+  AttackRange: 25
   AimTime: 0.2
-  CooldownTime: 0.8
+  CooldownTime: 0.55
   CanMoveWhileAttacking: 0
   Projectile: {fileID: 3172129098913920456, guid: 0a324907a6ab4f74f9c7640b4164f887,
     type: 3}
   ProjectileSpawnPoint: {fileID: 215761553878928209}
+--- !u!114 &6458255254071434888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383708903684389645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c4884072b92fa4db86e9b910aac6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GunDamageMult: 1
+  CannonDamageMult: 0.25
+  SniperDamageMult: 1
 --- !u!1 &6860236780928763210
 GameObject:
   m_ObjectHideFlags: 0

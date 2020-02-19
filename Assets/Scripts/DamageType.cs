@@ -1,5 +1,5 @@
 ﻿public enum DamageType {
-    Basic,
-    AntiInfantry,
-    AntiStructure
+    Gun,
+    Cannon,
+    Sniper
 }

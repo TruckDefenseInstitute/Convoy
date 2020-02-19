@@ -11,7 +11,7 @@ public class HitscanProjectile : MonoBehaviour
     public GameObject HitSpawn;
 
     [HideInInspector]
-    public float Damage;
+    public DamageMetadata DamageMetadata;
     [HideInInspector]
     public float Distance;
     [HideInInspector]
@@ -66,7 +66,7 @@ public class HitscanProjectile : MonoBehaviour
                     Instantiate(HitSpawn, Target.transform.position + Vector3.up, transform.rotation);
                 }
             }
-            u.TakeDamage(new DamageMetadata(Damage, DamageType.Basic));
+            u.TakeDamage(DamageMetadata);
         }
     }
 }

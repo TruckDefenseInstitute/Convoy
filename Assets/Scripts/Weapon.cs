@@ -9,8 +9,8 @@ public class Weapon : MonoBehaviour {
 
     public float MaxShootAngle = 5;
     public DamageType DamageType;
-    public float AttackRange;
     public float AttackDamage;
+    public float AttackRange;
     // prefably move timing stuff to mechanim
     public float AimTime;
     float _aimTimeLeft;
@@ -64,13 +64,22 @@ public class Weapon : MonoBehaviour {
         if (_aimTimeLeft >= AimTime && _cooldownLeft >= CooldownTime) {
             // todo instantiate projectile
             GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, Quaternion.LookRotation(_target.transform.position - RotationRoot.position));
+            WeaponTranslationalRecoil wbr;
+            if (TryGetComponent<WeaponTranslationalRecoil>(out wbr)) {
+                wbr.Recoil();
+            }
+            WeaponRotationalRecoil wrr;
+            if (TryGetComponent<WeaponRotationalRecoil>(out wrr)) {
+                wrr.Recoil();
+            }
+
             // todo change
             try {
                 var proj = go.GetComponent<HitscanProjectile>();
-                proj.Damage = AttackDamage;
+                proj.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
                 proj.Distance = (_target.transform.position - RotationRoot.position).magnitude;
                 proj.Target = _target.gameObject;
-            } catch (Exception e) {
+            } catch (Exception) {
 
             }
             _cooldownLeft = 0;

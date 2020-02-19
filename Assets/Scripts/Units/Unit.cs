@@ -8,7 +8,7 @@ using PathCreation;
 //[RequireComponent(typeof(Seeker))]
 //[RequireComponent(typeof(RVOController))]
 //[RequireComponent(typeof(RichAI))]
-//[RequireComponent(typeof(RTSAvoidance))]
+[RequireComponent(typeof(Armor))]
 public class Unit : MonoBehaviour {
     internal class Command{
         internal Unit _unit;
@@ -58,6 +58,7 @@ public class Unit : MonoBehaviour {
     protected MovementMode _movementMode = MovementMode.AMove;
     SphereCollider _rangeCollider;
     Weapon _weaponRef;
+    Armor _armorRef;
 
     Unit _focusTarget;
     bool _attacking = false;
@@ -149,6 +150,10 @@ public class Unit : MonoBehaviour {
     }
 
     void ExecuteFirstQueueAction() {
+        if (!IsAlive()) {
+            return;
+        }
+
         _guardPosition = new Vector3(float.PositiveInfinity, 0, 0);
         var temp = _shiftQueue.Peek();
         _movementMode = temp._mode;
@@ -156,7 +161,6 @@ public class Unit : MonoBehaviour {
             case MovementMode.AMove:
             case MovementMode.Move:
                 _aiRef.destination = temp._dest;
-                _aiRef.SearchPath();
                 break;
 
             case MovementMode.Attack:
@@ -180,6 +184,11 @@ public class Unit : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+
+        // only search if not in range
+        if (_movementMode == MovementMode.Move || Vector3.Distance(_aiRef.destination, transform.position) <= _weaponRef.AttackRange) {
+            _aiRef.SearchPath();
         }
     }
 
@@ -211,6 +220,7 @@ public class Unit : MonoBehaviour {
         if (TryGetComponent<Weapon>(out _weaponRef)) {
             _weaponRef.RotationSpeed = _weaponRef.CanMoveWhileAttacking ? _weaponRef.RotationSpeed : MaxRotatingSpeed;
         }
+        _armorRef = GetComponent<Armor>();
 
         _guardPosition = transform.position;
     }
@@ -250,6 +260,7 @@ public class Unit : MonoBehaviour {
                 if (_movementMode != MovementMode.Move) {
                     _rvoRef.locked = false;
                     _aiRef.destination = _focusTarget.transform.position;
+                    _aiRef.SearchPath();
                 }
             } else {
                 // attack if inside range
@@ -261,6 +272,7 @@ public class Unit : MonoBehaviour {
                     if (_movementMode != MovementMode.Move) {
                         _attacking = true;
                         _aiRef.destination = transform.position;
+                        _aiRef.SearchPath();
                     }
                 }
             }
@@ -335,12 +347,12 @@ public class Unit : MonoBehaviour {
 
         if (_movementMode == MovementMode.Follow || _movementMode == MovementMode.Attack) {
             if (_following != null && _following.IsAlive()) {
-                // keep between 5 - 8 units from target 
                 if (_movementMode == MovementMode.Follow) {
                     var dist = DistanceIgnoreY(transform.position, _following.transform.position);
-                    if (dist <= 5) {
+                    var radius = _following.GetComponent<RichAI>().radius;
+                    if (dist <= 2f * radius) {
                         _aiRef.destination = transform.position;
-                    } else if(dist >= 8) {
+                    } else if(dist >= 3f * radius) {
                         _aiRef.destination = _following.transform.position;
                     }
                 } else if (_movementMode == MovementMode.Attack){
@@ -359,7 +371,7 @@ public class Unit : MonoBehaviour {
 
     public void TakeDamage(DamageMetadata dm) {
         // todo reduce or increase damage formulas here
-        this.Health -= dm.Damage;
+        this.Health -= _armorRef.ReduceDamage(dm);
         Debug.Log(this.Name + " HP: " + this.Health + "/" + this.MaxHealth);
 
         if (Health <= 0) {
@@ -370,10 +382,10 @@ public class Unit : MonoBehaviour {
     void Die() {
         // Play death animation etc etc
         if (_aiRef != null) {
-            _aiRef.canSearch = false;
+            Destroy(((RichAI)_aiRef));
         }
         if (_rvoRef != null) {
-            _rvoRef.locked = true;
+            Destroy(_rvoRef);
         }
         transform.rotation = Quaternion.Euler(0, 0, 90);
 

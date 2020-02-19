@@ -50,7 +50,7 @@ MonoBehaviour:
   MuzzleFlash: {fileID: 7765527127802097871, guid: bc1087c2d278eb24aba8386d42da7d26,
     type: 3}
   IsInstant: 0
-  Speed: 60
+  Speed: 120
   HitSpawn: {fileID: 0}
   Damage: 0
   Distance: 0
@@ -4818,7 +4818,7 @@ ParticleSystemRenderer:
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 5
+  m_LengthScale: 10
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
