@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/*
-This code is currently unfinished! It does not check that selected units are alive!!!
-*/
 public class UnitControlAndSelectionManager : MonoBehaviour
 {
     enum GameControlState
@@ -295,6 +292,11 @@ public class UnitControlAndSelectionManager : MonoBehaviour
             _markedUnitsMemory[i] = _markedUnitsMemory[i].Where(go => go != deadGameObject)
                                                          .ToList();
         }
+    }
+
+    public bool InPannableControlState()
+    {
+        return !(_gameControlState == GameControlState.Multiselect);
     }
 }
 
