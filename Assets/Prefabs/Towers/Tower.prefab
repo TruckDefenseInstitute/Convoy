@@ -322,6 +322,7 @@ MonoBehaviour:
   MoveSpeed: 10
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 2854884618499930957}
+  SimpleHealthBar: {fileID: 109282, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 3}
 --- !u!114 &6598176128480756428
 MonoBehaviour:
   m_ObjectHideFlags: 0

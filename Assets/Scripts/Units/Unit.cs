@@ -223,6 +223,7 @@ public class Unit : MonoBehaviour {
         _armorRef = GetComponent<Armor>();
 
         _guardPosition = transform.position;
+
     }
 
     // looks for closest target and put it into _focusTarget

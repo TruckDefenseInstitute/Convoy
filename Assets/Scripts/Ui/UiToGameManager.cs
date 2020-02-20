@@ -11,11 +11,17 @@ public class UiToGameManager : MonoBehaviour {
     /// for this is to make this thing static, so that all copies get the same reference to
     /// a TruckReferenceManager. Sounds retarded? I agree. That's why,
     /// ANYTIME YOU FIND A BETTER WORKAROUND, JUST YEET THIS CODE INTO THE SUN THANKS.
+    
+    private UiOverlayManager _uiOverlayManager;
     static TruckReferenceManager _truckReferenceManager;
 
     void Awake() {
         SceneManager.LoadScene("UiOverlay", LoadSceneMode.Additive);
         _truckReferenceManager = gameObject.GetComponent<TruckReferenceManager>();
+    }
+
+    void Start() {
+        _uiOverlayManager = GameObject.Find("UiOverlayManager").GetComponent<UiOverlayManager>();
     }
 
     // To used by the button from SummonUnitsButton Object
@@ -24,6 +30,10 @@ public class UiToGameManager : MonoBehaviour {
         Vector3 currentTruckPosition = _truckReferenceManager.GetTruckPosition();
         Vector3 divergence = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
 
-        Instantiate(unit, currentTruckPosition + divergence, Quaternion.identity);
+        GameObject deployedUnit = Instantiate(unit, currentTruckPosition + divergence, Quaternion.identity);
+    }
+
+    public UiOverlayManager GetUiOverlayManager() {
+        return this._uiOverlayManager;
     }
 }

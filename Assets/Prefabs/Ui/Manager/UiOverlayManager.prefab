@@ -43,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf65c0c25584e145ada8430860641df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inGameUiCanvas: {fileID: 0}
+  _healthBarPrefab: {fileID: 109282, guid: 2b9babc0e49dd054797f369b54bc116a, type: 3}
