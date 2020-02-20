@@ -6789,6 +6789,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884850574, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
+      propertyPath: panLimit.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 884850574, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
+      propertyPath: panLimit.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 531588763534801136, guid: 7dc9ec88f5f9254409fe980876638477,
+        type: 3}
+      propertyPath: controlGroupsButton
+      value: 306
+      objectReference: {fileID: 0}
     - target: {fileID: 5255315256829858745, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6851,35 +6864,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
---- !u!1 &884850573 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6354755794662205186, guid: 7dc9ec88f5f9254409fe980876638477,
-    type: 3}
-  m_PrefabInstance: {fileID: 884850572}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &884850574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884850573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e6b13793e3cd54cbc4c5fc7a4b3379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraName: Player Camera
-  panSpeed: 20
-  panBorderThickness: 10
-  panLimit: {x: 40, y: 30}
-  scrollSpeed: 20
-  minY: 20
-  maxY: 60
-  up: 273
-  down: 274
-  left: 276
-  right: 275
 --- !u!4 &899549029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4257549673306434, guid: ee81afb80bd75294cb740f6f220deafd,
@@ -14583,7 +14567,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1

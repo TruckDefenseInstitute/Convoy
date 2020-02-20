@@ -15,10 +15,10 @@ public class PlayerCameraManager : MonoBehaviour
     public float minY = 20f;
     public float maxY = 60f;
 
-    public KeyCode up;
-    public KeyCode down;
-    public KeyCode left;
-    public KeyCode right;
+    public KeyCode up = KeyCode.UpArrow;
+    public KeyCode down = KeyCode.DownArrow;
+    public KeyCode left = KeyCode.LeftArrow;
+    public KeyCode right = KeyCode.RightArrow;
 
 
     void Start()

@@ -28,7 +28,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
     
     // Used in storing 
     List<GameObject>[] _markedUnitsMemory;
-    public KeyCode RecordingButton;
+    public KeyCode controlGroupsButton = KeyCode.LeftControl;
     
     KeyCode[] _numberKeyMap = { KeyCode.Alpha0,  KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
     bool _numberKeyPressed = false;
@@ -68,7 +68,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
                 break;
 
             case GameControlState.Selected:
-                if(Input.GetKey(RecordingButton))
+                if(Input.GetKey(controlGroupsButton))
                 {
                     if (_numberKeyPressed) RecordCurrentlySelectedAllies();
                 }
