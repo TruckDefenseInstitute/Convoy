@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerCameraController : MonoBehaviour
+public class PlayerCameraManager : MonoBehaviour
 {
     static readonly string _defaultCameraName = "Player Camera";
     public string cameraName = "Player Camera";
