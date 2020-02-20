@@ -725,7 +725,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 35
+    angle: 15
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -1040,7 +1040,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 100
+        scalar: 30
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -3895,7 +3895,7 @@ ParticleSystem:
       emitProbability: 1
   LightsModule:
     enabled: 1
-    ratio: 0.5
+    ratio: 0.1
     light: {fileID: 6883925442217081746, guid: c6d616f989517c242a94e5a3a7f1c298, type: 3}
     randomDistribution: 1
     color: 1
@@ -3904,8 +3904,8 @@ ParticleSystem:
     rangeCurve:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 5
+      scalar: 25
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3957,7 +3957,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2

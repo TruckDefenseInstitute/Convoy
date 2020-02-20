@@ -117,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
+      scalar: 1
       minScalar: 0.0001
       maxCurve:
         serializedVersion: 2
@@ -977,7 +977,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 60
+        scalar: 15
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -3831,8 +3831,8 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
-    ratio: 0.5
+    enabled: 0
+    ratio: 0.1
     light: {fileID: 7581314384674285648, guid: e7e126d648c470844af0ba756bfc8861, type: 3}
     randomDistribution: 1
     color: 1
@@ -3894,7 +3894,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -8723,7 +8723,7 @@ ParticleSystem:
       emitProbability: 1
   LightsModule:
     enabled: 1
-    ratio: 0.5
+    ratio: 0.1
     light: {fileID: 7581314384674285648, guid: e7e126d648c470844af0ba756bfc8861, type: 3}
     randomDistribution: 1
     color: 1

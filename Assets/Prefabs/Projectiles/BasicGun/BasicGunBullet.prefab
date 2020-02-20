@@ -52,7 +52,6 @@ MonoBehaviour:
   IsInstant: 0
   Speed: 120
   HitSpawn: {fileID: 0}
-  Damage: 0
   Distance: 0
   Target: {fileID: 0}
 --- !u!198 &3172129098913920458
@@ -3843,7 +3842,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 6883925442217081746, guid: c6d616f989517c242a94e5a3a7f1c298, type: 3}
     randomDistribution: 1
@@ -8731,7 +8730,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 6883925442217081746, guid: c6d616f989517c242a94e5a3a7f1c298, type: 3}
     randomDistribution: 1
