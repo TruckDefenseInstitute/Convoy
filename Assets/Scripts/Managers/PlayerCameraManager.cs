@@ -7,6 +7,13 @@ public class PlayerCameraManager : MonoBehaviour
     GameObject _cameraGameObject;
     UnitControlAndSelectionManager _unitControlAndSelectionManager;
 
+    [SerializeField]
+    private float _xMinimapPos = 0;
+    [SerializeField]
+    private float _yMinimapPos = 0;
+    [SerializeField]
+    private float _zMinimapPos = 0;
+
     public float panSpeed = 20f;
     public float panBorderThickness = 10f;
     public Vector2 panLimit = new Vector2(40f, 30f); // To be replaced by map width and length
@@ -25,6 +32,9 @@ public class PlayerCameraManager : MonoBehaviour
     {
         _cameraGameObject = GameObject.Find(cameraName == null ? _defaultCameraName : cameraName);
         _unitControlAndSelectionManager = GetComponent<UnitControlAndSelectionManager>();
+        GameObject.Find("MinimapCamera")
+            .GetComponent<MinimapCameraController>()
+            .SetMinimapCameraLocation(_xMinimapPos, _yMinimapPos, _zMinimapPos);
     }
 
     // Update is called once per frame
