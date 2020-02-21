@@ -445,7 +445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b673961d524b5fa48970e0a31c37d898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _yPosition: 0
 --- !u!20 &334637475
 Camera:
   m_ObjectHideFlags: 0
@@ -960,12 +959,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e6b13793e3cd54cbc4c5fc7a4b3379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraName: Player Camera
+  _xMinimapPos: 0
+  _yMinimapPos: 0
+  _zMinimapPos: 0
+  _miniMapSize: 50
   panSpeed: 20
   panBorderThickness: 10
-  panLimit: {x: 50, y: 40}
+  panLimit: {x: 500, y: 500}
   scrollSpeed: 20
   minY: 20
   maxY: 100
+  up: 273
+  down: 274
+  left: 276
+  right: 275
 --- !u!114 &1003531595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,7 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f659230fe25ebf44290cf07a18a11ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RecordingButton: 32
+  controlGroupsButton: 306
 --- !u!1 &1040802758
 GameObject:
   m_ObjectHideFlags: 0

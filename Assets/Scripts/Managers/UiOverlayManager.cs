@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UiOverlayManager : MonoBehaviour {
 
@@ -12,30 +13,33 @@ public class UiOverlayManager : MonoBehaviour {
     private GameObject _uiInterfaceCanvas;
     private GameObject _deployedUnitsPanel;
     
+    private TextMeshProUGUI _currencyText;
+    
     // UI In Game Canvas
     private GameObject _uiInGameCanvas;
     private GameObject _healthBarPanel;
-    private GameObject _selectionBox;
     
+    // Others
     private Camera _playerCamera;
     private Vector3 _mousePos;
-    private RectTransform _selectionBoxTransform;
 
     private bool _isDragging = false;
 
     void Start() {
-        // UI Interface Canvas
-        _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
-        _deployedUnitsPanel = _uiInterfaceCanvas.transform.GetChild(1).GetChild(0).gameObject;
-
         // UI In Game Canvas
         _uiInGameCanvas = GameObject.Find("UiInGameCanvas");
-        _selectionBox = _uiInGameCanvas.transform.GetChild(0).gameObject;
-        _selectionBoxTransform = _selectionBox.GetComponent<RectTransform>();
-        _healthBarPanel = _uiInGameCanvas.transform.GetChild(1).gameObject;
+        _healthBarPanel = GameObject.Find("HealthBarPanel");
+
+        // UI Interface Canvas
+        _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
+        _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
+        _currencyText = GameObject.Find("CurrencyText").GetComponent<TextMeshProUGUI>();
 
         // Others
         _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
+
+        // Startup
+        _currencyText.text = "2";
     }
 
     void Update() {
@@ -50,30 +54,19 @@ public class UiOverlayManager : MonoBehaviour {
         }
     }
 
-/*================ DrawingBox ================*/
+    /*================ DrawingBox ================*/
     private void UpdateDrawingBox() {
         if(Input.GetMouseButtonDown(0)) {
-            StartDrawingBox();
+            _mousePos = Input.mousePosition;
+            _isDragging = true;
         }
 
         if(Input.GetMouseButtonUp(0)) {
-            EndDrawingBox();
+            _isDragging = false;
         }
     }
 
-    private void StartDrawingBox() {
-        _mousePos = Input.mousePosition;
-        _isDragging = true;
-
-    }
-
-    private void EndDrawingBox() {
-        _isDragging = false;
-        _selectionBox.SetActive(false); 
-    }
-
-
-/*================ Health Bar ================*/
+    /*================ Health Bar ================*/
     public GameObject CreateUnitHealthBar(float health, float maxHealth) {
         _healthBarPanel = GameObject.Find("HealthBarPanel");
         GameObject healthBar = Instantiate(_healthBarPrefab, Vector3.zero, Quaternion.identity);
@@ -91,12 +84,15 @@ public class UiOverlayManager : MonoBehaviour {
     // The bar position should be anchored to the unit or something.
     public void UpdateUnitHealthBar(GameObject healthBar, Vector3 unitPos, float health, float maxHealth) {
         // Transform from world space to canvas space
-        unitPos += new Vector3(0, 2.5f, 0);
-        healthBar.transform.position = _playerCamera.WorldToScreenPoint(unitPos);
-        healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+        if(healthBar != null) {
+            unitPos += new Vector3(0, 2.5f, 0);
+            _playerCamera.WorldToScreenPoint(unitPos);
+            healthBar.transform.position = _playerCamera.WorldToScreenPoint(unitPos);
+            healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+        }
     }
 
-/* ================ Select Unit ================*/
+    /*================ Select Unit ================*/
     public void SelectAllyUnits(List<GameObject> allyList) {
         if(allyList == null) {
             return;
@@ -115,4 +111,11 @@ public class UiOverlayManager : MonoBehaviour {
             }
         }
     }
+
+    /*================ Currency ================*/
+
+    public void ChangeCurrency(float currency) {
+        _currencyText.text = currency.ToString();
+    }
+    
 }
