@@ -20,6 +20,7 @@ public class UnitCommandManager
 
         _selectedAllies.ForEach(ab => ab.Move(hit, mode));
     }
+
     public void ShiftDirectSelectedUnits(RaycastHit hit, MovementMode mode) {
         if (hit.transform == null)
         {

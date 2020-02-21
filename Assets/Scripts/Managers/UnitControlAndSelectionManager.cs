@@ -16,8 +16,8 @@ public class UnitControlAndSelectionManager : MonoBehaviour
     GameControlState _gameControlState = GameControlState.Idle;
 
     UnitCommandManager _unitCommandManager;
-
     UiOverlayManager _uiOverlayManager;
+    RingVisibilityManager _ringVisibilityManager;
 
     // Used in Multiselect
     Vector3 _startingPoint;
@@ -37,8 +37,9 @@ public class UnitControlAndSelectionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _uiOverlayManager = GameObject.Find("UiOverlayManager").GetComponent<UiOverlayManager>();
         _unitCommandManager = new UnitCommandManager();
+        _uiOverlayManager = GameObject.Find("UiOverlayManager").GetComponent<UiOverlayManager>();
+        _ringVisibilityManager = new RingVisibilityManager();
 
         _startingPoint = new Vector3();
         _endingPoint = new Vector3();
@@ -63,8 +64,15 @@ public class UnitControlAndSelectionManager : MonoBehaviour
                 if (Input.GetMouseButton(0) && IsPointerNotOverUI()) IdleLeftMouseDown();
                 break;
 
-            case GameControlState.Multiselect:                
-                if (Input.GetMouseButtonUp(0)) MultiselectLeftMouseUp();
+            case GameControlState.Multiselect:              
+                if (Input.GetMouseButtonUp(0))
+                { 
+                    MultiselectLeftMouseUp();
+                }
+                else
+                {
+                    MultiselectLeftMouseHeld();
+                }
                 break;
 
             case GameControlState.Selected:
@@ -120,6 +128,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
             _selectedAllies = _markedUnitsMemory[_alphanum];
             _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
             _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+            _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
             _gameControlState = GameControlState.Selected;
             Debug.Log("Loaded " + _alphanum);
@@ -175,6 +184,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         _selectedAllies.Add(closestAlly);
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
         Debug.Log("Now entering selected");
@@ -219,9 +229,49 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
         Debug.Log("Now entering selected");
+    }
+
+    void MultiselectLeftMouseHeld()
+    {
+        // This whole part is replicated from above
+        Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(mouseToWorldRay, out hit);
+        _endingPoint = hit.point;
+
+        Debug.Log(_startingPoint);
+        Debug.Log(_endingPoint);
+
+        Vector3 midpoint = Vector3.Lerp(_startingPoint, _endingPoint, 0.5f);
+        Vector3 extents = new Vector3(Mathf.Abs(_startingPoint.x - midpoint.x), 20, Mathf.Abs(_startingPoint.z - midpoint.z));
+                    
+        Collider[] hitColliders = Physics.OverlapBox(midpoint, extents, Quaternion.identity);
+
+        if (hitColliders.Length == 0)
+        {
+            return;
+        }
+
+        // todo to beautify
+        var potentialAllies = hitColliders.Select(c => c.transform.parent)
+                                          .Where(t => t != null)
+                                          .Where(t => t.GetComponent<Unit>() != null)
+                                          .Select(t => t.GetComponent<Unit>())
+                                          .Where(u => u.Alignment == Alignment.Friendly && u.IsControllable)
+                                          .Select(u => u.gameObject);
+
+        if (potentialAllies.FirstOrDefault() == null)
+        {
+            return;
+        }
+
+        _selectedAllies = potentialAllies.ToList();
+
+        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
     }
 
 
@@ -260,6 +310,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         _selectedAllies = new List<GameObject>();
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
         _gameControlState = GameControlState.Idle;
         Debug.Log("Now Entering Idle");
     }
@@ -281,6 +332,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
 
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
         
         if (_selectedAllies.Count == 0)
         {
