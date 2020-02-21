@@ -6000,7 +6000,7 @@ MonoBehaviour:
   acceleration: 5
   rotationSpeed: 360
   slowdownTime: 0.5
-  endReachedDistance: 0.01
+  endReachedDistance: 1
   wallForce: 3
   wallDist: 1
   funnelSimplification: 0

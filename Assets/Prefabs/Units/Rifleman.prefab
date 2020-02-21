@@ -638,7 +638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Alignment: 0
   IsControllable: 1
-  Name: Wot
+  Name: Rifleman
   MaxHealth: 450
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
