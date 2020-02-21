@@ -20,7 +20,6 @@ public class UiOverlayManager : MonoBehaviour {
     private Camera _playerCamera;
     private Vector3 _mousePos;
     private RectTransform _selectionBoxTransform;
-    private List<GameObject> _previousAllyList;
 
     private bool _isDragging = false;
 
@@ -107,14 +106,6 @@ public class UiOverlayManager : MonoBehaviour {
             unitSlot.gameObject.SetActive(false);
         }
 
-        if(_previousAllyList != null) {
-            foreach (GameObject selectedAlly in _previousAllyList) {
-                if(selectedAlly != null) {
-                    selectedAlly.GetComponent<Unit>().DeactivateSelectRing();
-                }
-            }
-        }
-
         int currentSlot = 0;
         foreach (GameObject selectedAlly in allyList) {
             if(currentSlot < 12) {
@@ -122,9 +113,6 @@ public class UiOverlayManager : MonoBehaviour {
                 deployedUnitSlot.SetActive(true);
                 currentSlot++;    
             }
-            selectedAlly.GetComponent<Unit>().ActivateSelectRing();
         }
-
-        _previousAllyList = allyList;
     }
 }
