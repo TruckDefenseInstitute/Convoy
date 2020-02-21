@@ -13,9 +13,19 @@ public class UnitCommandManager
     }
 
     public void DirectSelectedUnits(RaycastHit hit, MovementMode mode) {
+        if (hit.transform == null)
+        {
+            return;
+        }
+
         _selectedAllies.ForEach(ab => ab.Move(hit, mode));
     }
     public void ShiftDirectSelectedUnits(RaycastHit hit, MovementMode mode) {
+        if (hit.transform == null)
+        {
+            return;
+        }
+
         _selectedAllies.ForEach(ab => ab.ShiftMove(hit, mode));
     }
 }
