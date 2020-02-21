@@ -40,11 +40,11 @@ public class Unit : MonoBehaviour {
     }
 
     // unit stats
-
     public float DetectionRange;
     public float AMoveStopDistMultiplier = .75f;
     public float LoseVisionMultiplier = 1.1f;
     public float MoveSpeed = 10f;
+
     // in degrees
     public float MaxRotatingSpeed = 360;
 
@@ -70,6 +70,10 @@ public class Unit : MonoBehaviour {
     Unit _following;
 
     HashSet<Unit> _targets = new HashSet<Unit>();
+
+    // Select Ring
+    public GameObject selectRingPrefab;
+    GameObject _selectRing;
 
     public void AnimatorStartMoving() {
         if (_animRef != null) {
@@ -263,6 +267,9 @@ public class Unit : MonoBehaviour {
         _uiOverlayManager = GameObject.Find("GameManager").GetComponent<UiToGameManager>().GetUiOverlayManager();
         _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
 
+        if (selectRingPrefab != null) {
+            _selectRing = Instantiate(selectRingPrefab, gameObject.transform);
+        }
     }
     
     void AcquireClosestTarget() {
@@ -491,6 +498,14 @@ public class Unit : MonoBehaviour {
     }
 
     public void ActivateSelectRing() {
-        transform.GetChild(0).gameObject.SetActive(true);
+        if (_selectRing != null) {
+            _selectRing.SetActive(true);
+        }
+    }
+
+    public void DeactivateSelectRing() {
+        if (_selectRing != null) {
+            _selectRing.SetActive(false);
+        }
     }
 }
