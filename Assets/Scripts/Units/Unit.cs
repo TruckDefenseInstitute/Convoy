@@ -71,6 +71,8 @@ public class Unit : MonoBehaviour {
 
     HashSet<Unit> _targets = new HashSet<Unit>();
 
+    bool _startHasRun = false;
+
     // Select Ring
     public GameObject selectRingPrefab;
     GameObject _selectRing;
@@ -234,6 +236,10 @@ public class Unit : MonoBehaviour {
     
     public void Start()
     {
+        if (_startHasRun) {
+            return;
+        }
+
         Health = MaxHealth;
 
         _animRef = GetComponentInChildren<Animator>();
@@ -254,9 +260,6 @@ public class Unit : MonoBehaviour {
         _rangeCollider.radius = DetectionRange;
         _rangeCollider.isTrigger = true;
 
-        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
-
         if (TryGetComponent<Weapon>(out _weaponRef)) {
             _weaponRef.RotationSpeed = _weaponRef.CanMoveWhileAttacking ? _weaponRef.RotationSpeed : MaxRotatingSpeed;
         }
@@ -264,14 +267,19 @@ public class Unit : MonoBehaviour {
 
         _guardPosition = transform.position;
 
+        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+
         _uiOverlayManager = GameObject.Find("GameManager").GetComponent<UiToGameManager>().GetUiOverlayManager();
         _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
 
         if (selectRingPrefab != null) {
             _selectRing = Instantiate(selectRingPrefab, gameObject.transform);
         }
+
+        _startHasRun = true;
     }
-    
+
     void AcquireClosestTarget() {
         float minDist = DetectionRange;
 
