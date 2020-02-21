@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class UiOverlayManager : MonoBehaviour {
 
-    private GameObject _inGameUiCanvas = null;
-    private GameObject _deployedUnitsPanel = null;
-    private GameObject _selectionBox = null;
+    [SerializeField]
+    private GameObject _healthBarPrefab;
 
+    // Canvas
+    private GameObject _inGameUiCanvas;
+    private GameObject _deployedUnitsPanel;
+    private GameObject _healthBarPanel;
+    private GameObject _selectionBox;
+    
+    private Camera _playerCamera;
     private Vector2 _mouseStartPos;
     private RectTransform _selectionBoxTransform;
     private List<GameObject> _previousAllyList;
@@ -16,18 +22,25 @@ public class UiOverlayManager : MonoBehaviour {
     void Start() {
         // Game Objects
         _inGameUiCanvas = GameObject.Find("InGameUiCanvas");
+        _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
         _deployedUnitsPanel = _inGameUiCanvas.transform.GetChild(2).GetChild(0).gameObject;
         _selectionBox = _inGameUiCanvas.transform.GetChild(0).gameObject;
         _selectionBoxTransform = _selectionBox.GetComponent<RectTransform>();
+        _healthBarPanel = _inGameUiCanvas.transform.GetChild(5).gameObject;
     }
 
     void Update() {
+        UpdateDrawingBox();
+    }
+
+/*================ DrawingBox ================*/
+    private void UpdateDrawingBox() {
         if(Input.GetMouseButtonDown(0)) {
             StartDrawingBox();
         }
 
         if(Input.GetMouseButton(0)) {
-            UpdateDrawingBox(Input.mousePosition);
+            ReviseDrawingBox(Input.mousePosition);
         }
 
         if(Input.GetMouseButtonUp(0)) {
@@ -44,7 +57,7 @@ public class UiOverlayManager : MonoBehaviour {
 
     }
 
-    private void UpdateDrawingBox(Vector2 mousePos) {
+    private void ReviseDrawingBox(Vector2 mousePos) {
         float width = mousePos.x - _mouseStartPos.x;
         float height = mousePos.y - _mouseStartPos.y;
 
@@ -58,6 +71,30 @@ public class UiOverlayManager : MonoBehaviour {
         _selectionBox.SetActive(false);
     }
 
+/*================ Health Bar ================*/
+    public GameObject CreateUnitHealthBar(float health, float maxHealth) {
+        _healthBarPanel = GameObject.Find("HealthBarPanel");
+        GameObject healthBar = Instantiate(_healthBarPrefab, Vector3.zero, Quaternion.identity);
+        healthBar.transform.SetParent(_healthBarPanel.transform);
+        
+        // Change the size of the health bar
+        healthBar.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        
+        // Change health bar itself
+        healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+
+        return healthBar;
+    }
+
+    // The bar position should be anchored to the unit or something.
+    public void UpdateUnitHealthBar(GameObject healthBar, Vector3 unitPos, float health, float maxHealth) {
+        // Transform from world space to canvas space
+        unitPos += new Vector3(0, 2.5f, 0);
+        healthBar.transform.position = _playerCamera.WorldToScreenPoint(unitPos);
+        healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+    }
+
+/* ================ Select Unit ================*/
     public void SelectAllyUnits(List<GameObject> allyList) {
         Debug.Log("First phase0");
 
@@ -69,7 +106,7 @@ public class UiOverlayManager : MonoBehaviour {
         }
         
         // TODO: Idk why this part doesn't work
-        _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
+        // _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
 
         foreach(Transform unitSlot in _deployedUnitsPanel.transform) {
             unitSlot.gameObject.SetActive(false);
@@ -90,7 +127,7 @@ public class UiOverlayManager : MonoBehaviour {
                 deployedUnitSlot.SetActive(true);
                 currentSlot++;    
             }
-            selectedAlly.transform.GetChild(0).gameObject.SetActive(true);
+            selectedAlly.GetComponent<Unit>().ActivateSelectRing();
         }
 
         _previousAllyList = allyList;

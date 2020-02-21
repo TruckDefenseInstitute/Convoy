@@ -49,6 +49,8 @@ public class Unit : MonoBehaviour {
     public float MaxRotatingSpeed = 360;
 
     public GameObject EffectSpawningPoint;
+    GameObject _healthBar;
+    UiOverlayManager _uiOverlayManager; 
 
     IAstarAI _aiRef;
     Queue<Command> _shiftQueue = new Queue<Command>();
@@ -223,6 +225,10 @@ public class Unit : MonoBehaviour {
         _armorRef = GetComponent<Armor>();
 
         _guardPosition = transform.position;
+
+        _uiOverlayManager = GameObject.Find("GameManager").GetComponent<UiToGameManager>().GetUiOverlayManager();
+        _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
+
     }
 
     // looks for closest target and put it into _focusTarget
@@ -367,6 +373,9 @@ public class Unit : MonoBehaviour {
 
         // BELOW IS ATTACKING LOGIC
         AttackingLogic();
+
+        // Update health bar
+        _uiOverlayManager.UpdateUnitHealthBar(_healthBar, transform.position, Health, MaxHealth);
     }
 
     public void TakeDamage(DamageMetadata dm) {
@@ -395,6 +404,8 @@ public class Unit : MonoBehaviour {
         }
 
         Invoke("Destroy", 2);
+
+        Destroy(_healthBar);
     }
 
     void Destroy() {
@@ -426,5 +437,9 @@ public class Unit : MonoBehaviour {
             return;
         }
         _targets.Remove(u);
+    }
+
+    public void ActivateSelectRing() {
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 }
