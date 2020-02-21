@@ -78,14 +78,17 @@ public class Weapon : MonoBehaviour {
             }
 
             // todo change
-            try {
-                var proj = go.GetComponent<HitscanProjectile>();
-                proj.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
-                proj.Distance = (_target.transform.position - RotationRoot.position).magnitude;
-                proj.Target = _target.gameObject;
-            } catch (Exception) {
-
+            HitscanProjectile hsp;
+            RocketProjectile rp;
+            if (go.TryGetComponent<HitscanProjectile>(out hsp)) {
+                hsp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+                hsp.Distance = (_target.transform.position - RotationRoot.position).magnitude;
+                hsp.Target = _target.gameObject;
+            } else if (go.TryGetComponent<RocketProjectile>(out rp)) {
+                rp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+                rp.Target = _target.gameObject;
             }
+
             _cooldownLeft = 0;
         }
     }
