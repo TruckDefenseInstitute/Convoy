@@ -21,7 +21,7 @@ public class TruckReferenceManager : MonoBehaviour
         {
             GameObject truck = GameObject.Find(s);
             
-            if (s != null)
+            if (truck != null)
             {
                 _truckGameObject = truck;
                 break;
@@ -34,6 +34,6 @@ public class TruckReferenceManager : MonoBehaviour
 
     public Vector3 GetTruckPosition()
     {
-        return _truckTransform.position;
+        return _truckGameObject.transform.position;
     }
 }
