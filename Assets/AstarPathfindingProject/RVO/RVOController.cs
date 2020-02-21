@@ -4,39 +4,40 @@ using UnityEngine.Serialization;
 
 namespace Pathfinding.RVO {
 	using Pathfinding.Util;
+    using System;
 
-	/// <summary>
-	/// RVO Character Controller.
-	/// Similar to Unity's CharacterController. It handles movement calculations and takes other agents into account.
-	/// It does not handle movement itself, but allows the calling script to get the calculated velocity and
-	/// use that to move the object using a method it sees fit (for example using a CharacterController, using
-	/// transform.Translate or using a rigidbody).
-	///
-	/// <code>
-	/// public void Update () {
-	///     // Just some point far away
-	///     var targetPoint = transform.position + transform.forward * 100;
-	///
-	///     // Set the desired point to move towards using a desired speed of 10 and a max speed of 12
-	///     controller.SetTarget(targetPoint, 10, 12);
-	///
-	///     // Calculate how much to move during this frame
-	///     // This information is based on movement commands from earlier frames
-	///     // as local avoidance is calculated globally at regular intervals by the RVOSimulator component
-	///     var delta = controller.CalculateMovementDelta(transform.position, Time.deltaTime);
-	///     transform.position = transform.position + delta;
-	/// }
-	/// </code>
-	///
-	/// For documentation of many of the variables of this class: refer to the Pathfinding.RVO.IAgent interface.
-	///
-	/// Note: Requires a single RVOSimulator component in the scene
-	///
-	/// See: Pathfinding.RVO.IAgent
-	/// See: RVOSimulator
-	/// See: local-avoidance (view in online documentation for working links)
-	/// </summary>
-	[AddComponentMenu("Pathfinding/Local Avoidance/RVO Controller")]
+    /// <summary>
+    /// RVO Character Controller.
+    /// Similar to Unity's CharacterController. It handles movement calculations and takes other agents into account.
+    /// It does not handle movement itself, but allows the calling script to get the calculated velocity and
+    /// use that to move the object using a method it sees fit (for example using a CharacterController, using
+    /// transform.Translate or using a rigidbody).
+    ///
+    /// <code>
+    /// public void Update () {
+    ///     // Just some point far away
+    ///     var targetPoint = transform.position + transform.forward * 100;
+    ///
+    ///     // Set the desired point to move towards using a desired speed of 10 and a max speed of 12
+    ///     controller.SetTarget(targetPoint, 10, 12);
+    ///
+    ///     // Calculate how much to move during this frame
+    ///     // This information is based on movement commands from earlier frames
+    ///     // as local avoidance is calculated globally at regular intervals by the RVOSimulator component
+    ///     var delta = controller.CalculateMovementDelta(transform.position, Time.deltaTime);
+    ///     transform.position = transform.position + delta;
+    /// }
+    /// </code>
+    ///
+    /// For documentation of many of the variables of this class: refer to the Pathfinding.RVO.IAgent interface.
+    ///
+    /// Note: Requires a single RVOSimulator component in the scene
+    ///
+    /// See: Pathfinding.RVO.IAgent
+    /// See: RVOSimulator
+    /// See: local-avoidance (view in online documentation for working links)
+    /// </summary>
+    [AddComponentMenu("Pathfinding/Local Avoidance/RVO Controller")]
 	[HelpURL("http://arongranberg.com/astar/docs/class_pathfinding_1_1_r_v_o_1_1_r_v_o_controller.php")]
 	public class RVOController : VersionedMonoBehaviour {
 		[SerializeField][FormerlySerializedAs("radius")]
@@ -48,11 +49,19 @@ namespace Pathfinding.RVO {
 		[SerializeField][FormerlySerializedAs("center")]
 		float centerBackingField = 1;
 
-		/// <summary>
-		/// Radius of the agent in world units.
-		/// Note: If a movement script (AIPath/RichAI/AILerp, anything implementing the IAstarAI interface) is attached to the same GameObject, this value will be driven by that script.
-		/// </summary>
-		public float radius {
+        bool _isMoving;
+
+        // Call this when not moving
+        public Action StopMoving;
+
+        // Call this when starting to move
+        public Action StartMoving;
+
+        /// <summary>
+        /// Radius of the agent in world units.
+        /// Note: If a movement script (AIPath/RichAI/AILerp, anything implementing the IAstarAI interface) is attached to the same GameObject, this value will be driven by that script.
+        /// </summary>
+        public float radius {
 			get {
 				if (ai != null) return ai.radius;
 				return radiusBackingField;
@@ -320,7 +329,15 @@ namespace Pathfinding.RVO {
 		/// <param name="deltaTime">How far to move [seconds].
 		///      Usually set to Time.deltaTime.</param>
 		public Vector3 CalculateMovementDelta (Vector3 position, float deltaTime) {
-			return To3D(Vector2.ClampMagnitude(rvoAgent.CalculatedTargetPoint - To2D(position), rvoAgent.CalculatedSpeed * deltaTime), 0);
+            var rtv = To3D(Vector2.ClampMagnitude(rvoAgent.CalculatedTargetPoint - To2D(position), rvoAgent.CalculatedSpeed * deltaTime), 0);
+            if (_isMoving && rtv.magnitude < 0.001f) {
+                _isMoving = false;
+                StopMoving();
+            } else if (!_isMoving && rtv.magnitude > 0.001f) {
+                _isMoving = true;
+                StartMoving();
+            }
+            return rtv;
 		}
 
 		/// <summary>\copydoc Pathfinding::RVO::IAgent::SetCollisionNormal</summary>

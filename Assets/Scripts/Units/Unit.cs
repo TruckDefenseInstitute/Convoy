@@ -52,6 +52,7 @@ public class Unit : MonoBehaviour {
     GameObject _healthBar;
     UiOverlayManager _uiOverlayManager; 
 
+    Animator _animRef;
     IAstarAI _aiRef;
     Queue<Command> _shiftQueue = new Queue<Command>();
     Vector3 _guardPosition;
@@ -62,20 +63,44 @@ public class Unit : MonoBehaviour {
     Weapon _weaponRef;
     Armor _armorRef;
 
+    bool _decompose = false;
+
     Unit _focusTarget;
     bool _attacking = false;
     Unit _following;
 
     HashSet<Unit> _targets = new HashSet<Unit>();
 
+    public void AnimatorStartMoving() {
+        if (_animRef != null) {
+            _animRef.SetBool("IsMoving", true);
+        }
+    }
+    public void AnimatorStopMoving() {
+        if (_animRef != null) {
+            _animRef.SetBool("IsMoving", false);
+        }
+    }
+    public void AnimatorStartFiring() {
+        if (_animRef != null) {
+            _animRef.SetBool("IsFiring", true);
+        }
+    }
+    public void AnimatorStopFiring() {
+        if (_animRef != null) {
+            _animRef.SetBool("IsFiring", false);
+        }
+    }
+
     public void StartIdle() {
         _guardPosition = transform.position;
         this._movementMode = MovementMode.AMove;
+        AnimatorStopMoving();
     }
 
     public void NextDestination() {
         // dont do anything if attack or following alive unit
-        if (_attacking || (_movementMode == MovementMode.Follow && _following != null)) {
+        if (_attacking || (_movementMode == MovementMode.Follow && _following != null) || _shiftQueue.Count == 0) {
             return;
         }
 
@@ -93,12 +118,16 @@ public class Unit : MonoBehaviour {
     }
 
     public void ShiftMove(Vector3 moveTo, MovementMode mode) {
+        _attacking = false;
+        AnimatorStopFiring();
         _guardPosition = new Vector3(float.PositiveInfinity, 0, 0);
         _shiftQueue.Enqueue(new Command(mode, moveTo));
         ExecuteFirstQueueAction();
     }
 
     public void ShiftMove(RaycastHit hit, MovementMode mode) {
+        _attacking = false;
+        AnimatorStopFiring();
         _guardPosition = new Vector3(float.PositiveInfinity, 0, 0);
         Unit temp = hit.transform.GetComponentInParent<Unit>();
         // if raycast hit ground instead of unit
@@ -152,7 +181,7 @@ public class Unit : MonoBehaviour {
     }
 
     void ExecuteFirstQueueAction() {
-        if (!IsAlive()) {
+        if (!IsAlive() || _shiftQueue.Count == 0) {
             return;
         }
 
@@ -189,7 +218,8 @@ public class Unit : MonoBehaviour {
         }
 
         // only search if not in range
-        if (_movementMode == MovementMode.Move || Vector3.Distance(_aiRef.destination, transform.position) <= _weaponRef.AttackRange) {
+        if (_movementMode == MovementMode.Move || Vector3.Distance(_aiRef.destination, transform.position) >= _weaponRef.AttackRange) {
+            AnimatorStartMoving();
             _aiRef.SearchPath();
         }
     }
@@ -197,17 +227,21 @@ public class Unit : MonoBehaviour {
     public bool IsAlive() {
         return Health > 0;
     }
-
-    // Start is called before the first frame update
+    
     protected void Start()
     {
         Health = MaxHealth;
+
+        _animRef = GetComponentInChildren<Animator>();
 
         if (TryGetComponent<IAstarAI>(out _aiRef)) {
             _aiRef.maxSpeed = MoveSpeed;
             ((RichAI)_aiRef).rotationSpeed = MaxRotatingSpeed;
         }
-        TryGetComponent<RVOController>(out _rvoRef);
+        if (TryGetComponent<RVOController>(out _rvoRef)) {
+            _rvoRef.StartMoving += AnimatorStartMoving;
+            _rvoRef.StopMoving += AnimatorStopMoving;
+        }
         if (TryGetComponent<RTSAvoidance>(out _avoidanceRef)) {
             _avoidanceRef.ReachedDestinationCallback += NextDestination;
         }
@@ -230,8 +264,7 @@ public class Unit : MonoBehaviour {
         _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
 
     }
-
-    // looks for closest target and put it into _focusTarget
+    
     void AcquireClosestTarget() {
         float minDist = DetectionRange;
 
@@ -267,10 +300,13 @@ public class Unit : MonoBehaviour {
                     _rvoRef.locked = false;
                     _aiRef.destination = _focusTarget.transform.position;
                     _aiRef.SearchPath();
+                    AnimatorStopFiring();
+                    AnimatorStartMoving();
                 }
             } else {
                 // attack if inside range
                 _weaponRef.AimAt(_focusTarget);
+                AnimatorStartFiring();
 
                 // move to mult distance AMoveStopDistMultiplier
                 if (!_weaponRef.CanMoveWhileAttacking || distanceToFocus <= _weaponRef.AttackRange * AMoveStopDistMultiplier) {
@@ -279,6 +315,7 @@ public class Unit : MonoBehaviour {
                         _attacking = true;
                         _aiRef.destination = transform.position;
                         _aiRef.SearchPath();
+                        AnimatorStopMoving();
                     }
                 }
             }
@@ -287,9 +324,10 @@ public class Unit : MonoBehaviour {
                                                     // rotate turret back to forwards
                 _weaponRef.ResetRotation(transform.forward);
             }
+            AnimatorStopFiring();
             _attacking = false;
             _rvoRef.locked = false;
-            if (!float.IsPositiveInfinity(_guardPosition.x)) {
+            if (!float.IsPositiveInfinity(_guardPosition.x) && Vector3.Distance(_guardPosition, transform.position) < Vector3.kEpsilon) {
                 Move(_guardPosition, MovementMode.AMove);
             } else {
                 ExecuteFirstQueueAction();
@@ -324,6 +362,7 @@ public class Unit : MonoBehaviour {
                 _focusTarget = null;
                 _weaponRef.LoseAim();
                 _attacking = false;
+                AnimatorStopFiring();
             }
         }
 
@@ -343,11 +382,15 @@ public class Unit : MonoBehaviour {
 
         }
     }
-
-    // Update is called once per frame
+    
     void Update() {
         // dont do anything if dead
         if (!IsAlive()) {
+            if (_decompose) {
+                var p = transform.position;
+                p.y -= 1 * Time.deltaTime;
+                transform.position = p;
+            }
             return;
         }
 
@@ -396,16 +439,24 @@ public class Unit : MonoBehaviour {
         if (_rvoRef != null) {
             Destroy(_rvoRef);
         }
-        transform.rotation = Quaternion.Euler(0, 0, 90);
+        if (_animRef != null) {
+            _animRef.SetTrigger("Die");
+        }
 
         if (this.Alignment == Alignment.Friendly)
         {
             GameObject.Find("GameManager").GetComponent<UnitControlAndSelectionManager>().ReportUnitDead(gameObject);
         }
-
+        
         Invoke("Destroy", 2);
+        Invoke("Sink", 4);
+        Invoke("Destroy", 5);
 
         Destroy(_healthBar);
+    }
+
+    void Sink() {
+        _decompose = true;
     }
 
     void Destroy() {
