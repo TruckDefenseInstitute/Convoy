@@ -19,7 +19,7 @@ public class BarracksBehaviour : MonoBehaviour
         _truckReferenceManager = GameObject.Find("GameManager").GetComponent<TruckReferenceManager>();
 
         float barracksYAxisRotation = gameObject.transform.rotation.eulerAngles.y;
-        Vector3 initialDisplacement = new Vector3(7f, 0f, 0f);
+        Vector3 initialDisplacement = new Vector3(8f, 0f, 0f);
 
         Vector3 finalDisplacement = GetVectorRotatedAboutYAxis(initialDisplacement, barracksYAxisRotation);
         spawnPosition = gameObject.transform.position + finalDisplacement;
@@ -34,6 +34,8 @@ public class BarracksBehaviour : MonoBehaviour
 
             Unit unitScript = Instantiate(unitToSpawn, spawnPosition, Quaternion.identity).GetComponent<Unit>();
             unitScript.Alignment = Alignment.Hostile;
+            
+            unitScript.Start();
             unitScript.Move(_truckReferenceManager.GetTruckPosition(), MovementMode.AMove);
         }
         else
