@@ -228,7 +228,7 @@ public class Unit : MonoBehaviour {
         return Health > 0;
     }
     
-    protected void Start()
+    public void Start()
     {
         Health = MaxHealth;
 
