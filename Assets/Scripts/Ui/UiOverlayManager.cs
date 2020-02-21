@@ -110,7 +110,7 @@ public class UiOverlayManager : MonoBehaviour {
         if(_previousAllyList != null) {
             foreach (GameObject selectedAlly in _previousAllyList) {
                 if(selectedAlly != null) {
-                    selectedAlly.transform.GetChild(0).gameObject.SetActive(false);
+                    selectedAlly.GetComponent<Unit>().DeactivateSelectRing();
                 }
             }
         }

@@ -40,11 +40,11 @@ public class Unit : MonoBehaviour {
     }
 
     // unit stats
-
     public float DetectionRange;
     public float AMoveStopDistMultiplier = .75f;
     public float LoseVisionMultiplier = 1.1f;
     public float MoveSpeed = 10f;
+
     // in degrees
     public float MaxRotatingSpeed = 360;
 
@@ -70,6 +70,12 @@ public class Unit : MonoBehaviour {
     Unit _following;
 
     HashSet<Unit> _targets = new HashSet<Unit>();
+
+    bool _startHasRun = false;
+
+    // Select Ring
+    public GameObject selectRingPrefab;
+    GameObject _selectRing;
 
     public void AnimatorStartMoving() {
         if (_animRef != null) {
@@ -230,6 +236,10 @@ public class Unit : MonoBehaviour {
     
     public void Start()
     {
+        if (_startHasRun) {
+            return;
+        }
+
         Health = MaxHealth;
 
         _animRef = GetComponentInChildren<Animator>();
@@ -250,9 +260,6 @@ public class Unit : MonoBehaviour {
         _rangeCollider.radius = DetectionRange;
         _rangeCollider.isTrigger = true;
 
-        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
-
         if (TryGetComponent<Weapon>(out _weaponRef)) {
             _weaponRef.RotationSpeed = _weaponRef.CanMoveWhileAttacking ? _weaponRef.RotationSpeed : MaxRotatingSpeed;
         }
@@ -260,11 +267,19 @@ public class Unit : MonoBehaviour {
 
         _guardPosition = transform.position;
 
+        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+
         _uiOverlayManager = GameObject.Find("GameManager").GetComponent<UiToGameManager>().GetUiOverlayManager();
         _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
 
+        if (selectRingPrefab != null) {
+            _selectRing = Instantiate(selectRingPrefab, gameObject.transform);
+        }
+
+        _startHasRun = true;
     }
-    
+
     void AcquireClosestTarget() {
         float minDist = DetectionRange;
 
@@ -491,6 +506,14 @@ public class Unit : MonoBehaviour {
     }
 
     public void ActivateSelectRing() {
-        transform.GetChild(0).gameObject.SetActive(true);
+        if (_selectRing != null) {
+            _selectRing.SetActive(true);
+        }
+    }
+
+    public void DeactivateSelectRing() {
+        if (_selectRing != null) {
+            _selectRing.SetActive(false);
+        }
     }
 }
