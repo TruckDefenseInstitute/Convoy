@@ -57,10 +57,6 @@ public class UiOverlayManager : MonoBehaviour {
             StartDrawingBox();
         }
 
-        if(Input.GetMouseButton(0)) {
-            // ReviseDrawingBox(Input.mousePosition);
-        }
-
         if(Input.GetMouseButtonUp(0)) {
             EndDrawingBox();
         }
@@ -69,10 +65,6 @@ public class UiOverlayManager : MonoBehaviour {
     private void StartDrawingBox() {
         _mousePos = Input.mousePosition;
         _isDragging = true;
-
-    }
-
-    private void ReviseDrawingBox(Vector2 mousePos) {
 
     }
 
