@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1994548169520882249}
   - component: {fileID: 5522303047890575947}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: Guardian Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5318384293257334287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2, y: 0, z: 20.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2798213146696373594}
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Alignment: 1
   IsControllable: 0
-  Name: Tower
+  Name: Guardian Cannon
   MaxHealth: 5000
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
@@ -322,7 +322,6 @@ MonoBehaviour:
   MoveSpeed: 10
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 2854884618499930957}
-  SimpleHealthBar: {fileID: 109282, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 3}
 --- !u!114 &6598176128480756428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c4884072b92fa4db86e9b910aac6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunDamageMult: 0.25
+  GunDamageMult: 0.5
   CannonDamageMult: 0.75
   SniperDamageMult: 0.01
 --- !u!114 &1994548169520882249

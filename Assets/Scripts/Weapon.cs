@@ -72,6 +72,10 @@ public class Weapon : MonoBehaviour {
             if (TryGetComponent<WeaponRotationalRecoil>(out wrr)) {
                 wrr.Recoil();
             }
+            WeaponRotatingFire wrf;
+            if (TryGetComponent<WeaponRotatingFire>(out wrf)) {
+                wrf.Rotate();
+            }
 
             // todo change
             try {
