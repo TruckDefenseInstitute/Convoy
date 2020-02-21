@@ -33,6 +33,7 @@ public class UiOverlayManager : MonoBehaviour {
         UpdateDrawingBox();
     }
 
+/*================ DrawingBox ================*/
     private void UpdateDrawingBox() {
         if(Input.GetMouseButtonDown(0)) {
             StartDrawingBox();
@@ -45,11 +46,6 @@ public class UiOverlayManager : MonoBehaviour {
         if(Input.GetMouseButtonUp(0)) {
             EndDrawingBox();
         }
-    }
-
-    public void UpdateUnitHealthBar(GameObject healthBar, Vector3 unitPos) {
-        // Transform from world space to canvas space
-        healthBar.transform.position = _playerCamera.WorldToScreenPoint(unitPos);
     }
 
     private void StartDrawingBox() {
@@ -75,10 +71,30 @@ public class UiOverlayManager : MonoBehaviour {
         _selectionBox.SetActive(false);
     }
 
-    public GameObject CreateUnitHealthBar() {
-        return Instantiate(_healthBarPrefab, Vector3.zero, Quaternion.identity);
+/*================ Health Bar ================*/
+    public GameObject CreateUnitHealthBar(float health, float maxHealth) {
+        _healthBarPanel = GameObject.Find("HealthBarPanel");
+        GameObject healthBar = Instantiate(_healthBarPrefab, Vector3.zero, Quaternion.identity);
+        healthBar.transform.SetParent(_healthBarPanel.transform);
+        
+        // Change the size of the health bar
+        healthBar.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        
+        // Change health bar itself
+        healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+
+        return healthBar;
     }
 
+    // The bar position should be anchored to the unit or something.
+    public void UpdateUnitHealthBar(GameObject healthBar, Vector3 unitPos, float health, float maxHealth) {
+        // Transform from world space to canvas space
+        unitPos += new Vector3(0, 2.5f, 0);
+        healthBar.transform.position = _playerCamera.WorldToScreenPoint(unitPos);
+        healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+    }
+
+/* ================ Select Unit ================*/
     public void SelectAllyUnits(List<GameObject> allyList) {
         Debug.Log("First phase0");
 
@@ -111,7 +127,7 @@ public class UiOverlayManager : MonoBehaviour {
                 deployedUnitSlot.SetActive(true);
                 currentSlot++;    
             }
-            selectedAlly.transform.GetChild(0).gameObject.SetActive(true);
+            selectedAlly.GetComponent<Unit>().ActivateSelectRing();
         }
 
         _previousAllyList = allyList;
