@@ -276,7 +276,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
 
     public void ReportUnitDead(GameObject deadGameObject)
     {
-        _selectedAllies = _selectedAllies.Where(go => go != deadGameObject)
+        _selectedAllies = _selectedAllies.Where(go => go != deadGameObject && go != null)
                                          .ToList();
 
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
@@ -289,7 +289,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            _markedUnitsMemory[i] = _markedUnitsMemory[i].Where(go => go != deadGameObject)
+            _markedUnitsMemory[i] = _markedUnitsMemory[i].Where(go => go != deadGameObject && go != null)
                                                          .ToList();
         }
     }

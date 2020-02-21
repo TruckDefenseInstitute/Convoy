@@ -9,8 +9,7 @@ public class UnitCommandManager
 
     public void ChangeSelectedAllies(List<GameObject> gameObjectList)
     {
-        _selectedAllies = gameObjectList.Where(go => go != null)
-                                        .Select(go => go.GetComponent<Unit>()).ToList();
+        _selectedAllies = gameObjectList.Select(go => go.GetComponent<Unit>()).ToList();
     }
 
     public void DirectSelectedUnits(RaycastHit hit, MovementMode mode) {
