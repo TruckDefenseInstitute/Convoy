@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/*
-This code is currently unfinished! It does not check that selected units are alive!!!
-*/
 public class UnitControlAndSelectionManager : MonoBehaviour
 {
     enum GameControlState
@@ -31,7 +28,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
     
     // Used in storing 
     List<GameObject>[] _markedUnitsMemory;
-    public KeyCode RecordingButton;
+    public KeyCode controlGroupsButton = KeyCode.LeftControl;
     
     KeyCode[] _numberKeyMap = { KeyCode.Alpha0,  KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
     bool _numberKeyPressed = false;
@@ -71,7 +68,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
                 break;
 
             case GameControlState.Selected:
-                if(Input.GetKey(RecordingButton))
+                if(Input.GetKey(controlGroupsButton))
                 {
                     if (_numberKeyPressed) RecordCurrentlySelectedAllies();
                 }
@@ -295,6 +292,11 @@ public class UnitControlAndSelectionManager : MonoBehaviour
             _markedUnitsMemory[i] = _markedUnitsMemory[i].Where(go => go != deadGameObject)
                                                          .ToList();
         }
+    }
+
+    public bool InPannableControlState()
+    {
+        return !(_gameControlState == GameControlState.Multiselect);
     }
 }
 
