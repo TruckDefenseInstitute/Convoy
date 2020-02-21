@@ -8,29 +8,47 @@ public class UiOverlayManager : MonoBehaviour {
     [SerializeField]
     private GameObject _healthBarPrefab;
 
-    // Canvas
-    private GameObject _inGameUiCanvas;
+    // UI Inteface Canvas
+    private GameObject _uiInterfaceCanvas;
     private GameObject _deployedUnitsPanel;
+    
+    // UI In Game Canvas
+    private GameObject _uiInGameCanvas;
     private GameObject _healthBarPanel;
     private GameObject _selectionBox;
     
     private Camera _playerCamera;
-    private Vector2 _mouseStartPos;
+    private Vector3 _mousePos;
     private RectTransform _selectionBoxTransform;
     private List<GameObject> _previousAllyList;
 
+    private bool _isDragging = false;
+
     void Start() {
-        // Game Objects
-        _inGameUiCanvas = GameObject.Find("InGameUiCanvas");
-        _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
-        _deployedUnitsPanel = _inGameUiCanvas.transform.GetChild(2).GetChild(0).gameObject;
-        _selectionBox = _inGameUiCanvas.transform.GetChild(0).gameObject;
+        // UI Interface Canvas
+        _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
+        _deployedUnitsPanel = _uiInterfaceCanvas.transform.GetChild(1).GetChild(0).gameObject;
+
+        // UI In Game Canvas
+        _uiInGameCanvas = GameObject.Find("UiInGameCanvas");
+        _selectionBox = _uiInGameCanvas.transform.GetChild(0).gameObject;
         _selectionBoxTransform = _selectionBox.GetComponent<RectTransform>();
-        _healthBarPanel = _inGameUiCanvas.transform.GetChild(5).gameObject;
+        _healthBarPanel = _uiInGameCanvas.transform.GetChild(1).gameObject;
+
+        // Others
+        _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
     }
 
     void Update() {
         UpdateDrawingBox();
+    }
+
+    private void OnGUI() {
+        if(_isDragging) {
+            var rect = ScreenHelper.GetScreenRect(_mousePos, Input.mousePosition);
+            ScreenHelper.DrawScreenRect(rect, Color.clear);
+            ScreenHelper.DrawScreenRectBorder(rect, 1, new Color(0.6f, 0.9608f, 0.706f));
+        }
     }
 
 /*================ DrawingBox ================*/
@@ -40,7 +58,7 @@ public class UiOverlayManager : MonoBehaviour {
         }
 
         if(Input.GetMouseButton(0)) {
-            ReviseDrawingBox(Input.mousePosition);
+            // ReviseDrawingBox(Input.mousePosition);
         }
 
         if(Input.GetMouseButtonUp(0)) {
@@ -49,27 +67,20 @@ public class UiOverlayManager : MonoBehaviour {
     }
 
     private void StartDrawingBox() {
-        _mouseStartPos = Input.mousePosition;
-
-        if(!_selectionBox.activeInHierarchy) {
-            _selectionBox.SetActive(true);
-        }
+        _mousePos = Input.mousePosition;
+        _isDragging = true;
 
     }
 
     private void ReviseDrawingBox(Vector2 mousePos) {
-        float width = mousePos.x - _mouseStartPos.x;
-        float height = mousePos.y - _mouseStartPos.y;
 
-        _selectionBoxTransform.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
-        _selectionBoxTransform.anchoredPosition = _mouseStartPos + new Vector2(width / 2, height / 2);
-
-        // Debug.Log("x: " + mousePos.x + " y: " + mousePos.y);
     }
 
     private void EndDrawingBox() {
-        _selectionBox.SetActive(false);
+        _isDragging = false;
+        _selectionBox.SetActive(false); 
     }
+
 
 /*================ Health Bar ================*/
     public GameObject CreateUnitHealthBar(float health, float maxHealth) {
@@ -78,7 +89,7 @@ public class UiOverlayManager : MonoBehaviour {
         healthBar.transform.SetParent(_healthBarPanel.transform);
         
         // Change the size of the health bar
-        healthBar.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        healthBar.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         
         // Change health bar itself
         healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
@@ -96,17 +107,9 @@ public class UiOverlayManager : MonoBehaviour {
 
 /* ================ Select Unit ================*/
     public void SelectAllyUnits(List<GameObject> allyList) {
-        Debug.Log("First phase0");
-
-        Debug.Log(allyList == null);
-
-        Debug.Log("Second Phase");
         if(allyList == null) {
             return;
         }
-        
-        // TODO: Idk why this part doesn't work
-        // _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
 
         foreach(Transform unitSlot in _deployedUnitsPanel.transform) {
             unitSlot.gameObject.SetActive(false);
