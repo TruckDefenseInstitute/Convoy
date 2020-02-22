@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sniper
+  m_Controller: {fileID: 9100000, guid: 328e06bc786f72242adbdce4eab73010, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: baaca3a1f49e0a34c8705c7a8f70c64f,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: a9ecd1c2c956df74fa573b408eaf2d0c,
+      type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 8c7c699e900de26419b465e66f415b7a,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 6b614d032d588a74e888d133338a57a2,
+      type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: b7bdcbf1d5a67db479ec24f50d6b4586,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 1d2a1ea7c6c709b418a4bd3569bf0afd,
+      type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: f755217ce1fbc814884e5fd61a25995a,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 2a30895d73e256b4a9aa2268caaec68b,
+      type: 3}
