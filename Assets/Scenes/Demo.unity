@@ -5627,25 +5627,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ee81afb80bd75294cb740f6f220deafd, type: 3}
---- !u!1 &645046219 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6354755794662205186, guid: 7dc9ec88f5f9254409fe980876638477,
-    type: 3}
-  m_PrefabInstance: {fileID: 884850572}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &645046220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645046219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07efdff9955c54c41a5c697c77af2ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseButton: 112
 --- !u!1001 &645971054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7375,27 +7356,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 884850574, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
-      propertyPath: panLimit.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 884850574, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
-      propertyPath: panLimit.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 884850574, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
-      propertyPath: _yMinimapPos
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 884850574, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
-      propertyPath: _miniMapSize
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 531588763534801136, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: controlGroupsButton
-      value: 306
-      objectReference: {fileID: 0}
     - target: {fileID: 5255315256829858745, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
       propertyPath: m_LocalPosition.x

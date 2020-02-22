@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1349751038}
   - component: {fileID: -6079305086667926833}
   - component: {fileID: 884850574}
+  - component: {fileID: 645046220}
+  - component: {fileID: 5313950670620498501}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f659230fe25ebf44290cf07a18a11ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RecordingButton: 32
+  controlGroupsButton: 306
 --- !u!114 &1654287206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,9 +103,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraName: Player Camera
+  _xMinimapPos: 0
+  _yMinimapPos: 50
+  _zMinimapPos: 0
+  _miniMapSize: 60
   panSpeed: 20
   panBorderThickness: 10
-  panLimit: {x: 40, y: 30}
+  panLimit: {x: 50, y: 50}
   scrollSpeed: 20
   minY: 20
   maxY: 60
@@ -111,3 +117,28 @@ MonoBehaviour:
   down: 274
   left: 276
   right: 275
+--- !u!114 &645046220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354755794662205186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07efdff9955c54c41a5c697c77af2ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseButton: 112
+--- !u!114 &5313950670620498501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354755794662205186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b56f4337604d34d87b77b85047a23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
