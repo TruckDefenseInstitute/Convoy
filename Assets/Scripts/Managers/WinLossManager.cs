@@ -31,11 +31,22 @@ public class WinLossManager : MonoBehaviour
 
     public void ReportTruckReachedLevelEnd()
     {
+        Invoke("WinGame", 2f);
+    }
+
+    void WinGame()
+    {
         levelStatus = LevelStatus.Win;
         winScreenCanvas.SetActive(true);
     }
 
+
     public void ReportTruckDead()
+    {
+        Invoke("LoseGame", 2f);
+    }
+
+    void LoseGame()
     {
         levelStatus = LevelStatus.Lose;
         loseScreenCanvas.SetActive(true);
