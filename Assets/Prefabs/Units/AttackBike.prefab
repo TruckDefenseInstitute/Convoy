@@ -11,8 +11,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0177101, y: 1.0485376, z: 2.2832928}
-  m_Center: {x: 0.00857985, y: 0.5230786, z: 0.059754312}
+  m_Size: {x: 1.3219154, y: 1.3619598, z: 2.9658008}
+  m_Center: {x: 0.008579016, y: 0.62748945, z: 0.17364335}
 --- !u!1 &59739695266863722
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 59739696491603421}
   - component: {fileID: 59739696491603234}
   m_Layer: 0
-  m_Name: Aeot
+  m_Name: AttackBike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

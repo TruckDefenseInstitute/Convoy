@@ -37,9 +37,9 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
     // Start is called before the first frame update
     void Start()
     {
-        _unitCommandManager = new UnitCommandManager();
+        _unitCommandManager = UnitCommandManager.Instance;
         _uiOverlayManager = UiOverlayManager.Instance;
-        _ringVisibilityManager = new RingVisibilityManager();
+        _ringVisibilityManager = RingVisibilityManager.Instance;
 
         _startingPoint = new Vector3();
         _endingPoint = new Vector3();
@@ -228,7 +228,6 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
-        Debug.Log("Now entering selected");
     }
 
     void MultiselectLeftMouseHeld()
