@@ -72,6 +72,7 @@ public class Unit : MonoBehaviour {
     HashSet<Unit> _targets = new HashSet<Unit>();
 
     bool _startHasRun = false;
+    protected Action DeathCallback = () => {};
 
     // Select Ring
     public GameObject selectRingPrefab;
@@ -273,6 +274,16 @@ public class Unit : MonoBehaviour {
         _uiOverlayManager = GameObject.Find("GameManager").GetComponent<UiToGameManager>().GetUiOverlayManager();
         _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
 
+
+        if (this.Alignment == Alignment.Friendly)
+        {
+            DeathCallback = () => {
+                GameObject.Find("GameManager")
+                          .GetComponent<UnitControlAndSelectionManager>()
+                          .ReportUnitDead(gameObject);
+            };
+        }
+
         if (selectRingPrefab != null) {
             _selectRing = Instantiate(selectRingPrefab, gameObject.transform);
         }
@@ -458,10 +469,7 @@ public class Unit : MonoBehaviour {
             _animRef.SetTrigger("Die");
         }
 
-        if (this.Alignment == Alignment.Friendly)
-        {
-            GameObject.Find("GameManager").GetComponent<UnitControlAndSelectionManager>().ReportUnitDead(gameObject);
-        }
+        DeathCallback();
         
         Invoke("Destroy", 2);
         Invoke("Sink", 4);

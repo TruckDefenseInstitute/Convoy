@@ -817,6 +817,50 @@ Transform:
   m_Father: {fileID: 2882026416261013037}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7353319430732257244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5121409108774966552}
+  - component: {fileID: 6238467441589249775}
+  m_Layer: 0
+  m_Name: VictoryCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5121409108774966552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353319430732257244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9209276924344901949}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6238467441589249775
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353319430732257244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 2.5, z: 6}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1 &8011988062198722994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,6 +1664,7 @@ Transform:
   - {fileID: 4233441258696110553}
   - {fileID: 4233441259341024307}
   - {fileID: 9209276922950492676}
+  - {fileID: 5121409108774966552}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 206.56999, z: 0}
@@ -1750,6 +1795,7 @@ MonoBehaviour:
   MoveSpeed: 3.2
   MaxRotatingSpeed: 30
   EffectSpawningPoint: {fileID: 981080768016229489}
+  selectRingPrefab: {fileID: 0}
   pathCreator: {fileID: 0}
   end: 2
 --- !u!114 &9209276924344901942
@@ -1790,6 +1836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunDamageMult: 0.05
   CannonDamageMult: 0.43
+  GrenadeDamageMult: 1
   SniperDamageMult: 0.01
 --- !u!114 &82597591513019580
 MonoBehaviour:
