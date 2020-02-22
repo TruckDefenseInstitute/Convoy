@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UnitControlAndSelectionManager : MonoBehaviour
+public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionManager>
 {
     enum GameControlState
     {
@@ -38,7 +38,7 @@ public class UnitControlAndSelectionManager : MonoBehaviour
     void Start()
     {
         _unitCommandManager = new UnitCommandManager();
-        _uiOverlayManager = GameObject.Find("UiOverlayManager").GetComponent<UiOverlayManager>();
+        _uiOverlayManager = UiOverlayManager.Instance;
         _ringVisibilityManager = new RingVisibilityManager();
 
         _startingPoint = new Vector3();
@@ -173,7 +173,6 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         {
             _startingPoint = hit.point;
             _gameControlState = GameControlState.Multiselect;
-            Debug.Log("Now entering multi-select");
             return;
         }
                 
@@ -196,9 +195,6 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(mouseToWorldRay, out hit);
         _endingPoint = hit.point;
-
-        Debug.Log(_startingPoint);
-        Debug.Log(_endingPoint);
 
         Vector3 midpoint = Vector3.Lerp(_startingPoint, _endingPoint, 0.5f);
         Vector3 extents = new Vector3(Mathf.Abs(_startingPoint.x - midpoint.x), 20, Mathf.Abs(_startingPoint.z - midpoint.z));
@@ -243,9 +239,6 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         Physics.Raycast(mouseToWorldRay, out hit);
         _endingPoint = hit.point;
 
-        Debug.Log(_startingPoint);
-        Debug.Log(_endingPoint);
-
         Vector3 midpoint = Vector3.Lerp(_startingPoint, _endingPoint, 0.5f);
         Vector3 extents = new Vector3(Mathf.Abs(_startingPoint.x - midpoint.x), 20, Mathf.Abs(_startingPoint.z - midpoint.z));
                     
@@ -281,7 +274,6 @@ public class UnitControlAndSelectionManager : MonoBehaviour
         _endingPoint = new Vector3();
 
         _gameControlState = GameControlState.Idle;
-        Debug.Log("Now entering idle");
     }
 
     void SelectedRightMouseDown()

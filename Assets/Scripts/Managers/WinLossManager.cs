@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinLossManager : MonoBehaviour
+public class WinLossManager : Manager<WinLossManager>
 {
     UiOverlayManager _uiOverlayManager;
 

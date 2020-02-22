@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerCameraManager : MonoBehaviour
+public class PlayerCameraManager : Manager<PlayerCameraManager>
 {
     static readonly string _defaultCameraName = "Player Camera";
     public string cameraName = "Player Camera";
     GameObject _cameraGameObject;
-    UnitControlAndSelectionManager _unitControlAndSelectionManager;
 
     [SerializeField]
     private float _xMinimapPos = 0;
@@ -33,7 +32,6 @@ public class PlayerCameraManager : MonoBehaviour
     void Start()
     {
         _cameraGameObject = GameObject.Find(cameraName == null ? _defaultCameraName : cameraName);
-        _unitControlAndSelectionManager = GetComponent<UnitControlAndSelectionManager>();
         GameObject.Find("MinimapCamera")
             .GetComponent<MinimapCameraController>()
             .SetMinimapCameraLocation(_xMinimapPos, _yMinimapPos, _zMinimapPos, _miniMapSize);
@@ -44,7 +42,7 @@ public class PlayerCameraManager : MonoBehaviour
     {
         Vector3 pos = _cameraGameObject.transform.position;
 
-        if (_unitControlAndSelectionManager.InPannableControlState())
+        if (UnitControlAndSelectionManager.Instance.InPannableControlState())
         {
             if (Input.GetKey(up) || Input.mousePosition.y >= Screen.height - panBorderThickness)
             {

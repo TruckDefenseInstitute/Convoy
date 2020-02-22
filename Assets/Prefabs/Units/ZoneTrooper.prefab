@@ -240,11 +240,11 @@ MonoBehaviour:
   Alignment: 0
   IsControllable: 1
   Name: ZoneTrooper
-  MaxHealth: 500
-  DetectionRange: 50
+  MaxHealth: 960
+  DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
-  MoveSpeed: 2.5
+  MoveSpeed: 5.5
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -264,13 +264,13 @@ MonoBehaviour:
   RotationSpeed: 360
   RotationRoot: {fileID: 5627378590140159107}
   MaxShootAngle: 5
-  DamageType: 0
-  AttackDamage: 100
-  AttackRange: 50
+  DamageType: 1
+  AttackDamage: 840
+  AttackRange: 30
   AimTime: 0.2
-  CooldownTime: 1
+  CooldownTime: 2.3
   CanMoveWhileAttacking: 0
-  Projectile: {fileID: 3172129098913920456, guid: 0a324907a6ab4f74f9c7640b4164f887,
+  Projectile: {fileID: 5223907511035474348, guid: 102b27cbdb0be114a8087b0ff4633913,
     type: 3}
   ProjectileSpawnPoint: {fileID: 3515540702000022612}
 --- !u!114 &8582363949982957523
@@ -285,9 +285,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c4884072b92fa4db86e9b910aac6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunDamageMult: 0.5
-  CannonDamageMult: 0.8
-  GrenadeDamageMult: 1
+  GunDamageMult: 0.8
+  CannonDamageMult: 0.05
+  RocketDamageMult: 0.12
+  GrenadeDamageMult: 0.4
   SniperDamageMult: 0.2
 --- !u!1 &5628242310197840274
 GameObject:

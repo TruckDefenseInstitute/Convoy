@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AllyUnits
   - Selectables
+  - Truck
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - 
   - 
   - 
-  - WinGameCheck
+  - TruckScriptedEvents
   - Ground
   - 
   - 

@@ -3,18 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitCommandManager
-{
+public class UnitCommandManager : Manager<UnitCommandManager> {
     List<Unit> _selectedAllies = new List<Unit>();
 
-    public void ChangeSelectedAllies(List<GameObject> gameObjectList)
-    {
+    public void ChangeSelectedAllies(List<GameObject> gameObjectList) {
         _selectedAllies = gameObjectList.Select(go => go.GetComponent<Unit>()).ToList();
     }
 
     public void DirectSelectedUnits(RaycastHit hit, MovementMode mode) {
-        if (hit.transform == null)
-        {
+        if (hit.transform == null) {
             return;
         }
 
@@ -22,8 +19,7 @@ public class UnitCommandManager
     }
 
     public void ShiftDirectSelectedUnits(RaycastHit hit, MovementMode mode) {
-        if (hit.transform == null)
-        {
+        if (hit.transform == null) {
             return;
         }
 

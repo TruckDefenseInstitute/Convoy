@@ -317,11 +317,12 @@ MonoBehaviour:
   Name: Guardian Cannon
   MaxHealth: 5000
   DetectionRange: 35
-  AMoveStopDistMultiplier: 0.75
+  AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 10
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 2854884618499930957}
+  selectRingPrefab: {fileID: 0}
 --- !u!114 &6598176128480756428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunDamageMult: 0.5
   CannonDamageMult: 0.75
+  RocketDamageMult: 0.5
+  GrenadeDamageMult: 1
   SniperDamageMult: 0.01
 --- !u!114 &1994548169520882249
 MonoBehaviour:

@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   radius: 0.75
-  height: 2
+  height: 1
   repathRate: 0.5
   canSearch: 1
   canMove: 1
@@ -316,7 +316,7 @@ MonoBehaviour:
   Name: Attack Bike
   MaxHealth: 800
   DetectionRange: 34
-  AMoveStopDistMultiplier: 0.75
+  AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 16
   MaxRotatingSpeed: 360
@@ -338,13 +338,13 @@ MonoBehaviour:
   RotationSpeed: 360
   RotationRoot: {fileID: 59739695266863717}
   MaxShootAngle: 5
-  DamageType: 1
+  DamageType: 2
   AttackDamage: 300
   AttackRange: 29
-  AimTime: 0.2
+  AimTime: 0
   CooldownTime: 3.8
   CanMoveWhileAttacking: 1
-  Projectile: {fileID: 6794297145762213902, guid: 622c7cc40e16d4743989099844e2a29f,
+  Projectile: {fileID: 2746986793372496583, guid: 9ba685e7e74d6ff409ec4dad80b14090,
     type: 3}
   ProjectileSpawnPoint: {fileID: 59739695507629722}
 --- !u!114 &59739696491603234
@@ -361,6 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunDamageMult: 0.5
   CannonDamageMult: 1.1
+  RocketDamageMult: 1.1
   GrenadeDamageMult: 0.75
   SniperDamageMult: 0.01
 --- !u!1001 &59739694808291272
@@ -461,11 +462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4285322397440598, guid: dd404c768a9323b4fb42bd3f8ea5c2fe, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4285322397440598, guid: dd404c768a9323b4fb42bd3f8ea5c2fe, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4285322397440598, guid: dd404c768a9323b4fb42bd3f8ea5c2fe, type: 3}
       propertyPath: m_LocalRotation.w

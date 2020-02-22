@@ -286,11 +286,12 @@ MonoBehaviour:
   Name: Watchtower
   MaxHealth: 2400
   DetectionRange: 35
-  AMoveStopDistMultiplier: 0.75
+  AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 10
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 4792472682798676298}
+  selectRingPrefab: {fileID: 0}
 --- !u!114 &4507453238628221131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunDamageMult: 0.5
   CannonDamageMult: 0.75
+  RocketDamageMult: 0.5
+  GrenadeDamageMult: 1
   SniperDamageMult: 0.01
 --- !u!114 &3229763429284613135
 MonoBehaviour:

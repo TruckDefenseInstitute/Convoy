@@ -36,7 +36,7 @@ public class BarracksBehaviour : MonoBehaviour
             unitScript.Alignment = Alignment.Hostile;
             
             unitScript.Start();
-            unitScript.Move(_truckReferenceManager.GetTruckPosition(), MovementMode.AMove);
+            unitScript.Move(TruckReferenceManager.Instance.TruckGameObject.transform.position, MovementMode.AMove);
         }
         else
         {

@@ -63,30 +63,33 @@ public class Weapon : MonoBehaviour {
     void TryAttack() {
         if (_aimTimeLeft >= AimTime && _cooldownLeft >= CooldownTime) {
             // todo instantiate projectile
-            GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, Quaternion.LookRotation(_target.transform.position - RotationRoot.position));
-            WeaponTranslationalRecoil wbr;
-            if (TryGetComponent<WeaponTranslationalRecoil>(out wbr)) {
+            GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
+            if (TryGetComponent<WeaponTranslationalRecoil>(out WeaponTranslationalRecoil wbr)) {
                 wbr.Recoil();
             }
-            WeaponRotationalRecoil wrr;
-            if (TryGetComponent<WeaponRotationalRecoil>(out wrr)) {
+            if (TryGetComponent<WeaponRotationalRecoil>(out WeaponRotationalRecoil wrr)) {
                 wrr.Recoil();
             }
-            WeaponRotatingFire wrf;
-            if (TryGetComponent<WeaponRotatingFire>(out wrf)) {
+            if (TryGetComponent<WeaponRotatingFire>(out WeaponRotatingFire wrf)) {
                 wrf.Rotate();
             }
 
             // todo change
-            HitscanProjectile hsp;
-            RocketProjectile rp;
-            if (go.TryGetComponent<HitscanProjectile>(out hsp)) {
+            if (go.TryGetComponent<HitscanProjectile>(out HitscanProjectile hsp)) {
                 hsp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
                 hsp.Distance = (_target.transform.position - RotationRoot.position).magnitude;
                 hsp.Target = _target.gameObject;
-            } else if (go.TryGetComponent<RocketProjectile>(out rp)) {
+            } else if (go.TryGetComponent<RocketProjectile>(out RocketProjectile rp)) {
                 rp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
                 rp.Target = _target.gameObject;
+            } else if (go.TryGetComponent<RocketVolleyProjectile>(out RocketVolleyProjectile rvp)) {
+                go.transform.SetParent(ProjectileSpawnPoint);
+                rvp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+                rvp.Target = _target.gameObject;
+                rvp.TargetedAlignment = _target.Alignment;
+            } else if (go.TryGetComponent<InstantProjectile>(out InstantProjectile ip)) {
+                ip.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+                ip.Target = _target.gameObject;
             }
 
             _cooldownLeft = 0;

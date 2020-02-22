@@ -13,8 +13,8 @@ public class RTSAvoidance : MonoBehaviour {
     public Action ReachedDestinationCallback;
 
     [Range(0, 1)]
-    public float densityFraction = 0.5f;
-    public bool returnAfterBeingPushedAway = true;
+    public float densityFraction = 0.3f;
+    public bool returnAfterBeingPushedAway = false;
 
     void Awake() {
         ai = GetComponent<IAstarAI>();

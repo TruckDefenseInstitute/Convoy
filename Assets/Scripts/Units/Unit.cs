@@ -41,7 +41,7 @@ public class Unit : MonoBehaviour {
 
     // unit stats
     public float DetectionRange;
-    public float AMoveStopDistMultiplier = .75f;
+    public float AMoveStopDistMultiplier = 1f;
     public float LoseVisionMultiplier = 1.1f;
     public float MoveSpeed = 10f;
 

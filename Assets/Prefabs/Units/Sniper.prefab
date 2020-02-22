@@ -6004,11 +6004,11 @@ MonoBehaviour:
   Alignment: 0
   IsControllable: 1
   Name: Sniper
-  MaxHealth: 250
-  DetectionRange: 50
+  MaxHealth: 300
+  DetectionRange: 52
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
-  MoveSpeed: 1.5
+  MoveSpeed: 2
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -6028,13 +6028,13 @@ MonoBehaviour:
   RotationSpeed: 360
   RotationRoot: {fileID: 524654272129245434}
   MaxShootAngle: 5
-  DamageType: 3
-  AttackDamage: 500
-  AttackRange: 50
-  AimTime: 0.2
-  CooldownTime: 5
+  DamageType: 4
+  AttackDamage: 800
+  AttackRange: 47
+  AimTime: 1
+  CooldownTime: 1.9
   CanMoveWhileAttacking: 0
-  Projectile: {fileID: 3172129098913920456, guid: 0a324907a6ab4f74f9c7640b4164f887,
+  Projectile: {fileID: 8610042372494476193, guid: 25d7a264e22530a40b481311e26b3f24,
     type: 3}
   ProjectileSpawnPoint: {fileID: 736604718838075218}
 --- !u!114 &4218795827183255454
@@ -6050,8 +6050,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunDamageMult: 1
-  CannonDamageMult: 1
-  GrenadeDamageMult: 1
+  CannonDamageMult: 0.25
+  RocketDamageMult: 0.25
+  GrenadeDamageMult: 0.75
   SniperDamageMult: 1
 --- !u!1 &5203108326500030266
 GameObject:

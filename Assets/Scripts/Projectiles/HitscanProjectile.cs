@@ -6,7 +6,6 @@ using UnityEngine;
 public class HitscanProjectile : MonoBehaviour
 {
     public GameObject MuzzleFlash;
-    public bool IsInstant;
     public float Speed;
     public GameObject HitSpawn;
 
@@ -25,30 +24,26 @@ public class HitscanProjectile : MonoBehaviour
         if (MuzzleFlash != null) {
             Instantiate(MuzzleFlash, transform.position, transform.rotation);
         }
+        
+        float time = Distance / Speed;
 
-        if (IsInstant) {
-            HitTarget();
-        } else {
-            float time = Distance / Speed;
+        var ps = GetComponent<ParticleSystem>();
+        var psmain = ps.main;
+        var psmainsl = psmain.startLifetime;
+        psmainsl.mode = ParticleSystemCurveMode.TwoConstants;
+        psmainsl.constantMin = time * 0.95f;
+        psmainsl.constantMax = time * 1.00f;
+        psmain.startLifetime = psmainsl;
+        psmain.startSpeed = Speed;
 
-            var ps = GetComponent<ParticleSystem>();
-            var psmain = ps.main;
-            var psmainsl = psmain.startLifetime;
-            psmainsl.mode = ParticleSystemCurveMode.TwoConstants;
-            psmainsl.constantMin = time * 0.95f;
-            psmainsl.constantMax = time * 1.00f;
-            psmain.startLifetime = psmainsl;
-            psmain.startSpeed = Speed;
-
-            _originalLength = Vector3.Distance(transform.position, Target.transform.position);
-            Invoke("HitTarget", time);
-        }
+        _originalLength = Vector3.Distance(transform.position, Target.transform.position);
+        Invoke("HitTarget", time);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Target != null && !IsInstant) {
+        if (Target != null) {
             transform.LookAt(Target.transform.position + Vector3.up);
             var ls = transform.localScale;
             ls.z = Vector3.Distance(transform.position, Target.transform.position) / _originalLength;

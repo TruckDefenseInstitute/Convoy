@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingVisibilityManager
+public class RingVisibilityManager : Manager<RingVisibilityManager>
 {
     List<Unit> _previouslySelectedUnits = new List<Unit>();
     List<Unit> _selectedUnits = new List<Unit>();

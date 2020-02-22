@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseManager : MonoBehaviour
+public class PauseManager : Manager<PauseManager>
 {
     public KeyCode pauseButton;
 
     GameObject _pauseScreenCanvas;
     bool _gamePaused = false;
     float _originalTimeScale;
-    WinLossManager _winLossManager;
 
     // Start is called before the first frame update
     void Start()
     {
         _pauseScreenCanvas = GameObject.Find("PauseScreenCanvas");
-        _winLossManager = GetComponent<WinLossManager>();
         _pauseScreenCanvas.SetActive(false);
         _originalTimeScale = Time.timeScale;
     }
@@ -23,7 +21,7 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(pauseButton) && _winLossManager.GetGamePausable())
+        if (Input.GetKeyDown(pauseButton) && WinLossManager.Instance.GetGamePausable())
         {
             if (_gamePaused)
             {

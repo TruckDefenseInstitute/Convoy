@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class UiOverlayManager : MonoBehaviour {
+public class UiOverlayManager : Manager<UiOverlayManager> {
 
     [SerializeField]
     private GameObject _healthBarPrefab;
