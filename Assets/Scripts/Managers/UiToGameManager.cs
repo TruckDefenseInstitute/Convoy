@@ -3,15 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UiToGameManager : Manager<UiToGameManager> {
-    /// Right now you might be wondering - why the heck is this thing static?
-    /// Thanks to how Unity's EventSystem works, when the Summon method below gets
-    /// called from the UI button, it's not the method of the instance in the Hierarchy
-    /// that gets called, but another instance living somewhere else. The workaround 
-    /// for this is to make this thing static, so that all copies get the same reference to
-    /// a TruckReferenceManager. Sounds retarded? I agree. That's why,
-    /// ANYTIME YOU FIND A BETTER WORKAROUND, JUST YEET THIS CODE INTO THE SUN THANKS.
-    
+public class UiToGameManager : Manager<UiToGameManager> {    
     private UiOverlayManager _uiOverlayManager;
 
     new void Awake() {
