@@ -87,9 +87,6 @@ public class Weapon : MonoBehaviour {
                 rvp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
                 rvp.Target = _target.gameObject;
                 rvp.TargetedAlignment = _target.Alignment;
-            } else if (go.TryGetComponent<InstantProjectile>(out InstantProjectile ip)) {
-                ip.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
-                ip.Target = _target.gameObject;
             }
 
             _cooldownLeft = 0;
