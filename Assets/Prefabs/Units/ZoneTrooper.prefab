@@ -285,11 +285,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c4884072b92fa4db86e9b910aac6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunDamageMult: 0.8
+  GunDamageMult: 0.5
   CannonDamageMult: 0.05
   RocketDamageMult: 0.12
   GrenadeDamageMult: 0.4
-  SniperDamageMult: 0.2
+  SniperDamageMult: 0.5
 --- !u!1 &5628242310197840274
 GameObject:
   m_ObjectHideFlags: 0
