@@ -6,9 +6,9 @@ public class WinLossManager : MonoBehaviour
 {
     UiOverlayManager _uiOverlayManager;
 
-    GameObject winScreenCanvas;
-    GameObject loseScreenCanvas;
-    LevelStatus levelStatus;
+    GameObject _winScreenCanvas;
+    GameObject _loseScreenCanvas;
+    LevelStatus _levelStatus;
 
 
     enum LevelStatus
@@ -20,13 +20,13 @@ public class WinLossManager : MonoBehaviour
 
     void Start()
     {
-        levelStatus = LevelStatus.Ongoing;
+        _levelStatus = LevelStatus.Ongoing;
         
-        winScreenCanvas = GameObject.Find("WinScreenCanvas");
-        winScreenCanvas.SetActive(false);
+        _winScreenCanvas = GameObject.Find("WinScreenCanvas");
+        _winScreenCanvas.SetActive(false);
 
-        loseScreenCanvas = GameObject.Find("LoseScreenCanvas");
-        loseScreenCanvas.SetActive(false);
+        _loseScreenCanvas = GameObject.Find("LoseScreenCanvas");
+        _loseScreenCanvas.SetActive(false);
     }
 
     public void ReportTruckReachedLevelEnd()
@@ -36,8 +36,8 @@ public class WinLossManager : MonoBehaviour
 
     void WinGame()
     {
-        levelStatus = LevelStatus.Win;
-        winScreenCanvas.SetActive(true);
+        _levelStatus = LevelStatus.Win;
+        _winScreenCanvas.SetActive(true);
     }
 
 
@@ -48,7 +48,12 @@ public class WinLossManager : MonoBehaviour
 
     void LoseGame()
     {
-        levelStatus = LevelStatus.Lose;
-        loseScreenCanvas.SetActive(true);
+        _levelStatus = LevelStatus.Lose;
+        _loseScreenCanvas.SetActive(true);
+    }
+
+    public bool GetGamePausable()
+    {
+        return _levelStatus == LevelStatus.Ongoing;
     }
 }

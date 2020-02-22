@@ -6,24 +6,26 @@ public class PauseManager : MonoBehaviour
 {
     public KeyCode pauseButton;
 
-    GameObject pauseScreenCanvas;
-    bool gamePaused = false;
-    float originalTimeScale;
+    GameObject _pauseScreenCanvas;
+    bool _gamePaused = false;
+    float _originalTimeScale;
+    WinLossManager _winLossManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        pauseScreenCanvas = GameObject.Find("PauseScreenCanvas");
-        pauseScreenCanvas.SetActive(false);
-        originalTimeScale = Time.timeScale;
+        _pauseScreenCanvas = GameObject.Find("PauseScreenCanvas");
+        _winLossManager = GetComponent<WinLossManager>();
+        _pauseScreenCanvas.SetActive(false);
+        _originalTimeScale = Time.timeScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(pauseButton))
+        if (Input.GetKeyDown(pauseButton) && _winLossManager.GetGamePausable())
         {
-            if (gamePaused)
+            if (_gamePaused)
             {
                 UnpauseGame();
             }
@@ -32,19 +34,19 @@ public class PauseManager : MonoBehaviour
                 PauseGame();
             }
 
-            gamePaused = !gamePaused;
+            _gamePaused = !_gamePaused;
         }
     }
 
     void PauseGame()
     {
-        pauseScreenCanvas.SetActive(true);
+        _pauseScreenCanvas.SetActive(true);
         Time.timeScale = 0f;
     }
 
     void UnpauseGame()
     {
-        pauseScreenCanvas.SetActive(false);
-        Time.timeScale = originalTimeScale;
+        _pauseScreenCanvas.SetActive(false);
+        Time.timeScale = _originalTimeScale;
     }
 }
