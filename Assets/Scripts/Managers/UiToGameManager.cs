@@ -15,15 +15,6 @@ public class UiToGameManager : Manager<UiToGameManager> {
         _uiOverlayManager = UiOverlayManager.Instance;
     }
 
-    // To used by the button from SummonUnitsButton Object
-    public void Summon(GameObject unit) {
-        // Summon Unit from truck here
-        Vector3 currentTruckPosition = TruckReferenceManager.Instance.TruckGameObject.transform.position;
-        Vector3 divergence = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
-
-        GameObject deployedUnit = Instantiate(unit, currentTruckPosition + divergence, Quaternion.identity);
-    }
-
     public UiOverlayManager GetUiOverlayManager() {
         return this._uiOverlayManager;
     }
