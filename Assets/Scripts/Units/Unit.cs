@@ -470,15 +470,20 @@ public class Unit : MonoBehaviour {
             _animRef.SetTrigger("Die");
         }
 
+        if (TryGetComponent<UnitSoundController>(out UnitSoundController usc)) {
+            usc.Die();
+        }
+
         DeathCallback();
         Destroy(_healthBar);
 
         if (Deathrattle != null) {
-            Destroy();
+            Invoke("Sink", 4);
+            Invoke("Destroy", 10);
             Instantiate(Deathrattle, transform.position, transform.rotation);
         } else {
             Invoke("Sink", 4);
-            Invoke("Destroy", 5);
+            Invoke("Destroy", 10);
         }
     }
 

@@ -9,6 +9,7 @@ public class ScriptedEventTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponentInParent<Truck>() != null) {
             Event.Trigger();
+            Destroy(gameObject);
         }
     }
 }

@@ -220,6 +220,8 @@ GameObject:
   - component: {fileID: 4507453238628221131}
   - component: {fileID: 8512803328921697895}
   - component: {fileID: 3229763429284613135}
+  - component: {fileID: 5625132071568460714}
+  - component: {fileID: 3425071553628816605}
   m_Layer: 0
   m_Name: Watchtower
   m_TagString: Untagged
@@ -323,12 +325,12 @@ MonoBehaviour:
   RotationRoot: {fileID: 2659449270406406944}
   MaxShootAngle: 5
   DamageType: 0
-  AttackDamage: 30
+  AttackDamage: 100
   AttackRange: 35
   AimTime: 0
-  CooldownTime: 0.1325
+  CooldownTime: 0.5
   CanMoveWhileAttacking: 0
-  Projectile: {fileID: 3172129098913920456, guid: 0a324907a6ab4f74f9c7640b4164f887,
+  Projectile: {fileID: 3172129098913920456, guid: 6ce08d7981be50449bd5d24474e9652b,
     type: 3}
   ProjectileSpawnPoint: {fileID: 2659449270201465308}
 --- !u!114 &8512803328921697895
@@ -361,8 +363,128 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationalRoot: {fileID: 8366788133821002797}
-  AngularVelocity: 216000
-  RotateTime: 0.1
+  AngularVelocity: 115200
+  RotateTime: 0.5
+--- !u!82 &5625132071568460714
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229763429284613128}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3425071553628816605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229763429284613128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88dbd4eb634ef44b842f173a112a490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FiringSounds:
+  - {fileID: 8300000, guid: 5a63dd0eeed9e6649a1445acdcccc534, type: 3}
+  - {fileID: 8300000, guid: 0555b55000aaceb43b1593ef77466b81, type: 3}
+  - {fileID: 8300000, guid: c146801e2a7986a42a92f761e0638ee8, type: 3}
+  - {fileID: 8300000, guid: ed75d6ef858583f4b9308d046a7581a9, type: 3}
+  - {fileID: 8300000, guid: 04c2e21d9282b9d4fa366bd75d7b8750, type: 3}
+  DieingSounds:
+  - {fileID: 8300000, guid: 6580ee1a59682a54ba1db3dab3bad659, type: 3}
+  - {fileID: 8300000, guid: 95e32ff11b2c6b244903d728e5618896, type: 3}
+  - {fileID: 8300000, guid: 3144e375a246d92419b234d841bd9151, type: 3}
+  - {fileID: 8300000, guid: 6a1028908367c4843bf4bf434e96c434, type: 3}
+  - {fileID: 8300000, guid: 97da0d179b5bcf140bb0661ad4d61a0c, type: 3}
 --- !u!1 &4792472682798676298
 GameObject:
   m_ObjectHideFlags: 0

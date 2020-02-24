@@ -4833,6 +4833,7 @@ GameObject:
   - component: {fileID: 7122772871084822110}
   - component: {fileID: 729660898679847717}
   - component: {fileID: 1241135721927158842}
+  - component: {fileID: 974448786878285351}
   m_Layer: 0
   m_Name: RocketExplosion
   m_TagString: Untagged
@@ -9656,3 +9657,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a794845f40e8b549923da285432d7b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &974448786878285351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166929477288599797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62401f53a683ba2458ae0dab083cde04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - {fileID: 8300000, guid: 07d718f3fffe517478f616506e25c6bc, type: 3}
+  - {fileID: 8300000, guid: dacb00a1bcf8f824aaa1ed161130d99b, type: 3}
+  - {fileID: 8300000, guid: d70cc9a7776ece54191252c9f1dac830, type: 3}
+  - {fileID: 8300000, guid: 720b369c981b3a64e8e1d30772c69eb5, type: 3}
+  - {fileID: 8300000, guid: 797f70ae9e24d23499114563d78b5b88, type: 3}
+  - {fileID: 8300000, guid: 4e090459498782f4b812200756c8cf09, type: 3}
+  - {fileID: 8300000, guid: 29490d000841d4349aa8bef6baa00056, type: 3}
