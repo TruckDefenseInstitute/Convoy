@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 7882821003103108580}
   - component: {fileID: 1889636015914291262}
   - component: {fileID: 7859007260933126520}
+  - component: {fileID: 6192791844687270002}
   m_Layer: 0
   m_Name: Rifleman
   m_TagString: Untagged
@@ -640,6 +641,7 @@ MonoBehaviour:
   IsControllable: 1
   Name: Rifleman
   MaxHealth: 450
+  Deathrattle: {fileID: 0}
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -689,6 +691,18 @@ MonoBehaviour:
   RocketDamageMult: 0.25
   GrenadeDamageMult: 0.75
   SniperDamageMult: 1
+--- !u!114 &6192791844687270002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605322507436367101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1733108195715021503
 GameObject:
   m_ObjectHideFlags: 0

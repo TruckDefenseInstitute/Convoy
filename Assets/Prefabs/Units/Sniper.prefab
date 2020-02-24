@@ -5861,6 +5861,7 @@ GameObject:
   - component: {fileID: 3586394942419683082}
   - component: {fileID: 8288680067763639638}
   - component: {fileID: 4218795827183255454}
+  - component: {fileID: 8384720999311943170}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Untagged
@@ -6005,6 +6006,7 @@ MonoBehaviour:
   IsControllable: 1
   Name: Sniper
   MaxHealth: 300
+  Deathrattle: {fileID: 0}
   DetectionRange: 52
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -6054,6 +6056,18 @@ MonoBehaviour:
   RocketDamageMult: 0.25
   GrenadeDamageMult: 0.75
   SniperDamageMult: 1
+--- !u!114 &8384720999311943170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524654272129245435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5203108326500030266
 GameObject:
   m_ObjectHideFlags: 0

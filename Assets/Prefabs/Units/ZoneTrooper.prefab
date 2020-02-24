@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 4611101249529794397}
   - component: {fileID: 9140151064923392952}
   - component: {fileID: 8582363949982957523}
+  - component: {fileID: -5069765891301830589}
   m_Layer: 0
   m_Name: ZoneTrooper
   m_TagString: Untagged
@@ -241,6 +242,7 @@ MonoBehaviour:
   IsControllable: 1
   Name: ZoneTrooper
   MaxHealth: 960
+  Deathrattle: {fileID: 0}
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -290,6 +292,18 @@ MonoBehaviour:
   RocketDamageMult: 0.12
   GrenadeDamageMult: 0.4
   SniperDamageMult: 0.5
+--- !u!114 &-5069765891301830589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627378590140159106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5628242310197840274
 GameObject:
   m_ObjectHideFlags: 0

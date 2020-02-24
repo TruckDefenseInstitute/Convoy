@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7341045708887740960
 Transform:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4151028798781889618
 Transform:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4151028798846783428
 Transform:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4151028799689311207
 Transform:
   m_ObjectHideFlags: 0
@@ -518,7 +518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4151028799929036702
 Transform:
   m_ObjectHideFlags: 0
@@ -1598,6 +1598,7 @@ GameObject:
   - component: {fileID: 9209276924344901950}
   - component: {fileID: 9209276924344901942}
   - component: {fileID: 2565094865741255934}
+  - component: {fileID: 7529519804065097576}
   - component: {fileID: 82597591513019580}
   m_Layer: 0
   m_Name: BulletTowerTruck
@@ -1744,6 +1745,7 @@ MonoBehaviour:
   IsControllable: 0
   Name: Bullet Truck
   MaxHealth: 19500
+  Deathrattle: {fileID: 0}
   DetectionRange: 30
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -1794,6 +1796,18 @@ MonoBehaviour:
   RocketDamageMult: 0.33
   GrenadeDamageMult: 0.1
   SniperDamageMult: 0.01
+--- !u!114 &7529519804065097576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209276924344901948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &82597591513019580
 MonoBehaviour:
   m_ObjectHideFlags: 0

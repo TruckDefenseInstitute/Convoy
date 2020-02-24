@@ -5892,6 +5892,7 @@ GameObject:
   - component: {fileID: 6657574400388041273}
   - component: {fileID: 6657574400388041272}
   - component: {fileID: 6657574400388041275}
+  - component: {fileID: 3192560613245235644}
   m_Layer: 0
   m_Name: Grunt
   m_TagString: Untagged
@@ -6036,6 +6037,7 @@ MonoBehaviour:
   IsControllable: 1
   Name: Grunt
   MaxHealth: 75
+  Deathrattle: {fileID: 0}
   DetectionRange: 30
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -6085,6 +6087,18 @@ MonoBehaviour:
   RocketDamageMult: 0.25
   GrenadeDamageMult: 0.75
   SniperDamageMult: 1
+--- !u!114 &3192560613245235644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6657574400388041278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6913238769434683645
 GameObject:
   m_ObjectHideFlags: 0
