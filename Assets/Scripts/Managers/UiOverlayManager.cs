@@ -6,24 +6,29 @@ using TMPro;
 
 public class UiOverlayManager : Manager<UiOverlayManager> {
 
-    [SerializeField]
-    private GameObject _healthBarPrefab;
+    // Serialized Prefabs
+    [SerializeField] private GameObject _healthBarPrefab;
+    [SerializeField] private List<GameObject> _unitTypeList;
 
     // UI Inteface Canvas
     private GameObject _uiInterfaceCanvas;
     private GameObject _deployedUnitsPanel;
+    private GameObject _trainUnitsPanel;
     
-    private TextMeshProUGUI _currencyText;
+    private TextMeshProUGUI _resourcesText;
     
     // UI In Game Canvas
     private GameObject _uiInGameCanvas;
     private GameObject _healthBarPanel;
-    
+
     // Others
     private Camera _playerCamera;
     private Vector3 _mousePos;
 
+    private List<GameObject> _unitsQueue;
+
     private bool _isDragging = false;
+    private bool _isUnitTrainingCompleted = true;
 
     void Start() {
         // UI In Game Canvas
@@ -33,13 +38,15 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         // UI Interface Canvas
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
-        _currencyText = GameObject.Find("CurrencyText").GetComponent<TextMeshProUGUI>();
+        _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
+        _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
 
         // Others
         _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
 
         // Startup
-        _currencyText.text = "2";
+        GetSummonUnitsPanelInfo(_unitTypeList);
+        
     }
 
     void Update() {
@@ -112,10 +119,34 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         }
     }
 
-    /*================ Currency ================*/
+    /*================ Resources ================*/
 
-    public void ChangeCurrency(float currency) {
-        _currencyText.text = currency.ToString();
+    public void UpdateResourcesText(float resources) {
+        _resourcesText.text = resources.ToString();
+    }
+
+    /*================ Summon Units ================*/
+    
+    public void GetSummonUnitsPanelInfo(List<GameObject> unitTypeList) {
+        int slot = 0;
+        foreach(GameObject unitType in unitTypeList) {
+            if(slot > 10) {
+                break;
+            }
+            Transform unitSummonSlot = _trainUnitsPanel.transform.GetChild(slot);
+            GameObject unitPanel = Instantiate(unitType, unitType.transform.position, unitType.transform.rotation);
+            unitPanel.transform.SetParent(unitSummonSlot);
+            RectTransform slotRect = unitPanel.GetComponent<RectTransform>();
+            slotRect.offsetMin = new Vector2(0, 0);
+            slotRect.offsetMax = new Vector2(0, 0);
+            slotRect.localScale = new Vector3(1, 1, 1);
+            slot++;
+        }
     }
     
+    private void UpdateFirstUnit(GameObject unitSlot) {
+        if(!_isUnitTrainingCompleted) {
+            // unitSlot.GetComponent<
+        }
+    }
 }

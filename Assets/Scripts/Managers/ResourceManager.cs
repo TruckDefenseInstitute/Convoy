@@ -2,41 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : Manager<ResourceManager>
-{
-    float _resource;
+public class ResourceManager : Manager<ResourceManager> {
+    
+    // Starting gold should be initialize in inspector
+    [SerializeField]
+    private float _resource = 50f;
+    [SerializeField]
+    private float _autoResourceGenerated = 1f;
 
+    private float _maxResources = 1000f;
+    private float _autoResourceGeneratedInterval = 1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _resource = 0f;
+    void Start() {
+        StartCoroutine(AutoGenerateResource());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        _resource += GetResourceGainByTruck();
+    void Update() {
+        UiOverlayManager.Instance.UpdateResourcesText(_resource);
     }
 
-    public float GetResourceAmount()
-    {
+    public float GetResourceAmount() {
         return _resource;
     }
 
-    public void DeductResource(float deductAmount)
-    {
-        // Assume that there is enough resource to deduct.
-        _resource -= deductAmount;
+    // Returns bool to indicate if successfully deducted or not.
+    public bool DeductResource(float deductAmount) {
+        if(deductAmount <= _resource) {
+            _resource -= deductAmount;
+            return true;
+        } else {
+            Debug.Log("Not enough gold");
+            return false;
+        }
     }
 
-    public bool ResourcesEqualOrGreaterThan(float compareAmount)
-    {
+    public bool ResourcesEqualOrGreaterThan(float compareAmount) {
         return _resource >= compareAmount;
     }
 
-    float GetResourceGainByTruck()
-    {
-        return 1f;
+    IEnumerator AutoGenerateResource() {
+        // Stop upon Victory, Loss, or Pause
+        if(_resource < _maxResources) {
+            yield return new WaitForSeconds(_autoResourceGeneratedInterval);
+            _resource += _autoResourceGenerated;
+        }
+        StartCoroutine(AutoGenerateResource());
     }
 }

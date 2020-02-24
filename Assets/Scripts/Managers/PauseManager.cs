@@ -14,7 +14,6 @@ public class PauseManager : Manager<PauseManager>
     void Start()
     {
         _pauseScreenCanvas = GameObject.Find("PauseScreenCanvas");
-        _pauseScreenCanvas.SetActive(false);
         _originalTimeScale = Time.timeScale;
     }
 
