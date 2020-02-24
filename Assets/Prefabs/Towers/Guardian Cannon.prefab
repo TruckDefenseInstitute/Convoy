@@ -316,6 +316,8 @@ MonoBehaviour:
   IsControllable: 0
   Name: Guardian Cannon
   MaxHealth: 5000
+  Deathrattle: {fileID: 4121849538939856015, guid: def12e3d87090c744b08d557dd68dc79,
+    type: 3}
   DetectionRange: 35
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1

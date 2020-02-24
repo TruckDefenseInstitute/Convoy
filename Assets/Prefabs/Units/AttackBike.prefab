@@ -315,6 +315,8 @@ MonoBehaviour:
   IsControllable: 1
   Name: Attack Bike
   MaxHealth: 800
+  Deathrattle: {fileID: 8316906689581392877, guid: ce32be32456797f45bd0afb27c7ef836,
+    type: 3}
   DetectionRange: 34
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1

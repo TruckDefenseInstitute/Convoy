@@ -46,7 +46,10 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
     private void DeployUnit(GameObject unit) {
         Vector3 currentTruckPosition = TruckReferenceManager.Instance.TruckGameObject.transform.position;
         Vector3 divergence = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
-        GameObject deployedUnit = Instantiate(unit, currentTruckPosition + divergence, Quaternion.identity);
+        GameObject deployedUnit = Instantiate(unit, currentTruckPosition + divergence, TruckReferenceManager.Instance.TruckGameObject.transform.rotation);
+        Unit u = deployedUnit.GetComponent<Unit>();
+        u.Start();
+        u.Follow(TruckReferenceManager.Instance.TruckBehavior);
     }
 
 }

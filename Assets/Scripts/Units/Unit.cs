@@ -38,6 +38,7 @@ public class Unit : MonoBehaviour {
         get;
         private set;
     }
+    public GameObject Deathrattle;
 
     // unit stats
     public float DetectionRange;
@@ -265,7 +266,7 @@ public class Unit : MonoBehaviour {
             _weaponRef.RotationSpeed = _weaponRef.CanMoveWhileAttacking ? _weaponRef.RotationSpeed : MaxRotatingSpeed;
         }
         _armorRef = GetComponent<Armor>();
-
+        
         _guardPosition = transform.position;
 
         Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
@@ -470,12 +471,15 @@ public class Unit : MonoBehaviour {
         }
 
         DeathCallback();
-        
-        Invoke("Destroy", 2);
-        Invoke("Sink", 4);
-        Invoke("Destroy", 5);
-
         Destroy(_healthBar);
+
+        if (Deathrattle != null) {
+            Destroy();
+            Instantiate(Deathrattle, transform.position, transform.rotation);
+        } else {
+            Invoke("Sink", 4);
+            Invoke("Destroy", 5);
+        }
     }
 
     void Sink() {
