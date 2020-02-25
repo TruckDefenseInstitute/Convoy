@@ -62,35 +62,41 @@ public class Weapon : MonoBehaviour {
 
     void TryAttack() {
         if (_aimTimeLeft >= AimTime && _cooldownLeft >= CooldownTime) {
-            // todo instantiate projectile
-            GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
-            if (TryGetComponent<WeaponTranslationalRecoil>(out WeaponTranslationalRecoil wbr)) {
-                wbr.Recoil();
-            }
-            if (TryGetComponent<WeaponRotationalRecoil>(out WeaponRotationalRecoil wrr)) {
-                wrr.Recoil();
-            }
-            if (TryGetComponent<WeaponRotatingFire>(out WeaponRotatingFire wrf)) {
-                wrf.Rotate();
-            }
-
-            // todo change
-            if (go.TryGetComponent<HitscanProjectile>(out HitscanProjectile hsp)) {
-                hsp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
-                hsp.Distance = (_target.transform.position - RotationRoot.position).magnitude;
-                hsp.Target = _target.gameObject;
-            } else if (go.TryGetComponent<RocketProjectile>(out RocketProjectile rp)) {
-                rp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
-                rp.Target = _target.gameObject;
-            } else if (go.TryGetComponent<RocketVolleyProjectile>(out RocketVolleyProjectile rvp)) {
-                go.transform.SetParent(ProjectileSpawnPoint);
-                rvp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
-                rvp.Target = _target.gameObject;
-                rvp.TargetedAlignment = _target.Alignment;
-            }
-
-            _cooldownLeft = 0;
+            Attack();
         }
+    }
+
+    void Attack() {
+        GameObject go = Instantiate(Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
+        if (TryGetComponent<WeaponTranslationalRecoil>(out WeaponTranslationalRecoil wbr)) {
+            wbr.Recoil();
+        }
+        if (TryGetComponent<WeaponRotationalRecoil>(out WeaponRotationalRecoil wrr)) {
+            wrr.Recoil();
+        }
+        if (TryGetComponent<WeaponRotatingFire>(out WeaponRotatingFire wrf)) {
+            wrf.Rotate();
+        }
+
+        // todo change
+        if (go.TryGetComponent<HitscanProjectile>(out HitscanProjectile hsp)) {
+            hsp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+            hsp.Distance = (_target.transform.position - RotationRoot.position).magnitude;
+            hsp.Target = _target.gameObject;
+        } else if (go.TryGetComponent<RocketProjectile>(out RocketProjectile rp)) {
+            rp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+            rp.Target = _target.gameObject;
+        } else if (go.TryGetComponent<RocketVolleyProjectile>(out RocketVolleyProjectile rvp)) {
+            go.transform.SetParent(ProjectileSpawnPoint);
+            rvp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+            rvp.Target = _target.gameObject;
+            rvp.TargetedAlignment = _target.Alignment;
+        }
+
+        if (TryGetComponent<UnitSoundController>(out UnitSoundController usc)) {
+            usc.FireGun();
+        }
+        _cooldownLeft = 0;
     }
 
     float AngleIgnoreY(Vector3 a, Vector3 b) {

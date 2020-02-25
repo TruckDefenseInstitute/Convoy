@@ -15,9 +15,7 @@ public class Truck : Unit
         base.Start();
         
         DeathCallback = () => {
-            GameObject.Find("GameManager")
-                      .GetComponent<WinLossManager>()
-                      .ReportTruckDead();
+            WinLossManager.Instance.ReportTruckDead();
         };
 
         _movementMode = MovementMode.Move;

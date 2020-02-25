@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7764280778267188452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611733386190981116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd2e7f06f05ab6498e2adcf1193fb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrapMesh: []
+  Scrap: {fileID: 4088584583208333590, guid: f56d21f0ff3734f43bb30c3ea1c147c6, type: 3}
+  ScrapsToSpawn: 1
+--- !u!1001 &7292893948117034001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873516849022671812, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316906689581392877, guid: ce32be32456797f45bd0afb27c7ef836,
+        type: 3}
+      propertyPath: m_Name
+      value: RagdollExplosiveDeathrattle Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce32be32456797f45bd0afb27c7ef836, type: 3}
+--- !u!1 &1611733386190981116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8316906689581392877, guid: ce32be32456797f45bd0afb27c7ef836,
+    type: 3}
+  m_PrefabInstance: {fileID: 7292893948117034001}
+  m_PrefabAsset: {fileID: 0}

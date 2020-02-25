@@ -34,7 +34,7 @@ public class BarracksBehaviour : MonoBehaviour
 
             Unit unitScript = Instantiate(unitToSpawn, spawnPosition, Quaternion.identity).GetComponent<Unit>();
             unitScript.Alignment = Alignment.Hostile;
-            
+
             unitScript.Start();
             unitScript.Move(TruckReferenceManager.Instance.TruckGameObject.transform.position, MovementMode.AMove);
         }

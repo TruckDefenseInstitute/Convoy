@@ -7,7 +7,7 @@ using PathCreation;
 
 //[RequireComponent(typeof(Seeker))]
 //[RequireComponent(typeof(RVOController))]
-//[RequireComponent(typeof(RichAI))]
+[RequireComponent(typeof(UnitAlignmentIndicator))]
 [RequireComponent(typeof(Armor))]
 public class Unit : MonoBehaviour {
     internal class Command{
@@ -38,6 +38,8 @@ public class Unit : MonoBehaviour {
         get;
         private set;
     }
+    public bool DestroyImmediately;
+    public GameObject Deathrattle;
 
     // unit stats
     public float DetectionRange;
@@ -62,6 +64,7 @@ public class Unit : MonoBehaviour {
     SphereCollider _rangeCollider;
     Weapon _weaponRef;
     Armor _armorRef;
+    UnitAlignmentIndicator _light;
 
     bool _decompose = false;
 
@@ -265,6 +268,7 @@ public class Unit : MonoBehaviour {
             _weaponRef.RotationSpeed = _weaponRef.CanMoveWhileAttacking ? _weaponRef.RotationSpeed : MaxRotatingSpeed;
         }
         _armorRef = GetComponent<Armor>();
+        _light = GetComponent<UnitAlignmentIndicator>();
 
         _guardPosition = transform.position;
 
@@ -448,9 +452,12 @@ public class Unit : MonoBehaviour {
     }
 
     public void TakeDamage(DamageMetadata dm) {
-        // todo reduce or increase damage formulas here
+        // to prevent double deaths
+        if (Health <= 0) {
+            return;
+        }
+
         this.Health -= _armorRef.ReduceDamage(dm);
-        Debug.Log(this.Name + " HP: " + this.Health + "/" + this.MaxHealth);
 
         if (Health <= 0) {
             Die();
@@ -468,14 +475,33 @@ public class Unit : MonoBehaviour {
         if (_animRef != null) {
             _animRef.SetTrigger("Die");
         }
+        _light.Destroy();
+
+        if (TryGetComponent<UnitSoundController>(out UnitSoundController usc)) {
+            usc.Die();
+        }
 
         DeathCallback();
-        
-        Invoke("Destroy", 2);
-        Invoke("Sink", 4);
-        Invoke("Destroy", 5);
-
         Destroy(_healthBar);
+
+        if (Deathrattle != null) {
+            Destroy(GetComponentInChildren<Collider>());
+            Instantiate(Deathrattle, transform.position, transform.rotation);
+        }
+        if (DestroyImmediately) {
+            var arr = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer cmr in arr) {
+                Destroy(cmr);
+            }
+            var arr2 = GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (SkinnedMeshRenderer csmr in arr2) {
+                Destroy(csmr);
+            }
+            Invoke("Destroy", 10);
+            return;
+        }
+        Invoke("Sink", 4);
+        Invoke("Destroy", 10);
     }
 
     void Sink() {

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8986015812388357365}
   - component: {fileID: 703968045848422726}
   - component: {fileID: 3670413387620279838}
+  - component: {fileID: 6479078846698226587}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -104,6 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraName: Player Camera
+  CameraDolly: {fileID: 0}
+  CameraAngleAxis: {fileID: 0}
+  CameraRig: {fileID: 9115404474587516145, guid: 3b04d644529aea34f9d8aac8a6196d7d,
+    type: 3}
   _xMinimapPos: 0
   _yMinimapPos: 50
   _zMinimapPos: 0
@@ -112,8 +117,8 @@ MonoBehaviour:
   panBorderThickness: 10
   panLimit: {x: 50, y: 50}
   scrollSpeed: 20
-  minY: 20
-  maxY: 60
+  minY: -70
+  maxY: -10
   up: 273
   down: 274
   left: 276
@@ -185,3 +190,15 @@ MonoBehaviour:
   - {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728, type: 3}
   - {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde, type: 3}
   - {fileID: 8418034470593014249, guid: 585a7254efa4138469738122c5647fd5, type: 3}
+--- !u!114 &6479078846698226587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354755794662205186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942773cf0f2c76e478dad39dfff9fb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
