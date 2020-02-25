@@ -52,7 +52,9 @@ public class Unit : MonoBehaviour {
 
     public GameObject EffectSpawningPoint;
     GameObject _healthBar;
-    UiOverlayManager _uiOverlayManager; 
+    UiOverlayManager _uiOverlayManager;
+
+    bool _movementLocked;
 
     Animator _animRef;
     IAstarAI _aiRef;
@@ -81,6 +83,10 @@ public class Unit : MonoBehaviour {
     public GameObject selectRingPrefab;
     GameObject _selectRing;
 
+    public void DisableMovement(bool move) {
+        _movementLocked = move;
+        _rvoRef.locked = _movementLocked;
+    }
     public void AnimatorStartMoving() {
         if (_animRef != null) {
             _animRef.SetBool("IsMoving", true);
@@ -327,7 +333,7 @@ public class Unit : MonoBehaviour {
             if (distanceToFocus > _weaponRef.AttackRange) {
                 // move only if cannot attack while moving
                 if (_movementMode != MovementMode.Move) {
-                    _rvoRef.locked = false;
+                    _rvoRef.locked = _movementLocked;
                     _aiRef.destination = _focusTarget.transform.position;
                     _aiRef.SearchPath();
                     AnimatorStopFiring();
@@ -356,7 +362,7 @@ public class Unit : MonoBehaviour {
             }
             AnimatorStopFiring();
             _attacking = false;
-            _rvoRef.locked = false;
+            _rvoRef.locked = _movementLocked;
             if (!float.IsPositiveInfinity(_guardPosition.x) && Vector3.Distance(_guardPosition, transform.position) < Vector3.kEpsilon) {
                 Move(_guardPosition, MovementMode.AMove);
             } else {
