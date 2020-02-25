@@ -29,6 +29,8 @@ public class ResourceManager : Manager<ResourceManager> {
     public bool DeductResource(float deductAmount) {
         if(deductAmount <= _resource) {
             _resource -= deductAmount;
+
+            UiOverlayManager.Instance.DisplayResourceDeduction(deductAmount);
             return true;
         } else {
             return false;
