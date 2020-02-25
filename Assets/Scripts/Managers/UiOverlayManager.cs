@@ -12,6 +12,9 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     [SerializeField]
     private GameObject _resourceGainPopupPrefab;
+
+    [SerializeField]
+    private GameObject _resourceLossPopupPrefab;
     
     // UI Inteface Canvas
     private GameObject _uiInterfaceCanvas;
@@ -199,6 +202,14 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     public void UpdateResourcesText(float resources) {
         _resourcesText.text = resources.ToString();
+    }
+
+    public void DisplayResourceDeduction(float resourcesDeducted) {
+        GameObject popup = Instantiate(_resourceLossPopupPrefab, _resourcesText.gameObject.transform.position, Quaternion.identity);
+        popup.transform.SetParent(_uiInterfaceCanvas.transform, false);
+        ResourceLossPopup resourceLossPopup = popup.GetComponent<ResourceLossPopup>();
+        resourceLossPopup.Start();
+        resourceLossPopup.SetText(resourcesDeducted);
     }
 
     public void DisplayResourceGain(float resourcesGained) {
