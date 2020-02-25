@@ -31,7 +31,6 @@ public class ResourceManager : Manager<ResourceManager> {
             _resource -= deductAmount;
             return true;
         } else {
-            Debug.Log("Not enough gold");
             return false;
         }
     }

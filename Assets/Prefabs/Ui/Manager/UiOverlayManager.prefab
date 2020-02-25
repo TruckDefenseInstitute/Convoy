@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2411142497566417258}
   - component: {fileID: 7065461173274612548}
+  - component: {fileID: 4263082842724400394}
   m_Layer: 0
   m_Name: UiOverlayManager
   m_TagString: Untagged
@@ -44,3 +45,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBarPrefab: {fileID: 109282, guid: 2b9babc0e49dd054797f369b54bc116a, type: 3}
+--- !u!114 &4263082842724400394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411142497566417259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1a5a478bb6d8b4e82af5b32e330306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitDeployedButtonPrefab:
+  - {fileID: 1738896534840907197, guid: e4d5f65dd556e75419f9bcfe3700248e, type: 3}
+  - {fileID: 1738896534840907197, guid: 920a894425271884c9ec61e2bb355624, type: 3}
+  - {fileID: 1738896534840907197, guid: 838009de90b318e4b986ec078873bee8, type: 3}
+  - {fileID: 1738896534840907197, guid: f9b536e1a42fc40409bff5fd07cfcfae, type: 3}
+  - {fileID: 1738896534840907197, guid: 493472c91e5e96e45b22de252f37f72a, type: 3}
+  _unitDeployedButtonMultiplePrefab:
+  - {fileID: 1738896534840907197, guid: 57f01ceb2a7f82f4883fbaa76c1cd10e, type: 3}
+  - {fileID: 1738896534840907197, guid: f22bf9dc44a8b2b4792cf616738fa1f4, type: 3}
+  - {fileID: 1738896534840907197, guid: 44e531707eb50c84cac4429f0aa0e722, type: 3}
+  - {fileID: 1738896534840907197, guid: 6074f536e819cd845910f2738ee386ac, type: 3}
+  - {fileID: 1738896534840907197, guid: 73fef2083ff119a41a5b503adf1aab12, type: 3}
