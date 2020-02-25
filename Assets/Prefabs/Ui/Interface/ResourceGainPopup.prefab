@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3635348176298860033}
   - component: {fileID: 4466323515653863757}
   m_Layer: 5
-  m_Name: MoneyGainPopup
+  m_Name: ResourceGainPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0

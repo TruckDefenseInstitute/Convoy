@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class MoneyGainPopup : MonoBehaviour
+public class ResourceGainPopup : MonoBehaviour
 {
     TextMeshProUGUI _textMeshPro;
     bool _startHasRun = false;
@@ -19,7 +19,7 @@ public class MoneyGainPopup : MonoBehaviour
 
         _textMeshPro = gameObject.GetComponent<TextMeshProUGUI>();
         _textMeshPro.fontSize = 50;
-        _textMeshPro.margin = new Vector4(440f, 1081f, 1323f, 83f);
+        _textMeshPro.margin = new Vector4(420f, 1081f, 1323f, 83f);
         Invoke("Destroy", 1);
 
         _startHasRun = true;

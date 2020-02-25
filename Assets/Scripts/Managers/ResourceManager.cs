@@ -46,7 +46,7 @@ public class ResourceManager : Manager<ResourceManager> {
             _resource = potentialFinalAmount;
         }
 
-        UiOverlayManager.Instance.DisplayMoneyGain(amountGained);
+        UiOverlayManager.Instance.DisplayResourceGain(amountGained);
     }
 
     public bool ResourcesEqualOrGreaterThan(float compareAmount) {
