@@ -301,7 +301,8 @@ public class Unit : MonoBehaviour {
         _startHasRun = true;
     }
 
-    void AcquireClosestTarget() {
+    // dont automatically attck units <= 0.04f efficiency
+    void AcquireTarget() {
         float minDist = DetectionRange;
 
         if (_focusTarget == null) {
@@ -310,6 +311,9 @@ public class Unit : MonoBehaviour {
             foreach (var unit in _targets) {
                 var dist = DistanceIgnoreY(unit.transform.position, transform.position);
                 if (dist < minDist) {
+                    if (unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType)) <= 0.04f) {
+                        continue;
+                    }
                     _focusTarget = unit;
                     minDist = dist;
                 }
@@ -323,7 +327,7 @@ public class Unit : MonoBehaviour {
             return;
         }
 
-        AcquireClosestTarget();
+        AcquireTarget();
 
         // if have target
         if (_focusTarget != null) {
@@ -372,7 +376,7 @@ public class Unit : MonoBehaviour {
     }
 
     void StationaryAttackLogic() {
-        AcquireClosestTarget();
+        AcquireTarget();
 
         if (_focusTarget != null) {
             var distanceToFocus = DistanceIgnoreY(_focusTarget.transform.position, transform.position);
@@ -437,8 +441,10 @@ public class Unit : MonoBehaviour {
                     var radius = _following.GetComponent<RichAI>().radius;
                     if (dist <= 2f * radius) {
                         _aiRef.destination = transform.position;
+                        AnimatorStopMoving();
                     } else if(dist >= 3f * radius) {
                         _aiRef.destination = _following.transform.position;
+                        AnimatorStartMoving();
                     }
                 } else if (_movementMode == MovementMode.Attack){
                     _aiRef.destination = _following.transform.position;
