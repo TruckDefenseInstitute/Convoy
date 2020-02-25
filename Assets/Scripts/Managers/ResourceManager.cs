@@ -37,12 +37,16 @@ public class ResourceManager : Manager<ResourceManager> {
 
     public void IncreaseResource(float increaseAmount) {
         float potentialFinalAmount = _resource + increaseAmount;
+        float amountGained = increaseAmount;
         
         if (potentialFinalAmount > _maxResources) {
+            amountGained = _maxResources - potentialFinalAmount;
             _resource = _maxResources;
         } else {
             _resource = potentialFinalAmount;
         }
+
+        UiOverlayManager.Instance.DisplayMoneyGain(amountGained);
     }
 
     public bool ResourcesEqualOrGreaterThan(float compareAmount) {

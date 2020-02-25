@@ -9,6 +9,9 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     // Serialized Prefabs
     [SerializeField] 
     private GameObject _healthBarPrefab;
+
+    [SerializeField]
+    private GameObject _moneyGainPopupPrefab;
     
     // UI Inteface Canvas
     private GameObject _uiInterfaceCanvas;
@@ -49,7 +52,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
         // Startup
         GetTrainingUnitsPanelInfo(TrainingUnitsQueueManager.Instance.GetUnitTypeList());
-        
     }
 
     void Update() {
@@ -197,6 +199,14 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     public void UpdateResourcesText(float resources) {
         _resourcesText.text = resources.ToString();
+    }
+
+    public void DisplayMoneyGain(float resourcesGained) {
+        GameObject popup = Instantiate(_moneyGainPopupPrefab, _resourcesText.gameObject.transform.position, Quaternion.identity);
+        popup.transform.SetParent(_uiInterfaceCanvas.transform, false);
+        MoneyGainPopup moneyGainPopup = popup.GetComponent<MoneyGainPopup>();
+        moneyGainPopup.Start();
+        moneyGainPopup.SetText(resourcesGained);
     }
 
     /*================ Train Units ================*/
