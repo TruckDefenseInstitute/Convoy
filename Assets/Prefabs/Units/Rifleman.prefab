@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCost: 5
-  _unitTrainingTime: 3
+  _unitTrainingTime: 2.5
 --- !u!1 &1733108195715021503
 GameObject:
   m_ObjectHideFlags: 0
