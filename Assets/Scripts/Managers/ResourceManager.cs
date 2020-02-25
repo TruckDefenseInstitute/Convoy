@@ -13,7 +13,11 @@ public class ResourceManager : Manager<ResourceManager> {
     private float _maxResources = 9999f;
     private float _autoResourceGeneratedInterval = 1f;
 
+    public AudioClip loseMoneySound;
+    AudioSource _audioSource;
+
     void Start() {
+        _audioSource = GetComponent<AudioSource>();
         StartCoroutine(AutoGenerateResource());
     }
 
@@ -31,6 +35,10 @@ public class ResourceManager : Manager<ResourceManager> {
             _resource -= deductAmount;
 
             UiOverlayManager.Instance.DisplayResourceDeduction(deductAmount);
+
+            _audioSource.clip = loseMoneySound;
+            _audioSource.Play();
+
             return true;
         } else {
             return false;
