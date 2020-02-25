@@ -300,12 +300,14 @@ MonoBehaviour:
   IsControllable: 0
   Name: Watchtower
   MaxHealth: 2400
+  DestroyImmediately: 0
   Deathrattle: {fileID: 4121849538939856015, guid: def12e3d87090c744b08d557dd68dc79,
     type: 3}
   DetectionRange: 35
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 10
+  OnEnemyDeathReward: 100
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 4792472682798676298}
   selectRingPrefab: {fileID: 0}

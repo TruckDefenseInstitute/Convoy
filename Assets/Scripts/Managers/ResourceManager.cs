@@ -10,7 +10,7 @@ public class ResourceManager : Manager<ResourceManager> {
     [SerializeField]
     private float _autoResourceGenerated = 1f;
 
-    private float _maxResources = 1000f;
+    private float _maxResources = 9999f;
     private float _autoResourceGeneratedInterval = 1f;
 
     void Start() {
@@ -32,6 +32,16 @@ public class ResourceManager : Manager<ResourceManager> {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void IncreaseResource(float increaseAmount) {
+        float potentialFinalAmount = _resource + increaseAmount;
+        
+        if (potentialFinalAmount > _maxResources) {
+            _resource = _maxResources;
+        } else {
+            _resource = potentialFinalAmount;
         }
     }
 

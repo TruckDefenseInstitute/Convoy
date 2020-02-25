@@ -46,6 +46,7 @@ public class Unit : MonoBehaviour {
     public float AMoveStopDistMultiplier = 1f;
     public float LoseVisionMultiplier = 1.1f;
     public float MoveSpeed = 10f;
+    public float OnEnemyDeathReward = 1f;
 
     // in degrees
     public float MaxRotatingSpeed = 360;
@@ -283,6 +284,12 @@ public class Unit : MonoBehaviour {
         {
             DeathCallback = () => {
                 UnitControlAndSelectionManager.Instance.ReportUnitDead(gameObject);
+            };
+        }
+        else
+        {
+            DeathCallback = () => {
+                ResourceManager.Instance.IncreaseResource(OnEnemyDeathReward);
             };
         }
 
