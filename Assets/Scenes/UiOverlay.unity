@@ -7752,5 +7752,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde,
         type: 3}
+    - target: {fileID: 7065461173274612548, guid: c032a58a001bb0343a26d131286f2ebe,
+        type: 3}
+      propertyPath: _moneyGainPopupPrefab
+      value: 
+      objectReference: {fileID: 3635348176298860039, guid: 50a36d8fd6c622440adcbf33e61abe4a,
+        type: 3}
+    - target: {fileID: 7065461173274612548, guid: c032a58a001bb0343a26d131286f2ebe,
+        type: 3}
+      propertyPath: _resourceGainPopupPrefab
+      value: 
+      objectReference: {fileID: 3635348176298860039, guid: 50a36d8fd6c622440adcbf33e61abe4a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c032a58a001bb0343a26d131286f2ebe, type: 3}
