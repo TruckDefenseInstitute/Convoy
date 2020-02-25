@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +54,9 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
 
     private IEnumerator DeployUnitCoroutine(GameObject unit) {
         Vector3 currentTruckPosition = TruckReferenceManager.Instance.TruckGameObject.transform.position;
-        Vector3 divergence = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
+        Vector3 divergence = Random.insideUnitCircle.normalized * TruckReferenceManager.Instance.TruckBehavior.GetComponent<RichAI>().radius * 2f;
+        divergence.z = divergence.y;
+        divergence.y = 0;
         Instantiate(_summonCircle, currentTruckPosition + divergence + new Vector3(0, 1, 0), TruckReferenceManager.Instance.TruckGameObject.transform.rotation);
         
         yield return new WaitForSeconds(0.5f);

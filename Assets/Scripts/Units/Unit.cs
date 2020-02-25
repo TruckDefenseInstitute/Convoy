@@ -53,7 +53,9 @@ public class Unit : MonoBehaviour {
 
     public GameObject EffectSpawningPoint;
     GameObject _healthBar;
-    UiOverlayManager _uiOverlayManager; 
+    UiOverlayManager _uiOverlayManager;
+
+    bool _movementLocked;
 
     Animator _animRef;
     IAstarAI _aiRef;
@@ -82,6 +84,10 @@ public class Unit : MonoBehaviour {
     public GameObject selectRingPrefab;
     GameObject _selectRing;
 
+    public void DisableMovement(bool move) {
+        _movementLocked = move;
+        _rvoRef.locked = _movementLocked;
+    }
     public void AnimatorStartMoving() {
         if (_animRef != null) {
             _animRef.SetBool("IsMoving", true);
@@ -300,7 +306,8 @@ public class Unit : MonoBehaviour {
         _startHasRun = true;
     }
 
-    void AcquireClosestTarget() {
+    // dont automatically attck units <= 0.04f efficiency
+    void AcquireTarget() {
         float minDist = DetectionRange;
 
         if (_focusTarget == null) {
@@ -309,6 +316,9 @@ public class Unit : MonoBehaviour {
             foreach (var unit in _targets) {
                 var dist = DistanceIgnoreY(unit.transform.position, transform.position);
                 if (dist < minDist) {
+                    if (unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType)) <= 0.04f) {
+                        continue;
+                    }
                     _focusTarget = unit;
                     minDist = dist;
                 }
@@ -322,7 +332,7 @@ public class Unit : MonoBehaviour {
             return;
         }
 
-        AcquireClosestTarget();
+        AcquireTarget();
 
         // if have target
         if (_focusTarget != null) {
@@ -332,7 +342,7 @@ public class Unit : MonoBehaviour {
             if (distanceToFocus > _weaponRef.AttackRange) {
                 // move only if cannot attack while moving
                 if (_movementMode != MovementMode.Move) {
-                    _rvoRef.locked = false;
+                    _rvoRef.locked = _movementLocked;
                     _aiRef.destination = _focusTarget.transform.position;
                     _aiRef.SearchPath();
                     AnimatorStopFiring();
@@ -361,7 +371,7 @@ public class Unit : MonoBehaviour {
             }
             AnimatorStopFiring();
             _attacking = false;
-            _rvoRef.locked = false;
+            _rvoRef.locked = _movementLocked;
             if (!float.IsPositiveInfinity(_guardPosition.x) && Vector3.Distance(_guardPosition, transform.position) < Vector3.kEpsilon) {
                 Move(_guardPosition, MovementMode.AMove);
             } else {
@@ -371,7 +381,7 @@ public class Unit : MonoBehaviour {
     }
 
     void StationaryAttackLogic() {
-        AcquireClosestTarget();
+        AcquireTarget();
 
         if (_focusTarget != null) {
             var distanceToFocus = DistanceIgnoreY(_focusTarget.transform.position, transform.position);
@@ -436,8 +446,10 @@ public class Unit : MonoBehaviour {
                     var radius = _following.GetComponent<RichAI>().radius;
                     if (dist <= 2f * radius) {
                         _aiRef.destination = transform.position;
+                        AnimatorStopMoving();
                     } else if(dist >= 3f * radius) {
                         _aiRef.destination = _following.transform.position;
+                        AnimatorStartMoving();
                     }
                 } else if (_movementMode == MovementMode.Attack){
                     _aiRef.destination = _following.transform.position;

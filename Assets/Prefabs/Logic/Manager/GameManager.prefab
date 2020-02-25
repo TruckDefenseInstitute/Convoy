@@ -190,6 +190,8 @@ MonoBehaviour:
   - {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728, type: 3}
   - {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde, type: 3}
   - {fileID: 8418034470593014249, guid: 585a7254efa4138469738122c5647fd5, type: 3}
+  _summonCircle: {fileID: 851792572026771221, guid: fb5fa7849ee91af47892f7edd7bd0fed,
+    type: 3}
 --- !u!114 &6479078846698226587
 MonoBehaviour:
   m_ObjectHideFlags: 0

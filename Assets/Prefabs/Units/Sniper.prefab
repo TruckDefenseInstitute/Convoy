@@ -6014,7 +6014,7 @@ MonoBehaviour:
   DetectionRange: 52
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
-  MoveSpeed: 2
+  MoveSpeed: 5.5
   OnEnemyDeathReward: 3
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
