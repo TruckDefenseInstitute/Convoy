@@ -90,8 +90,9 @@ public class RocketProjectile : MonoBehaviour {
         transform.rotation = Quaternion.LookRotation(f, Vector3.up);
 
         // accelerate
-        var v = (_velocity + transform.forward * Acceleration * Time.deltaTime) * (Vector3.Distance(_dest, transform.position) / _iniDistance);
-        v += transform.forward * _velocity.magnitude * (1 - Vector3.Distance(_dest, transform.position) / _iniDistance);
+        var factor = Mathf.Clamp01(Vector3.Distance(_dest, transform.position) / _iniDistance);
+        var v = (_velocity + transform.forward * Acceleration * Time.deltaTime) * factor;
+        v += transform.forward * _velocity.magnitude * (1 - factor);
         _velocity = v;
 
         _rigidbody.MovePosition(transform.position + _velocity * Time.deltaTime);

@@ -105,6 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraName: Player Camera
+  CameraDolly: {fileID: 0}
+  CameraAngleAxis: {fileID: 0}
+  CameraRig: {fileID: 0}
   _xMinimapPos: 0
   _yMinimapPos: 50
   _zMinimapPos: 0
@@ -113,8 +116,8 @@ MonoBehaviour:
   panBorderThickness: 10
   panLimit: {x: 50, y: 50}
   scrollSpeed: 20
-  minY: 20
-  maxY: 60
+  minY: -70
+  maxY: -10
   up: 273
   down: 274
   left: 276
