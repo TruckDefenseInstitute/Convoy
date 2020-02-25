@@ -7,13 +7,14 @@ using UnityEngine;
 public class UnitAlignmentIndicator : MonoBehaviour {
 
     Unit _unit;
+    GameObject _child;
     Light _light;
 
     // Start is called before the first frame update
     void Start() {
         _unit = GetComponent<Unit>();
-        var child = new GameObject("Alignment Light");
-        _light = child.AddComponent<Light>();
+        _child = new GameObject("Alignment Light");
+        _light = _child.AddComponent<Light>();
         _light.color = _unit.Alignment == Alignment.Friendly ? Color.blue : Color.red;
         if (TryGetComponent<RichAI>(out RichAI ai)) {
             _light.range = ai.radius * 4;
@@ -23,12 +24,11 @@ public class UnitAlignmentIndicator : MonoBehaviour {
             _light.range = 3;
         }
         _light.bounceIntensity = 0;
-        child.transform.SetParent(transform);
-        child.transform.localPosition = new Vector3(0f, 1f, 0f);
+        _child.transform.SetParent(transform);
+        _child.transform.localPosition = new Vector3(0f, 1f, 0f);
     }
 
-    // Update is called once per frame
-    void Update() {
-
+    public void Destroy() {
+        Destroy(_child);
     }
 }

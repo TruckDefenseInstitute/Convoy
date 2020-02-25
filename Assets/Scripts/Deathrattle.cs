@@ -22,10 +22,19 @@ public class Deathrattle : MonoBehaviour
 
     public void Explode() {
         for (int i = 0; i < ScrapsToSpawn; ++i) {
-            var dir = Vector3.up + Random.onUnitSphere;
-            var potato = Instantiate(Scrap, transform.position, Quaternion.LookRotation(dir));
-            potato.GetComponent<Rigidbody>().velocity = dir.normalized * 8.0f;
-            Instantiate(ScrapMesh[Random.Range(0, ScrapMesh.Length - 1)], potato.transform);
+            var dir = (Vector3.up + Random.onUnitSphere).normalized;
+            var potato = Instantiate(Scrap, transform.position + dir, Quaternion.LookRotation(dir));
+            if (potato.TryGetComponent<Rigidbody>(out Rigidbody rb)) {
+                rb.velocity = dir * 8.0f;
+            } else {
+                var arr = potato.GetComponentsInChildren<Rigidbody>();
+                foreach (Rigidbody crb in arr) {
+                    crb.velocity = dir * Random.Range(5.0f, 10.0f);
+                }
+            }
+            if (ScrapMesh.Length != 0) {
+                Instantiate(ScrapMesh[Random.Range(0, ScrapMesh.Length - 1)], potato.transform);
+            }
         }
     }
 }

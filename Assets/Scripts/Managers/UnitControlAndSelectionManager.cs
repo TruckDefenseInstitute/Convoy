@@ -303,7 +303,6 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
         _gameControlState = GameControlState.Idle;
-        Debug.Log("Now Entering Idle");
     }
 
     // Make clciking such that it is on the Ui, not on the unit

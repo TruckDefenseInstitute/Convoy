@@ -6219,6 +6219,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d584a6c8fe8e96c4a81ed55b6afc65a3, type: 3}
   - {fileID: 8300000, guid: 5ed8535cd3de0424c97f14bba31f7339, type: 3}
   - {fileID: 8300000, guid: 5ca122400c5c7914fbe95f34d221a4b6, type: 3}
+  FiringVolume: 0.4
   DieingSounds:
   - {fileID: 8300000, guid: 4e11d5d553c78df46b48ad416a78c518, type: 3}
   - {fileID: 8300000, guid: 01f93bd845d6d0a428247a1fb3a352dd, type: 3}
@@ -6228,6 +6229,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 43a00463e9dc1bc42903f31e08fa057b, type: 3}
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
+  DeathVolume: 1
 --- !u!1 &6913238769434683645
 GameObject:
   m_ObjectHideFlags: 0

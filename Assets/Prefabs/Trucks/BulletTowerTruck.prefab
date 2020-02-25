@@ -1940,9 +1940,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d5c8589c9d59f7e4888cb0ada6283f8b, type: 3}
   - {fileID: 8300000, guid: 291523c63f162b04d8b1d953c3884860, type: 3}
   - {fileID: 8300000, guid: fe48fc27b425c7540a9a2140163d94ef, type: 3}
+  FiringVolume: 1
   DieingSounds:
-  - {fileID: 8300000, guid: 6580ee1a59682a54ba1db3dab3bad659, type: 3}
-  - {fileID: 8300000, guid: 95e32ff11b2c6b244903d728e5618896, type: 3}
-  - {fileID: 8300000, guid: 3144e375a246d92419b234d841bd9151, type: 3}
-  - {fileID: 8300000, guid: 6a1028908367c4843bf4bf434e96c434, type: 3}
-  - {fileID: 8300000, guid: 97da0d179b5bcf140bb0661ad4d61a0c, type: 3}
+  - {fileID: 8300000, guid: f3d4d1edfdd17a647afd74ba6b778302, type: 3}
+  - {fileID: 8300000, guid: 20801ad9dfad2b146b9a18e1e64c02c5, type: 3}
+  - {fileID: 8300000, guid: ed841319f1aa097488af97cc80ee7684, type: 3}
+  - {fileID: 8300000, guid: 61cfe8aacf5640440803aef08dd743fc, type: 3}
+  - {fileID: 8300000, guid: 241d569469facd44796f7c20d7df8f36, type: 3}
+  - {fileID: 8300000, guid: 09031c1ff87300e4a9494b936ff218ab, type: 3}
+  DeathVolume: 1

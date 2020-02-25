@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571e2c9abce1a1542b575d007b7739b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MuzzleFlash: {fileID: 7765527127802097871, guid: bc1087c2d278eb24aba8386d42da7d26,
+  MuzzleFlash: {fileID: 7765527127802097871, guid: 9c125b56c8e65c044918702526d21563,
     type: 3}
   Speed: 120
   HitSpawn: {fileID: 0}
