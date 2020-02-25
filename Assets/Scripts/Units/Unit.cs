@@ -275,16 +275,14 @@ public class Unit : MonoBehaviour {
         Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
         rigidbody.isKinematic = true;
 
-        _uiOverlayManager = GameObject.Find("GameManager").GetComponent<UiToGameManager>().GetUiOverlayManager();
+        _uiOverlayManager = UiToGameManager.Instance.GetUiOverlayManager();
         _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
 
 
         if (this.Alignment == Alignment.Friendly)
         {
             DeathCallback = () => {
-                GameObject.Find("GameManager")
-                          .GetComponent<UnitControlAndSelectionManager>()
-                          .ReportUnitDead(gameObject);
+                UnitControlAndSelectionManager.Instance.ReportUnitDead(gameObject);
             };
         }
 
