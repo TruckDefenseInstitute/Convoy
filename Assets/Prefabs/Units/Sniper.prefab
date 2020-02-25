@@ -1658,9 +1658,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 2
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &522947325382301315
 GameObject:
   m_ObjectHideFlags: 0
@@ -6008,6 +6008,7 @@ MonoBehaviour:
   IsControllable: 1
   Name: Sniper
   MaxHealth: 300
+  DestroyImmediately: 0
   Deathrattle: {fileID: 0}
   DetectionRange: 52
   AMoveStopDistMultiplier: 0.75
