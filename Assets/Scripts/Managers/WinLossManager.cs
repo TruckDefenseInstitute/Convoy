@@ -23,8 +23,10 @@ public class WinLossManager : Manager<WinLossManager>
         _levelStatus = LevelStatus.Ongoing;
         
         _winScreenCanvas = GameObject.Find("WinScreenCanvas");
+        // _winScreenCanvas.SetActive(False);
 
         _loseScreenCanvas = GameObject.Find("LoseScreenCanvas");
+        // _loseScreenCanvas.SetActive(False);
     }
 
     public void ReportTruckReachedLevelEnd()

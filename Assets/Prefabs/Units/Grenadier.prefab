@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 5722266796826851144}
   - component: {fileID: 8681707789488934065}
   - component: {fileID: 1525478595363567599}
+  - component: {fileID: 8607750826959613292}
   m_Layer: 0
   m_Name: Grenadier
   m_TagString: Untagged
@@ -278,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationSpeed: 0
-  RotationRoot: {fileID: 0}
+  RotationRoot: {fileID: 2642452591249032522}
   MaxShootAngle: 5
   DamageType: 3
   AttackDamage: 100
@@ -437,6 +438,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
   DeathVolume: 0.5
+--- !u!114 &8607750826959613292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642452591249032523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitCost: 12
+  _unitTrainingTime: 12
 --- !u!1 &2642452591257603703
 GameObject:
   m_ObjectHideFlags: 0

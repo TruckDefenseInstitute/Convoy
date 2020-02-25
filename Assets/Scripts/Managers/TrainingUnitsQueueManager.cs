@@ -6,7 +6,10 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
 
     private static Queue<TrainButton> _unitSlotQueue;
 
-    private int _queueSize = 8;
+    [SerializeField] 
+    private List<GameObject> _unitTypeList;
+
+    private int _maxQueueSize = 8;
 
     void Start() {
         _unitSlotQueue = new Queue<TrainButton>();
@@ -26,11 +29,13 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
                 unitSlot.ResetTraining();
             }
         }
+
+        UiOverlayManager.Instance.UpdateTrainingQueue(_unitSlotQueue.Count, _maxQueueSize);
     }
 
     // Receives the unit slot button itself to start the timer
     public void QueueUnit(TrainButton unitSlot) {
-        if(_unitSlotQueue.Count <= _queueSize) {
+        if(_unitSlotQueue.Count < _maxQueueSize) {
             float unitCost = unitSlot.GetUnitCost();
             bool isDeducted = ResourceManager.Instance.DeductResource(unitCost);
             
@@ -39,7 +44,7 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
                 _unitSlotQueue.Enqueue(unitSlot);       
             }
         } else {
-            // Indicate queue is full
+            // TODO: Indicate queue is full
         }
     }
 
@@ -50,6 +55,10 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
         Unit u = deployedUnit.GetComponent<Unit>();
         u.Start();
         u.Follow(TruckReferenceManager.Instance.TruckBehavior);
+    }
+
+    public List<GameObject> GetUnitTypeList() {
+        return this._unitTypeList;
     }
 
 }

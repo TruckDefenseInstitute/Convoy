@@ -7,15 +7,17 @@ using TMPro;
 public class UiOverlayManager : Manager<UiOverlayManager> {
 
     // Serialized Prefabs
-    [SerializeField] private GameObject _healthBarPrefab;
-    [SerializeField] private List<GameObject> _unitTypeList;
-
+    [SerializeField] 
+    private GameObject _healthBarPrefab;
+    
     // UI Inteface Canvas
     private GameObject _uiInterfaceCanvas;
     private GameObject _deployedUnitsPanel;
     private GameObject _trainUnitsPanel;
+    private GameObject _trainingQueue;
     
     private TextMeshProUGUI _resourcesText;
+    private DeployedUnitDictionary _deployedUnitDictionary;
     
     // UI In Game Canvas
     private GameObject _uiInGameCanvas;
@@ -25,10 +27,9 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private Camera _playerCamera;
     private Vector3 _mousePos;
 
-    private List<GameObject> _unitsQueue;
-
     private bool _isDragging = false;
     private bool _isUnitTrainingCompleted = true;
+    private int _maxSlots = 10;
 
     void Start() {
         // UI In Game Canvas
@@ -40,12 +41,14 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
         _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
+        _trainingQueue = GameObject.Find("TrainingQueue");
+        _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
         // Others
         _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
 
         // Startup
-        GetSummonUnitsPanelInfo(_unitTypeList);
+        GetTrainingUnitsPanelInfo(TrainingUnitsQueueManager.Instance.GetUnitTypeList());
         
     }
 
@@ -101,23 +104,94 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     /*================ Select Unit ================*/
     public void SelectAllyUnits(List<GameObject> allyList) {
-        if(allyList == null) {
-            return;
-        }
-
         foreach(Transform unitSlot in _deployedUnitsPanel.transform) {
-            unitSlot.gameObject.SetActive(false);
-        }
-
-        int currentSlot = 0;
-        foreach (GameObject selectedAlly in allyList) {
-            if(currentSlot < 12) {
-                GameObject deployedUnitSlot = _deployedUnitsPanel.transform.GetChild(currentSlot).gameObject;
-                deployedUnitSlot.SetActive(true);
-                currentSlot++;    
+            foreach(Transform child in unitSlot) {
+                Destroy(child.gameObject);
             }
         }
+
+        if(allyList == null || allyList.Count == 0) {
+            return;
+        }
+        
+        // Sort by cost then by name
+        allyList.Sort(
+            delegate(GameObject g1, GameObject g2) { 
+                float g1UnitCost = g1.GetComponent<UnitTraining>().GetUnitCost();
+                float g2UnitCost = g2.GetComponent<UnitTraining>().GetUnitCost();
+                
+                if(g1UnitCost == g2UnitCost) {
+                    return g1.GetComponent<Unit>().Name.CompareTo(g2.GetComponent<Unit>().Name);
+                } else {
+                    return g2UnitCost.CompareTo(g1UnitCost);
+                }
+                
+            });
+
+        if(allyList.Count <= 10) {
+            SelectIndividualUnits(allyList);
+        } else {
+            SelectGroupUnits(allyList);
+        }
     }
+
+    private void SelectIndividualUnits(List<GameObject> allyList) {
+        int slot = 0;
+        // Slot should be less than 10 at all times
+        foreach(GameObject selectedAlly in allyList) {
+            if(slot >= 10) {
+                Debug.Log("Not suppose to have more than 10 selected");
+                break;
+            }
+            GameObject deployedButtonPrefab = _deployedUnitDictionary
+                    .GetUnitDeployedButton(selectedAlly
+                    .GetComponent<Unit>());
+            
+            GameObject deployedButton = Instantiate(deployedButtonPrefab, Vector3.zero, Quaternion.identity);
+            deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
+            RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
+            slotRect.offsetMin = new Vector2(0, 0);
+            slotRect.offsetMax = new Vector2(0, 0);
+            slotRect.localScale = new Vector3(1, 1, 1);
+            slot++;            
+        } 
+    }   
+
+    private void SelectGroupUnits(List<GameObject> allyList) {
+        // For first instantiation
+        int slot = 0;
+        int totalSameUnits = 1;
+        bool isFirst = true;
+        GameObject prevAlly = allyList[0];
+        TextMeshProUGUI totalUnitsText = null;
+        
+        // For the rest of the loop
+        for(int i = 0; i < allyList.Count; i++) {
+            GameObject selectedAlly = allyList[i];
+            if(isFirst || prevAlly.GetComponent<Unit>().Name != selectedAlly.GetComponent<Unit>().Name){
+                GameObject deployedButtonPrefab = _deployedUnitDictionary
+                        .GetUnitDeployedButtonMultiple(selectedAlly
+                        .GetComponent<Unit>());
+            
+                GameObject deployedButton = Instantiate(deployedButtonPrefab, Vector3.zero, Quaternion.identity);
+                deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
+                RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
+                slotRect.offsetMin = new Vector2(0, 0);
+                slotRect.offsetMax = new Vector2(0, 0);
+                slotRect.localScale = new Vector3(1, 1, 1);
+                
+                totalUnitsText = deployedButton.transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+                totalSameUnits = 0;
+                slot++;   
+                isFirst = false;
+            }
+
+            prevAlly = selectedAlly;
+            totalSameUnits++;
+            totalUnitsText.text = totalSameUnits.ToString();
+        }
+    }
+
 
     /*================ Resources ================*/
 
@@ -125,9 +199,9 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _resourcesText.text = resources.ToString();
     }
 
-    /*================ Summon Units ================*/
+    /*================ Train Units ================*/
     
-    public void GetSummonUnitsPanelInfo(List<GameObject> unitTypeList) {
+    public void GetTrainingUnitsPanelInfo(List<GameObject> unitTypeList) {
         int slot = 0;
         foreach(GameObject unitType in unitTypeList) {
             if(slot > 10) {
@@ -143,10 +217,16 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             slot++;
         }
     }
-    
-    private void UpdateFirstUnit(GameObject unitSlot) {
-        if(!_isUnitTrainingCompleted) {
-            // unitSlot.GetComponent<
+
+    public void UpdateTrainingQueue(int queueSize, int maxQueueSize) {
+        for(int i = 0; i < maxQueueSize; i++) {
+            if(i < queueSize) {
+                _trainingQueue.transform.GetChild(i).gameObject.SetActive(true);
+            } else {
+                _trainingQueue.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
+        
     }
+    
 }
