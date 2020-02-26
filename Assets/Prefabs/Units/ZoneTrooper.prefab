@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 5627378590140159106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 7788186891416508735}
   - {fileID: 5623108334670628628}
@@ -251,6 +251,7 @@ MonoBehaviour:
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5.5
+  OnEnemyDeathReward: 6
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -291,11 +292,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c4884072b92fa4db86e9b910aac6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunDamageMult: 0.5
-  CannonDamageMult: 0.05
-  RocketDamageMult: 0.12
-  GrenadeDamageMult: 0.4
-  SniperDamageMult: 0.5
+  GunDamageMult: 1
+  CannonDamageMult: 0.12
+  RocketDamageMult: 0.25
+  GrenadeDamageMult: 0.75
+  SniperDamageMult: 0.8
 --- !u!114 &-5069765891301830589
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,12 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     // Serialized Prefabs
     [SerializeField] 
     private GameObject _healthBarPrefab;
+
+    [SerializeField]
+    private GameObject _resourceGainPopupPrefab;
+
+    [SerializeField]
+    private GameObject _resourceLossPopupPrefab;
     
     // UI In Game Canvas
     private GameObject _uiInGameCanvas;
@@ -51,7 +57,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
         // Startup
         GetTrainingUnitsPanelInfo(TrainingUnitsQueueManager.Instance.GetUnitTypeList());
-        
     }
 
     void Update() {
@@ -215,6 +220,22 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     public void UpdateResourcesText(float resources) {
         _resourcesText.text = resources.ToString();
+    }
+
+    public void DisplayResourceDeduction(float resourcesDeducted) {
+        GameObject popup = Instantiate(_resourceLossPopupPrefab, _resourcesText.gameObject.transform.position, Quaternion.identity);
+        popup.transform.SetParent(_uiInterfaceCanvas.transform, false);
+        ResourceLossPopup resourceLossPopup = popup.GetComponent<ResourceLossPopup>();
+        resourceLossPopup.Start();
+        resourceLossPopup.SetText(resourcesDeducted);
+    }
+
+    public void DisplayResourceGain(float resourcesGained) {
+        GameObject popup = Instantiate(_resourceGainPopupPrefab, _resourcesText.gameObject.transform.position, Quaternion.identity);
+        popup.transform.SetParent(_uiInterfaceCanvas.transform, false);
+        ResourceGainPopup resourceGainPopup = popup.GetComponent<ResourceGainPopup>();
+        resourceGainPopup.Start();
+        resourceGainPopup.SetText(resourcesGained);
     }
 
     /*================ Train Units ================*/

@@ -5956,7 +5956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  radius: 0.5
+  radius: 0.75
   height: 1.8
   repathRate: 0.5
   canSearch: 1
@@ -6014,7 +6014,8 @@ MonoBehaviour:
   DetectionRange: 52
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
-  MoveSpeed: 2
+  MoveSpeed: 5.5
+  OnEnemyDeathReward: 3
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -6210,7 +6211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCost: 20
-  _unitTrainingTime: 6
+  _unitTrainingTime: 4
 --- !u!1 &5203108326500030266
 GameObject:
   m_ObjectHideFlags: 0

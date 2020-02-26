@@ -80,10 +80,12 @@ public class Weapon : MonoBehaviour {
 
         // todo change
         if (go.TryGetComponent<HitscanProjectile>(out HitscanProjectile hsp)) {
+            go.transform.SetParent(ProjectileSpawnPoint);
             hsp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
             hsp.Distance = (_target.transform.position - RotationRoot.position).magnitude;
             hsp.Target = _target.gameObject;
         } else if (go.TryGetComponent<RocketProjectile>(out RocketProjectile rp)) {
+            go.transform.SetParent(ProjectileSpawnPoint);
             rp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
             rp.Target = _target.gameObject;
         } else if (go.TryGetComponent<RocketVolleyProjectile>(out RocketVolleyProjectile rvp)) {
@@ -91,6 +93,9 @@ public class Weapon : MonoBehaviour {
             rvp.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
             rvp.Target = _target.gameObject;
             rvp.TargetedAlignment = _target.Alignment;
+        } else if (go.TryGetComponent<InstantProjectile>(out InstantProjectile ip)) {
+            ip.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+            ip.Target = _target.gameObject;
         }
 
         if (TryGetComponent<UnitSoundController>(out UnitSoundController usc)) {

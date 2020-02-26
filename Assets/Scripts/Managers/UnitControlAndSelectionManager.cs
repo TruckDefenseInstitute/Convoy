@@ -34,6 +34,13 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
     bool _numberKeyPressed = false;
     int _alphanum = 0;
 
+    // User feedback
+    public AudioClip unitSelectionSound;
+    AudioSource _audioSource;
+    
+    public GameObject clickEffect;
+    GameObject _previousClickEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +56,8 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
         {
             _markedUnitsMemory[i] = new List<GameObject>();
         }
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -131,6 +140,8 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
             _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
             _gameControlState = GameControlState.Selected;
+            _audioSource.clip = unitSelectionSound;
+            _audioSource.Play();
             Debug.Log("Loaded " + _alphanum);
             Debug.Log("Now entering selected");
         }
@@ -186,6 +197,8 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
+        _audioSource.clip = unitSelectionSound;
+        _audioSource.Play();
         Debug.Log("Now entering selected");
     }
 
@@ -228,6 +241,9 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
+        _audioSource.clip = unitSelectionSound;
+        _audioSource.Play();
+        Debug.Log("Now entering selected");
     }
 
     void MultiselectLeftMouseHeld()
@@ -294,6 +310,14 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
         } else {
             _unitCommandManager.DirectSelectedUnits(hit, mm);
         }
+
+
+        if (_previousClickEffect != null)
+        {
+            Destroy(_previousClickEffect);
+        }
+
+        _previousClickEffect = Instantiate(clickEffect, new Vector3(hit.point.x, 0f, hit.point.z), Quaternion.identity);
     }
 
     void SelectedLeftMouseDown()

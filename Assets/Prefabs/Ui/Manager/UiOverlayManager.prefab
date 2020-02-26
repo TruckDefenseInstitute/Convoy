@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBarPrefab: {fileID: 109282, guid: 2b9babc0e49dd054797f369b54bc116a, type: 3}
+  _resourceGainPopupPrefab: {fileID: 3635348176298860039, guid: 50a36d8fd6c622440adcbf33e61abe4a,
+    type: 3}
+  _resourceLossPopupPrefab: {fileID: 3635348176298860039, guid: 78ea76637cca38b4ca8608a58bded66d,
+    type: 3}
 --- !u!114 &4263082842724400394
 MonoBehaviour:
   m_ObjectHideFlags: 0

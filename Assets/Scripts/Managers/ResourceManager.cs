@@ -15,7 +15,11 @@ public class ResourceManager : Manager<ResourceManager> {
 
     private float _maxResources = 999999f;
 
+    public AudioClip loseMoneySound;
+    AudioSource _audioSource;
+
     void Start() {
+        _audioSource = GetComponent<AudioSource>();
         StartCoroutine(AutoGenerateResource());
     }
 
@@ -31,10 +35,30 @@ public class ResourceManager : Manager<ResourceManager> {
     public bool DeductResource(float deductAmount) {
         if(deductAmount <= _resource) {
             _resource -= deductAmount;
+
+            UiOverlayManager.Instance.DisplayResourceDeduction(deductAmount);
+
+            _audioSource.clip = loseMoneySound;
+            _audioSource.Play();
+
             return true;
         } else {
             return false;
         }
+    }
+
+    public void IncreaseResource(float increaseAmount) {
+        float potentialFinalAmount = _resource + increaseAmount;
+        float amountGained = increaseAmount;
+        
+        if (potentialFinalAmount > _maxResources) {
+            amountGained = _maxResources - potentialFinalAmount;
+            _resource = _maxResources;
+        } else {
+            _resource = potentialFinalAmount;
+        }
+
+        UiOverlayManager.Instance.DisplayResourceGain(amountGained);
     }
 
     public bool ResourcesEqualOrGreaterThan(float compareAmount) {
