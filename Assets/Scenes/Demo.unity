@@ -9782,11 +9782,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -6079305086667926833, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: _resource
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 884850574, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
       propertyPath: CameraDolly
       value: 
@@ -9799,41 +9794,6 @@ PrefabInstance:
       propertyPath: CameraRig
       value: 
       objectReference: {fileID: 1456947632}
-    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: _unitTypeList.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: _unitTypeList.Array.data[5]
-      value: 
-      objectReference: {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde,
-        type: 3}
-    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: _unitTypeList.Array.data[6]
-      value: 
-      objectReference: {fileID: 8418034470593014249, guid: 1e685e766dd356d49aa82341f0409a36,
-        type: 3}
-    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: _unitTypeList.Array.data[3]
-      value: 
-      objectReference: {fileID: 8418034470593014249, guid: 585a7254efa4138469738122c5647fd5,
-        type: 3}
-    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: _unitTypeList.Array.data[2]
-      value: 
-      objectReference: {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728,
-        type: 3}
-    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
-        type: 3}
-      propertyPath: _unitTypeList.Array.data[4]
-      value: 
-      objectReference: {fileID: 8418034470593014249, guid: fe871bebaede23d47b71f64fdaa174c0,
-        type: 3}
     - target: {fileID: 5255315256829858745, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
       propertyPath: m_LocalPosition.x

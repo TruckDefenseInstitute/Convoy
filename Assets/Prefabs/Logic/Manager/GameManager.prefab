@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlGroupsButton: 306
-  unitSelectionSound: {fileID: 0}
+  unitSelectionSound: {fileID: 8300000, guid: 2cfd32935d22e304f8d0f15ef23d7970, type: 3}
 --- !u!114 &1654287206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,8 +110,7 @@ MonoBehaviour:
   cameraName: Player Camera
   CameraDolly: {fileID: 0}
   CameraAngleAxis: {fileID: 0}
-  CameraRig: {fileID: 9115404474587516145, guid: 3b04d644529aea34f9d8aac8a6196d7d,
-    type: 3}
+  CameraRig: {fileID: 0}
   _xMinimapPos: 0
   _yMinimapPos: 50
   _zMinimapPos: 0
