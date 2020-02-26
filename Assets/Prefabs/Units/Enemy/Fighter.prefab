@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 8557033926123987529}
   - component: {fileID: 2824235727889900299}
   - component: {fileID: 6962868520382110374}
-  - component: {fileID: 6366300841588297729}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -351,20 +350,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a1028908367c4843bf4bf434e96c434, type: 3}
   - {fileID: 8300000, guid: 97da0d179b5bcf140bb0661ad4d61a0c, type: 3}
   DeathVolume: 0.5
---- !u!114 &6366300841588297729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520670747652415232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _unitCost: 5
-  _unitTrainingTime: 2.5
 --- !u!1 &520670747953167118
 GameObject:
   m_ObjectHideFlags: 0

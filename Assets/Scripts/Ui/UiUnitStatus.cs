@@ -13,18 +13,22 @@ public class UiUnitStatus : MonoBehaviour {
 
     // Skills panel not yet implemented
 
-    private void Start() {
+     void Start() {
         // Unit Status Panel
         _statsPanel = transform.GetChild(0);
-        _attack = _statsPanel.GetChild(0).GetComponent<TextMeshProUGUI>();
-        _attackSpeed = _statsPanel.GetChild(1).GetComponent<TextMeshProUGUI>();
-        _movementSpeed = _statsPanel.GetChild(2).GetComponent<TextMeshProUGUI>();
+        _attack = GameObject.Find("AttackText").GetComponent<TextMeshProUGUI>();
+        _attackSpeed = GameObject.Find("AttackSpeedText").GetComponent<TextMeshProUGUI>();
+        _movementSpeed = GameObject.Find("MovementSpeedText").GetComponent<TextMeshProUGUI>();
     }
 
     public void ChangeUnitStatus(GameObject unit) {
-        _attack.text = unit.GetComponent<Weapon>().AttackDamage.ToString();
-        _attackSpeed.text = (1.0 / unit.GetComponent<Weapon>().CooldownTime).ToString();
-        _movementSpeed.text = unit.GetComponent<Unit>().MoveSpeed.ToString();
+        float attack = unit.GetComponent<Weapon>().AttackDamage;
+        float attackSpeed = (float) (1.0 / unit.GetComponent<Weapon>().CooldownTime);
+        float movementSpeed = unit.GetComponent<Unit>().MoveSpeed;
+        
+        _attack.text = attack.ToString("0.00");
+        _attackSpeed.text = attackSpeed.ToString("0.00");
+        _movementSpeed.text = movementSpeed.ToString("0.00");
     }
 
 }
