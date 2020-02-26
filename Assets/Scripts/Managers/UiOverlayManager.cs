@@ -9,10 +9,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     // Serialized Prefabs
     [SerializeField] 
     private GameObject _healthBarPrefab;
-
     [SerializeField]
     private GameObject _resourceGainPopupPrefab;
-
     [SerializeField]
     private GameObject _resourceLossPopupPrefab;
     
@@ -47,11 +45,11 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         // UI Interface Canvas
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
-        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
         _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
         _resourceChange = GameObject.Find("ResourceChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
+        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
         // Others
@@ -161,7 +159,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
                 slotRect.localScale = new Vector3(1, 1, 1);
                 slot++;   
 
-                deployedButton.GetComponent<DeployedUnitButton>().SetUnitList(sameAllyList);
+                deployedButton.GetComponent<DeployedUnitButton>().SetUnit(selectedAlly);
             }
         }
     }   
@@ -184,7 +182,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             TextMeshProUGUI totalUnitsText = deployedButton.transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
             totalUnitsText.text = sameAllyList.Count.ToString();
 
-            deployedButton.GetComponent<DeployedUnitButton>().SetUnitList(sameAllyList);
+            deployedButton.GetComponent<DeployedUnitButtonM>().SetUnitList(sameAllyList);
         }
     }
 
@@ -211,10 +209,21 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     /*================ Units Status ================*/
     public void ResetUnitStatus() {
-
+        
     }
-    public void CreateUnitStatus(GameObject unit) {
+
+    public void CreateUnitStatus(DeployedUnitButton deployedButton) {
         ResetUnitStatus();
+        GameObject unit = deployedButton.GetUnit();
+        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
+        _uiUnitStatus.ChangeUnitStatus(unit);
+    }
+
+    public void CreateUnitStatus_M(DeployedUnitButtonM deployedButton) {
+        ResetUnitStatus();
+        // Assumes the list is not empty
+        GameObject unit = deployedButton.GetUnitList()[0];
+        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
         _uiUnitStatus.ChangeUnitStatus(unit);
     }
 
