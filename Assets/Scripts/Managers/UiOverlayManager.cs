@@ -28,6 +28,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     
     private UiUnitStatus _uiUnitStatus;
     private TextMeshProUGUI _resourcesText;
+    private GameObject _resourceChange;
     private DeployedUnitDictionary _deployedUnitDictionary;
     
     // Others
@@ -49,6 +50,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
         _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
+        _resourceChange = GameObject.Find("ResourceChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
@@ -223,16 +225,14 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     }
 
     public void DisplayResourceDeduction(float resourcesDeducted) {
-        GameObject popup = Instantiate(_resourceLossPopupPrefab, _resourcesText.gameObject.transform.position, Quaternion.identity);
-        popup.transform.SetParent(_uiInterfaceCanvas.transform, false);
+        GameObject popup = Instantiate(_resourceLossPopupPrefab, _resourceChange.transform);        
         ResourceLossPopup resourceLossPopup = popup.GetComponent<ResourceLossPopup>();
         resourceLossPopup.Start();
         resourceLossPopup.SetText(resourcesDeducted);
     }
 
     public void DisplayResourceGain(float resourcesGained) {
-        GameObject popup = Instantiate(_resourceGainPopupPrefab, _resourcesText.gameObject.transform.position, Quaternion.identity);
-        popup.transform.SetParent(_uiInterfaceCanvas.transform, false);
+        GameObject popup = Instantiate(_resourceGainPopupPrefab, _resourceChange.transform);        
         ResourceGainPopup resourceGainPopup = popup.GetComponent<ResourceGainPopup>();
         resourceGainPopup.Start();
         resourceGainPopup.SetText(resourcesGained);
