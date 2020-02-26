@@ -138,7 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8f53b31690e254ebc6a99b8820d69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MuzzleFlash: {fileID: 0}
+  MuzzleFlash: {fileID: 4760530729682655560, guid: 7c701693d2678a5439c2e584f7a3c2aa,
+    type: 3}
   HitSpawn: {fileID: 3166929477288599797, guid: 2af097b292cdc224abf974860d5dbd83,
     type: 3}
   TargetedAlignment: 0

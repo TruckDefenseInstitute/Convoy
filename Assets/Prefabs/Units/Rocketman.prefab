@@ -274,13 +274,13 @@ MonoBehaviour:
   Alignment: 0
   IsControllable: 1
   Name: Rocketman
-  MaxHealth: 450
+  MaxHealth: 600
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
   DetectionRange: 40
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
-  MoveSpeed: 5.7
+  MoveSpeed: 5.5
   OnEnemyDeathReward: 3
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
@@ -302,10 +302,10 @@ MonoBehaviour:
   RotationRoot: {fileID: 7061815773503231011}
   MaxShootAngle: 5
   DamageType: 2
-  AttackDamage: 300
-  AttackRange: 30
-  AimTime: 0.2
-  CooldownTime: 1
+  AttackDamage: 600
+  AttackRange: 35
+  AimTime: 0.5
+  CooldownTime: 3.6
   CanMoveWhileAttacking: 0
   Projectile: {fileID: 2746986793372496583, guid: cb5ca9e3e3fbec94eab50510a4ace4c9,
     type: 3}
@@ -448,9 +448,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FiringSounds:
-  - {fileID: 8300000, guid: bedb719e1b3b3714ca203ad37bcfe960, type: 3}
-  - {fileID: 8300000, guid: 5348782cc77e37a4eb8bd836b90a5ff9, type: 3}
-  - {fileID: 8300000, guid: 591a2f8b427880146ba2e3192626e78a, type: 3}
+  - {fileID: 8300000, guid: ba6afd62e48f6024494f796f3689678f, type: 3}
+  - {fileID: 8300000, guid: 80af2d331868cfe42994bdcbb0bd5a08, type: 3}
+  - {fileID: 8300000, guid: 3d1a4d6c19fc47e44a78d298b6df3a80, type: 3}
+  - {fileID: 8300000, guid: d02f8ac788e254744a4ebd7c77cb7aef, type: 3}
+  - {fileID: 8300000, guid: b30d410d77ea66644a0f6bf785f332e6, type: 3}
   FiringVolume: 0.4
   DieingSounds:
   - {fileID: 8300000, guid: 4e11d5d553c78df46b48ad416a78c518, type: 3}
@@ -3832,7 +3834,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 1
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}

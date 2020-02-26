@@ -128,6 +128,9 @@ public class RocketProjectile : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
+        if (other.isTrigger) {
+            return;
+        }
         Unit u = other.GetComponentInParent<Unit>();
         if (u != null && u.Alignment == TargetedAlignment) {
             _inRange.Add(u);
@@ -135,6 +138,9 @@ public class RocketProjectile : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
+        if (other.isTrigger) {
+            return;
+        }
         Unit u = other.GetComponentInParent<Unit>();
         if (u != null) {
             _inRange.Remove(u);

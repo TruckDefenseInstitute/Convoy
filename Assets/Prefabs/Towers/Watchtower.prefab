@@ -366,7 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationalRoot: {fileID: 8366788133821002797}
   AngularVelocity: 115200
-  RotateTime: 0.5
+  RotateTime: 0.4
 --- !u!82 &5625132071568460714
 AudioSource:
   m_ObjectHideFlags: 0

@@ -305,21 +305,28 @@ public class Unit : MonoBehaviour {
 
         _startHasRun = true;
     }
-
-    // dont automatically attck units <= 0.04f efficiency
+    
     void AcquireTarget() {
         float minDist = DetectionRange;
+        float bestDmg = 0f;
 
         if (_focusTarget == null) {
             _targets.RemoveWhere(u => !u.IsAlive());
             _targets.RemoveWhere(u => u == null);
             foreach (var unit in _targets) {
                 var dist = DistanceIgnoreY(unit.transform.position, transform.position);
-                if (dist < minDist) {
-                    if (unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType)) <= 0.04f) {
-                        continue;
-                    }
+                var curDmg = unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType));
+                if (curDmg <= 0.04f) {
+                    continue;
+                }
+                if (curDmg == bestDmg && dist < minDist) {
                     _focusTarget = unit;
+                    bestDmg = curDmg;
+                    minDist = dist;
+                }
+                if (curDmg > bestDmg && dist < DetectionRange) {
+                    _focusTarget = unit;
+                    bestDmg = curDmg;
                     minDist = dist;
                 }
             }
