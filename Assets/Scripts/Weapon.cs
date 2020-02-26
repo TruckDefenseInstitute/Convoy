@@ -96,6 +96,10 @@ public class Weapon : MonoBehaviour {
         } else if (go.TryGetComponent<InstantProjectile>(out InstantProjectile ip)) {
             ip.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
             ip.Target = _target.gameObject;
+        } else if (go.TryGetComponent<AOEProjectile>(out AOEProjectile ap)) {
+            ap.DamageMetadata = new DamageMetadata(AttackDamage, DamageType);
+            ap.Target = _target.gameObject;
+            ap.TargetedAlignment = _target.Alignment;
         }
 
         if (TryGetComponent<UnitSoundController>(out UnitSoundController usc)) {

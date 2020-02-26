@@ -369,8 +369,10 @@ GameObject:
   - component: {fileID: 3058466262236801902}
   - component: {fileID: 3058466262236801896}
   - component: {fileID: 4225878222174524927}
+  - component: {fileID: 3162706346676878027}
+  - component: {fileID: 5331906923391885724}
   m_Layer: 0
-  m_Name: Flamethrower
+  m_Name: Flametrooper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  radius: 0.4
+  radius: 0.75
   height: 1.8
   repathRate: 0.5
   canSearch: 1
@@ -511,11 +513,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Alignment: 0
   IsControllable: 1
-  Name: Flamethrower
-  MaxHealth: 500
+  Name: Flametrooper
+  MaxHealth: 800
   DestroyImmediately: 0
-  Deathrattle: {fileID: 0}
-  DetectionRange: 15
+  Deathrattle: {fileID: 7190217404225326594, guid: 1f618360230211d45bc187c8a80385c1,
+    type: 3}
+  DetectionRange: 23
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5
@@ -539,13 +542,13 @@ MonoBehaviour:
   RotationSpeed: 360
   RotationRoot: {fileID: 3058466262236801898}
   MaxShootAngle: 5
-  DamageType: 0
-  AttackDamage: 100
-  AttackRange: 15
-  AimTime: 0.2
+  DamageType: 3
+  AttackDamage: 40
+  AttackRange: 18
+  AimTime: 0.5
   CooldownTime: 0.1
   CanMoveWhileAttacking: 0
-  Projectile: {fileID: 3172129098913920456, guid: 0a324907a6ab4f74f9c7640b4164f887,
+  Projectile: {fileID: 4110800054907853826, guid: 72d62f46128d7014cbf73f3f1c45dc4c,
     type: 3}
   ProjectileSpawnPoint: {fileID: 3058466261574956272}
 --- !u!114 &3058466262236801902
@@ -560,10 +563,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c4884072b92fa4db86e9b910aac6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunDamageMult: 0.33
-  CannonDamageMult: 0.1
-  RocketDamageMult: 0.1
-  GrenadeDamageMult: 0.1
+  GunDamageMult: 1
+  CannonDamageMult: 0.25
+  RocketDamageMult: 0.5
+  GrenadeDamageMult: 0.75
   SniperDamageMult: 1
 --- !u!114 &3058466262236801896
 MonoBehaviour:
@@ -591,6 +594,131 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 80
   _unitTrainingTime: 15
+--- !u!82 &3162706346676878027
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3058466262236801893}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5331906923391885724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3058466262236801893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88dbd4eb634ef44b842f173a112a490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FiringSounds:
+  - {fileID: 8300000, guid: 333af193b07b249459e50cd954bfff41, type: 3}
+  - {fileID: 8300000, guid: 3680dc3580dc6d04c95fd6852e29a4f6, type: 3}
+  - {fileID: 8300000, guid: 4e502a09f9e16da4cb1bbe1f55008798, type: 3}
+  - {fileID: 8300000, guid: 3432cb0110d19854db0805af4bbe45da, type: 3}
+  - {fileID: 8300000, guid: 2dc91f44fca249a4e84b268d04cd8562, type: 3}
+  FiringVolume: 0.4
+  DieingSounds:
+  - {fileID: 8300000, guid: 4e11d5d553c78df46b48ad416a78c518, type: 3}
+  - {fileID: 8300000, guid: 01f93bd845d6d0a428247a1fb3a352dd, type: 3}
+  - {fileID: 8300000, guid: 373553b69c1c2b343aa82dc4760c8c02, type: 3}
+  - {fileID: 8300000, guid: 17ff8b386a99ba9428b597001aad48b1, type: 3}
+  - {fileID: 8300000, guid: 40cce43ed0a50304b82adf6c7d3cbf3f, type: 3}
+  - {fileID: 8300000, guid: 43a00463e9dc1bc42903f31e08fa057b, type: 3}
+  - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
+  - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
+  DeathVolume: 1
 --- !u!1 &3058509849049786563
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +1003,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 1
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}

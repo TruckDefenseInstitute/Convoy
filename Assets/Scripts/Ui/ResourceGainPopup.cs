@@ -19,7 +19,6 @@ public class ResourceGainPopup : MonoBehaviour
 
         _textMeshPro = gameObject.GetComponent<TextMeshProUGUI>();
         _textMeshPro.fontSize = 50;
-        _textMeshPro.margin = new Vector4(420f, 1081f, 1323f, 83f);
         Invoke("Destroy", 1);
 
         _startHasRun = true;
