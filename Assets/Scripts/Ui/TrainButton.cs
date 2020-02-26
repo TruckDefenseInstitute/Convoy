@@ -52,7 +52,6 @@ public class TrainButton : MonoBehaviour {
         _isTraining = false;
         _isCompleted = false;
         if(_amountOfUnitsQueued != 0) {
-            Debug.Log(_amountOfUnitsQueued);
             _trainingTimeImage.fillAmount = 1;
         } else {
             CheckUnitsInQueue(_amountOfUnitsQueued);

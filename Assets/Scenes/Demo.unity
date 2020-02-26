@@ -6068,7 +6068,7 @@ PrefabInstance:
     - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
       propertyPath: _unitTypeList.Array.size
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
@@ -6086,19 +6086,31 @@ PrefabInstance:
         type: 3}
       propertyPath: _unitTypeList.Array.data[3]
       value: 
-      objectReference: {fileID: 8418034470593014249, guid: 585a7254efa4138469738122c5647fd5,
+      objectReference: {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728,
         type: 3}
     - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
       propertyPath: _unitTypeList.Array.data[2]
       value: 
-      objectReference: {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728,
+      objectReference: {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde,
         type: 3}
     - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}
       propertyPath: _unitTypeList.Array.data[4]
       value: 
-      objectReference: {fileID: 8418034470593014249, guid: fe871bebaede23d47b71f64fdaa174c0,
+      objectReference: {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde,
+        type: 3}
+    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
+        type: 3}
+      propertyPath: _unitTypeList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8418034470593014249, guid: f78c786858f943d44943869e1cdd3b17,
+        type: 3}
+    - target: {fileID: 3670413387620279838, guid: 7dc9ec88f5f9254409fe980876638477,
+        type: 3}
+      propertyPath: _unitTypeList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728,
         type: 3}
     - target: {fileID: 5255315256829858745, guid: 7dc9ec88f5f9254409fe980876638477,
         type: 3}

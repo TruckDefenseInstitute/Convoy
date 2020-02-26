@@ -90,8 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9689d57e3fac62843a2f3480c7574fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resource: 50
-  _autoResourceGenerated: 1
+  _resource: 100
+  _autoResourceGenerated: 5
+  _autoResourceGeneratedInterval: 0.5
 --- !u!114 &884850574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,12 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfed4e1c309e7924db7fe6a2bda3a8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitTypeList:
-  - {fileID: 8418034470593014249, guid: 5a593589e5b2bd14eafc6d52eadcc490, type: 3}
-  - {fileID: 8418034470593014249, guid: f78c786858f943d44943869e1cdd3b17, type: 3}
-  - {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728, type: 3}
-  - {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde, type: 3}
-  - {fileID: 8418034470593014249, guid: 585a7254efa4138469738122c5647fd5, type: 3}
+  _unitTypeList: []
 --- !u!114 &6479078846698226587
 MonoBehaviour:
   m_ObjectHideFlags: 0
