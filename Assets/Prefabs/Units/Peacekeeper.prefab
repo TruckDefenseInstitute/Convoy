@@ -3900,6 +3900,7 @@ GameObject:
   - component: {fileID: 2550659281788605197}
   - component: {fileID: 2550659281788605196}
   - component: {fileID: 2550659281788605199}
+  - component: {fileID: -3130877715890117894}
   m_Layer: 0
   m_Name: Peacekeeper
   m_TagString: Untagged
@@ -4108,6 +4109,20 @@ MonoBehaviour:
   RocketDamageMult: 0.5
   GrenadeDamageMult: 0.1
   SniperDamageMult: 0.2
+--- !u!114 &-3130877715890117894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2550659281788605186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitCost: 50
+  _unitTrainingTime: 9
 --- !u!1 &2550659282452598374
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,18 +62,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitDeployedButtonPrefab:
-  - {fileID: 1738896534840907197, guid: e4d5f65dd556e75419f9bcfe3700248e, type: 3}
-  - {fileID: 1738896534840907197, guid: 54cc15455e0cf5d4b8218a2fec54ccde, type: 3}
-  - {fileID: 1738896534840907197, guid: 920a894425271884c9ec61e2bb355624, type: 3}
   - {fileID: 1738896534840907197, guid: 838009de90b318e4b986ec078873bee8, type: 3}
   - {fileID: 1738896534840907197, guid: f9b536e1a42fc40409bff5fd07cfcfae, type: 3}
-  - {fileID: 1738896534840907197, guid: 1bc1fb14b33ba6e4baa0e8d801823054, type: 3}
   - {fileID: 1738896534840907197, guid: 493472c91e5e96e45b22de252f37f72a, type: 3}
-  _unitDeployedButtonMultiplePrefab:
-  - {fileID: 1738896534840907197, guid: 57f01ceb2a7f82f4883fbaa76c1cd10e, type: 3}
-  - {fileID: 1738896534840907197, guid: 01fcb82803182b34daf32bbb0ac5212e, type: 3}
-  - {fileID: 1738896534840907197, guid: f22bf9dc44a8b2b4792cf616738fa1f4, type: 3}
-  - {fileID: 1738896534840907197, guid: 44e531707eb50c84cac4429f0aa0e722, type: 3}
-  - {fileID: 1738896534840907197, guid: 6074f536e819cd845910f2738ee386ac, type: 3}
-  - {fileID: 1738896534840907197, guid: 616a182ac624a454fae8bd7cc2ac409b, type: 3}
-  - {fileID: 1738896534840907197, guid: 73fef2083ff119a41a5b503adf1aab12, type: 3}
+  _unitDeployedButtonPrefab_M:
+  - {fileID: 1738896534840907197, guid: bb0deba015d299a43b00d916b5a7b30b, type: 3}
+  - {fileID: 1738896534840907197, guid: 088c88af2f320af45833239eb2c972a0, type: 3}
+  - {fileID: 1738896534840907197, guid: e68440d8456ec8442b83ad37ecd62195, type: 3}

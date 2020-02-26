@@ -7,48 +7,32 @@ public class DeployedUnitDictionary : MonoBehaviour {
     [SerializeField]
     private List<GameObject> _unitDeployedButtonPrefab;
     [SerializeField]
-    private List<GameObject> _unitDeployedButtonMultiplePrefab;
+    private List<GameObject> _unitDeployedButtonPrefab_M;
     
     // Sort by name here
     public GameObject GetUnitDeployedButton(Unit unit) {
         switch(unit.Name) {
-            case "Attack Bike": 
-                return _unitDeployedButtonPrefab[0];
-            case "Grenadier": 
-                return _unitDeployedButtonPrefab[1];
-            case "Grunt": 
-                return _unitDeployedButtonPrefab[2];
             case "Rifleman": 
-                return _unitDeployedButtonPrefab[3];
+                return _unitDeployedButtonPrefab[0];
             case "Sniper": 
-                return _unitDeployedButtonPrefab[4];
-            case "Tank":
-                return _unitDeployedButtonPrefab[5];
+                return _unitDeployedButtonPrefab[1];
             case "ZoneTrooper":
-                return _unitDeployedButtonPrefab[6];
+                return _unitDeployedButtonPrefab[2];
             default:
                 return _unitDeployedButtonPrefab[0]; // Backup
         }
     }
 
-    public GameObject GetUnitDeployedButtonMultiple(Unit unit) {
+    public GameObject GetUnitDeployedButton_M(Unit unit) {
         switch(unit.Name) {
-            case "Attack Bike": 
-                return _unitDeployedButtonMultiplePrefab[0];
-            case "Grenadier": 
-                return _unitDeployedButtonMultiplePrefab[1];
-            case "Grunt": 
-                return _unitDeployedButtonMultiplePrefab[2];
             case "Rifleman": 
-                return _unitDeployedButtonMultiplePrefab[3];
+                return _unitDeployedButtonPrefab_M[0];
             case "Sniper": 
-                return _unitDeployedButtonMultiplePrefab[4];
-            case "Tank":
-                return _unitDeployedButtonMultiplePrefab[5];
+                return _unitDeployedButtonPrefab_M[1];
             case "ZoneTrooper":
-                return _unitDeployedButtonMultiplePrefab[6];
+                return _unitDeployedButtonPrefab_M[2];
             default:
-                return _unitDeployedButtonMultiplePrefab[0]; // Backup
+                return _unitDeployedButtonPrefab_M[0]; // Backup
         }
     }
 }

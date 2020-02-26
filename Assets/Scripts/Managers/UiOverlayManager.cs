@@ -16,19 +16,20 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     [SerializeField]
     private GameObject _resourceLossPopupPrefab;
     
+    // UI In Game Canvas
+    private GameObject _uiInGameCanvas;
+    private GameObject _healthBarPanel;
+
     // UI Inteface Canvas
     private GameObject _uiInterfaceCanvas;
     private GameObject _deployedUnitsPanel;
     private GameObject _trainUnitsPanel;
     private GameObject _trainingQueue;
     
+    private UiUnitStatus _uiUnitStatus;
     private TextMeshProUGUI _resourcesText;
     private DeployedUnitDictionary _deployedUnitDictionary;
     
-    // UI In Game Canvas
-    private GameObject _uiInGameCanvas;
-    private GameObject _healthBarPanel;
-
     // Others
     private Camera _playerCamera;
     private Vector3 _mousePos;
@@ -45,6 +46,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         // UI Interface Canvas
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
+        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
         _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
         _trainingQueue = GameObject.Find("TrainingQueue");
@@ -142,40 +144,11 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     private void SelectIndividualUnits(List<GameObject> allyList) {
         int slot = 0;
-        // Slot should be less than 10 at all times
-        foreach(GameObject selectedAlly in allyList) {
-            if(slot >= 10) {
-                Debug.Log("Not suppose to have more than 10 selected");
-                break;
-            }
-            GameObject deployedButtonPrefab = _deployedUnitDictionary
-                    .GetUnitDeployedButton(selectedAlly
-                    .GetComponent<Unit>());
-            
-            GameObject deployedButton = Instantiate(deployedButtonPrefab, Vector3.zero, Quaternion.identity);
-            deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
-            RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
-            slotRect.offsetMin = new Vector2(0, 0);
-            slotRect.offsetMax = new Vector2(0, 0);
-            slotRect.localScale = new Vector3(1, 1, 1);
-            slot++;            
-        } 
-    }   
-
-    private void SelectGroupUnits(List<GameObject> allyList) {
-        // For first instantiation
-        int slot = 0;
-        int totalSameUnits = 1;
-        bool isFirst = true;
-        GameObject prevAlly = allyList[0];
-        TextMeshProUGUI totalUnitsText = null;
-        
-        // For the rest of the loop
-        for(int i = 0; i < allyList.Count; i++) {
-            GameObject selectedAlly = allyList[i];
-            if(isFirst || prevAlly.GetComponent<Unit>().Name != selectedAlly.GetComponent<Unit>().Name){
+        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
+        foreach(List<GameObject> sameAllyList in splitAllyList) {
+            foreach(GameObject selectedAlly in sameAllyList) {
                 GameObject deployedButtonPrefab = _deployedUnitDictionary
-                        .GetUnitDeployedButtonMultiple(selectedAlly
+                        .GetUnitDeployedButton(selectedAlly
                         .GetComponent<Unit>());
             
                 GameObject deployedButton = Instantiate(deployedButtonPrefab, Vector3.zero, Quaternion.identity);
@@ -184,19 +157,64 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
                 slotRect.offsetMin = new Vector2(0, 0);
                 slotRect.offsetMax = new Vector2(0, 0);
                 slotRect.localScale = new Vector3(1, 1, 1);
-                
-                totalUnitsText = deployedButton.transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-                totalSameUnits = 0;
                 slot++;   
-                isFirst = false;
-            }
 
-            prevAlly = selectedAlly;
-            totalSameUnits++;
-            totalUnitsText.text = totalSameUnits.ToString();
+                deployedButton.GetComponent<DeployedUnitButton>().SetUnitList(sameAllyList);
+            }
+        }
+    }   
+
+    private void SelectGroupUnits(List<GameObject> allyList) {        
+        int slot = 0;
+        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
+        foreach(List<GameObject> sameAllyList in splitAllyList) {
+            GameObject deployedButtonPrefab_M = _deployedUnitDictionary
+                    .GetUnitDeployedButton_M(sameAllyList[0]
+                    .GetComponent<Unit>());
+        
+            GameObject deployedButton = Instantiate(deployedButtonPrefab_M, Vector3.zero, Quaternion.identity);
+            deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
+            RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
+            slotRect.offsetMin = new Vector2(0, 0);
+            slotRect.offsetMax = new Vector2(0, 0);
+            slotRect.localScale = new Vector3(1, 1, 1);
+            slot++;   
+            TextMeshProUGUI totalUnitsText = deployedButton.transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            totalUnitsText.text = sameAllyList.Count.ToString();
+
+            deployedButton.GetComponent<DeployedUnitButton>().SetUnitList(sameAllyList);
         }
     }
 
+    // Assumes that the list is already sorted in a way that the same unit types are together.
+    private List<List<GameObject>> SplitAllyList(List<GameObject> allyList) {
+        List<List<GameObject>> sameUnitsList = new List<List<GameObject>>();
+        List<GameObject> currentUnitList = new List<GameObject>();
+        GameObject prevAlly = allyList[0];
+        foreach(GameObject selectedAlly in allyList) {
+            if(selectedAlly.GetComponent<Unit>().Name == prevAlly.GetComponent<Unit>().Name) {
+                currentUnitList.Add(selectedAlly);
+            } else {
+                sameUnitsList.Add(currentUnitList);
+                currentUnitList = new List<GameObject>();
+                currentUnitList.Add(selectedAlly);
+            }
+            prevAlly = selectedAlly;
+        }
+
+        sameUnitsList.Add(currentUnitList);
+
+        return sameUnitsList;
+    }
+
+    /*================ Units Status ================*/
+    public void ResetUnitStatus() {
+
+    }
+    public void CreateUnitStatus(GameObject unit) {
+        ResetUnitStatus();
+        _uiUnitStatus.ChangeUnitStatus(unit);
+    }
 
     /*================ Resources ================*/
 

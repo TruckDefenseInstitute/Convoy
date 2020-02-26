@@ -10,8 +10,10 @@ public class ResourceManager : Manager<ResourceManager> {
     [SerializeField]
     private float _autoResourceGenerated = 1f;
 
-    private float _maxResources = 9999f;
-    private float _autoResourceGeneratedInterval = 1f;
+    [SerializeField]
+    private float _autoResourceGeneratedInterval = .5f;
+
+    private float _maxResources = 999999f;
 
     public AudioClip loseMoneySound;
     AudioSource _audioSource;
