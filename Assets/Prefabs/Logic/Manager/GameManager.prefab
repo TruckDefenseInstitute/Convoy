@@ -56,6 +56,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlGroupsButton: 306
   unitSelectionSound: {fileID: 8300000, guid: 2cfd32935d22e304f8d0f15ef23d7970, type: 3}
+  clickEffect: {fileID: 7681987688127664353, guid: 28dd834400ade56479ef5348c0b600f2,
+    type: 3}
 --- !u!114 &1654287206
 MonoBehaviour:
   m_ObjectHideFlags: 0
