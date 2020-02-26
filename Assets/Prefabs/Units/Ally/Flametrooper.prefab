@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 3162706346676878027}
   - component: {fileID: 5331906923391885724}
   m_Layer: 0
-  m_Name: Flamethrower
+  m_Name: Flametrooper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +708,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4e502a09f9e16da4cb1bbe1f55008798, type: 3}
   - {fileID: 8300000, guid: 3432cb0110d19854db0805af4bbe45da, type: 3}
   - {fileID: 8300000, guid: 2dc91f44fca249a4e84b268d04cd8562, type: 3}
-  FiringVolume: 1
+  FiringVolume: 0.4
   DieingSounds:
   - {fileID: 8300000, guid: 4e11d5d553c78df46b48ad416a78c518, type: 3}
   - {fileID: 8300000, guid: 01f93bd845d6d0a428247a1fb3a352dd, type: 3}
