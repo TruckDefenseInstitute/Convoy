@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: a39c3d01331c5dc4882f9fc1be8a60a8
+guid: 4ffd9b5cf2c7e164f81dd809c99bfc7c
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: SniperCrouchIdle
+    second: PeacekeeperSlash
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SniperCrouchIdle
+      name: PeacekeeperSlash
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 252
+      lastFrame: 190
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
