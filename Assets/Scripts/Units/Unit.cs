@@ -508,8 +508,13 @@ public class Unit : MonoBehaviour {
         DeathCallback();
         Destroy(_healthBar);
 
+        // todo refactor into something nice
+        Destroy(GetComponentInChildren<CapsuleCollider>());
+        Destroy(GetComponentInChildren<BoxCollider>());
+        if (TryGetComponent<NavmeshCut>(out var navmeshCut)) {
+            Destroy(navmeshCut);
+        }
         if (Deathrattle != null) {
-            Destroy(GetComponentInChildren<Collider>());
             Instantiate(Deathrattle, transform.position, transform.rotation);
         }
         if (DestroyImmediately) {
