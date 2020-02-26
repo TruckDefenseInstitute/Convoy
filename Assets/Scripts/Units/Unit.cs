@@ -86,7 +86,8 @@ public class Unit : MonoBehaviour {
 
     public void DisableMovement(bool move) {
         _movementLocked = move;
-        _rvoRef.locked = _movementLocked;
+        Debug.Log(_shiftQueue.Count);
+        ExecuteFirstQueueAction();
     }
     public void AnimatorStartMoving() {
         if (_animRef != null) {
@@ -117,7 +118,7 @@ public class Unit : MonoBehaviour {
 
     public void NextDestination() {
         // dont do anything if attack or following alive unit
-        if (_attacking || (_movementMode == MovementMode.Follow && _following != null) || _shiftQueue.Count == 0) {
+        if (_attacking || (_movementMode == MovementMode.Follow && _following != null) || _shiftQueue.Count == 0 || _movementLocked) {
             return;
         }
 
@@ -197,6 +198,13 @@ public class Unit : MonoBehaviour {
         ShiftAttack(u);
     }
 
+    Vector3 SetDestination(Vector3 dest) {
+        if (_movementLocked) {
+            return transform.position;
+        }
+        return _aiRef.destination = dest;
+    }
+
     void ExecuteFirstQueueAction() {
         if (!IsAlive() || _shiftQueue.Count == 0) {
             return;
@@ -205,17 +213,18 @@ public class Unit : MonoBehaviour {
         _guardPosition = new Vector3(float.PositiveInfinity, 0, 0);
         var temp = _shiftQueue.Peek();
         _movementMode = temp._mode;
+        Vector3 dest = transform.position;
         switch (temp._mode) {
             case MovementMode.AMove:
             case MovementMode.Move:
-                _aiRef.destination = temp._dest;
+                dest = SetDestination(temp._dest);
                 break;
 
             case MovementMode.Attack:
                 if (temp._unit != null) {
                     _following = temp._unit;
                     _focusTarget = temp._unit;
-                    _aiRef.destination = temp._unit.transform.position;
+                    dest = SetDestination(temp._unit.transform.position);
                     _aiRef.SearchPath();
                 } else {
                     NextDestination();
@@ -235,7 +244,7 @@ public class Unit : MonoBehaviour {
         }
 
         // only search if not in range
-        if (_movementMode == MovementMode.Move || Vector3.Distance(_aiRef.destination, transform.position) >= _weaponRef.AttackRange) {
+        if (_movementMode == MovementMode.Move || Vector3.Distance(dest, transform.position) >= _weaponRef.AttackRange) {
             AnimatorStartMoving();
             _aiRef.SearchPath();
         }
@@ -349,8 +358,7 @@ public class Unit : MonoBehaviour {
             if (distanceToFocus > _weaponRef.AttackRange) {
                 // move only if cannot attack while moving
                 if (_movementMode != MovementMode.Move) {
-                    _rvoRef.locked = _movementLocked;
-                    _aiRef.destination = _focusTarget.transform.position;
+                    SetDestination(_focusTarget.transform.position);
                     _aiRef.SearchPath();
                     AnimatorStopFiring();
                     AnimatorStartMoving();
@@ -365,7 +373,7 @@ public class Unit : MonoBehaviour {
                     // lock only if cannot attack while moving
                     if (_movementMode != MovementMode.Move) {
                         _attacking = true;
-                        _aiRef.destination = transform.position;
+                        SetDestination(transform.position);
                         _aiRef.SearchPath();
                         AnimatorStopMoving();
                     }
@@ -378,7 +386,6 @@ public class Unit : MonoBehaviour {
             }
             AnimatorStopFiring();
             _attacking = false;
-            _rvoRef.locked = _movementLocked;
             if (!float.IsPositiveInfinity(_guardPosition.x) && Vector3.Distance(_guardPosition, transform.position) < Vector3.kEpsilon) {
                 Move(_guardPosition, MovementMode.AMove);
             } else {
@@ -424,7 +431,7 @@ public class Unit : MonoBehaviour {
         }
 
         // if can pathfind
-        if (_aiRef != null) {
+        if (_aiRef != null || _movementLocked) {
 
             MobileAttackLogic();
 
@@ -452,14 +459,14 @@ public class Unit : MonoBehaviour {
                     var dist = DistanceIgnoreY(transform.position, _following.transform.position);
                     var radius = _following.GetComponent<RichAI>().radius;
                     if (dist <= 2f * radius) {
-                        _aiRef.destination = transform.position;
+                        SetDestination(transform.position);
                         AnimatorStopMoving();
                     } else if(dist >= 3f * radius) {
-                        _aiRef.destination = _following.transform.position;
+                        SetDestination(_following.transform.position);
                         AnimatorStartMoving();
                     }
                 } else if (_movementMode == MovementMode.Attack){
-                    _aiRef.destination = _following.transform.position;
+                    SetDestination(_following.transform.position);
                 }
             } else {
                 // target is dead
