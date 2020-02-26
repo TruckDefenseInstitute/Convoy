@@ -191,7 +191,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1738896534840907139}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7065461173274612548, guid: c032a58a001bb0343a26d131286f2ebe,
+          type: 3}
+        m_MethodName: CreateUnitStatus
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8786988482538360646}
+          m_ObjectArgumentAssemblyTypeName: DeployedUnitButton, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8786988482538360646
 MonoBehaviour:
   m_ObjectHideFlags: 0

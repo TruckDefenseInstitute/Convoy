@@ -5895,7 +5895,6 @@ GameObject:
   - component: {fileID: 3192560613245235644}
   - component: {fileID: 7134019565849647756}
   - component: {fileID: 816840299295209909}
-  - component: {fileID: 1446095024735228657}
   m_Layer: 0
   m_Name: Grunt
   m_TagString: Untagged
@@ -6233,20 +6232,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
   DeathVolume: 1
---- !u!114 &1446095024735228657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6657574400388041278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _unitCost: 2
-  _unitTrainingTime: 0.5
 --- !u!1 &6913238769434683645
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class DeployedUnitButton : MonoBehaviour {
 
-    
-    private List<GameObject> _unitList;
+    private GameObject _unit;
 
-    public void SetUnitList(List<GameObject> unitList) {
-        this._unitList = unitList;
+    public void SetUnit(GameObject unit) {
+        this._unit = unit;
+    }
+
+    public GameObject GetUnit() {
+        return this._unit;
     }
 }
