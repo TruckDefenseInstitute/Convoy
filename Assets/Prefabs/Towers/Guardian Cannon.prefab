@@ -338,7 +338,7 @@ MonoBehaviour:
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 10
-  OnEnemyDeathReward: 100
+  OnEnemyDeathReward: 50
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 2854884618499930957}
   selectRingPrefab: {fileID: 0}

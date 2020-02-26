@@ -3482,7 +3482,7 @@ MonoBehaviour:
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 8
-  OnEnemyDeathReward: 1
+  OnEnemyDeathReward: 100
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -3540,5 +3540,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitCost: 80
-  _unitTrainingTime: 12
+  _unitCost: 200
+  _unitTrainingTime: 15
