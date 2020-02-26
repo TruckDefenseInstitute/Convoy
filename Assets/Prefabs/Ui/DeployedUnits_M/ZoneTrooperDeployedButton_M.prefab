@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 1738896534840907138}
   - component: {fileID: 1738896534840907139}
   - component: {fileID: 8730842750512320476}
-  - component: {fileID: 1967030528023827014}
+  - component: {fileID: 438512717229077073}
   m_Layer: 5
   m_Name: ZoneTrooperDeployedButton_M
   m_TagString: Untagged
@@ -192,8 +192,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1738896534840907139}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1967030528023827014
+      m_Calls:
+      - m_Target: {fileID: 7065461173274612548, guid: c032a58a001bb0343a26d131286f2ebe,
+          type: 3}
+        m_MethodName: CreateUnitStatus_M
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 438512717229077073}
+          m_ObjectArgumentAssemblyTypeName: DeployedUnitButtonM, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &438512717229077073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,7 +214,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1738896534840907197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70267e663ba60814baa09e2def0077ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ba5602db47a9544bb6b1e513204d7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5644684505331258479
