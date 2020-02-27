@@ -322,6 +322,7 @@ MonoBehaviour:
   DestroyImmediately: 1
   Deathrattle: {fileID: 1611733386190981116, guid: 5843c8bf1e0f0e74d8d4eed9ed36da23,
     type: 3}
+  RetargetTime: 2
   DetectionRange: 34
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
@@ -347,7 +348,7 @@ MonoBehaviour:
   RotationRoot: {fileID: 59739695266863717}
   MaxShootAngle: 5
   DamageType: 2
-  AttackDamage: 300
+  AttackDamage: 600
   AttackRange: 29
   AimTime: 0
   CooldownTime: 3.8
