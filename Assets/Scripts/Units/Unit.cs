@@ -329,9 +329,18 @@ public class Unit : MonoBehaviour {
             if (effectiveness <= 0.04f) {
                 continue;
             }
-            if (timeToKill < bestTimeToKill && dist < DetectionRange) {
-                _focusTarget = unit;
-                bestTimeToKill = timeToKill;
+            // if both can one shot
+            if (timeToKill < _weaponRef.CooldownTime && bestTimeToKill < _weaponRef.CooldownTime && dist < DetectionRange) {
+                // select the one with higher kill time
+                if (timeToKill > bestTimeToKill) {
+                    _focusTarget = unit;
+                    bestTimeToKill = timeToKill;
+                }
+            } else { // cannot one shot, so select the one that takes less shits
+                if (timeToKill < bestTimeToKill && dist < DetectionRange) {
+                    _focusTarget = unit;
+                    bestTimeToKill = timeToKill;
+                }
             }
         }
         return _focusTarget != null;
