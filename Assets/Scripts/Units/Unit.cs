@@ -88,7 +88,6 @@ public class Unit : MonoBehaviour {
 
     public void DisableMovement(bool move) {
         _movementLocked = move;
-        Debug.Log(_shiftQueue.Count);
         ExecuteFirstQueueAction();
     }
     public void AnimatorStartMoving() {
@@ -288,8 +287,6 @@ public class Unit : MonoBehaviour {
         _armorRef = GetComponent<Armor>();
         _light = GetComponent<UnitAlignmentIndicator>();
 
-        _guardPosition = transform.position;
-
         Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
         rigidbody.isKinematic = true;
 
@@ -314,7 +311,14 @@ public class Unit : MonoBehaviour {
             _selectRing = Instantiate(selectRingPrefab, gameObject.transform);
         }
 
+        if (_aiRef != null) {
+            Move(transform.position, MovementMode.Move);
+        }
         _startHasRun = true;
+    }
+
+    void TargetThisLater(Unit u) {
+        ShiftFollow(u);
     }
 
     bool GetBestTarget() {
@@ -329,9 +333,24 @@ public class Unit : MonoBehaviour {
             if (effectiveness <= 0.04f) {
                 continue;
             }
-            if (timeToKill < bestTimeToKill && dist < DetectionRange) {
-                _focusTarget = unit;
-                bestTimeToKill = timeToKill;
+            // if both can one shot
+            if (timeToKill < _weaponRef.CooldownTime && bestTimeToKill < _weaponRef.CooldownTime && dist < DetectionRange) {
+                // select the one with higher kill time
+                if (timeToKill > bestTimeToKill) {
+                    if (_shiftQueue.Count <= 0 && typeof(Truck).IsInstanceOfType(unit) && _aiRef != null) {
+                        TargetThisLater(unit);
+                    }
+                    _focusTarget = unit;
+                    bestTimeToKill = timeToKill;
+                }
+            } else { // cannot one shot, so select the one that takes less shits
+                if (timeToKill < bestTimeToKill && dist < DetectionRange) {
+                    if (_shiftQueue.Count <= 0 && typeof(Truck).IsInstanceOfType(unit) && _aiRef != null) {
+                        TargetThisLater(unit);
+                    }
+                    _focusTarget = unit;
+                    bestTimeToKill = timeToKill;
+                }
             }
         }
         return _focusTarget != null;
@@ -378,6 +397,10 @@ public class Unit : MonoBehaviour {
                     AnimatorStopFiring();
                     AnimatorStartMoving();
                 }
+
+                if (_weaponRef.CanMoveWhileAttacking) {
+                    _weaponRef.ContinueToAimAt(_focusTarget);
+                }
             } else {
                 // attack if inside range
                 _weaponRef.AimAt(_focusTarget);
@@ -394,18 +417,24 @@ public class Unit : MonoBehaviour {
                     }
                 }
             }
-        }  else {
+        } else {
             if (_weaponRef.CanMoveWhileAttacking) { // no enemy found
                                                     // rotate turret back to forwards
                 _weaponRef.ResetRotation(transform.forward);
             }
             AnimatorStopFiring();
             _attacking = false;
-            if (!float.IsPositiveInfinity(_guardPosition.x) && Vector3.Distance(_guardPosition, transform.position) < Vector3.kEpsilon) {
+
+            // if no target move to guar pos
+            if (!float.IsPositiveInfinity(_guardPosition.x) && Vector3.Distance(_guardPosition, transform.position) < Vector3.kEpsilon && _aiRef.destination != _guardPosition) {
                 Move(_guardPosition, MovementMode.AMove);
-            } else {
+            } else if (_shiftQueue.Count == 0) {
+                // already at guard position
+                // do nothing
+            } else if (_movementMode == MovementMode.AMove && _aiRef.destination != _shiftQueue.Peek()._dest) { // if Amoving somewhere continue moving to dest
                 ExecuteFirstQueueAction();
             }
+
         }
     }
 

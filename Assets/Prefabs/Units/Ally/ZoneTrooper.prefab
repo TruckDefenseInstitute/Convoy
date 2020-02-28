@@ -247,11 +247,12 @@ MonoBehaviour:
   MaxHealth: 960
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
+  RetargetTime: 2
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5.5
-  OnEnemyDeathReward: 35
+  OnEnemyDeathReward: 20
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -447,7 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCost: 130
-  _unitTrainingTime: 10
+  _unitTrainingTime: 5.5
 --- !u!1 &5628242310197840274
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class BarracksBehaviour : MonoBehaviour
 
         unitScript.Start();
         unitScript.Move(RallyPoint.position, MovementMode.Move);
-        unitScript.ShiftMove(TruckReferenceManager.Instance.TruckGameObject.transform.position, MovementMode.AMove);
+        unitScript.ShiftFollow(TruckReferenceManager.Instance.TruckBehavior);
         Invoke("SpawnDude", CooldownTime);
     }
 }

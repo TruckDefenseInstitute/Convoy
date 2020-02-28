@@ -241,7 +241,7 @@ MonoBehaviour:
     type: 3}
   SpawnPosition: {fileID: 2944763925865779392}
   RallyPoint: {fileID: 2944763926250746023}
-  CooldownTime: 9
+  CooldownTime: 12
 --- !u!114 &7879922955203946036
 MonoBehaviour:
   m_ObjectHideFlags: 0

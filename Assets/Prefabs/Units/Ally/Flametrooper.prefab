@@ -518,11 +518,12 @@ MonoBehaviour:
   DestroyImmediately: 0
   Deathrattle: {fileID: 7190217404225326594, guid: 1f618360230211d45bc187c8a80385c1,
     type: 3}
+  RetargetTime: 2
   DetectionRange: 23
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5
-  OnEnemyDeathReward: 30
+  OnEnemyDeathReward: 20
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -593,7 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCost: 90
-  _unitTrainingTime: 9
+  _unitTrainingTime: 5
 --- !u!82 &3162706346676878027
 AudioSource:
   m_ObjectHideFlags: 0

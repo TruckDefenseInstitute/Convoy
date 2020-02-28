@@ -243,7 +243,6 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
         _gameControlState = GameControlState.Selected;
         _audioSource.clip = unitSelectionSound;
         _audioSource.Play();
-        Debug.Log("Now entering selected");
     }
 
     void MultiselectLeftMouseHeld()
