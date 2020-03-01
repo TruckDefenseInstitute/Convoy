@@ -6059,7 +6059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunDamageMult: 1
   CannonDamageMult: 0.25
-  RocketDamageMult: 0.25
+  RocketDamageMult: 0.33
   GrenadeDamageMult: 0.75
   SniperDamageMult: 1.1
 --- !u!114 &8384720999311943170
@@ -6211,7 +6211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitCost: 100
+  _unitCost: 90
   _unitTrainingTime: 5
 --- !u!1 &5203108326500030266
 GameObject:

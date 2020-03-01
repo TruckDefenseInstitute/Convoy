@@ -573,7 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCost: 120
-  _unitTrainingTime: 5.5
+  _unitTrainingTime: 6
 --- !u!1001 &597354458258842385
 PrefabInstance:
   m_ObjectHideFlags: 0

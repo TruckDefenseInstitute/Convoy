@@ -212,10 +212,11 @@ MonoBehaviour:
   Alignment: 1
   IsControllable: 0
   Name: War Garage
-  MaxHealth: 10000
+  MaxHealth: 5000
   DestroyImmediately: 0
   Deathrattle: {fileID: 4121849538939856015, guid: def12e3d87090c744b08d557dd68dc79,
     type: 3}
+  RetargetTime: 2
   DetectionRange: 0
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1

@@ -369,8 +369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunDamageMult: 0.5
-  CannonDamageMult: 1.1
-  RocketDamageMult: 1.1
+  CannonDamageMult: 1
+  RocketDamageMult: 1
   GrenadeDamageMult: 0.75
   SniperDamageMult: 0.01
 --- !u!114 &8155252163900823658

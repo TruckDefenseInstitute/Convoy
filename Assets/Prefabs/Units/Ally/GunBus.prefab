@@ -161,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7247557218571838799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -49.759487, y: -0.1, z: 35.755978}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7247557218871525696}
@@ -290,7 +290,7 @@ MonoBehaviour:
   Alignment: 0
   IsControllable: 1
   Name: TurtleTank
-  MaxHealth: 3400
+  MaxHealth: 3000
   DestroyImmediately: 1
   Deathrattle: {fileID: 1611733386190981116, guid: 5843c8bf1e0f0e74d8d4eed9ed36da23,
     type: 3}
@@ -298,7 +298,7 @@ MonoBehaviour:
   DetectionRange: 35
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
-  MoveSpeed: 6
+  MoveSpeed: 7.5
   OnEnemyDeathReward: 15
   MaxRotatingSpeed: 90
   EffectSpawningPoint: {fileID: 0}
@@ -491,8 +491,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitCost: 120
-  _unitTrainingTime: 6
+  _unitCost: 110
+  _unitTrainingTime: 5
 --- !u!1 &7247557218871525697
 GameObject:
   m_ObjectHideFlags: 0

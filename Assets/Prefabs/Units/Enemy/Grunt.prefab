@@ -6041,6 +6041,7 @@ MonoBehaviour:
   MaxHealth: 75
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
+  RetargetTime: 2
   DetectionRange: 30
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -6088,7 +6089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunDamageMult: 0.75
   CannonDamageMult: 0.25
-  RocketDamageMult: 0.25
+  RocketDamageMult: 0.33
   GrenadeDamageMult: 0.75
   SniperDamageMult: 1
 --- !u!114 &3192560613245235644
