@@ -42,6 +42,8 @@ public class Unit : MonoBehaviour {
     public GameObject Deathrattle;
 
     // unit stats
+    [HideInInspector]
+    public float RetargetTime = 2.0f;
     public float DetectionRange;
     public float AMoveStopDistMultiplier = 1f;
     public float LoseVisionMultiplier = 1.1f;
@@ -314,30 +316,52 @@ public class Unit : MonoBehaviour {
 
         _startHasRun = true;
     }
-    
-    void AcquireTarget() {
-        float minDist = DetectionRange;
-        float bestDmg = 0f;
 
+    bool GetBestTarget() {
+        float bestTimeToKill = float.PositiveInfinity;
+        _targets.RemoveWhere(u => !u.IsAlive());
+        _targets.RemoveWhere(u => u == null);
+        foreach (var unit in _targets) {
+            var dist = DistanceIgnoreY(unit.transform.position, transform.position);
+            var effectiveness = unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType));
+            var dpsToUnit = effectiveness * _weaponRef.DPS;
+            var timeToKill = unit.Health / dpsToUnit;
+            if (effectiveness <= 0.04f) {
+                continue;
+            }
+            // if both can one shot
+            if (timeToKill < _weaponRef.CooldownTime && bestTimeToKill < _weaponRef.CooldownTime && dist < DetectionRange) {
+                // select the one with higher kill time
+                if (timeToKill > bestTimeToKill) {
+                    _focusTarget = unit;
+                    bestTimeToKill = timeToKill;
+                }
+            } else { // cannot one shot, so select the one that takes less shits
+                if (timeToKill < bestTimeToKill && dist < DetectionRange) {
+                    _focusTarget = unit;
+                    bestTimeToKill = timeToKill;
+                }
+            }
+        }
+        return _focusTarget != null;
+    }
+
+    void ReacquireTarget() {
+        // dont override player command
+        if (_movementMode == MovementMode.Attack) {
+            return;
+        }
+
+        if (_focusTarget != null) {
+            GetBestTarget();
+            Invoke("ReacquireTarget", RetargetTime);
+        }
+    }
+
+    void AcquireTarget() {
         if (_focusTarget == null) {
-            _targets.RemoveWhere(u => !u.IsAlive());
-            _targets.RemoveWhere(u => u == null);
-            foreach (var unit in _targets) {
-                var dist = DistanceIgnoreY(unit.transform.position, transform.position);
-                var curDmg = unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType));
-                if (curDmg <= 0.04f) {
-                    continue;
-                }
-                if (curDmg == bestDmg && dist < minDist) {
-                    _focusTarget = unit;
-                    bestDmg = curDmg;
-                    minDist = dist;
-                }
-                if (curDmg > bestDmg && dist < DetectionRange) {
-                    _focusTarget = unit;
-                    bestDmg = curDmg;
-                    minDist = dist;
-                }
+            if (GetBestTarget()) {
+                Invoke("ReacquireTarget", RetargetTime);
             }
         }
     }

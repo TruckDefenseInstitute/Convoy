@@ -11,6 +11,10 @@ public class Weapon : MonoBehaviour {
     public DamageType DamageType;
     public float AttackDamage;
     public float AttackRange;
+    [HideInInspector]
+    public float DPS {
+        get => AttackDamage / CooldownTime;
+    }
     // prefably move timing stuff to mechanim
     public float AimTime;
     float _aimTimeLeft;
