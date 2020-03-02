@@ -46,7 +46,7 @@
                 float4 pos: SV_POSITION;                  // Position in clip space
                 float4 preDistortionPosition: TEXCOORD0;  // Actual position on-screen
                 float4 postDistortionPosition: TEXCOORD1; // Position on-screen to actually grab from 
-                float4 depth: DEPTH;                      // Depth
+                float4 depth: DEPTH;
                 float3 normal: NORMAL;
                 float3 viewDir: TEXCOORD2;
             };
@@ -69,7 +69,6 @@
 
                 // Get depth
                 output.depth = UnityObjectToViewPos(input.vertex).z * _ProjectionParams.w;
-                //output.depth = -mul(UNITY_MATRIX_MV, input.vertex).z * _ProjectionParams.w;
 
                 // Get normal
                 output.normal = UnityObjectToWorldNormal(input.normal);
