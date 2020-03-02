@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UiOverlayManager : Manager<UiOverlayManager> {
@@ -20,6 +21,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     // UI Inteface Canvas
     private GameObject _uiInterfaceCanvas;
+    private GameObject _minimap;
     private GameObject _deployedUnitsPanel;
     private GameObject _trainUnitsPanel;
     private GameObject _trainingQueue;
@@ -31,6 +33,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     
     // Others
     private Camera _playerCamera;
+    private Camera _minimapCamera;
     private Vector3 _mousePos;
 
     private bool _isDragging = false;
@@ -44,6 +47,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
         // UI Interface Canvas
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
+        _minimap = GameObject.Find("Minimap");
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
         _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
@@ -53,7 +57,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
         // Others
-        _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
+        _playerCamera = Camera.main;
+        _minimapCamera = GameObject.Find("MinimapCamera").GetComponent<Camera>();
 
         // Startup
         GetTrainingUnitsPanelInfo(TrainingUnitsQueueManager.Instance.GetUnitTypeList());
@@ -66,20 +71,30 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private void OnGUI() {
         if(_isDragging) {
             var rect = ScreenHelper.GetScreenRect(_mousePos, Input.mousePosition);
-            ScreenHelper.DrawScreenRect(rect, Color.clear);
             ScreenHelper.DrawScreenRectBorder(rect, 1, new Color(0.6f, 0.9608f, 0.706f));
         }
+
+        // var minimapRect = ScreenHelper.GetScreenRect();
+        // ScreenHelper.DrawScreenRectBorder(minimapRect, 1, new Color(1f, 1f, 1f));
     }
 
     /*================ DrawingBox ================*/
     private void UpdateDrawingBox() {
         if(Input.GetMouseButtonDown(0)) {
-            _mousePos = Input.mousePosition;
-            _isDragging = true;
+            if(IsPointerNotOverUI()) {
+                _mousePos = Input.mousePosition;
+                _isDragging = true;
+            }
         }
 
         if(Input.GetMouseButtonUp(0)) {
             _isDragging = false;
+        }
+
+        if(Input.GetMouseButton(0)) {
+            if(IsPointerOverMinimap() && !_isDragging) {
+                MoveCameraThroughMinimap(Input.mousePosition);
+            }
         }
     }
 
@@ -208,19 +223,13 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     }
 
     /*================ Units Status ================*/
-    public void ResetUnitStatus() {
-        
-    }
-
     public void CreateUnitStatus(DeployedUnitButton deployedButton) {
-        ResetUnitStatus();
         GameObject unit = deployedButton.GetUnit();
         _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
         _uiUnitStatus.ChangeUnitStatus(unit);
     }
 
     public void CreateUnitStatus_M(DeployedUnitButtonM deployedButton) {
-        ResetUnitStatus();
         // Assumes the list is not empty
         GameObject unit = deployedButton.GetUnitList()[0];
         _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
@@ -277,4 +286,40 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         
     }
     
+    /* =============== Other UI ================ */
+    
+    private bool IsPointerNotOverUI() {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count == 0;
+    }
+
+    private bool IsPointerOverMinimap() {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        
+        foreach(RaycastResult result in results) {
+            if(result.gameObject == _minimap) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void MoveCameraThroughMinimap(Vector3 mousePos) {
+        // This are magic numbers because i have no idea how tf to make them work.
+        mousePos.x -= 10;
+        mousePos.y -= 10;
+
+        mousePos.x /= 1.5f;
+        mousePos.y /= 1.5f;
+
+        Vector3 worldPos = _minimapCamera.ScreenToWorldPoint(mousePos);
+        PlayerCameraManager.Instance.SetCameraPosition(worldPos);
+    }
 }

@@ -80,4 +80,8 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
             CameraAngleAxis.transform.localEulerAngles = angle;
         }
     }
+
+    public void SetCameraPosition(Vector3 position) {
+        CameraRig.transform.position = new Vector3(position.x, CameraRig.transform.position.y, position.z);
+    }
 }

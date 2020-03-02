@@ -88,7 +88,6 @@ public class Unit : MonoBehaviour {
 
     public void DisableMovement(bool move) {
         _movementLocked = move;
-        Debug.Log(_shiftQueue.Count);
         ExecuteFirstQueueAction();
     }
     public void AnimatorStartMoving() {
