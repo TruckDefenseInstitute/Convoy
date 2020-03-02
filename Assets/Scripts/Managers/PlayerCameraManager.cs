@@ -71,7 +71,7 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
             CameraRig.transform.position = pos;
 
             var rot = CameraRig.transform.localEulerAngles;
-            rot.y += Input.GetKey(KeyCode.O) ? Time.deltaTime * 180 : Input.GetKey(KeyCode.P) ? Time.deltaTime * -180 : 0;
+            rot.y += Input.GetKey(KeyCode.LeftBracket) ? Time.deltaTime * 180 : Input.GetKey(KeyCode.RightBracket) ? Time.deltaTime * -180 : 0;
             CameraRig.transform.localEulerAngles = rot;
 
             var angle = CameraAngleAxis.transform.localEulerAngles;
