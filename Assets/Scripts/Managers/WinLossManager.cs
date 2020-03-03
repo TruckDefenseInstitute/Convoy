@@ -21,12 +21,27 @@ public class WinLossManager : Manager<WinLossManager>
     void Start()
     {
         _levelStatus = LevelStatus.Ongoing;
-        
-        _winScreenCanvas = GameObject.Find("WinScreenCanvas");
         // _winScreenCanvas.SetActive(False);
+        {
+            var temp = Resources.FindObjectsOfTypeAll<Canvas>();
+            foreach (var x in temp) {
+                if (x.name == "WinScreenCanvas") {
+                    _winScreenCanvas = x.gameObject;
+                    break;
+                }
+            }
+        }
 
-        _loseScreenCanvas = GameObject.Find("LoseScreenCanvas");
         // _loseScreenCanvas.SetActive(False);
+        {
+            var temp = Resources.FindObjectsOfTypeAll<Canvas>();
+            foreach (var x in temp) {
+                if (x.name == "LoseScreenCanvas") {
+                    _loseScreenCanvas = x.gameObject;
+                    break;
+                }
+            }
+        }
     }
 
     public void ReportTruckReachedLevelEnd()
