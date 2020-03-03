@@ -8,10 +8,10 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
     private static Queue<TrainButton> _unitSlotQueue;
 
     [SerializeField] 
-    private List<GameObject> _unitTypeList;
+    private List<GameObject> _unitTypeList = null;
 
     [SerializeField]
-    private GameObject _summonCircle;
+    private GameObject _summonCircle = null;
 
     private int _maxQueueSize = 8;
 

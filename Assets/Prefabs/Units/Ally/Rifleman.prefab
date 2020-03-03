@@ -646,6 +646,7 @@ MonoBehaviour:
   MaxHealth: 450
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
+  RetargetTime: 2
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -845,6 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 10
   _unitTrainingTime: 2
+  _unitDescription: Your standard infantry unit, a jack of all trades.
 --- !u!1 &1733108195715021503
 GameObject:
   m_ObjectHideFlags: 0
