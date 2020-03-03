@@ -4059,6 +4059,7 @@ MonoBehaviour:
   MaxHealth: 500
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
+  RetargetTime: 2
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -4123,6 +4124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 50
   _unitTrainingTime: 9
+  _unitDescription: Good Tank against Rifles
 --- !u!1 &2550659282452598374
 GameObject:
   m_ObjectHideFlags: 0

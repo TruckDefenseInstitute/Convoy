@@ -3478,6 +3478,7 @@ MonoBehaviour:
   MaxHealth: 1000
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
+  RetargetTime: 2
   DetectionRange: 10
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
@@ -3542,3 +3543,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 80
   _unitTrainingTime: 12
+  _unitDescription: Fast Assassin

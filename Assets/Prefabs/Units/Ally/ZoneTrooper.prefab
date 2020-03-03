@@ -247,6 +247,7 @@ MonoBehaviour:
   MaxHealth: 960
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
+  RetargetTime: 2
   DetectionRange: 35
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -448,6 +449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 50
   _unitTrainingTime: 8
+  _unitDescription: Good against Turrets
 --- !u!1 &5628242310197840274
 GameObject:
   m_ObjectHideFlags: 0

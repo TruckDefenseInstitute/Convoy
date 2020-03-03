@@ -1,25 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class TrainButton : MonoBehaviour {
+public class TrainButton : MonoBehaviour, 
+                            IPointerEnterHandler,
+                            IPointerExitHandler {
     
     [SerializeField]
-    private GameObject _unitPrefab;
+    private GameObject _unitPrefab = null;
 
-    private GameObject _unitsInQueue;
+    private GameObject _unitsInQueue = null;
 
-    private TextMeshProUGUI _unitsInQueueText;
-    private Image _trainingTimeImage;    
+    private TextMeshProUGUI _unitsInQueueText = null;
+    private Image _trainingTimeImage = null;
 
     private int _amountOfUnitsQueued = 0;
-    private float _trainingIntervals;
+    private float _trainingIntervals = 0;
     private bool _isCompleted = false;
     private bool _isTraining = false;
-    private float _unitCost;
-    private float _unitTrainingTime;
+    private float _unitCost = 0;
+    private float _unitTrainingTime = 0;
 
     // Magic Numbers
     private float ticksPerSecond = 100;
@@ -35,6 +38,15 @@ public class TrainButton : MonoBehaviour {
     
         _trainingIntervals = _unitTrainingTime / ticksPerSecond;
     }
+
+    public void OnPointerEnter(PointerEventData eventdata) {
+        UiOverlayManager.Instance.PopUpUnitDescription(_unitPrefab);
+    }
+
+    public void OnPointerExit(PointerEventData eventdata) {
+        UiOverlayManager.Instance.RemoveUnitDescription(_unitPrefab);
+    }
+
 
     IEnumerator TrainingDelay() {
         if(_trainingTimeImage.fillAmount <= 0) {

@@ -518,6 +518,7 @@ MonoBehaviour:
   DestroyImmediately: 0
   Deathrattle: {fileID: 7190217404225326594, guid: 1f618360230211d45bc187c8a80385c1,
     type: 3}
+  RetargetTime: 2
   DetectionRange: 23
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
@@ -594,6 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 80
   _unitTrainingTime: 15
+  _unitDescription: Throws Fire
 --- !u!82 &3162706346676878027
 AudioSource:
   m_ObjectHideFlags: 0

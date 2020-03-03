@@ -9,36 +9,37 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     // Serialized Prefabs
     [SerializeField] 
-    private GameObject _healthBarPrefab;
+    private GameObject _healthBarPrefab = null;
     [SerializeField]
-    private GameObject _resourceGainPopupPrefab;
+    private GameObject _popUpPrefab = null;
     [SerializeField]
-    private GameObject _resourceLossPopupPrefab;
+    private GameObject _resourceGainPopupPrefab = null;
+    [SerializeField]
+    private GameObject _resourceLossPopupPrefab = null;
     
     // UI In Game Canvas
-    private GameObject _uiInGameCanvas;
-    private GameObject _healthBarPanel;
+    private GameObject _uiInGameCanvas = null;
+    private GameObject _healthBarPanel = null;
 
     // UI Inteface Canvas
-    private GameObject _uiInterfaceCanvas;
-    private GameObject _minimap;
-    private GameObject _deployedUnitsPanel;
-    private GameObject _trainUnitsPanel;
-    private GameObject _trainingQueue;
+    private GameObject _uiInterfaceCanvas = null;
+    private GameObject _minimap = null;
+    private GameObject _deployedUnitsPanel = null;
+    private GameObject _trainUnitsPanel = null;
+    private GameObject _trainingQueue = null;
+    private GameObject _popUpPanel = null;
     
-    private UiUnitStatus _uiUnitStatus;
-    private TextMeshProUGUI _resourcesText;
-    private GameObject _resourceChange;
-    private DeployedUnitDictionary _deployedUnitDictionary;
+    private UiUnitStatus _uiUnitStatus = null;
+    private TextMeshProUGUI _resourcesText = null;
+    private GameObject _resourceChange = null;
+    private DeployedUnitDictionary _deployedUnitDictionary = null;
     
     // Others
-    private Camera _playerCamera;
-    private Camera _minimapCamera;
+    private Camera _playerCamera = null;
+    private Camera _minimapCamera = null;
     private Vector3 _mousePos;
 
     private bool _isDragging = false;
-    private bool _isUnitTrainingCompleted = true;
-    private int _maxSlots = 10;
 
     void Start() {
         // UI In Game Canvas
@@ -54,6 +55,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _resourceChange = GameObject.Find("ResourceChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
         _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
+        _popUpPanel = _uiInterfaceCanvas.transform.GetChild(6).gameObject;
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
         // Others
@@ -92,7 +94,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         }
 
         if(Input.GetMouseButton(0)) {
-            if(IsPointerOverMinimap() && !_isDragging) {
+            if(_minimap.GetComponent<UiMinimap>().GetIsHovering() && !_isDragging) {
                 MoveCameraThroughMinimap(Input.mousePosition);
             }
         }
@@ -286,6 +288,19 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         
     }
     
+    /* =============== Pop Up ================= */
+
+    public void PopUpUnitDescription(GameObject unit) {
+        GameObject popUp = Instantiate(_popUpPrefab);
+        popUp.GetComponent<UiPopUp>().Configure(unit, _popUpPanel);
+    }
+
+    public void RemoveUnitDescription(GameObject unit) {
+        foreach(Transform child in _popUpPanel.transform) {
+            Destroy(child.gameObject);
+        }
+    }
+
     /* =============== Other UI ================ */
     
     private bool IsPointerNotOverUI() {
@@ -294,21 +309,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count == 0;
-    }
-
-    private bool IsPointerOverMinimap() {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        
-        foreach(RaycastResult result in results) {
-            if(result.gameObject == _minimap) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private void MoveCameraThroughMinimap(Vector3 mousePos) {

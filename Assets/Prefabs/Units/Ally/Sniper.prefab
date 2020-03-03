@@ -6011,6 +6011,7 @@ MonoBehaviour:
   MaxHealth: 300
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
+  RetargetTime: 2
   DetectionRange: 52
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
@@ -6212,6 +6213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 20
   _unitTrainingTime: 0
+  _unitDescription: Good against infantries.
 --- !u!1 &5203108326500030266
 GameObject:
   m_ObjectHideFlags: 0
