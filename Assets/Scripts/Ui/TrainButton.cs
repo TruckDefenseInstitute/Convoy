@@ -47,6 +47,14 @@ public class TrainButton : MonoBehaviour,
         UiOverlayManager.Instance.RemoveUnitDescription(_unitPrefab);
     }
 
+    public void Configure() {
+        RectTransform slotRect = GetComponent<RectTransform>();
+        slotRect.localScale = new Vector3(1, 1, 1);
+        slotRect.offsetMin = new Vector2(0, 0);
+        slotRect.offsetMax = new Vector2(0, 0);
+        slotRect.sizeDelta = new Vector2(65, 65);
+    }
+
 
     IEnumerator TrainingDelay() {
         if(_trainingTimeImage.fillAmount <= 0) {

@@ -28,8 +28,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private GameObject _trainUnitsPanel = null;
     private GameObject _trainingQueue = null;
     private GameObject _popUpPanel = null;
-    
-    private UiUnitStatus _uiUnitStatus = null;
+    private GameObject _unitStatus = null;
+
     private TextMeshProUGUI _resourcesText = null;
     private GameObject _resourceChange = null;
     private DeployedUnitDictionary _deployedUnitDictionary = null;
@@ -54,7 +54,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
         _resourceChange = GameObject.Find("ResourceChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
-        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
+        _unitStatus = GameObject.Find("UnitStatus");
         _popUpPanel = _uiInterfaceCanvas.transform.GetChild(6).gameObject;
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
@@ -152,16 +152,18 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
                 
             });
 
+        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
         if(allyList.Count <= 10) {
-            SelectIndividualUnits(allyList);
+            SelectIndividualUnits(splitAllyList);
         } else {
-            SelectGroupUnits(allyList);
+            SelectGroupUnits(splitAllyList);
         }
+
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(allyList[0]);
     }
 
-    private void SelectIndividualUnits(List<GameObject> allyList) {
+    private void SelectIndividualUnits(List<List<GameObject>> splitAllyList) {
         int slot = 0;
-        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
         foreach(List<GameObject> sameAllyList in splitAllyList) {
             foreach(GameObject selectedAlly in sameAllyList) {
                 GameObject deployedButtonPrefab = _deployedUnitDictionary
@@ -170,20 +172,14 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             
                 GameObject deployedButton = Instantiate(deployedButtonPrefab, Vector3.zero, Quaternion.identity);
                 deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
-                RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
-                slotRect.offsetMin = new Vector2(0, 0);
-                slotRect.offsetMax = new Vector2(0, 0);
-                slotRect.localScale = new Vector3(1, 1, 1);
-                slot++;   
-
-                deployedButton.GetComponent<DeployedUnitButton>().SetUnit(selectedAlly);
+                deployedButton.GetComponent<DeployedUnitButton>().Configure(selectedAlly);
+                slot++;
             }
         }
     }   
 
-    private void SelectGroupUnits(List<GameObject> allyList) {        
+    private void SelectGroupUnits(List<List<GameObject>> splitAllyList) {        
         int slot = 0;
-        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
         foreach(List<GameObject> sameAllyList in splitAllyList) {
             GameObject deployedButtonPrefab_M = _deployedUnitDictionary
                     .GetUnitDeployedButton_M(sameAllyList[0]
@@ -191,15 +187,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         
             GameObject deployedButton = Instantiate(deployedButtonPrefab_M, Vector3.zero, Quaternion.identity);
             deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
-            RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
-            slotRect.offsetMin = new Vector2(0, 0);
-            slotRect.offsetMax = new Vector2(0, 0);
-            slotRect.localScale = new Vector3(1, 1, 1);
+            deployedButton.GetComponent<DeployedUnitButtonM>().Configure(sameAllyList, sameAllyList.Count.ToString());
             slot++;   
-            TextMeshProUGUI totalUnitsText = deployedButton.transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-            totalUnitsText.text = sameAllyList.Count.ToString();
-
-            deployedButton.GetComponent<DeployedUnitButtonM>().SetUnitList(sameAllyList);
         }
     }
 
@@ -227,15 +216,19 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     /*================ Units Status ================*/
     public void CreateUnitStatus(DeployedUnitButton deployedButton) {
         GameObject unit = deployedButton.GetUnit();
-        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
-        _uiUnitStatus.ChangeUnitStatus(unit);
+        if(_unitStatus == null) {
+            _unitStatus = GameObject.Find("UnitStatus");
+        } 
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
     }
 
     public void CreateUnitStatus_M(DeployedUnitButtonM deployedButton) {
         // Assumes the list is not empty
         GameObject unit = deployedButton.GetUnitList()[0];
-        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
-        _uiUnitStatus.ChangeUnitStatus(unit);
+        if(_unitStatus == null) {
+            _unitStatus = GameObject.Find("UnitStatus");
+        } 
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
     }
 
     /*================ Resources ================*/
@@ -269,10 +262,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             Transform unitSummonSlot = _trainUnitsPanel.transform.GetChild(slot);
             GameObject unitPanel = Instantiate(unitType, unitType.transform.position, unitType.transform.rotation);
             unitPanel.transform.SetParent(unitSummonSlot);
-            RectTransform slotRect = unitPanel.GetComponent<RectTransform>();
-            slotRect.offsetMin = new Vector2(0, 0);
-            slotRect.offsetMax = new Vector2(0, 0);
-            slotRect.localScale = new Vector3(1, 1, 1);
+            unitPanel.GetComponent<TrainButton>().Configure();
             slot++;
         }
     }

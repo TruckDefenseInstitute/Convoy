@@ -610,4 +610,8 @@ public class Unit : MonoBehaviour {
             _selectRing.SetActive(false);
         }
     }
+
+    public GameObject GetHealthBar() {
+        return _healthBar;
+    }
 }
