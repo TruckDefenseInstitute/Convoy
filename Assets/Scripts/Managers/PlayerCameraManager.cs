@@ -30,6 +30,8 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
     public KeyCode left = KeyCode.LeftArrow;
     public KeyCode right = KeyCode.RightArrow;
 
+    bool _middleMousePanning;
+    Vector3 _middleMousePanningStartCoords;
 
     void Start() {
         _cameraGameObject = GameObject.Find(cameraName == null ? _defaultCameraName : cameraName);
@@ -43,6 +45,14 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
         Vector3 pos = CameraRig.transform.position;
 
         if (UnitControlAndSelectionManager.Instance.InPannableControlState()) {
+            if (Input.GetKeyDown(KeyCode.Mouse2)) {
+                _middleMousePanning = true;
+                _middleMousePanningStartCoords = Input.mousePosition;
+            }
+            if (Input.GetKeyUp(KeyCode.Mouse2)) {
+                _middleMousePanning = false;
+            }
+
             if (Input.GetKey(up) || Input.mousePosition.y >= Screen.height - panBorderThickness) {
                 pos += CameraRig.transform.forward * Time.deltaTime * panSpeed;
             }
@@ -57,6 +67,11 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
 
             if (Input.GetKey(right) || Input.mousePosition.x >= Screen.width - panBorderThickness) {
                 pos += CameraRig.transform.right * Time.deltaTime * panSpeed;
+            }
+
+            if (_middleMousePanning) {
+                pos += CameraRig.transform.forward * Time.deltaTime * panSpeed * (Input.mousePosition - _middleMousePanningStartCoords).y / Screen.height * 5.0f;
+                pos += CameraRig.transform.right * Time.deltaTime * panSpeed * (Input.mousePosition - _middleMousePanningStartCoords).x / Screen.width * 5.0f;
             }
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
