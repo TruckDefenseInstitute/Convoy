@@ -27,6 +27,10 @@ public class Weapon : MonoBehaviour {
     public GameObject Projectile;
     public Transform ProjectileSpawnPoint;
 
+    private void Start() {
+        _cooldownLeft = CooldownTime;
+    }
+
     public void LoseAim() {
         _target = null;
     }
