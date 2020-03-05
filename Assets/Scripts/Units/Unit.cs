@@ -467,7 +467,7 @@ public class Unit : MonoBehaviour {
         }
     }
     
-    void Update() {
+    protected void Update() {
         // dont do anything if dead
         if (!IsAlive()) {
             if (_decompose) {
