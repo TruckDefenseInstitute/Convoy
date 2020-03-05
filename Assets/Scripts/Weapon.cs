@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour {
         _target = null;
     }
     
-    public void AimAt(Unit u) {
+    public bool AimAt(Unit u) {
         if (_target != u) {
             _target = u;
             _aimTimeLeft = 0;
@@ -50,8 +50,9 @@ public class Weapon : MonoBehaviour {
         RotationRoot.rotation = Quaternion.LookRotation(f, Vector3.up);
 
         if (AngleIgnoreY(RotationRoot.forward, d) <= MaxShootAngle) { // within angles
-            TryAttack();
+            return TryAttack();
         }
+        return false;
     }
 
     private void Update() {
@@ -68,10 +69,12 @@ public class Weapon : MonoBehaviour {
         RotationRoot.rotation = Quaternion.LookRotation(f, Vector3.up);
     }
 
-    void TryAttack() {
+    bool TryAttack() {
         if (_aimTimeLeft >= AimTime && _cooldownLeft >= CooldownTime) {
             Attack();
+            return true;
         }
+        return false;
     }
 
     void Attack() {

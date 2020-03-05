@@ -389,8 +389,9 @@ public class Unit : MonoBehaviour {
                 }
             } else {
                 // attack if inside range
-                _weaponRef.AimAt(_focusTarget);
-                AnimatorStartFiring();
+                if (_weaponRef.AimAt(_focusTarget)) {
+                    AnimatorStartFiring();
+                }
 
                 // move to mult distance AMoveStopDistMultiplier
                 if (!_weaponRef.CanMoveWhileAttacking || distanceToFocus <= _weaponRef.AttackRange * AMoveStopDistMultiplier) {
