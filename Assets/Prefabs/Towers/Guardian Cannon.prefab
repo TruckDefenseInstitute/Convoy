@@ -334,11 +334,12 @@ MonoBehaviour:
   DestroyImmediately: 0
   Deathrattle: {fileID: 4121849538939856015, guid: def12e3d87090c744b08d557dd68dc79,
     type: 3}
+  RetargetTime: 2
   DetectionRange: 35
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 10
-  OnEnemyDeathReward: 100
+  OnEnemyDeathReward: 50
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 2854884618499930957}
   selectRingPrefab: {fileID: 0}
@@ -358,10 +359,10 @@ MonoBehaviour:
   RotationRoot: {fileID: 4835563620151454792}
   MaxShootAngle: 5
   DamageType: 1
-  AttackDamage: 200
+  AttackDamage: 500
   AttackRange: 35
   AimTime: 0.4
-  CooldownTime: 1.4
+  CooldownTime: 1.8
   CanMoveWhileAttacking: 0
   Projectile: {fileID: 5223907511035474348, guid: 8e1945fdaa2a98b40accffa1a3a4b12f,
     type: 3}
@@ -379,8 +380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunDamageMult: 0.5
-  CannonDamageMult: 0.75
-  RocketDamageMult: 0.5
+  CannonDamageMult: 0.8
+  RocketDamageMult: 0.75
   GrenadeDamageMult: 1
   SniperDamageMult: 0.01
 --- !u!114 &1994548169520882249

@@ -66,8 +66,7 @@ public class RocketProjectile : MonoBehaviour {
         if (_exploded) {
             return;
         }
-
-        if (_u.IsAlive()) {
+        if (_u != null && _u.IsAlive()) {
             _dest = _u.transform.position + Vector3.up;
             if (Vector3.Distance(_dest, transform.position) <= _radius) {
                 HitTarget();

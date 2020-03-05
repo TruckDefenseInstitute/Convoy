@@ -212,15 +212,16 @@ MonoBehaviour:
   Alignment: 1
   IsControllable: 0
   Name: War Garage
-  MaxHealth: 10000
+  MaxHealth: 5000
   DestroyImmediately: 0
   Deathrattle: {fileID: 4121849538939856015, guid: def12e3d87090c744b08d557dd68dc79,
     type: 3}
+  RetargetTime: 2
   DetectionRange: 0
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
   MoveSpeed: 10
-  OnEnemyDeathReward: 1
+  OnEnemyDeathReward: 100
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 0}
@@ -236,12 +237,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 211df391cb34fa1479b42a627e395bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SleepTime: 30
+  SleepTime: 35
   UnitToSpawn: {fileID: 59739696491603235, guid: 47ca758acc9e6aa4ab389f71ab3e690e,
     type: 3}
   SpawnPosition: {fileID: 2944763925865779392}
   RallyPoint: {fileID: 2944763926250746023}
-  CooldownTime: 6
+  CooldownTime: 12
 --- !u!114 &7879922955203946036
 MonoBehaviour:
   m_ObjectHideFlags: 0

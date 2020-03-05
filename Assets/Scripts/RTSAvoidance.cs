@@ -110,10 +110,14 @@ public class RTSAvoidance : MonoBehaviour {
         CheckDestination();
 
         if (ai.reachedEndOfPath || ShouldStop()) {
+            if (TryGetComponent<Weapon>(out var w)) {
+                if (w.CanMoveWhileAttacking) {
+                }
+            }
             if (!ai.pathPending) {
                 timer1 = 0f;
                 reachedCurrentDestination = true;
-                ReachedDestinationCallback();
+                ReachedDestinationCallback.Invoke();
             }
             //ai.isStopped = true;
             rvo.flowFollowingStrength = Mathf.Lerp(rvo.flowFollowingStrength, 1.0f, Time.deltaTime * 1);

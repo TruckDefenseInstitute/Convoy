@@ -327,7 +327,7 @@ MonoBehaviour:
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 16
-  OnEnemyDeathReward: 1
+  OnEnemyDeathReward: 15
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -369,8 +369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunDamageMult: 0.5
-  CannonDamageMult: 1.1
-  RocketDamageMult: 1.1
+  CannonDamageMult: 1
+  RocketDamageMult: 1
   GrenadeDamageMult: 0.75
   SniperDamageMult: 0.01
 --- !u!114 &8155252163900823658

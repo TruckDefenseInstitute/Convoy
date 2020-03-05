@@ -4056,7 +4056,7 @@ MonoBehaviour:
   Alignment: 0
   IsControllable: 1
   Name: Peacekeeper
-  MaxHealth: 500
+  MaxHealth: 50000
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
   RetargetTime: 2
@@ -4064,7 +4064,7 @@ MonoBehaviour:
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5
-  OnEnemyDeathReward: 3
+  OnEnemyDeathReward: 10
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -4105,11 +4105,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c4884072b92fa4db86e9b910aac6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GunDamageMult: 0.1
-  CannonDamageMult: 1
-  RocketDamageMult: 0.5
-  GrenadeDamageMult: 0.1
-  SniperDamageMult: 0.2
+  GunDamageMult: 10
+  CannonDamageMult: 100
+  RocketDamageMult: 50
+  GrenadeDamageMult: 10
+  SniperDamageMult: 20
 --- !u!114 &-3130877715890117894
 MonoBehaviour:
   m_ObjectHideFlags: 0

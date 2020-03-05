@@ -34,6 +34,21 @@ public class Weapon : MonoBehaviour {
     public void LoseAim() {
         _target = null;
     }
+
+    public void ContinueToAimAt(Unit u) {
+        if (_target != u) {
+            return;
+        }
+
+        Vector3 d = u.transform.position - RotationRoot.position;
+        d.y = 0;
+        Vector3 f = Vector3.RotateTowards(
+            RotationRoot.forward,
+            d,
+            Mathf.Deg2Rad * RotationSpeed * Time.deltaTime,
+            0);
+        RotationRoot.rotation = Quaternion.LookRotation(f, Vector3.up);
+    }
     
     public bool AimAt(Unit u) {
         if (_target != u) {

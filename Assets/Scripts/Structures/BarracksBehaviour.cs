@@ -3,45 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Unit))]
 public class BarracksBehaviour : MonoBehaviour
 {
-    public GameObject unitToSpawn;
-    
+    public float SleepTime;
+    public GameObject UnitToSpawn;
+    public Transform SpawnPosition;
+    public Transform RallyPoint;
+
     public float CooldownTime;
     float _cooldownLeft;
     Vector3 spawnPosition;
-
-    TruckReferenceManager _truckReferenceManager;
+    Unit _unit;
 
     // Start is called before the first frame update
     void Start()
     {
-        _truckReferenceManager = GameObject.Find("GameManager").GetComponent<TruckReferenceManager>();
-
         float barracksYAxisRotation = gameObject.transform.rotation.eulerAngles.y;
-        Vector3 initialDisplacement = new Vector3(8f, 0f, 0f);
-
-        Vector3 finalDisplacement = GetVectorRotatedAboutYAxis(initialDisplacement, barracksYAxisRotation);
-        spawnPosition = gameObject.transform.position + finalDisplacement;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (_cooldownLeft >= CooldownTime)
-        {
-            _cooldownLeft = 0;
-
-            Unit unitScript = Instantiate(unitToSpawn, spawnPosition, Quaternion.identity).GetComponent<Unit>();
-            unitScript.Alignment = Alignment.Hostile;
-
-            unitScript.Start();
-            unitScript.Move(TruckReferenceManager.Instance.TruckGameObject.transform.position, MovementMode.AMove);
-        }
-        else
-        {
-            _cooldownLeft = _cooldownLeft + Time.deltaTime;
-        }
+        _unit = GetComponent<Unit>();
+        Invoke("SpawnDude", SleepTime);
     }
 
     Vector3 GetVectorRotatedAboutYAxis(Vector3 vector, float degrees)
@@ -57,5 +37,21 @@ public class BarracksBehaviour : MonoBehaviour
         float x2 = (float)(sin * z1 + cos * x1);
 
         return new Vector3(x2, vector.y, z2);
+    }
+
+    void SpawnDude() {
+        if (!_unit.IsAlive()) {
+            Destroy(this);
+            return;
+        }
+        _cooldownLeft = 0;
+
+        Unit unitScript = Instantiate(UnitToSpawn, SpawnPosition.position, SpawnPosition.rotation).GetComponent<Unit>();
+        unitScript.Alignment = Alignment.Hostile;
+
+        unitScript.Start();
+        unitScript.Move(RallyPoint.position, MovementMode.Move);
+        unitScript.ShiftFollow(TruckReferenceManager.Instance.TruckBehavior);
+        Invoke("SpawnDude", CooldownTime);
     }
 }

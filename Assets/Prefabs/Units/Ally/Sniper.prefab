@@ -6016,7 +6016,7 @@ MonoBehaviour:
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5.5
-  OnEnemyDeathReward: 3
+  OnEnemyDeathReward: 20
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
@@ -6059,9 +6059,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunDamageMult: 1
   CannonDamageMult: 0.25
-  RocketDamageMult: 0.25
+  RocketDamageMult: 0.33
   GrenadeDamageMult: 0.75
-  SniperDamageMult: 1
+  SniperDamageMult: 1.1
 --- !u!114 &8384720999311943170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6188,7 +6188,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cb69ab50dc9818347b392e9d05037d87, type: 3}
   - {fileID: 8300000, guid: 03e7b660ed2a32b4f991969c12f465ae, type: 3}
   - {fileID: 8300000, guid: c8ff91a6aea1d2942b6b0eb6f7f2ca4e, type: 3}
-  FiringVolume: 0.4
+  FiringVolume: 1
   DieingSounds:
   - {fileID: 8300000, guid: 4e11d5d553c78df46b48ad416a78c518, type: 3}
   - {fileID: 8300000, guid: 01f93bd845d6d0a428247a1fb3a352dd, type: 3}
@@ -6211,8 +6211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitCost: 20
-  _unitTrainingTime: 0
+  _unitCost: 90
+  _unitTrainingTime: 5
   _unitDescription: Good against infantries.
 --- !u!1 &5203108326500030266
 GameObject:

@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9689d57e3fac62843a2f3480c7574fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resource: 100
+  _resource: 260
   _autoResourceGenerated: 5
-  _autoResourceGeneratedInterval: 0.5
+  _autoResourceGeneratedInterval: 1
   loseMoneySound: {fileID: 8300000, guid: 8aaf8a76b1ff1c541a90565c6fb813cd, type: 3}
 --- !u!114 &884850574
 MonoBehaviour:

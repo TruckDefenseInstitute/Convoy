@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3431939570232370600}
   - component: {fileID: 7534652730499293412}
   m_Layer: 0
-  m_Name: Barracks
+  m_Name: Rocket Barracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,11 +60,12 @@ MonoBehaviour:
   DestroyImmediately: 0
   Deathrattle: {fileID: 4121849538939856015, guid: def12e3d87090c744b08d557dd68dc79,
     type: 3}
+  RetargetTime: 2
   DetectionRange: 0
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
   MoveSpeed: 10
-  OnEnemyDeathReward: 1
+  OnEnemyDeathReward: 100
   MaxRotatingSpeed: 360
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 0}
@@ -111,7 +112,7 @@ MonoBehaviour:
     type: 3}
   SpawnPosition: {fileID: 875715013751432764}
   RallyPoint: {fileID: 2442891304625917056}
-  CooldownTime: 4
+  CooldownTime: 8
 --- !u!114 &1448087854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunDamageMult: 0.25
-  CannonDamageMult: 1
+  CannonDamageMult: 0.75
   RocketDamageMult: 0.5
   GrenadeDamageMult: 1
   SniperDamageMult: 0.01
