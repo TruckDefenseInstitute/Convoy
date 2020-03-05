@@ -2,40 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UiOverlayManager : Manager<UiOverlayManager> {
 
     // Serialized Prefabs
     [SerializeField] 
-    private GameObject _healthBarPrefab;
+    private GameObject _healthBarPrefab = null;
     [SerializeField]
-    private GameObject _resourceGainPopupPrefab;
+    private GameObject _popUpPrefab = null;
     [SerializeField]
-    private GameObject _resourceLossPopupPrefab;
+    private GameObject _resourceGainPopupPrefab = null;
+    [SerializeField]
+    private GameObject _resourceLossPopupPrefab = null;
     
     // UI In Game Canvas
-    private GameObject _uiInGameCanvas;
-    private GameObject _healthBarPanel;
+    private GameObject _uiInGameCanvas = null;
+    private GameObject _healthBarPanel = null;
 
     // UI Inteface Canvas
-    private GameObject _uiInterfaceCanvas;
-    private GameObject _deployedUnitsPanel;
-    private GameObject _trainUnitsPanel;
-    private GameObject _trainingQueue;
-    
-    private UiUnitStatus _uiUnitStatus;
-    private TextMeshProUGUI _resourcesText;
-    private GameObject _resourceChange;
-    private DeployedUnitDictionary _deployedUnitDictionary;
+    private GameObject _uiInterfaceCanvas = null;
+    private GameObject _minimap = null;
+    private GameObject _deployedUnitsPanel = null;
+    private GameObject _trainUnitsPanel = null;
+    private GameObject _trainingQueue = null;
+    private GameObject _popUpPanel = null;
+    private GameObject _unitStatus = null;
+
+    private TextMeshProUGUI _resourcesText = null;
+    private GameObject _resourceChange = null;
+    private DeployedUnitDictionary _deployedUnitDictionary = null;
     
     // Others
-    private Camera _playerCamera;
+    private Camera _playerCamera = null;
+    private Camera _minimapCamera = null;
     private Vector3 _mousePos;
 
     private bool _isDragging = false;
-    private bool _isUnitTrainingCompleted = true;
-    private int _maxSlots = 10;
 
     void Start() {
         // UI In Game Canvas
@@ -44,16 +48,19 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
         // UI Interface Canvas
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
+        _minimap = GameObject.Find("Minimap");
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
         _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
         _resourceChange = GameObject.Find("ResourceChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
-        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
+        _unitStatus = GameObject.Find("UnitStatus");
+        _popUpPanel = _uiInterfaceCanvas.transform.GetChild(6).gameObject;
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
         // Others
-        _playerCamera = GameObject.Find("Player Camera").GetComponent<Camera>();
+        _playerCamera = Camera.main;
+        _minimapCamera = GameObject.Find("MinimapCamera").GetComponent<Camera>();
 
         // Startup
         GetTrainingUnitsPanelInfo(TrainingUnitsQueueManager.Instance.GetUnitTypeList());
@@ -66,20 +73,30 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private void OnGUI() {
         if(_isDragging) {
             var rect = ScreenHelper.GetScreenRect(_mousePos, Input.mousePosition);
-            ScreenHelper.DrawScreenRect(rect, Color.clear);
             ScreenHelper.DrawScreenRectBorder(rect, 1, new Color(0.6f, 0.9608f, 0.706f));
         }
+
+        // var minimapRect = ScreenHelper.GetScreenRect();
+        // ScreenHelper.DrawScreenRectBorder(minimapRect, 1, new Color(1f, 1f, 1f));
     }
 
     /*================ DrawingBox ================*/
     private void UpdateDrawingBox() {
         if(Input.GetMouseButtonDown(0)) {
-            _mousePos = Input.mousePosition;
-            _isDragging = true;
+            if(IsPointerNotOverUI()) {
+                _mousePos = Input.mousePosition;
+                _isDragging = true;
+            }
         }
 
         if(Input.GetMouseButtonUp(0)) {
             _isDragging = false;
+        }
+
+        if(Input.GetMouseButton(0)) {
+            if(_minimap.GetComponent<UiMinimap>().GetIsHovering() && !_isDragging) {
+                MoveCameraThroughMinimap(Input.mousePosition);
+            }
         }
     }
 
@@ -135,16 +152,18 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
                 
             });
 
+        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
         if(allyList.Count <= 10) {
-            SelectIndividualUnits(allyList);
+            SelectIndividualUnits(splitAllyList);
         } else {
-            SelectGroupUnits(allyList);
+            SelectGroupUnits(splitAllyList);
         }
+
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(allyList[0]);
     }
 
-    private void SelectIndividualUnits(List<GameObject> allyList) {
+    private void SelectIndividualUnits(List<List<GameObject>> splitAllyList) {
         int slot = 0;
-        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
         foreach(List<GameObject> sameAllyList in splitAllyList) {
             foreach(GameObject selectedAlly in sameAllyList) {
                 GameObject deployedButtonPrefab = _deployedUnitDictionary
@@ -153,20 +172,14 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             
                 GameObject deployedButton = Instantiate(deployedButtonPrefab, Vector3.zero, Quaternion.identity);
                 deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
-                RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
-                slotRect.offsetMin = new Vector2(0, 0);
-                slotRect.offsetMax = new Vector2(0, 0);
-                slotRect.localScale = new Vector3(1, 1, 1);
-                slot++;   
-
-                deployedButton.GetComponent<DeployedUnitButton>().SetUnit(selectedAlly);
+                deployedButton.GetComponent<DeployedUnitButton>().Configure(selectedAlly);
+                slot++;
             }
         }
     }   
 
-    private void SelectGroupUnits(List<GameObject> allyList) {        
+    private void SelectGroupUnits(List<List<GameObject>> splitAllyList) {        
         int slot = 0;
-        List<List<GameObject>> splitAllyList = SplitAllyList(allyList);
         foreach(List<GameObject> sameAllyList in splitAllyList) {
             GameObject deployedButtonPrefab_M = _deployedUnitDictionary
                     .GetUnitDeployedButton_M(sameAllyList[0]
@@ -174,15 +187,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         
             GameObject deployedButton = Instantiate(deployedButtonPrefab_M, Vector3.zero, Quaternion.identity);
             deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
-            RectTransform slotRect = deployedButton.GetComponent<RectTransform>();
-            slotRect.offsetMin = new Vector2(0, 0);
-            slotRect.offsetMax = new Vector2(0, 0);
-            slotRect.localScale = new Vector3(1, 1, 1);
+            deployedButton.GetComponent<DeployedUnitButtonM>().Configure(sameAllyList, sameAllyList.Count.ToString());
             slot++;   
-            TextMeshProUGUI totalUnitsText = deployedButton.transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-            totalUnitsText.text = sameAllyList.Count.ToString();
-
-            deployedButton.GetComponent<DeployedUnitButtonM>().SetUnitList(sameAllyList);
         }
     }
 
@@ -208,23 +214,21 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     }
 
     /*================ Units Status ================*/
-    public void ResetUnitStatus() {
-        
-    }
-
     public void CreateUnitStatus(DeployedUnitButton deployedButton) {
-        ResetUnitStatus();
         GameObject unit = deployedButton.GetUnit();
-        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
-        _uiUnitStatus.ChangeUnitStatus(unit);
+        if(_unitStatus == null) {
+            _unitStatus = GameObject.Find("UnitStatus");
+        } 
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
     }
 
     public void CreateUnitStatus_M(DeployedUnitButtonM deployedButton) {
-        ResetUnitStatus();
         // Assumes the list is not empty
         GameObject unit = deployedButton.GetUnitList()[0];
-        _uiUnitStatus = GameObject.Find("UnitStatus").GetComponent<UiUnitStatus>();
-        _uiUnitStatus.ChangeUnitStatus(unit);
+        if(_unitStatus == null) {
+            _unitStatus = GameObject.Find("UnitStatus");
+        } 
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
     }
 
     /*================ Resources ================*/
@@ -258,10 +262,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             Transform unitSummonSlot = _trainUnitsPanel.transform.GetChild(slot);
             GameObject unitPanel = Instantiate(unitType, unitType.transform.position, unitType.transform.rotation);
             unitPanel.transform.SetParent(unitSummonSlot);
-            RectTransform slotRect = unitPanel.GetComponent<RectTransform>();
-            slotRect.offsetMin = new Vector2(0, 0);
-            slotRect.offsetMax = new Vector2(0, 0);
-            slotRect.localScale = new Vector3(1, 1, 1);
+            unitPanel.GetComponent<TrainButton>().Configure();
             slot++;
         }
     }
@@ -277,4 +278,38 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         
     }
     
+    /* =============== Pop Up ================= */
+
+    public void PopUpUnitDescription(GameObject unit) {
+        GameObject popUp = Instantiate(_popUpPrefab);
+        popUp.GetComponent<UiPopUp>().Configure(unit, _popUpPanel);
+    }
+
+    public void RemoveUnitDescription(GameObject unit) {
+        foreach(Transform child in _popUpPanel.transform) {
+            Destroy(child.gameObject);
+        }
+    }
+
+    /* =============== Other UI ================ */
+    
+    private bool IsPointerNotOverUI() {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count == 0;
+    }
+
+    private void MoveCameraThroughMinimap(Vector3 mousePos) {
+        // This are magic numbers because i have no idea how tf to make them work.
+        mousePos.x -= 10;
+        mousePos.y -= 10;
+
+        mousePos.x /= 1.5f;
+        mousePos.y /= 1.5f;
+
+        Vector3 worldPos = _minimapCamera.ScreenToWorldPoint(mousePos);
+        PlayerCameraManager.Instance.SetCameraPosition(worldPos);
+    }
 }

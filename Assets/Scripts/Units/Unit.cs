@@ -43,7 +43,7 @@ public class Unit : MonoBehaviour {
 
     // unit stats
     [HideInInspector]
-    public float RetargetTime = 2.0f;
+    public float RetargetTime = 6.0f;
     public float DetectionRange;
     public float AMoveStopDistMultiplier = 1f;
     public float LoseVisionMultiplier = 1.1f;
@@ -364,6 +364,7 @@ public class Unit : MonoBehaviour {
 
         if (_focusTarget != null) {
             GetBestTarget();
+            CancelInvoke("ReacquireTarget");
             Invoke("ReacquireTarget", RetargetTime);
         }
     }
@@ -403,8 +404,9 @@ public class Unit : MonoBehaviour {
                 }
             } else {
                 // attack if inside range
-                _weaponRef.AimAt(_focusTarget);
-                AnimatorStartFiring();
+                if (_weaponRef.AimAt(_focusTarget)) {
+                    AnimatorStartFiring();
+                }
 
                 // move to mult distance AMoveStopDistMultiplier
                 if (!_weaponRef.CanMoveWhileAttacking || distanceToFocus <= _weaponRef.AttackRange * AMoveStopDistMultiplier) {
@@ -486,7 +488,7 @@ public class Unit : MonoBehaviour {
         }
     }
     
-    void Update() {
+    protected void Update() {
         // dont do anything if dead
         if (!IsAlive()) {
             if (_decompose) {
@@ -629,5 +631,9 @@ public class Unit : MonoBehaviour {
         if (_selectRing != null) {
             _selectRing.SetActive(false);
         }
+    }
+
+    public GameObject GetHealthBar() {
+        return _healthBar;
     }
 }

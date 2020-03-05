@@ -5,9 +5,9 @@ using UnityEngine;
 public class DeployedUnitDictionary : MonoBehaviour {
     
     [SerializeField]
-    private List<GameObject> _unitDeployedButtonPrefab;
+    private List<GameObject> _unitDeployedButtonPrefab = null;
     [SerializeField]
-    private List<GameObject> _unitDeployedButtonPrefab_M;
+    private List<GameObject> _unitDeployedButtonPrefab_M = null;
     
     // Sort by name here
     public GameObject GetUnitDeployedButton(Unit unit) {

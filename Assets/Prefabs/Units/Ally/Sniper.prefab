@@ -6213,6 +6213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 90
   _unitTrainingTime: 5
+  _unitDescription: Good against infantries.
 --- !u!1 &5203108326500030266
 GameObject:
   m_ObjectHideFlags: 0

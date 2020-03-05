@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ForTestingAdditive/UiTest2.unity
-    guid: b90e377a7aebe2649b0282c102693061
+    path: Assets/Scenes/Demo.unity
+    guid: d4db9dbaf62aa3b4282f08defbb203ce
   - enabled: 1
     path: Assets/Scenes/UiOverlay.unity
     guid: a65a723fd6befae4e9bd9241c9395871

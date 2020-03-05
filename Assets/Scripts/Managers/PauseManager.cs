@@ -13,7 +13,13 @@ public class PauseManager : Manager<PauseManager>
     // Start is called before the first frame update
     void Start()
     {
-        _pauseScreenCanvas = GameObject.Find("PauseScreenCanvas");
+        var temp = Resources.FindObjectsOfTypeAll<Canvas>();
+        foreach (var x in temp) {
+            if (x.name == "PauseScreenCanvas") {
+                _pauseScreenCanvas = x.gameObject;
+                break;
+            }
+        }
         _originalTimeScale = Time.timeScale;
     }
 

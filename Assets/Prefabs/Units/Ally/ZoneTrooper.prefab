@@ -449,6 +449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitCost: 130
   _unitTrainingTime: 5.5
+  _unitDescription: Good against Turrets
 --- !u!1 &5628242310197840274
 GameObject:
   m_ObjectHideFlags: 0

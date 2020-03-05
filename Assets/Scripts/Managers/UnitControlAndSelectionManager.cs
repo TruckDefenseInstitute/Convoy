@@ -299,7 +299,7 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
 
         // todo beautify
         MovementMode mm;
-        if (Input.GetKey(KeyCode.Space)) {
+        if (Input.GetKey(KeyCode.A)) {
             mm = MovementMode.AMove;
         } else {
             mm = MovementMode.Move;
