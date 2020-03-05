@@ -7,6 +7,7 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
     public GameObject CameraAngleAxis;
     public GameObject CameraRig;
     GameObject _cameraGameObject;
+    Camera _camera;
 
     [SerializeField]
     private float _xMinimapPos = 0;
@@ -32,12 +33,27 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
 
     bool _middleMousePanning;
     Vector3 _middleMousePanningStartCoords;
+    GameObject _minimapBox;
+    LineRenderer _minimapBoxRenderer;
+
+    readonly Vector3[] _corners = new Vector3[] { new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 1, 0), new Vector3(1, 0, 0) };
 
     void Start() {
         _cameraGameObject = GameObject.Find(cameraName == null ? _defaultCameraName : cameraName);
         GameObject.Find("MinimapCamera")
             .GetComponent<MinimapCameraController>()
             .SetMinimapCameraLocation(_xMinimapPos, _yMinimapPos, _zMinimapPos, _miniMapSize);
+        _camera = _cameraGameObject.GetComponent<Camera>();
+
+        _minimapBox = new GameObject();
+        var renderer = _minimapBox.AddComponent<SpriteRenderer>();
+        var material = renderer.material;
+        Destroy(renderer);
+        _minimapBoxRenderer = _minimapBox.AddComponent<LineRenderer>();
+        _minimapBoxRenderer.positionCount = 4;
+        _minimapBoxRenderer.loop = true;
+        _minimapBoxRenderer.material = material;
+        _minimapBox.layer = LayerMask.NameToLayer("Minimap");
     }
 
     // Update is called once per frame
@@ -91,8 +107,20 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
 
             var angle = CameraAngleAxis.transform.localEulerAngles;
             angle.x += Input.GetKey(KeyCode.PageUp) ? Time.deltaTime * 60 : Input.GetKey(KeyCode.PageDown) ? Time.deltaTime * -60 : 0;
-            angle.x = Mathf.Clamp(angle.x, 10, 70);
+            angle.x = Mathf.Clamp(angle.x, 45, 80);
             CameraAngleAxis.transform.localEulerAngles = angle;
+
+            // draw minimap box
+            int i = 0;
+            foreach (var point in _corners) {
+                Ray p = _camera.ViewportPointToRay(point);
+                RaycastHit hit;
+                Physics.Raycast(p, out hit, 10000f, LayerMask.GetMask("Ground"));
+                Vector3 drawPoint = hit.point;
+                drawPoint.y = 10;
+                _minimapBoxRenderer.SetPosition(i++, drawPoint);
+            }
+
         }
     }
 
