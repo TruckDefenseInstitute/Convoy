@@ -180,26 +180,26 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
                                           .Where(u => u.Alignment == Alignment.Friendly && u.IsControllable)
                                           .Select(u => u.gameObject);
 
-        if (potentialAllies.Count() == 0)
-        {
+        //if (potentialAllies.Count() == 0)
+        //{
             _startingPoint = hit.point;
             _gameControlState = GameControlState.Multiselect;
             return;
-        }
+        //}
                 
-        GameObject closestAlly = potentialAllies.Aggregate((a, b) => Vector3.Distance(hit.point, a.transform.position)
-                                                                   < Vector3.Distance(hit.point, b.transform.position)
-                                                                   ? a : b);
+        //GameObject closestAlly = potentialAllies.Aggregate((a, b) => Vector3.Distance(hit.point, a.transform.position)
+        //                                                           < Vector3.Distance(hit.point, b.transform.position)
+        //                                                           ? a : b);
 
-        _selectedAllies.Add(closestAlly);
-        _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
-        _uiOverlayManager.SelectAllyUnits(_selectedAllies);
-        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
+        //_selectedAllies.Add(closestAlly);
+        //_unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+        //_uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        //_ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
-        _gameControlState = GameControlState.Selected;
-        _audioSource.clip = unitSelectionSound;
-        _audioSource.Play();
-        Debug.Log("Now entering selected");
+        //_gameControlState = GameControlState.Selected;
+        //_audioSource.clip = unitSelectionSound;
+        //_audioSource.Play();
+        //Debug.Log("Now entering selected");
     }
 
     void MultiselectLeftMouseUp()

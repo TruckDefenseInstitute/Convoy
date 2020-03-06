@@ -25,6 +25,8 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
     public float scrollSpeed = 20f;
     public float minY = 0f;
     public float maxY = 60f;
+    public float minPan = 45f;
+    public float maxPan = 70f;
 
     public KeyCode up = KeyCode.UpArrow;
     public KeyCode down = KeyCode.DownArrow;
@@ -107,7 +109,7 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
 
             var angle = CameraAngleAxis.transform.localEulerAngles;
             angle.x += Input.GetKey(KeyCode.PageUp) ? Time.deltaTime * 60 : Input.GetKey(KeyCode.PageDown) ? Time.deltaTime * -60 : 0;
-            angle.x = Mathf.Clamp(angle.x, 45, 80);
+            angle.x = Mathf.Clamp(angle.x, minPan, maxPan);
             CameraAngleAxis.transform.localEulerAngles = angle;
 
             // draw minimap box
