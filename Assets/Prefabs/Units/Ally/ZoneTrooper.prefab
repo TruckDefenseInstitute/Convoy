@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitSprite: {fileID: 21300000, guid: f73f54ec42a5cb945850d5dfa58ebc36, type: 3}
   _unitCost: 130
   _unitTrainingTime: 5.5
   _unitDescription: Good against Turrets

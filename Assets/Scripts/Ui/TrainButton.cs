@@ -9,34 +9,25 @@ public class TrainButton : MonoBehaviour,
                             IPointerEnterHandler,
                             IPointerExitHandler {
     
-    [SerializeField]
     private GameObject _unitPrefab = null;
-
     private GameObject _unitsInQueue = null;
-
     private TextMeshProUGUI _unitsInQueueText = null;
     private Image _trainingTimeImage = null;
+    private Image _unitIcon = null;
 
     private int _amountOfUnitsQueued = 0;
     private float _trainingIntervals = 0;
     private bool _isCompleted = false;
     private bool _isTraining = false;
-    private float _unitCost = 0;
-    private float _unitTrainingTime = 0;
 
     // Magic Numbers
     private float ticksPerSecond = 100;
 
     void Start() {
+        _unitIcon = transform.GetChild(0).GetComponent<Image>();
         _unitsInQueue = transform.GetChild(2).gameObject;
-        _unitsInQueueText = _unitsInQueue.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-
-        _trainingTimeImage = transform.GetChild(1).gameObject.GetComponent<Image>();
-        
-        _unitCost = _unitPrefab.GetComponent<UnitTraining>().GetUnitCost();
-        _unitTrainingTime = _unitPrefab.GetComponent<UnitTraining>().GetUnitTrainingTime();
-    
-        _trainingIntervals = _unitTrainingTime / ticksPerSecond;
+        _unitsInQueueText = _unitsInQueue.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        _trainingTimeImage = transform.GetChild(1).GetComponent<Image>();
     }
 
     public void OnPointerEnter(PointerEventData eventdata) {
@@ -47,12 +38,22 @@ public class TrainButton : MonoBehaviour,
         UiOverlayManager.Instance.RemoveUnitDescription(_unitPrefab);
     }
 
-    public void Configure() {
+    public void Configure(GameObject unit) {
+        _unitPrefab = unit;
+        if(_unitIcon == null) {
+            _unitIcon = transform.GetChild(0).GetComponent<Image>();
+        }
+        _unitIcon.sprite = unit.GetComponent<UnitTraining>().GetUnitSprite();
+
         RectTransform slotRect = GetComponent<RectTransform>();
         slotRect.localScale = new Vector3(1, 1, 1);
         slotRect.offsetMin = new Vector2(0, 0);
         slotRect.offsetMax = new Vector2(0, 0);
         slotRect.sizeDelta = new Vector2(65, 65);
+
+        // 60 Ticks per second
+        _trainingIntervals = unit.GetComponent<UnitTraining>().GetUnitTrainingTime() / 60;
+
     }
 
 
@@ -103,19 +104,19 @@ public class TrainButton : MonoBehaviour,
 
     /*================ Getters and Setters ================*/
     public GameObject GetUnitPrefab() {
-        return this._unitPrefab;
+        return _unitPrefab;
     }
 
     public bool GetIsCompleted() {
-        return this._isCompleted;
+        return _isCompleted;
     }
 
     public bool GetIsTraining() {
-        return this._isTraining;
+        return _isTraining;
     }
 
     public float GetUnitCost() {
-        return this._unitCost;
+        return _unitPrefab.GetComponent<UnitTraining>().GetUnitCost();
     }
 
     

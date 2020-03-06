@@ -8,7 +8,7 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
     private static Queue<TrainButton> _unitSlotQueue;
 
     [SerializeField] 
-    private List<GameObject> _unitTypeList = null;
+    private List<GameObject> _unitPrefabList = null;
 
     [SerializeField]
     private GameObject _summonCircle = null;
@@ -67,7 +67,7 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
         u.Follow(TruckReferenceManager.Instance.TruckBehavior);
     }
 
-    public List<GameObject> GetUnitTypeList() {
-        return this._unitTypeList;
+    public List<GameObject> GetUnitPrefabList() {
+        return this._unitPrefabList;
     }
 }

@@ -1,13 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DeployedUnitButtonM : MonoBehaviour {
 
-    private List<GameObject> _unitList;
+    private Image _unitIcon = null;
+    private List<GameObject> _unitList = null;
 
-    public void Configure(List<GameObject> unitList, string totalUnits) {
+    void Start() {
+        _unitIcon = transform.GetChild(0).GetComponent<Image>();
+    }
+
+    public void Configure(List<GameObject> unitList) {
+        // Unit List
+        _unitList = unitList;
+        
         // Rect
         RectTransform slotRect = GetComponent<RectTransform>();
         slotRect.localScale = new Vector3(1, 1, 1);
@@ -15,12 +24,18 @@ public class DeployedUnitButtonM : MonoBehaviour {
         slotRect.offsetMax = new Vector2(0, 0);
         slotRect.sizeDelta = new Vector2(65, 65);
 
-        // Text
-        TextMeshProUGUI totalUnitsText = transform.GetChild(1).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        totalUnitsText.text = totalUnits;
+        // Image
+        if(_unitIcon == null) {
+            _unitIcon = transform.GetChild(0).GetComponent<Image>();
+        }
 
-        // Unit List
-        this._unitList = unitList;
+        if(unitList.Count > 0) {
+            _unitIcon.sprite = unitList[0].GetComponent<UnitTraining>().GetUnitSprite();
+        }
+
+        // Text
+        TextMeshProUGUI totalUnitsText = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
+        totalUnitsText.text = unitList.Count.ToString();
     }
 
     public List<GameObject> GetUnitList() {

@@ -35,7 +35,7 @@ public class UiUnitStatus : MonoBehaviour {
 
         _attack.text = attack.ToString("0");
         _attackSpeed.text = attackSpeed.ToString("0.00");
-        _movementSpeed.text = movementSpeed.ToString("0");
+        _movementSpeed.text = movementSpeed.ToString("0.0");
         _name.text = name;
     }
 
