@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1738896532971031294}
   - component: {fileID: 1738896532971031295}
   m_Layer: 5
-  m_Name: DeployedUnitsIcon
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f73f54ec42a5cb945850d5dfa58ebc36, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 8730842750512320476}
   - component: {fileID: 1967030528023827014}
   m_Layer: 5
-  m_Name: ZoneTrooperDeployedButton
+  m_Name: DeployedButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,19 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeployedUnitButton : MonoBehaviour {
 
-    private GameObject _unit;
-    private Unit _unitUnit;
-    private SimpleHealthBar _healthBar;
+    private GameObject _unit = null;
+    private Image _unitIcon = null;
+    private Unit _unitUnit = null;
+    private SimpleHealthBar _healthBar = null;
+
+    void Start() {
+        _unitIcon = transform.GetChild(0).GetComponent<Image>();
+    }
 
     void Update() {
-
         _healthBar.UpdateBar(_unitUnit.Health, _unitUnit.MaxHealth);
     }
 
-    public void Configure(GameObject unit) {
+    public void Configure(GameObject unit) {        
         // Rect
         RectTransform slotRect = GetComponent<RectTransform>();
         slotRect.localScale = new Vector3(1, 1, 1);
@@ -24,6 +29,12 @@ public class DeployedUnitButton : MonoBehaviour {
         // Unit
         _unit = unit;
         _unitUnit = unit.GetComponent<Unit>();
+
+        // Image
+        if(_unitIcon == null) {
+            _unitIcon = transform.GetChild(0).GetComponent<Image>();
+        }
+        _unitIcon.sprite = unit.GetComponent<UnitTraining>().GetUnitSprite();
 
         // Health Bar
         GameObject healthBar = Instantiate(unit.GetComponent<Unit>().GetHealthBar());

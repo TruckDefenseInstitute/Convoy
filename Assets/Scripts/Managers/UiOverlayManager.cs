@@ -16,6 +16,12 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private GameObject _resourceGainPopupPrefab = null;
     [SerializeField]
     private GameObject _resourceLossPopupPrefab = null;
+    [SerializeField]
+    private GameObject _trainButtonPrefab = null;
+    [SerializeField]
+    private GameObject _deployedButtonPrefab = null;
+    [SerializeField]
+    private GameObject _deployedButtonMPrefab = null;
     
     // UI In Game Canvas
     private GameObject _uiInGameCanvas = null;
@@ -63,7 +69,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _minimapCamera = GameObject.Find("MinimapCamera").GetComponent<Camera>();
 
         // Startup
-        GetTrainingUnitsPanelInfo(TrainingUnitsQueueManager.Instance.GetUnitTypeList());
+        GetTrainingUnitsPanelInfo(TrainingUnitsQueueManager.Instance.GetUnitPrefabList());
     }
 
     void Update() {
@@ -110,7 +116,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         healthBar.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         
         // Change health bar itself
-        healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+        healthBar.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
 
         return healthBar;
     }
@@ -122,7 +128,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             unitPos += new Vector3(0, 2.5f, 0);
             _playerCamera.WorldToScreenPoint(unitPos);
             healthBar.transform.position = _playerCamera.WorldToScreenPoint(unitPos);
-            healthBar.transform.GetChild(0).gameObject.GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+            healthBar.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
         }
     }
 
@@ -165,12 +171,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private void SelectIndividualUnits(List<List<GameObject>> splitAllyList) {
         int slot = 0;
         foreach(List<GameObject> sameAllyList in splitAllyList) {
-            foreach(GameObject selectedAlly in sameAllyList) {
-                GameObject deployedButtonPrefab = _deployedUnitDictionary
-                        .GetUnitDeployedButton(selectedAlly
-                        .GetComponent<Unit>());
-            
-                GameObject deployedButton = Instantiate(deployedButtonPrefab, Vector3.zero, Quaternion.identity);
+            foreach(GameObject selectedAlly in sameAllyList) {            
+                GameObject deployedButton = Instantiate(_deployedButtonPrefab);
                 deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
                 deployedButton.GetComponent<DeployedUnitButton>().Configure(selectedAlly);
                 slot++;
@@ -180,14 +182,10 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     private void SelectGroupUnits(List<List<GameObject>> splitAllyList) {        
         int slot = 0;
-        foreach(List<GameObject> sameAllyList in splitAllyList) {
-            GameObject deployedButtonPrefab_M = _deployedUnitDictionary
-                    .GetUnitDeployedButton_M(sameAllyList[0]
-                    .GetComponent<Unit>());
-        
-            GameObject deployedButton = Instantiate(deployedButtonPrefab_M, Vector3.zero, Quaternion.identity);
-            deployedButton.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
-            deployedButton.GetComponent<DeployedUnitButtonM>().Configure(sameAllyList, sameAllyList.Count.ToString());
+        foreach(List<GameObject> sameAllyList in splitAllyList) {    
+            GameObject deployedButtonM = Instantiate(_deployedButtonMPrefab);
+            deployedButtonM.transform.SetParent(_deployedUnitsPanel.transform.GetChild(slot));
+            deployedButtonM.GetComponent<DeployedUnitButtonM>().Configure(sameAllyList);
             slot++;   
         }
     }
@@ -253,16 +251,16 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     /*================ Train Units ================*/
     
-    public void GetTrainingUnitsPanelInfo(List<GameObject> unitTypeList) {
+    public void GetTrainingUnitsPanelInfo(List<GameObject> unitPrefabList) {
         int slot = 0;
-        foreach(GameObject unitType in unitTypeList) {
+        foreach(GameObject unit in unitPrefabList) {
             if(slot > 10) {
                 break;
             }
-            Transform unitSummonSlot = _trainUnitsPanel.transform.GetChild(slot);
-            GameObject unitPanel = Instantiate(unitType, unitType.transform.position, unitType.transform.rotation);
-            unitPanel.transform.SetParent(unitSummonSlot);
-            unitPanel.GetComponent<TrainButton>().Configure();
+            Transform unitSlot = _trainUnitsPanel.transform.GetChild(slot);
+            GameObject trainButton = Instantiate(_trainButtonPrefab);
+            trainButton.transform.SetParent(unitSlot);
+            trainButton.GetComponent<TrainButton>().Configure(unit);
             slot++;
         }
     }

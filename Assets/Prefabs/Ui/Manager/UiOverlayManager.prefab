@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2411142497566417258}
   - component: {fileID: 7065461173274612548}
-  - component: {fileID: 4263082842724400394}
   m_Layer: 0
   m_Name: UiOverlayManager
   m_TagString: Untagged
@@ -45,35 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBarPrefab: {fileID: 109282, guid: 2b9babc0e49dd054797f369b54bc116a, type: 3}
+  _popUpPrefab: {fileID: 5367325828100496997, guid: 28e1d96e3f46bcd4287658e66e376f1f,
+    type: 3}
   _resourceGainPopupPrefab: {fileID: 3635348176298860039, guid: 50a36d8fd6c622440adcbf33e61abe4a,
     type: 3}
   _resourceLossPopupPrefab: {fileID: 3635348176298860039, guid: 78ea76637cca38b4ca8608a58bded66d,
     type: 3}
---- !u!114 &4263082842724400394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2411142497566417259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb1a5a478bb6d8b4e82af5b32e330306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _unitDeployedButtonPrefab:
-  - {fileID: 1738896534840907197, guid: db51ead2bd23cd143bd5bf3d956c064c, type: 3}
-  - {fileID: 1738896534840907197, guid: 46d85374f8a9cb047816a420aaddd8a7, type: 3}
-  - {fileID: 1738896534840907197, guid: 0160dff1a432fc848af387ed6f441fc8, type: 3}
-  - {fileID: 1738896534840907197, guid: 838009de90b318e4b986ec078873bee8, type: 3}
-  - {fileID: 1738896534840907197, guid: 84783fb1834f02c42b064997cf3b0267, type: 3}
-  - {fileID: 1738896534840907197, guid: f9b536e1a42fc40409bff5fd07cfcfae, type: 3}
-  - {fileID: 1738896534840907197, guid: 493472c91e5e96e45b22de252f37f72a, type: 3}
-  _unitDeployedButtonPrefab_M:
-  - {fileID: 1738896534840907197, guid: 92d79084bc43fef49b38ae3990186e6c, type: 3}
-  - {fileID: 1738896534840907197, guid: eef4ae62dd25c354090ab434668b882f, type: 3}
-  - {fileID: 1738896534840907197, guid: 1e86ca08ffa97174b8ab4b0d407d7f62, type: 3}
-  - {fileID: 1738896534840907197, guid: bb0deba015d299a43b00d916b5a7b30b, type: 3}
-  - {fileID: 1738896534840907197, guid: 8bd73c2b215bcd1488c45f8919dac768, type: 3}
-  - {fileID: 1738896534840907197, guid: 088c88af2f320af45833239eb2c972a0, type: 3}
-  - {fileID: 1738896534840907197, guid: e68440d8456ec8442b83ad37ecd62195, type: 3}
+  _trainButtonPrefab: {fileID: 8418034470593014249, guid: 87dfbbff7fb3dcf4e8658232bd3c022a,
+    type: 3}
+  _deployedButtonPrefab: {fileID: 1738896534840907197, guid: 7e2aa8a3d0667fc40a43b80c4326f0ef,
+    type: 3}
+  _deployedButtonMPrefab: {fileID: 1738896534840907197, guid: 01ca812aae4d80541a74a2917d22223e,
+    type: 3}

@@ -124,6 +124,8 @@ MonoBehaviour:
   scrollSpeed: 20
   minY: -70
   maxY: -10
+  minPan: 45
+  maxPan: 70
   up: 273
   down: 274
   left: 276
@@ -189,14 +191,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfed4e1c309e7924db7fe6a2bda3a8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitTypeList:
-  - {fileID: 8418034470593014249, guid: f78c786858f943d44943869e1cdd3b17, type: 3}
-  - {fileID: 8418034470593014249, guid: dedfb686cd720424ebf3b7c2701062a0, type: 3}
-  - {fileID: 8418034470593014249, guid: 5e0b87143dca3364bb3acf305a2d0728, type: 3}
-  - {fileID: 8418034470593014249, guid: ded553dc7315ae34088eceab3ea6ddde, type: 3}
-  - {fileID: 8418034470593014249, guid: abf3e2ed0d4e5ce46b18784bcf2a2a4b, type: 3}
-  - {fileID: 8418034470593014249, guid: 92ea5a326277ca2418d45ab738579b3b, type: 3}
-  - {fileID: 8418034470593014249, guid: 37f041487c1ed31489bd3091ac2dcec6, type: 3}
+  _unitPrefabList:
+  - {fileID: 605322507436367101, guid: 577afc4c354e67d488855fdfc700e3a0, type: 3}
+  - {fileID: 7061815773503231191, guid: 57853bd06bee0914e8f93e07df8b2827, type: 3}
+  - {fileID: 524654272129245435, guid: 84bacf7126ed24a4aa9c94e525b7e2f1, type: 3}
+  - {fileID: 3058466262236801893, guid: 849c31ab2e1ab054b88456000f494e0e, type: 3}
+  - {fileID: 5627378590140159106, guid: bb022c473cf79ed41a903bcec339975e, type: 3}
+  - {fileID: 7247557218571838799, guid: a72986396ad691348a0b54f450746e8e, type: 3}
+  - {fileID: 2547072763294027783, guid: d7b41f5a992504e4d9e4012c7bac30fa, type: 3}
   _summonCircle: {fileID: 851792572026771221, guid: fb5fa7849ee91af47892f7edd7bd0fed,
     type: 3}
 --- !u!114 &6479078846698226587
