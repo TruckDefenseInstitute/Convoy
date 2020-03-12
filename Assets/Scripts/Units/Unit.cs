@@ -269,6 +269,10 @@ public class Unit : MonoBehaviour {
 
         _animRef = GetComponentInChildren<Animator>();
 
+        if (_animRef != null) {
+            _animRef.SetFloat("RandomOffset", UnityEngine.Random.Range(0f, 1f));
+        }
+
         if (TryGetComponent<IAstarAI>(out _aiRef)) {
             _aiRef.maxSpeed = MoveSpeed;
             ((RichAI)_aiRef).rotationSpeed = MaxRotatingSpeed;
@@ -318,6 +322,7 @@ public class Unit : MonoBehaviour {
         if (_aiRef != null) {
             Move(transform.position, MovementMode.Move);
         }
+
         _startHasRun = true;
     }
 
