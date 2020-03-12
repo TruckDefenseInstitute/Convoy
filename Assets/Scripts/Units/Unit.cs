@@ -86,6 +86,10 @@ public class Unit : MonoBehaviour {
     public GameObject selectRingPrefab;
     GameObject _selectRing;
 
+    private void Awake() {
+        RTSUnitManager.Instance.AddUnit(gameObject);
+    }
+
     public void DisableMovement(bool move) {
         _movementLocked = move;
         ExecuteFirstQueueAction();
@@ -297,7 +301,7 @@ public class Unit : MonoBehaviour {
         if (this.Alignment == Alignment.Friendly)
         {
             DeathCallback = () => {
-                UnitControlAndSelectionManager.Instance.ReportUnitDead(gameObject);
+                RTSUnitManager.Instance.ReportUnitDead(gameObject);
             };
         }
         else
@@ -553,6 +557,7 @@ public class Unit : MonoBehaviour {
             _animRef.SetTrigger("Die");
         }
         _light.Destroy();
+        RTSUnitManager.Instance.RemoveUnit(gameObject);
 
         if (TryGetComponent<UnitSoundController>(out UnitSoundController usc)) {
             usc.Die();

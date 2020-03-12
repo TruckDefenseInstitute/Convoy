@@ -6,8 +6,10 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
     public GameObject CameraDolly;
     public GameObject CameraAngleAxis;
     public GameObject CameraRig;
-    GameObject _cameraGameObject;
-    Camera _camera;
+    [HideInInspector]
+    public GameObject CameraGameObject;
+    [HideInInspector]
+    public Camera Camera;
 
     [SerializeField]
     private float _xMinimapPos = 0;
@@ -41,11 +43,11 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
     readonly Vector3[] _corners = new Vector3[] { new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 1, 0), new Vector3(1, 0, 0) };
 
     void Start() {
-        _cameraGameObject = GameObject.Find(cameraName == null ? _defaultCameraName : cameraName);
+        CameraGameObject = GameObject.Find(cameraName == null ? _defaultCameraName : cameraName);
         GameObject.Find("MinimapCamera")
             .GetComponent<MinimapCameraController>()
             .SetMinimapCameraLocation(_xMinimapPos, _yMinimapPos, _zMinimapPos, _miniMapSize);
-        _camera = _cameraGameObject.GetComponent<Camera>();
+        Camera = CameraGameObject.GetComponent<Camera>();
 
         _minimapBox = new GameObject();
         var renderer = _minimapBox.AddComponent<SpriteRenderer>();
@@ -62,7 +64,7 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
     void Update() {
         Vector3 pos = CameraRig.transform.position;
 
-        if (UnitControlAndSelectionManager.Instance.InPannableControlState()) {
+        if (RTSUnitManager.Instance.InPannableControlState()) {
             if (Input.GetKeyDown(KeyCode.Mouse2)) {
                 _middleMousePanning = true;
                 _middleMousePanningStartCoords = Input.mousePosition;
@@ -115,7 +117,7 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
             // draw minimap box
             int i = 0;
             foreach (var point in _corners) {
-                Ray p = _camera.ViewportPointToRay(point);
+                Ray p = Camera.ViewportPointToRay(point);
                 RaycastHit hit;
                 Physics.Raycast(p, out hit, 10000f, LayerMask.GetMask("Ground"));
                 Vector3 drawPoint = hit.point;

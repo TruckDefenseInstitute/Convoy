@@ -1,10 +1,11 @@
-﻿﻿using System.Linq;
+﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
-public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionManager>
+public class RTSUnitManager : Manager<RTSUnitManager>
 {
     enum GameControlState
     {
@@ -24,9 +25,10 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
     Vector3 _endingPoint;
 
     // Used in Idle, Multiselect and Selected
-    List<GameObject> _selectedAllies = new List<GameObject>();    
-    
+    List<GameObject> _selectedAllies = new List<GameObject>();
+
     // Used in storing 
+    List<GameObject> _units = new List<GameObject>();
     List<GameObject>[] _markedUnitsMemory;
     public KeyCode controlGroupsButton = KeyCode.LeftControl;
     
@@ -155,78 +157,31 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
 
     void IdleLeftMouseDown()
     {
-        Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        Physics.Raycast(mouseToWorldRay, out hit);
-
-        if (hit.collider == null)
-        {
-            return;
-        }
-
-        Collider[]  hitColliders = Physics.OverlapSphere(hit.point, 1f);
-
-        if (hitColliders.Length == 0)
-        {
-            return;
-        }
-
-        // todo to beautify
-        var potentialAllies = hitColliders.Select(c => c.transform.parent)
-                                          .Where(t => t != null)
-                                          .Where(t => t.GetComponent<Unit>() != null)
-                                          .Select(t => t.GetComponent<Unit>())
-                                          .Where(u => u.Alignment == Alignment.Friendly && u.IsControllable)
-                                          .Select(u => u.gameObject);
-
-        //if (potentialAllies.Count() == 0)
-        //{
-            _startingPoint = hit.point;
-            _gameControlState = GameControlState.Multiselect;
-            return;
-        //}
-                
-        //GameObject closestAlly = potentialAllies.Aggregate((a, b) => Vector3.Distance(hit.point, a.transform.position)
-        //                                                           < Vector3.Distance(hit.point, b.transform.position)
-        //                                                           ? a : b);
-
-        //_selectedAllies.Add(closestAlly);
-        //_unitCommandManager.ChangeSelectedAllies(_selectedAllies);
-        //_uiOverlayManager.SelectAllyUnits(_selectedAllies);
-        //_ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
-
-        //_gameControlState = GameControlState.Selected;
-        //_audioSource.clip = unitSelectionSound;
-        //_audioSource.Play();
-        //Debug.Log("Now entering selected");
+        _startingPoint = Input.mousePosition;
+        _gameControlState = GameControlState.Multiselect;
+        return;
     }
 
     void MultiselectLeftMouseUp()
     {
-        Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Physics.Raycast(mouseToWorldRay, out hit);
-        _endingPoint = hit.point;
+        var llc = Vector2.Min(_startingPoint, Input.mousePosition);
+        var urc = Vector2.Max(_startingPoint, Input.mousePosition);
+        var rect = Rect.MinMaxRect(llc.x, llc.y, urc.x, urc.y);
 
-        Vector3 midpoint = Vector3.Lerp(_startingPoint, _endingPoint, 0.5f);
-        Vector3 extents = new Vector3(Mathf.Abs(_startingPoint.x - midpoint.x), 20, Mathf.Abs(_startingPoint.z - midpoint.z));
-                    
-        Collider[] hitColliders = Physics.OverlapBox(midpoint, extents, Quaternion.identity);
+        var potentialAllies =
+            _units.FindAll(unit => rect.Contains(PlayerCameraManager.Instance.Camera.WorldToScreenPoint(unit.transform.position)))
+                  .FindAll(unit => {
+                      if (unit.TryGetComponent<Unit>(out var u)) {
+                          return u.Alignment == Alignment.Friendly && u.IsControllable;
+                      } else {
+                          return false;
+                      }
+                  });
 
-        if (hitColliders.Length == 0)
-        {
+        if (potentialAllies.Count == 0) {
             ExitMultiselectReturnToIdle();
             return;
         }
-
-        // todo to beautify
-        var potentialAllies = hitColliders.Select(c => c.transform.parent)
-                                          .Where(t => t != null)
-                                          .Where(t => t.GetComponent<Unit>() != null)
-                                          .Select(t => t.GetComponent<Unit>())
-                                          .Where(u => u.Alignment == Alignment.Friendly && u.IsControllable)
-                                          .Select(u => u.gameObject);
 
         if (potentialAllies.FirstOrDefault() == null)
         {
@@ -248,28 +203,19 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
     void MultiselectLeftMouseHeld()
     {
         // This whole part is replicated from above
-        Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Physics.Raycast(mouseToWorldRay, out hit);
-        _endingPoint = hit.point;
+        var llc = Vector2.Min(_startingPoint, Input.mousePosition);
+        var urc = Vector2.Max(_startingPoint, Input.mousePosition);
+        var rect = Rect.MinMaxRect(llc.x, llc.y, urc.x, urc.y);
 
-        Vector3 midpoint = Vector3.Lerp(_startingPoint, _endingPoint, 0.5f);
-        Vector3 extents = new Vector3(Mathf.Abs(_startingPoint.x - midpoint.x), 20, Mathf.Abs(_startingPoint.z - midpoint.z));
-                    
-        Collider[] hitColliders = Physics.OverlapBox(midpoint, extents, Quaternion.identity);
-
-        if (hitColliders.Length == 0)
-        {
-            return;
-        }
-
-        // todo to beautify
-        var potentialAllies = hitColliders.Select(c => c.transform.parent)
-                                          .Where(t => t != null)
-                                          .Where(t => t.GetComponent<Unit>() != null)
-                                          .Select(t => t.GetComponent<Unit>())
-                                          .Where(u => u.Alignment == Alignment.Friendly && u.IsControllable)
-                                          .Select(u => u.gameObject);
+        var potentialAllies =
+            _units.FindAll(unit => rect.Contains(PlayerCameraManager.Instance.Camera.WorldToScreenPoint(unit.transform.position)))
+                  .FindAll(unit => {
+                      if (unit.TryGetComponent<Unit>(out var u)) {
+                          return u.Alignment == Alignment.Friendly && u.IsControllable;
+                      } else {
+                          return false;
+                      }
+                  });
 
         if (potentialAllies.FirstOrDefault() == null)
         {
@@ -362,6 +308,14 @@ public class UnitControlAndSelectionManager : Manager<UnitControlAndSelectionMan
     public bool InPannableControlState()
     {
         return !(_gameControlState == GameControlState.Multiselect);
+    }
+
+    public void AddUnit(GameObject unit) {
+        _units.Add(unit);
+    }
+
+    public void RemoveUnit(GameObject unit) {
+        _units.Remove(unit);
     }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-50)]
 public abstract class Manager<T> : MonoBehaviour where T : MonoBehaviour {
     private static T _instance;
 
