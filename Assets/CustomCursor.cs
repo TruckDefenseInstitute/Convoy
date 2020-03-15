@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class CustomCursor : MonoBehaviour
 {
+    // Serialized Prefabs
+    [SerializeField]
+    private Sprite _sprite = null;
+
     RectTransform _rectTransform;
     RectTransform _uiInterfaceCanvasRectTransform;
+    private SpriteRenderer _spriteRenderer = null;
     
     public Vector2 cursorPointOffset;
     public bool hideRealCursor;
@@ -14,11 +19,14 @@ public class CustomCursor : MonoBehaviour
     {
         _rectTransform = GetComponent<RectTransform>();
         _uiInterfaceCanvasRectTransform = transform.parent.gameObject.GetComponent<RectTransform>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (hideRealCursor)
         {
             Cursor.visible = false;
         }
+
+        _spriteRenderer.sprite = this._sprite;
     }
 
     void FixedUpdate()
