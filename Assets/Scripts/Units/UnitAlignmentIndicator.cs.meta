@@ -3,7 +3,11 @@ guid: 5a4824d0be3dcaa4cb9f71254ede62f2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - AlliedMinimapIndicator: {fileID: 6371135337354866469, guid: 50dd0f866c16fc441b7898bd6ff5eb54,
+      type: 3}
+  - EnemyMinimapIndicator: {fileID: 6586887388040599793, guid: ace787eeb7dead2498abda19113ec220,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

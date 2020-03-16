@@ -25951,6 +25951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThreatLevel: 1
+  AlliedMinimapIndicator: {fileID: 0}
+  EnemyMinimapIndicator: {fileID: 0}
+  AlliedColor: {r: 0, g: 0, b: 1, a: 1}
+  EnemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &1895131438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27247,7 +27252,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -30872,6 +30877,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThreatLevel: 1
+  AlliedMinimapIndicator: {fileID: 0}
+  EnemyMinimapIndicator: {fileID: 0}
+  AlliedColor: {r: 0, g: 0, b: 1, a: 1}
+  EnemyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &6605843126302809802
 MonoBehaviour:
   m_ObjectHideFlags: 0
