@@ -21,13 +21,15 @@ public class TrainButton : MonoBehaviour,
     private bool _isTraining = false;
 
     // Magic Numbers
-    private float ticksPerSecond = 100;
+    private float ticksPerSecond;
 
     void Start() {
         _unitIcon = transform.GetChild(0).GetComponent<Image>();
         _unitsInQueue = transform.GetChild(2).gameObject;
         _unitsInQueueText = _unitsInQueue.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         _trainingTimeImage = transform.GetChild(1).GetComponent<Image>();
+
+        ticksPerSecond = 1f / Time.deltaTime;
     }
 
     public void OnPointerEnter(PointerEventData eventdata) {
