@@ -16,14 +16,20 @@ public class SpawnEvent : ScriptedEvent
     IEnumerator Spawn() {
         WaitForSeconds delay = new WaitForSeconds(DelayBetweenSpawns);
         foreach (Transform spawn in SpawnPoint) {
-            Unit bike = Instantiate(PrefabToBeSpawned, spawn.transform.position, spawn.transform.rotation).GetComponent<Unit>();
             foreach (GameObject effect in SpawnEffects) {
                 Instantiate(effect, spawn.transform.position, Quaternion.identity);
             }
-            bike.Alignment = Alignment.Hostile;
-            bike.Start();
-            bike.Attack(TruckReferenceManager.Instance.TruckBehavior);
+            StartCoroutine(SpawnUnit(spawn));
             yield return delay;
         }
+    }
+
+    IEnumerator SpawnUnit(Transform spawn) {
+        yield return new WaitForSeconds(0.5f);
+
+        Unit bike = Instantiate(PrefabToBeSpawned, spawn.transform.position, spawn.transform.rotation).GetComponent<Unit>();
+        bike.Alignment = Alignment.Hostile;
+        bike.Start();
+        bike.Attack(TruckReferenceManager.Instance.TruckBehavior);
     }
 }
