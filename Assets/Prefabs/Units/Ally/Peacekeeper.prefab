@@ -4027,7 +4027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84137426a3da644e9584fc4793c1e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  densityFraction: 0.3
+  densityFraction: 0.2
   returnAfterBeingPushedAway: 0
 --- !u!114 &2550659281788605194
 MonoBehaviour:
