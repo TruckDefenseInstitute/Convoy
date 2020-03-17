@@ -114,6 +114,8 @@ MonoBehaviour:
   CameraDolly: {fileID: 0}
   CameraAngleAxis: {fileID: 0}
   CameraRig: {fileID: 0}
+  CameraGameObject: {fileID: 0}
+  Camera: {fileID: 0}
   _xMinimapPos: 0
   _yMinimapPos: 50
   _zMinimapPos: 0
@@ -124,7 +126,7 @@ MonoBehaviour:
   scrollSpeed: 20
   minY: -70
   maxY: -10
-  minPan: 45
+  minPan: 30
   maxPan: 70
   up: 273
   down: 274

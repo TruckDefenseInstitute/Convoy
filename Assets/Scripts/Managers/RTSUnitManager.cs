@@ -162,21 +162,28 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         return;
     }
 
-    void MultiselectLeftMouseUp()
-    {
+    void MultiselectLeftMouseUp() {
         var llc = Vector2.Min(_startingPoint, Input.mousePosition);
         var urc = Vector2.Max(_startingPoint, Input.mousePosition);
         var rect = Rect.MinMaxRect(llc.x, llc.y, urc.x, urc.y);
 
+        Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(mouseToWorldRay, out hit);
+
+        Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.1f);
+
         var potentialAllies =
-            _units.FindAll(unit => rect.Contains(PlayerCameraManager.Instance.Camera.WorldToScreenPoint(unit.transform.position)))
-                  .FindAll(unit => {
-                      if (unit.TryGetComponent<Unit>(out var u)) {
-                          return u.Alignment == Alignment.Friendly && u.IsControllable;
-                      } else {
-                          return false;
-                      }
-                  });
+            _units.FindAll(unit => rect.Contains(PlayerCameraManager.Instance.Camera.WorldToScreenPoint(unit.transform.position)));
+        potentialAllies.AddRange(hitColliders.Where(c => c.transform.parent != null).Select(c => c.transform.parent.gameObject));
+        potentialAllies =
+            potentialAllies.FindAll(unit => {
+                if (unit.TryGetComponent<Unit>(out var u)) {
+                    return u.Alignment == Alignment.Friendly && u.IsControllable;
+                } else {
+                    return false;
+                }
+            });
 
         if (potentialAllies.Count == 0) {
             ExitMultiselectReturnToIdle();
@@ -207,20 +214,23 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         var urc = Vector2.Max(_startingPoint, Input.mousePosition);
         var rect = Rect.MinMaxRect(llc.x, llc.y, urc.x, urc.y);
 
-        var potentialAllies =
-            _units.FindAll(unit => rect.Contains(PlayerCameraManager.Instance.Camera.WorldToScreenPoint(unit.transform.position)))
-                  .FindAll(unit => {
-                      if (unit.TryGetComponent<Unit>(out var u)) {
-                          return u.Alignment == Alignment.Friendly && u.IsControllable;
-                      } else {
-                          return false;
-                      }
-                  });
+        Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(mouseToWorldRay, out hit);
 
-        if (potentialAllies.FirstOrDefault() == null)
-        {
-            return;
-        }
+        Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.1f);
+
+        var potentialAllies =
+            _units.FindAll(unit => rect.Contains(PlayerCameraManager.Instance.Camera.WorldToScreenPoint(unit.transform.position)));
+        potentialAllies.AddRange(hitColliders.Where(c => c.transform.parent != null).Select(c => c.transform.parent.gameObject));
+        potentialAllies =
+            potentialAllies.FindAll(unit => {
+                if (unit.TryGetComponent<Unit>(out var u)) {
+                    return u.Alignment == Alignment.Friendly && u.IsControllable;
+                } else {
+                    return false;
+                }
+            });
 
         _selectedAllies = potentialAllies.ToList();
 
