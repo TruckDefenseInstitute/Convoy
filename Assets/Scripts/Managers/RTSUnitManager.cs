@@ -102,7 +102,11 @@ public class RTSUnitManager : Manager<RTSUnitManager>
                 }
                 else if (Input.GetMouseButtonDown(0) && IsPointerNotOverUI())
                 {
-                    SelectedLeftMouseDown();
+                    if (Input.GetKey(KeyCode.LeftShift)) {
+                        goto case GameControlState.Idle;
+                    } else {
+                        SelectedLeftMouseDownNoShift();
+                    }
                 }
                 break;
         }
@@ -196,7 +200,12 @@ public class RTSUnitManager : Manager<RTSUnitManager>
             return;
         }
 
-        _selectedAllies = potentialAllies.ToList();
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            _selectedAllies.AddRange(potentialAllies.ToList());
+            _selectedAllies = _selectedAllies.Distinct().ToList();
+        } else {
+            _selectedAllies = potentialAllies.ToList();
+        }
         
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
@@ -232,7 +241,12 @@ public class RTSUnitManager : Manager<RTSUnitManager>
                 }
             });
 
-        _selectedAllies = potentialAllies.ToList();
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            _selectedAllies.AddRange(potentialAllies.ToList());
+            _selectedAllies = _selectedAllies.Distinct().ToList();
+        } else {
+            _selectedAllies = potentialAllies.ToList();
+        }
 
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
     }
@@ -275,8 +289,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         _previousClickEffect = Instantiate(clickEffect, new Vector3(hit.point.x, 0f, hit.point.z), Quaternion.identity);
     }
 
-    void SelectedLeftMouseDown()
-    {
+    void SelectedLeftMouseDownNoShift() {
         _selectedAllies = new List<GameObject>();
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
