@@ -7,7 +7,7 @@ public class ResourceLossPopup : MonoBehaviour
 {
     TextMeshProUGUI _textMeshPro;
     bool _startHasRun = false;
-    byte alpha = 255;
+    float alpha = 1;
 
     // Start is called before the first frame update
     public void Start()
@@ -37,12 +37,12 @@ public class ResourceLossPopup : MonoBehaviour
                                           _textMeshPro.margin.z,
                                           _textMeshPro.margin.w);
 
-        _textMeshPro.color = new Color32(255,
-                                         0,
-                                         0,
-                                         alpha);
+        _textMeshPro.color = new Color(1,
+                                       0,
+                                       0,
+                                       alpha);
 
-        alpha -= 3;
+        alpha -= Time.deltaTime;
     }
 
     void Destroy()
