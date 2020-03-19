@@ -119,7 +119,7 @@ MonoBehaviour:
   _xMinimapPos: 0
   _yMinimapPos: 50
   _zMinimapPos: 0
-  _miniMapSize: 60
+  _miniMapSize: 55
   panSpeed: 20
   panBorderThickness: 10
   panLimit: {x: 50, y: 50}

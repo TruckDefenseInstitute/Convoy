@@ -263,9 +263,15 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     void SelectedRightMouseDown()
     {
         Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit hit;
 
         Physics.Raycast(mouseToWorldRay, out hit);
+
+        if (Mathf.Abs(hit.point.x) > PlayerCameraManager.Instance.panLimit.x
+            || Mathf.Abs(hit.point.z) > PlayerCameraManager.Instance.panLimit.y) {
+            return;
+        }
 
         // todo beautify
         MovementMode mm;
