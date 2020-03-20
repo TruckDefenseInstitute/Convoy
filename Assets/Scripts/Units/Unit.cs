@@ -353,6 +353,7 @@ public class Unit : MonoBehaviour {
 
     bool GetBestTarget() {
         float bestTimeToKill = float.PositiveInfinity;
+        var highestThreatLevel = 0f;
         _targets.RemoveWhere(u => !u.IsAlive());
         _targets.RemoveWhere(u => u == null);
         foreach (var unit in _targets) {
@@ -360,7 +361,6 @@ public class Unit : MonoBehaviour {
             var effectiveness = unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType));
             var dpsToUnit = effectiveness * _weaponRef.DPS;
             var timeToKill = unit.Health / dpsToUnit;
-            var highestThreatLevel = 0f;
             var localRange = _stance == Stance.HoldGround ? _weaponRef.AttackRange : DetectionRange;
 
             if (effectiveness <= 0.04f) {
@@ -370,7 +370,7 @@ public class Unit : MonoBehaviour {
                 continue;
             }
 
-            if (unit.ThreatLevel > highestThreatLevel  && dist < localRange) {
+            if (unit.ThreatLevel > highestThreatLevel && dist < localRange) {
                 highestThreatLevel = unit.ThreatLevel;
                 _focusTarget = unit;
                 bestTimeToKill = timeToKill;
