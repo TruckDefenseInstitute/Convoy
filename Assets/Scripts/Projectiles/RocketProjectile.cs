@@ -23,14 +23,10 @@ public class RocketProjectile : MonoBehaviour {
     public GameObject Target;
 
     private Rigidbody _rigidbody;
-    private SphereCollider _rangeCollider;
-    private float _radius;
 
     private Unit _u;
     private Vector3 _dest;
     private Vector3 _velocity;
-
-    private List<Unit> _inRange = new List<Unit>();
 
     private bool _exploded = false;
 
@@ -43,11 +39,7 @@ public class RocketProjectile : MonoBehaviour {
         }
 
         _rigidbody = transform.GetComponent<Rigidbody>();
-        if (Target.TryGetComponent<RichAI>(out RichAI ri)) {
-            _radius = Mathf.Max(ri.radius, ri.height, MinHitRadius);
-        } else {
-            _radius = MinHitRadius;
-        }
+
         var ps = GetComponent<ParticleSystem>();
         _u = Target.GetComponent<Unit>();
         _dest = _u.transform.position + Vector3.up;
@@ -55,10 +47,6 @@ public class RocketProjectile : MonoBehaviour {
         _iniDistance = Vector3.Distance(_dest, transform.position);
 
         _velocity = transform.forward * InitialVelocity;
-
-        _rangeCollider = gameObject.AddComponent<SphereCollider>();
-        _rangeCollider.radius = _radius;
-        _rangeCollider.isTrigger = true;
     }
 
     // Update is called once per frame
@@ -68,23 +56,14 @@ public class RocketProjectile : MonoBehaviour {
         }
         if (_u != null && _u.IsAlive()) {
             _dest = _u.transform.position + Vector3.up;
-            if (Vector3.Distance(_dest, transform.position) <= _radius) {
-                HitTarget();
-                _exploded = true;
-                if (HitSpawn != null) {
-                    Instantiate(HitSpawn, transform.position, transform.rotation);
-                }
-                Destroy(gameObject);
-                return;
-            }
         }
         var destFacing = _dest - transform.position;
 
         // rotate
         Vector3 f = Vector3.RotateTowards(
-            transform.forward, 
+            transform.forward,
             destFacing,
-            Mathf.Deg2Rad * MaxAngularVelocity * Time.deltaTime, 
+            Mathf.Deg2Rad * MaxAngularVelocity * Time.deltaTime,
             0);
         transform.rotation = Quaternion.LookRotation(f, Vector3.up);
 
@@ -98,24 +77,12 @@ public class RocketProjectile : MonoBehaviour {
 
         if (transform.position.y < _dest.y) {
             _exploded = true;
-            Unit hit = null; 
-            float minRange = float.PositiveInfinity;
-            foreach (Unit u in _inRange) {
-                if (u != null) {
-                    float curRange = Vector3.Distance(u.transform.position, transform.position);
-                    if (curRange < minRange) {
-                        minRange = curRange;
-                        hit = u;
-                    }
-                }
-            }
-            if (hit != null) {
-                hit.TakeDamage(DamageMetadata);
-            }
             if (HitSpawn != null) {
                 Instantiate(HitSpawn, transform.position, transform.rotation);
             }
-            Destroy(gameObject);
+            Destroy(this);
+            Destroy(_rigidbody);
+            Destroy(transform.GetChild(0).gameObject);
         }
     }
 
@@ -131,18 +98,15 @@ public class RocketProjectile : MonoBehaviour {
             return;
         }
         Unit u = other.GetComponentInParent<Unit>();
-        if (u != null && u.Alignment == TargetedAlignment) {
-            _inRange.Add(u);
-        }
-    }
-
-    private void OnTriggerExit(Collider other) {
-        if (other.isTrigger) {
-            return;
-        }
-        Unit u = other.GetComponentInParent<Unit>();
-        if (u != null) {
-            _inRange.Remove(u);
+        if (u != null && u == _u && u.IsAlive()) {
+            HitTarget();
+            _exploded = true;
+            if (HitSpawn != null) {
+                Instantiate(HitSpawn, transform.position, transform.rotation);
+            }
+            Destroy(this);
+            Destroy(_rigidbody);
+            Destroy(transform.GetChild(0).gameObject);
         }
     }
 }

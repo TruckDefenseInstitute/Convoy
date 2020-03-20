@@ -102,7 +102,11 @@ public class RTSUnitManager : Manager<RTSUnitManager>
                 }
                 else if (Input.GetMouseButtonDown(0) && IsPointerNotOverUI())
                 {
-                    SelectedLeftMouseDown();
+                    if (Input.GetKey(KeyCode.LeftShift)) {
+                        goto case GameControlState.Idle;
+                    } else {
+                        SelectedLeftMouseDownNoShift();
+                    }
                 }
                 break;
         }
@@ -196,7 +200,12 @@ public class RTSUnitManager : Manager<RTSUnitManager>
             return;
         }
 
-        _selectedAllies = potentialAllies.ToList();
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            _selectedAllies.AddRange(potentialAllies.ToList());
+            _selectedAllies = _selectedAllies.Distinct().ToList();
+        } else {
+            _selectedAllies = potentialAllies.ToList();
+        }
         
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
@@ -232,7 +241,12 @@ public class RTSUnitManager : Manager<RTSUnitManager>
                 }
             });
 
-        _selectedAllies = potentialAllies.ToList();
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            _selectedAllies.AddRange(potentialAllies.ToList());
+            _selectedAllies = _selectedAllies.Distinct().ToList();
+        } else {
+            _selectedAllies = potentialAllies.ToList();
+        }
 
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
     }
@@ -249,9 +263,15 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     void SelectedRightMouseDown()
     {
         Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit hit;
 
         Physics.Raycast(mouseToWorldRay, out hit);
+
+        if (Mathf.Abs(hit.point.x) > PlayerCameraManager.Instance.panLimit.x
+            || Mathf.Abs(hit.point.z) > PlayerCameraManager.Instance.panLimit.y) {
+            return;
+        }
 
         // todo beautify
         MovementMode mm;
@@ -275,8 +295,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         _previousClickEffect = Instantiate(clickEffect, new Vector3(hit.point.x, 0f, hit.point.z), Quaternion.identity);
     }
 
-    void SelectedLeftMouseDown()
-    {
+    void SelectedLeftMouseDownNoShift() {
         _selectedAllies = new List<GameObject>();
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);

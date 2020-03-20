@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: -999
+  m_text: -000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efcd2363f779b9345b9fc321ae7431f1, type: 2}
   m_sharedMaterial: {fileID: 1840754161631898696, guid: efcd2363f779b9345b9fc321ae7431f1,
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -57.316284, y: 220, z: 957.5072, w: 249}
+  m_margin: {x: -57.316284, y: 220, z: 938.6493, w: 249}
   m_textInfo:
     textComponent: {fileID: 3635348176298860033}
     characterCount: 4
