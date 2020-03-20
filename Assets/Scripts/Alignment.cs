@@ -1,5 +1,6 @@
 public enum Alignment
 {
     Friendly,
-    Hostile
+    Hostile,
+    Neutral
 }

@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour {
 
     // portrait stats
 
+    public float ThreatLevel = 1;
     public string Name;
     public float MaxHealth;
     [HideInInspector]
@@ -357,11 +358,22 @@ public class Unit : MonoBehaviour {
             var effectiveness = unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType));
             var dpsToUnit = effectiveness * _weaponRef.DPS;
             var timeToKill = unit.Health / dpsToUnit;
+            var highestThreatLevel = 0f;
             var localRange = _stance == Stance.HoldGround ? _weaponRef.AttackRange : DetectionRange;
 
             if (effectiveness <= 0.04f) {
                 continue;
             }
+            if (ThreatLevel <= 0) {
+                continue;
+            }
+
+            if (unit.ThreatLevel > highestThreatLevel && dist < localRange) {
+                highestThreatLevel = unit.ThreatLevel;
+                _focusTarget = unit;
+                bestTimeToKill = timeToKill;
+            }
+
             // if both can one shot
             if (timeToKill < _weaponRef.CooldownTime && bestTimeToKill < _weaponRef.CooldownTime && dist < localRange) {
                 // select the one with higher kill time
@@ -665,5 +677,9 @@ public class Unit : MonoBehaviour {
 
     public GameObject GetHealthBar() {
         return _healthBar;
+    }
+
+    public void LockMovement(bool locked) {
+        _rvoRef.locked = locked;
     }
 }
