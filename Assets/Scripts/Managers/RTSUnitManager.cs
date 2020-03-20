@@ -96,6 +96,13 @@ public class RTSUnitManager : Manager<RTSUnitManager>
                     if (_numberKeyPressed) SwitchToRecordedAllies();
                 }
 
+                if (Input.GetKey(KeyCode.S)) {
+                    _unitCommandManager.Stop();
+                }
+                if (Input.GetKey(KeyCode.G)) {
+                    _unitCommandManager.HoldGround();
+                }
+
                 if (Input.GetMouseButtonDown(1) && IsPointerNotOverUI())
                 {
                     SelectedRightMouseDown();

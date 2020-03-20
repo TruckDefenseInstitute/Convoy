@@ -25,4 +25,12 @@ public class UnitCommandManager : Manager<UnitCommandManager> {
 
         _selectedAllies.ForEach(ab => ab.ShiftMove(hit, mode));
     }
+
+    public void Stop() {
+        _selectedAllies.ForEach(ab => ab.Stop());   
+    }
+
+    public void HoldGround() {
+        _selectedAllies.ForEach(ab => ab.HoldGround());
+    }
 }
