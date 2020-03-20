@@ -164,7 +164,7 @@ public class Unit : MonoBehaviour {
         ExecuteFirstQueueAction();
     }
 
-    public void ShiftMove(RaycastHit hit, MovementMode mode) {
+    public int ShiftMove(RaycastHit hit, MovementMode mode) {
         _attacking = false;
         AnimatorStopFiring();
         _guardPosition = new Vector3(float.PositiveInfinity, 0, 0);
@@ -172,14 +172,16 @@ public class Unit : MonoBehaviour {
         // if raycast hit ground instead of unit
         if (temp == null) {
             ShiftMove(hit.point, mode);
-            return;
+            return mode == MovementMode.AMove ? 1 : 0;
         }
 
         // follow target
         if (temp.Alignment == Alignment.Friendly) {
             ShiftFollow(temp);
+            return 3;
         } else { // attack target
             ShiftAttack(temp);
+            return 2;
         }
     }
 
@@ -188,9 +190,9 @@ public class Unit : MonoBehaviour {
         ShiftMove(moveTo, mode);
     }
 
-    public void Move(RaycastHit hit, MovementMode mode) {
+    public int Move(RaycastHit hit, MovementMode mode) {
         _shiftQueue.Clear();
-        ShiftMove(hit, mode);
+        return ShiftMove(hit, mode);
     }
     
     public void ShiftFollow(Unit u) {
@@ -368,7 +370,7 @@ public class Unit : MonoBehaviour {
                 continue;
             }
 
-            if (unit.ThreatLevel > highestThreatLevel && dist < localRange) {
+            if (unit.ThreatLevel > highestThreatLevel  && dist < localRange) {
                 highestThreatLevel = unit.ThreatLevel;
                 _focusTarget = unit;
                 bestTimeToKill = timeToKill;

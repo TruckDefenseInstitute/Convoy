@@ -280,6 +280,12 @@ public class RTSUnitManager : Manager<RTSUnitManager>
             return;
         }
 
+        if (_previousClickEffect != null) {
+            Destroy(_previousClickEffect);
+        }
+        Color[] colors = new Color[] { Color.white, Color.white, Color.white };
+        _previousClickEffect = Instantiate(clickEffect, new Vector3(hit.point.x, 0f, hit.point.z), Quaternion.identity);
+
         // todo beautify
         MovementMode mm;
         if (Input.GetKey(KeyCode.A)) {
@@ -287,19 +293,36 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         } else {
             mm = MovementMode.Move;
         }
+        int rtv;
         if (Input.GetKey(KeyCode.LeftShift)) {
-            _unitCommandManager.ShiftDirectSelectedUnits(hit, mm);
+            rtv = _unitCommandManager.ShiftDirectSelectedUnits(hit, mm);
         } else {
-            _unitCommandManager.DirectSelectedUnits(hit, mm);
+            rtv = _unitCommandManager.DirectSelectedUnits(hit, mm);
         }
 
-
-        if (_previousClickEffect != null)
-        {
-            Destroy(_previousClickEffect);
+        switch (rtv) {
+            case 0: // move
+                break;
+            case 1: // amove
+                colors[0] = Color.red;
+                colors[1] = Color.red;
+                colors[2] = Color.red;
+                break;
+            case 2: // attack
+                colors[0] = Color.red;
+                break;
+            case 3: // follow
+                colors[0] = Color.green;
+                colors[1] = Color.green;
+                colors[2] = Color.green;
+                break;
         }
 
-        _previousClickEffect = Instantiate(clickEffect, new Vector3(hit.point.x, 0f, hit.point.z), Quaternion.identity);
+        int i = 0;
+        foreach (var ps in _previousClickEffect.GetComponentsInChildren<ParticleSystem>()) {
+            var m = ps.main;
+            m.startColor = colors[i++];
+        }
     }
 
     void SelectedLeftMouseDownNoShift() {
