@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33052384381534216}
   - component: {fileID: 23964771147314728}
   - component: {fileID: 5278557077163501458}
-  - component: {fileID: 8447525331099330156}
+  - component: {fileID: 912001416}
   m_Layer: 0
   m_Name: SM_Bld_Industrial_01
   m_TagString: Untagged
@@ -95,19 +95,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9b40fbe3d4d348f428ac506a1ae07f72, type: 3}
---- !u!208 &8447525331099330156
-NavMeshObstacle:
+--- !u!114 &912001416
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926591690556932}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 5.5000005, y: 3.0000002, z: 0.43400002}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -5, y: 3.0000002, z: 0.13700001}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bee0a6fa1f5d4f4db481219040523c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  type: 0
+  mesh: {fileID: 0}
+  rectangleSize: {x: 12, y: 3}
+  circleRadius: 1
+  circleResolution: 6
+  height: 5
+  meshScale: 1
+  center: {x: -5, y: -0.5, z: 0}
+  updateDistance: 0.4
+  isDual: 0
+  cutsAddedGeom: 1
+  updateRotationDistance: 10
+  useRotationAndScale: 0
