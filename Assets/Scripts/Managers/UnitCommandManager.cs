@@ -10,19 +10,27 @@ public class UnitCommandManager : Manager<UnitCommandManager> {
         _selectedAllies = gameObjectList.Select(go => go.GetComponent<Unit>()).ToList();
     }
 
-    public void DirectSelectedUnits(RaycastHit hit, MovementMode mode) {
+    public int DirectSelectedUnits(RaycastHit hit, MovementMode mode) {
         if (hit.transform == null) {
-            return;
+            return -1;
         }
 
-        _selectedAllies.ForEach(ab => ab.Move(hit, mode));
+        return _selectedAllies.ConvertAll(ab => ab.Move(hit, mode))[0];
     }
 
-    public void ShiftDirectSelectedUnits(RaycastHit hit, MovementMode mode) {
+    public int ShiftDirectSelectedUnits(RaycastHit hit, MovementMode mode) {
         if (hit.transform == null) {
-            return;
+            return -1;
         }
 
-        _selectedAllies.ForEach(ab => ab.ShiftMove(hit, mode));
+        return _selectedAllies.ConvertAll(ab => ab.ShiftMove(hit, mode))[0];
+    }
+
+    public void Stop() {
+        _selectedAllies.ForEach(ab => ab.Stop());   
+    }
+
+    public void HoldGround() {
+        _selectedAllies.ForEach(ab => ab.HoldGround());
     }
 }

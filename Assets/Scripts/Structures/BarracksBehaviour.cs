@@ -12,16 +12,18 @@ public class BarracksBehaviour : MonoBehaviour
     public Transform RallyPoint;
 
     public float CooldownTime;
-    float _cooldownLeft;
     Vector3 spawnPosition;
     Unit _unit;
+    bool _enabled;
 
     // Start is called before the first frame update
     void Start()
     {
         float barracksYAxisRotation = gameObject.transform.rotation.eulerAngles.y;
         _unit = GetComponent<Unit>();
-        Invoke("SpawnDude", SleepTime);
+        if (SleepTime >= 0) {
+            Invoke("SleepEnable", SleepTime);
+        }
     }
 
     Vector3 GetVectorRotatedAboutYAxis(Vector3 vector, float degrees)
@@ -39,12 +41,24 @@ public class BarracksBehaviour : MonoBehaviour
         return new Vector3(x2, vector.y, z2);
     }
 
-    void SpawnDude() {
+    void SleepEnable() {
+        SetEnable(true);
+    }
+
+    public void SetEnable(bool enabled) {
+        _enabled = enabled;
+        if (_enabled) {
+            SpawnDude();
+        } else {
+            CancelInvoke();
+        }
+    }
+
+    public void SpawnSingleDude() {
         if (!_unit.IsAlive()) {
             Destroy(this);
             return;
         }
-        _cooldownLeft = 0;
 
         Unit unitScript = Instantiate(UnitToSpawn, SpawnPosition.position, SpawnPosition.rotation).GetComponent<Unit>();
         unitScript.Alignment = Alignment.Hostile;
@@ -52,6 +66,10 @@ public class BarracksBehaviour : MonoBehaviour
         unitScript.Start();
         unitScript.Move(RallyPoint.position, MovementMode.Move);
         unitScript.ShiftFollow(TruckReferenceManager.Instance.TruckBehavior);
+    }
+
+    void SpawnDude() {
+        SpawnSingleDude();
         Invoke("SpawnDude", CooldownTime);
     }
 }

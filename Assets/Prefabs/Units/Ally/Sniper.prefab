@@ -5969,7 +5969,7 @@ MonoBehaviour:
   orientation: 0
   enableRotation: 1
   targetCompatibility: {fileID: 0}
-  acceleration: 20
+  acceleration: 10000
   rotationSpeed: 1080
   slowdownTime: 0.5
   endReachedDistance: 1

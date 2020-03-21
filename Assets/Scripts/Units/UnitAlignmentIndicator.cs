@@ -5,8 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Unit))]
 public class UnitAlignmentIndicator : MonoBehaviour {
-    [Tooltip("Indicates how big to draw the minimap indicator. Scale multiplier grows asymptotically to square root of the Threat Level.")]
-    public float ThreatLevel = 1;
     public GameObject AlliedMinimapIndicator;
     public GameObject EnemyMinimapIndicator;
 
@@ -21,22 +19,26 @@ public class UnitAlignmentIndicator : MonoBehaviour {
     void Start() {
         _unit = GetComponent<Unit>();
         _child = new GameObject("Alignment Light");
-        _light = _child.AddComponent<Light>();
+        if (_unit.Alignment == Alignment.Neutral) {
+        } else {
+            _light = _child.AddComponent<Light>();
+            if (TryGetComponent<RichAI>(out RichAI ai)) {
+                _light.range = ai.radius * 4;
+            } else if (TryGetComponent<NavmeshCut>(out NavmeshCut nc)) {
+                _light.range = nc.circleRadius * 2;
+            } else {
+                _light.range = 3;
+            }
+            _light.bounceIntensity = 0;
+        }
+
         if (_unit.Alignment == Alignment.Friendly) {
             _light.color = AlliedColor;
-            Instantiate(AlliedMinimapIndicator, transform).transform.localScale *= Mathf.Sqrt(ThreatLevel);
+            Instantiate(AlliedMinimapIndicator, transform).transform.localScale *= Mathf.Sqrt(_unit.ThreatLevel);
         } else if (_unit.Alignment == Alignment.Hostile) {
             _light.color = EnemyColor;
-            Instantiate(EnemyMinimapIndicator, transform).transform.localScale *= Mathf.Sqrt(ThreatLevel);
+            Instantiate(EnemyMinimapIndicator, transform).transform.localScale *= Mathf.Sqrt(_unit.ThreatLevel);
         }
-        if (TryGetComponent<RichAI>(out RichAI ai)) {
-            _light.range = ai.radius * 4;
-        } else if (TryGetComponent<NavmeshCut>(out NavmeshCut nc)) {
-            _light.range = nc.circleRadius * 2;
-        } else {
-            _light.range = 3;
-        }
-        _light.bounceIntensity = 0;
         _child.transform.SetParent(transform);
         _child.transform.localPosition = new Vector3(0f, 1f, 0f);
     }

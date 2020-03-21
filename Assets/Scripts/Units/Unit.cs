@@ -10,7 +10,7 @@ using PathCreation;
 [RequireComponent(typeof(UnitAlignmentIndicator))]
 [RequireComponent(typeof(Armor))]
 public class Unit : MonoBehaviour {
-    internal class Command{
+    internal class Command {
         internal Unit _unit;
         internal Vector3 _dest;
         internal MovementMode _mode;
@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour {
 
     // portrait stats
 
+    public float ThreatLevel = 1;
     public string Name;
     public float MaxHealth;
     [HideInInspector]
@@ -66,6 +67,7 @@ public class Unit : MonoBehaviour {
     RVOController _rvoRef;
     RTSAvoidance _avoidanceRef;
     protected MovementMode _movementMode = MovementMode.AMove;
+    protected Stance _stance = Stance.DefensiveStance;
     SphereCollider _rangeCollider;
     Weapon _weaponRef;
     Armor _armorRef;
@@ -115,10 +117,24 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public void Stop() {
+        _shiftQueue.Clear();
+        NextDestination();
+        SetDestination(transform.position);
+        _aiRef.SearchPath();
+        StartIdle();
+    }
+
     public void StartIdle() {
         _guardPosition = transform.position;
-        this._movementMode = MovementMode.AMove;
+        this._movementMode = MovementMode.Guard;
+        this._stance = Stance.DefensiveStance;
         AnimatorStopMoving();
+    }
+
+    public void HoldGround() {
+        Stop();
+        this._stance = Stance.HoldGround;
     }
 
     public void NextDestination() {
@@ -148,7 +164,7 @@ public class Unit : MonoBehaviour {
         ExecuteFirstQueueAction();
     }
 
-    public void ShiftMove(RaycastHit hit, MovementMode mode) {
+    public int ShiftMove(RaycastHit hit, MovementMode mode) {
         _attacking = false;
         AnimatorStopFiring();
         _guardPosition = new Vector3(float.PositiveInfinity, 0, 0);
@@ -156,14 +172,16 @@ public class Unit : MonoBehaviour {
         // if raycast hit ground instead of unit
         if (temp == null) {
             ShiftMove(hit.point, mode);
-            return;
+            return mode == MovementMode.AMove ? 1 : 0;
         }
 
         // follow target
         if (temp.Alignment == Alignment.Friendly) {
             ShiftFollow(temp);
+            return 3;
         } else { // attack target
             ShiftAttack(temp);
+            return 2;
         }
     }
 
@@ -172,9 +190,9 @@ public class Unit : MonoBehaviour {
         ShiftMove(moveTo, mode);
     }
 
-    public void Move(RaycastHit hit, MovementMode mode) {
+    public int Move(RaycastHit hit, MovementMode mode) {
         _shiftQueue.Clear();
-        ShiftMove(hit, mode);
+        return ShiftMove(hit, mode);
     }
     
     public void ShiftFollow(Unit u) {
@@ -221,10 +239,13 @@ public class Unit : MonoBehaviour {
         Vector3 dest = transform.position;
         switch (temp._mode) {
             case MovementMode.AMove:
-            case MovementMode.Move:
+                this._stance = Stance.DefensiveStance;
                 dest = SetDestination(temp._dest);
                 break;
-
+            case MovementMode.Move:
+                this._stance = Stance.HoldFire;
+                dest = SetDestination(temp._dest);
+                break;
             case MovementMode.Attack:
                 if (temp._unit != null) {
                     _following = temp._unit;
@@ -339,11 +360,24 @@ public class Unit : MonoBehaviour {
             var effectiveness = unit.GetComponent<Armor>().ReduceDamage(new DamageMetadata(1.0f, _weaponRef.DamageType));
             var dpsToUnit = effectiveness * _weaponRef.DPS;
             var timeToKill = unit.Health / dpsToUnit;
+            var highestThreatLevel = 0f;
+            var localRange = _stance == Stance.HoldGround ? _weaponRef.AttackRange : DetectionRange;
+
             if (effectiveness <= 0.04f) {
                 continue;
             }
+            if (ThreatLevel <= 0) {
+                continue;
+            }
+
+            if (unit.ThreatLevel > highestThreatLevel  && dist < localRange) {
+                highestThreatLevel = unit.ThreatLevel;
+                _focusTarget = unit;
+                bestTimeToKill = timeToKill;
+            }
+
             // if both can one shot
-            if (timeToKill < _weaponRef.CooldownTime && bestTimeToKill < _weaponRef.CooldownTime && dist < DetectionRange) {
+            if (timeToKill < _weaponRef.CooldownTime && bestTimeToKill < _weaponRef.CooldownTime && dist < localRange) {
                 // select the one with higher kill time
                 if (timeToKill > bestTimeToKill) {
                     if (_shiftQueue.Count <= 0 && typeof(Truck).IsInstanceOfType(unit) && _aiRef != null) {
@@ -353,7 +387,7 @@ public class Unit : MonoBehaviour {
                     bestTimeToKill = timeToKill;
                 }
             } else { // cannot one shot, so select the one that takes less shits
-                if (timeToKill < bestTimeToKill && dist < DetectionRange) {
+                if (timeToKill < bestTimeToKill && dist < localRange) {
                     if (_shiftQueue.Count <= 0 && typeof(Truck).IsInstanceOfType(unit) && _aiRef != null) {
                         TargetThisLater(unit);
                     }
@@ -467,12 +501,12 @@ public class Unit : MonoBehaviour {
         if (_weaponRef == null) {
             return;
         }
-        
+
         // check if lost vision or target is dead
         if (_focusTarget != null) {
             if (!_focusTarget.IsAlive()
-                || DistanceIgnoreY(_focusTarget.transform.position, transform.position) > DetectionRange * (_aiRef != null ? LoseVisionMultiplier : 1)
-                ) {
+                || (_stance == Stance.HoldGround && DistanceIgnoreY(_focusTarget.transform.position, transform.position) > _weaponRef.AttackRange) // hold ground behavior
+                || DistanceIgnoreY(_focusTarget.transform.position, transform.position) > DetectionRange * (_aiRef != null ? LoseVisionMultiplier : 1)) { // normal behavior
                 _focusTarget = null;
                 _weaponRef.LoseAim();
                 _attacking = false;
@@ -486,7 +520,7 @@ public class Unit : MonoBehaviour {
         }
 
         // if can pathfind
-        if (_aiRef != null || _movementLocked) {
+        if (_aiRef != null && !_movementLocked && _stance != Stance.HoldGround) {
 
             MobileAttackLogic();
 
@@ -645,5 +679,9 @@ public class Unit : MonoBehaviour {
 
     public GameObject GetHealthBar() {
         return _healthBar;
+    }
+
+    public void LockMovement(bool locked) {
+        _rvoRef.locked = locked;
     }
 }
