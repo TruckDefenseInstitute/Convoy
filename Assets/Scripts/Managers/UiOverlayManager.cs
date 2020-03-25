@@ -141,6 +141,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         }
 
         if(allyList == null || allyList.Count == 0) {
+            _unitStatus.GetComponent<UiUnitStatus>().ClearUnitStatus();
             return;
         }
         
