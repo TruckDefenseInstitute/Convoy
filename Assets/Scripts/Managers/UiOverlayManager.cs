@@ -266,14 +266,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         }
     }
 
-    public void UpdateTrainingQueue(int queueSize, int maxQueueSize) {
-        for(int i = 0; i < maxQueueSize; i++) {
-            if(i < queueSize) {
-                _trainingQueue.transform.GetChild(i).gameObject.SetActive(true);
-            } else {
-                _trainingQueue.transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
+    public void UpdateTrainingQueue(Queue<TrainButton> unitSlotQueue) {
+        _trainingQueue.GetComponent<TrainingQueue>().ChangeTrainingQueue(unitSlotQueue);
         
     }
     
