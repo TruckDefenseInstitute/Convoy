@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33014044855853088}
   - component: {fileID: 23448690748965898}
   - component: {fileID: 95323565240803910}
+  - component: {fileID: 8422617117175314845}
   - component: {fileID: 1706441976}
   m_Layer: 0
   m_Name: SM_Prop_Fence_01
@@ -100,6 +101,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &8422617117175314845
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192176246735656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 6064be090550b694eb8c7d898273d5ae, type: 3}
 --- !u!114 &1706441976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,14 +130,14 @@ MonoBehaviour:
   version: 1
   type: 0
   mesh: {fileID: 0}
-  rectangleSize: {x: 2, y: 0.2}
+  rectangleSize: {x: 0.2, y: 2}
   circleRadius: 1
   circleResolution: 6
-  height: 7.5
+  height: 7
   meshScale: 1
   center: {x: 0, y: -1, z: 0}
   updateDistance: 0.4
   isDual: 0
   cutsAddedGeom: 1
   updateRotationDistance: 10
-  useRotationAndScale: 0
+  useRotationAndScale: 1
