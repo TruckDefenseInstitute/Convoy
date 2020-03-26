@@ -9,8 +9,22 @@ public class SpawnEvent : ScriptedEvent
     public GameObject[] SpawnEffects;
     public GameObject PrefabToBeSpawned;
 
+    public bool onRepeat = false;
+    public float timeBetweenRepeatSpawns = 5.0f;
+
     public override void Trigger() {
+        if (onRepeat) {
+            StartCoroutine(RepeatingSpawnLoop());
+        } else {
+            StartCoroutine(Spawn());
+        }
+    }
+
+    IEnumerator RepeatingSpawnLoop() {
         StartCoroutine(Spawn());
+
+        WaitForSeconds delay = new WaitForSeconds(timeBetweenRepeatSpawns);
+        yield return StartCoroutine(RepeatingSpawnLoop());
     }
 
     IEnumerator Spawn() {
