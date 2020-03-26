@@ -92,7 +92,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: de04fe5f5ea058c4196ccbcbac489ac3, type: 3}
 --- !u!114 &1179793094
@@ -110,14 +110,14 @@ MonoBehaviour:
   version: 1
   type: 0
   mesh: {fileID: 0}
-  rectangleSize: {x: 4, y: 4}
+  rectangleSize: {x: 4.1, y: 4}
   circleRadius: 1
   circleResolution: 6
   height: 26
   meshScale: 1
-  center: {x: 0, y: -1, z: 0}
+  center: {x: 0.1, y: -1, z: 0}
   updateDistance: 0.4
   isDual: 0
   cutsAddedGeom: 1
   updateRotationDistance: 10
-  useRotationAndScale: 0
+  useRotationAndScale: 1

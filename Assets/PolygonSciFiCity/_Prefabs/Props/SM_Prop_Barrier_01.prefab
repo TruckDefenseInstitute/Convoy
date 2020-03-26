@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4419796514499596}
   - component: {fileID: 33571724292534090}
   - component: {fileID: 23279733054990320}
+  - component: {fileID: 5944588079245601997}
   - component: {fileID: 1794081116}
   m_Layer: 0
   m_Name: SM_Prop_Barrier_01
@@ -80,6 +81,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5944588079245601997
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057758197969386}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 26af201b7e78ab248b739a17d79c9a39, type: 3}
 --- !u!114 &1794081116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,14 +110,14 @@ MonoBehaviour:
   version: 1
   type: 0
   mesh: {fileID: 0}
-  rectangleSize: {x: 2, y: 0.5}
+  rectangleSize: {x: 0.6, y: 2.1}
   circleRadius: 1
   circleResolution: 6
-  height: 3.75
+  height: 2.1
   meshScale: 1
-  center: {x: 0, y: -1, z: 0}
+  center: {x: 0, y: -0.1, z: 0}
   updateDistance: 0.4
   isDual: 0
   cutsAddedGeom: 1
   updateRotationDistance: 10
-  useRotationAndScale: 0
+  useRotationAndScale: 1
