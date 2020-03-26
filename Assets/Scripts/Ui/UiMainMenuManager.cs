@@ -34,17 +34,17 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
     }
 
     IEnumerator LateStartGame() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator LateOption() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         
     }
 
     IEnumerator LateQuit() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         Application.Quit();
     }
 }
