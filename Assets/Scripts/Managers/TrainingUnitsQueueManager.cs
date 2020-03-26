@@ -34,7 +34,7 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
             }
         }
 
-        UiOverlayManager.Instance.UpdateTrainingQueue(_unitSlotQueue.Count, _maxQueueSize);
+        UiOverlayManager.Instance.UpdateTrainingQueue(_unitSlotQueue);
     }
 
     // Receives the unit slot button itself to start the timer
@@ -69,5 +69,9 @@ public class TrainingUnitsQueueManager : Manager<TrainingUnitsQueueManager> {
 
     public List<GameObject> GetUnitPrefabList() {
         return this._unitPrefabList;
+    }
+
+    public int GetMaxQueueSize() {
+        return _maxQueueSize;
     }
 }
