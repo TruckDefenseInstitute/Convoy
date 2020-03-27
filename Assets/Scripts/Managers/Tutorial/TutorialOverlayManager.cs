@@ -10,8 +10,9 @@ public class TutorialOverlayManager : Manager<TutorialOverlayManager>
     static GameObject _cameraRig;
 
     static DefendTruckTutorialTextManager _defendTruckTutorialTextManager;
-    static AmbushTutorialTextManager _ambushTutorialTextManager;
-    static BlockadeTutorialTextManager _blockadeTutorialTextManager;
+    static TutorialTextManager _teachControlsTutorialTextManager;
+    static TutorialTextManager _ambushTutorialTextManager;
+    static TutorialTextManager _blockadeTutorialTextManager;
 
     static ITutorialTextManager _activeTextManager;
 
@@ -36,15 +37,21 @@ public class TutorialOverlayManager : Manager<TutorialOverlayManager>
                 _defendTruckTutorialTextManager.Start();
             }
 
+            if (_pauseScreenCanvas.transform.GetChild(i).name == "TeachControlsText")
+            {
+                _teachControlsTutorialTextManager = _pauseScreenCanvas.transform.GetChild(i).GetComponent<TutorialTextManager>();
+                _teachControlsTutorialTextManager.Start();
+            }
+
             if (_pauseScreenCanvas.transform.GetChild(i).name == "AmbushTutorialText")
             {
-                _ambushTutorialTextManager = _pauseScreenCanvas.transform.GetChild(i).GetComponent<AmbushTutorialTextManager>();
+                _ambushTutorialTextManager = _pauseScreenCanvas.transform.GetChild(i).GetComponent<TutorialTextManager>();
                 _ambushTutorialTextManager.Start();
             }
 
             if (_pauseScreenCanvas.transform.GetChild(i).name == "BlockadeTutorialText")
             {
-                _blockadeTutorialTextManager = _pauseScreenCanvas.transform.GetChild(i).GetComponent<BlockadeTutorialTextManager>();
+                _blockadeTutorialTextManager = _pauseScreenCanvas.transform.GetChild(i).GetComponent<TutorialTextManager>();
                 _blockadeTutorialTextManager.Start();
             }
         }
@@ -104,6 +111,13 @@ public class TutorialOverlayManager : Manager<TutorialOverlayManager>
         TutorialPause();
     }
 
+    public void ActivateTeachControlsTutorial()
+    {
+        _activeTextManager = (ITutorialTextManager) _teachControlsTutorialTextManager;
+        _activeTextManager.Activate();
+        TutorialPause();
+    }
+
 
     public void ActivateAmbushTutorial()
     {
@@ -111,7 +125,6 @@ public class TutorialOverlayManager : Manager<TutorialOverlayManager>
         _activeTextManager.Activate();
         TutorialPause();
     }
-
 
     public void ActivateBlockadeTutorial()
     {

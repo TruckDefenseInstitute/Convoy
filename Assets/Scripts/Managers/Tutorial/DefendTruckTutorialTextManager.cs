@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefendTruckTutorialTextManager : Manager<DefendTruckTutorialTextManager>, ITutorialTextManager
+public class DefendTruckTutorialTextManager : MonoBehaviour, ITutorialTextManager
 {
     GameObject[] _textObjects;
     int index = 0;

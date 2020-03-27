@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockadeTutorialTextManager : Manager<BlockadeTutorialTextManager>, ITutorialTextManager
+public class TutorialTextManager : MonoBehaviour, ITutorialTextManager
 {
     GameObject[] _textObjects;
     int index = 0;
+
 
     public void Start()
     {
@@ -14,6 +15,7 @@ public class BlockadeTutorialTextManager : Manager<BlockadeTutorialTextManager>,
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             _textObjects[i] = gameObject.transform.GetChild(i).gameObject;
+            Debug.Log(_textObjects[i].name);
         }
     }
 
@@ -41,7 +43,7 @@ public class BlockadeTutorialTextManager : Manager<BlockadeTutorialTextManager>,
             return true;
         }
     }
-    
+
     public bool TrainButtonPress()
     {
         return false;
