@@ -9377,6 +9377,7 @@ GameObject:
   - component: {fileID: 6947077366260828920}
   - component: {fileID: 6947077366260828921}
   - component: {fileID: 6947077366260828922}
+  - component: {fileID: 6947077366260828918}
   - component: {fileID: 6947077366260828923}
   - component: {fileID: 6947077366260828925}
   - component: {fileID: 6947077366260828926}
@@ -9402,6 +9403,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Event: {fileID: 2045578648}
+--- !u!114 &6947077366260828918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947077366260828916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4c379874c4218488b1a80093c11f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Alignment: 1
+  IsControllable: 0
+  ThreatLevel: 0.01
+  Name: Blockade
+  MaxHealth: 10000
+  DestroyImmediately: 0
+  Deathrattle: {fileID: 0}
+  RetargetTime: 6
+  DetectionRange: 0
+  AMoveStopDistMultiplier: 1
+  LoseVisionMultiplier: 1.1
+  MoveSpeed: 10
+  OnEnemyDeathReward: 1
+  MaxRotatingSpeed: 360
+  EffectSpawningPoint: {fileID: 0}
+  selectRingPrefab: {fileID: 0}
 --- !u!114 &6947077366260828920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9470,7 +9499,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6947077366260828916}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3de4e06b6b000442836e77228e0e3b9, type: 3}
   m_Name: 
