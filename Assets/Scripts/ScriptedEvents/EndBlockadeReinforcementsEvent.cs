@@ -14,6 +14,7 @@ public class EndBlockadeReinforcementsEvent : ScriptedEvent
 
     public override void Trigger()
     {
+        Debug.Log("Ya Yeet");
         _blockadeReinforcementEvent.reinforcementsEnded = true;
     }
 }
