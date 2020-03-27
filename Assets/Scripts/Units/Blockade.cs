@@ -9,14 +9,9 @@ public class Blockade : Unit
         base.Start();
 
         DeathCallback = () => {
-            
-            GetChildByName(GetChildByName(gameObject.transform.parent.gameObject, "BlockadeReinforcements"), "BlockadeReinforcementSpawns").GetComponent<EndBlockadeReinforcementsEvent>().Trigger();
-
-            /*
-            GameObject.Find("BlockadeReinforcementSpawns")
-                      .GetComponent<EndBlockadeReinforcementsEvent>()
-                      .Trigger();
-            */
+            GameObject sibling = GetChildByName(gameObject.transform.parent.gameObject, "BlockadeReinforcements");
+            GameObject nephew = GetChildByName(sibling, "BlockadeReinforcementSpawns");
+            nephew.GetComponent<EndBlockadeReinforcementsEvent>().Trigger();
         };
     }
 
