@@ -15,7 +15,6 @@ public class TutorialTextManager : MonoBehaviour, ITutorialTextManager
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             _textObjects[i] = gameObject.transform.GetChild(i).gameObject;
-            Debug.Log(_textObjects[i].name);
         }
     }
 

@@ -22,12 +22,6 @@ public class OpenVerticalTransitionController : MonoBehaviour
     void Update()
     {
         timeElapsed += Time.deltaTime;
-        
-        if (yeet)
-        {
-            material.SetFloat("_TimeElapsed", timeElapsed);
-        }
-
-        yeet = !yeet;
+        material.SetFloat("_TimeElapsed", timeElapsed);
     }
 }
