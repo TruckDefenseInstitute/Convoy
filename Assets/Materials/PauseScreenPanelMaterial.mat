@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OpenVerticalScreenTransition
-  m_Shader: {fileID: 4800000, guid: 531bdd03e9a5cc848bf0ef82dd7c9657, type: 3}
+  m_Name: PauseScreenPanelMaterial
+  m_Shader: {fileID: 4800000, guid: 02bd150b1565ff64c8b2751a212c099e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BarsTexture:
+        m_Texture: {fileID: 2800000, guid: 476263fa620957a438f1948bc9d9c855, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -47,12 +51,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 3e789f6c0dea0404da6d28d1f03f6025, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _OffsetTexture:
-        m_Texture: {fileID: 2800000, guid: fa07f0e82b4e62e4eb3cc1ee71e081f2, type: 3}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -60,6 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Brightness: 1.6
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -74,10 +79,13 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TimeElapsed: 3.9331133
-    - _TransitionTime: 1.5
+    - _TintDegree: 0.15
     - _UVSec: 0
+    - _UnscaledTime: 9.360788
     - _ZWrite: 1
     m_Colors:
+    - _BarsUVOffset: {r: 0, g: 0.54140127, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorTint: {r: 1, g: 0.14509803, b: 0.55616766, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RGBOffset: {r: -0.001, g: 0.003, b: 0.001, a: 0}
