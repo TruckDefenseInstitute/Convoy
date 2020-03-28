@@ -9,8 +9,6 @@ public class OpenVerticalTransitionController : MonoBehaviour
     public float timeElapsed;
 
     Material material;
-    bool yeet;
-    
 
     // Start is called before the first frame update
     void Start()

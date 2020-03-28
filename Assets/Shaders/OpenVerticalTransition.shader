@@ -64,9 +64,9 @@ Shader "Custom/OpenVerticalTransition"
                 else
                 {
                     float timePassedAsRatio = _TimeElapsed / _TransitionTime;
-                    float yeet2 = tex2Dproj(_OffsetTexture, input.onScreenPosition).x;
+                    float textureSample = tex2Dproj(_OffsetTexture, input.onScreenPosition).x;
 
-                    if (timePassedAsRatio > 1 - yeet2)
+                    if (timePassedAsRatio > 1 - textureSample)
                     {
                         return tex2Dproj(_BackgroundTexture, input.onScreenPosition);
                     }
