@@ -42,7 +42,7 @@ public class ResourceGainPopup : MonoBehaviour
                                        1,
                                        alpha);
 
-        alpha -= Time.deltaTime;
+        alpha -= Time.unscaledDeltaTime;
     }
 
     void Destroy()
