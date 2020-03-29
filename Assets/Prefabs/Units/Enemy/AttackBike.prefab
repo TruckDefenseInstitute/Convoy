@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Alignment: 0
   IsControllable: 1
+  ThreatLevel: 1
   Name: Attack Bike
   MaxHealth: 800
   DestroyImmediately: 1
@@ -318,7 +319,8 @@ AudioSource:
   m_GameObject: {fileID: 59739696491603235}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4086930104016042620, guid: 113d2cf7a89e26a41b6e7f5e6b128b98,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

@@ -37,9 +37,6 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     int _alphanum = 0;
 
     // User feedback
-    public AudioClip unitSelectionSound;
-    AudioSource _audioSource;
-    
     public GameObject clickEffect;
     GameObject _previousClickEffect;
 
@@ -58,8 +55,6 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         {
             _markedUnitsMemory[i] = new List<GameObject>();
         }
-
-        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -153,8 +148,6 @@ public class RTSUnitManager : Manager<RTSUnitManager>
             _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
             _gameControlState = GameControlState.Selected;
-            _audioSource.clip = unitSelectionSound;
-            _audioSource.Play();
             Debug.Log("Loaded " + _alphanum);
             Debug.Log("Now entering selected");
         }
@@ -219,8 +212,6 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
 
         _gameControlState = GameControlState.Selected;
-        _audioSource.clip = unitSelectionSound;
-        _audioSource.Play();
     }
 
     void MultiselectLeftMouseHeld()
