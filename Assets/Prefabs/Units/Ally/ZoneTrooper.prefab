@@ -375,7 +375,10 @@ MonoBehaviour:
   _unitSprite: {fileID: 21300000, guid: 51b74521b92d2bf46b61e6c6fde3fdea, type: 3}
   _unitCost: 130
   _unitTrainingTime: 10
-  _unitDescription: Good against Turrets
+  _unitDescription: Armoured Infantry Unit.<br>Strong against structures.
+  _unitFlavourText: Those unable to keep up with the demands of the battlefield quickly
+    die or desert. To graduate from the Khaganite Academy is but the highest praise
+    of a soldier's ability.
 --- !u!1 &5628242310197840274
 GameObject:
   m_ObjectHideFlags: 0
