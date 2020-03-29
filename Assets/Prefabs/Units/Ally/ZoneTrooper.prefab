@@ -161,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Alignment: 0
   IsControllable: 1
+  ThreatLevel: 1
   Name: ZoneTrooper
   MaxHealth: 960
   DestroyImmediately: 0
@@ -228,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThreatLevel: 1
   AlliedMinimapIndicator: {fileID: 6371135337354866469, guid: 50dd0f866c16fc441b7898bd6ff5eb54,
     type: 3}
   EnemyMinimapIndicator: {fileID: 6586887388040599793, guid: ace787eeb7dead2498abda19113ec220,
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d0f4e9485ad3945bf7cf2a3c9b6b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitSprite: {fileID: 21300000, guid: f73f54ec42a5cb945850d5dfa58ebc36, type: 3}
+  _unitSprite: {fileID: 21300000, guid: 51b74521b92d2bf46b61e6c6fde3fdea, type: 3}
   _unitCost: 130
   _unitTrainingTime: 10
   _unitDescription: Good against Turrets
