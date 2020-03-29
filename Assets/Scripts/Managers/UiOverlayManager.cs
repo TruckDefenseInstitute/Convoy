@@ -145,6 +145,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             return;
         }
         
+        UiSoundManager.Instance.PlayUnitSelectSound();
         // Sort by cost then by name
         allyList.Sort(
             delegate(GameObject g1, GameObject g2) { 

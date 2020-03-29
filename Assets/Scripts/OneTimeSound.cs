@@ -9,19 +9,12 @@ public class OneTimeSound : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        AudioSource audio = gameObject.AddComponent<AudioSource>();
+        AudioSource audio = GetComponent<AudioSource>();
         audio.clip = Sounds[Random.Range(0, Sounds.Length - 1)];
         audio.volume = Volume * SoundManager.Instance.GetMultiplier(audio.clip);
         audio.spatialBlend = 1;
         audio.rolloffMode = AudioRolloffMode.Linear;
         audio.maxDistance = 100f;
         audio.Play();
-        Destroy(audio, audio.clip.length);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

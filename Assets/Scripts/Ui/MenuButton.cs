@@ -9,7 +9,7 @@ public class MenuButton : MonoBehaviour,
                             IPointerEnterHandler {
 
     public void OnPointerEnter(PointerEventData eventdata) {
-        UiSoundManager.Instance.PlaySelectSound();
+        UiSoundManager.Instance.PlayButtonSelectSound();
     }
 
 }

@@ -5721,6 +5721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Alignment: 0
   IsControllable: 0
+  ThreatLevel: 1
   Name: Bullet Truck
   MaxHealth: 19500
   DestroyImmediately: 0
@@ -5790,7 +5791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4824d0be3dcaa4cb9f71254ede62f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThreatLevel: 1
   AlliedMinimapIndicator: {fileID: 8951132918243145190, guid: 7659d9a608f223a4cae82e0bb01386f6,
     type: 3}
   EnemyMinimapIndicator: {fileID: 6586887388040599793, guid: ace787eeb7dead2498abda19113ec220,
@@ -5822,7 +5822,8 @@ AudioSource:
   m_GameObject: {fileID: 9209276924344901948}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4086930104016042620, guid: 113d2cf7a89e26a41b6e7f5e6b128b98,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
