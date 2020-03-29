@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33589681688013118}
   - component: {fileID: 23104296648227060}
   - component: {fileID: 1118073776}
+  - component: {fileID: 7565981154883141262}
   m_Layer: 0
   m_Name: SM_Bld_Large_Part_05
   m_TagString: Untagged
@@ -94,3 +95,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b28ffe9afd2c9b647b5ff5b8d1fb0562, type: 3}
+--- !u!114 &7565981154883141262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927133134700738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bee0a6fa1f5d4f4db481219040523c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  type: 0
+  mesh: {fileID: 0}
+  rectangleSize: {x: 8, y: 10}
+  circleRadius: 1
+  circleResolution: 6
+  height: 50
+  meshScale: 1
+  center: {x: 0, y: 0, z: 2.75}
+  updateDistance: 0.4
+  isDual: 0
+  cutsAddedGeom: 1
+  updateRotationDistance: 10
+  useRotationAndScale: 1

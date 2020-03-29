@@ -110,12 +110,12 @@ MonoBehaviour:
   version: 1
   type: 0
   mesh: {fileID: 0}
-  rectangleSize: {x: 0.6, y: 2.1}
+  rectangleSize: {x: 0.6, y: 2}
   circleRadius: 1
   circleResolution: 6
-  height: 2.1
+  height: 2
   meshScale: 1
-  center: {x: 0, y: -0.1, z: 0}
+  center: {x: 0, y: 0, z: 0}
   updateDistance: 0.4
   isDual: 0
   cutsAddedGeom: 1
