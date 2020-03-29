@@ -12,6 +12,8 @@ public class UnitTraining : MonoBehaviour {
     private float _unitTrainingTime = 0;
     [SerializeField]
     private string _unitDescription = "";
+    [SerializeField]
+    private string _unitFlavourText = "";
 
     public float GetUnitCost() {
         return _unitCost;
@@ -23,6 +25,10 @@ public class UnitTraining : MonoBehaviour {
 
     public string GetUnitDescription() {
         return _unitDescription;
+    }
+
+    public string GetUnitFlavourText() {
+        return _unitFlavourText;
     }
 
     public Sprite GetUnitSprite() {
