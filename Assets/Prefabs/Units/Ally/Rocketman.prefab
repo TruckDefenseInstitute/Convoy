@@ -405,7 +405,9 @@ MonoBehaviour:
   _unitSprite: {fileID: 21300000, guid: 0058f8c00697abf49ac67384e27707b4, type: 3}
   _unitCost: 40
   _unitTrainingTime: 4
-  _unitDescription: Good against enemy turrets and
+  _unitDescription: Light Infantry Unit.<br>Strong against structures.
+  _unitFlavourText: In addition to typical mercenary work, The Fennel Security Corps
+    engage in numerous humanitarian and peacekeeping activities worldwide.
 --- !u!1 &7603067107175053998
 GameObject:
   m_ObjectHideFlags: 0
