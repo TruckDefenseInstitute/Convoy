@@ -1,30 +1,62 @@
 fileFormatVersion: 2
 guid: 564a789693c5d9f4582d3d28513b1666
-timeCreated: 1523497667
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: SM_Wep_Grenade_HE_01_Clip
-    100004: SM_Wep_Grenade_HE_01_Pin
-    400000: //RootNode
-    400002: SM_Wep_Grenade_HE_01_Clip
-    400004: SM_Wep_Grenade_HE_01_Pin
-    2300000: //RootNode
-    2300002: SM_Wep_Grenade_HE_01_Clip
-    2300004: SM_Wep_Grenade_HE_01_Pin
-    3300000: //RootNode
-    3300002: SM_Wep_Grenade_HE_01_Clip
-    3300004: SM_Wep_Grenade_HE_01_Pin
-    4300000: SM_Wep_Grenade_HE_01
-    4300002: SM_Wep_Grenade_HE_01_Pin
-    4300004: SM_Wep_Grenade_HE_01_Clip
-    9500000: //RootNode
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: SM_Wep_Grenade_HE_01_Clip
+  - first:
+      1: 100004
+    second: SM_Wep_Grenade_HE_01_Pin
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: SM_Wep_Grenade_HE_01_Clip
+  - first:
+      4: 400004
+    second: SM_Wep_Grenade_HE_01_Pin
+  - first:
+      23: 2300000
+    second: //RootNode
+  - first:
+      23: 2300002
+    second: SM_Wep_Grenade_HE_01_Clip
+  - first:
+      23: 2300004
+    second: SM_Wep_Grenade_HE_01_Pin
+  - first:
+      33: 3300000
+    second: //RootNode
+  - first:
+      33: 3300002
+    second: SM_Wep_Grenade_HE_01_Clip
+  - first:
+      33: 3300004
+    second: SM_Wep_Grenade_HE_01_Pin
+  - first:
+      43: 4300000
+    second: SM_Wep_Grenade_HE_01
+  - first:
+      43: 4300002
+    second: SM_Wep_Grenade_HE_01_Pin
+  - first:
+      43: 4300004
+    second: SM_Wep_Grenade_HE_01_Clip
+  - first:
+      95: 9500000
+    second: //RootNode
+  externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -37,26 +69,39 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -66,10 +111,14 @@ ModelImporter:
     normalSmoothAngle: 5
     normalImportMode: 1
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -79,14 +128,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
