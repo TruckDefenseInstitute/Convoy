@@ -853,7 +853,7 @@ MonoBehaviour:
   _unitSprite: {fileID: 21300000, guid: a8f931898c2ccb2488f5dba9b6a95edd, type: 3}
   _unitCost: 30
   _unitTrainingTime: 3
-  _unitDescription: Light Infantry Unit.<br>Strong against infantry.
+  _unitDescription: Light Infantry Unit.<br>Strong against <color=#FFFF00>Infantry</color>.
   _unitFlavourText: The Fennel Security Corps were established to protect the interests
     of the Fennel Group.
 --- !u!1 &1733108195715021503
