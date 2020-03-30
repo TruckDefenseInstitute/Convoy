@@ -3,7 +3,9 @@ guid: 62401f53a683ba2458ae0dab083cde04
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sfxVolume: {fileID: -1433057485060142791, guid: 113d2cf7a89e26a41b6e7f5e6b128b98,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : Manager<SoundManager> {
     public const float TIME_TO_PLAY_AGAIN = 0.2f;
+    public AudioMixerGroup unitsVolumeGroup;
+    public AudioMixerGroup uiVolumeGroup;
 
     float[] _multiplers = new float[5];
     HashSet<AudioClip> _set = new HashSet<AudioClip>();

@@ -54,7 +54,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlGroupsButton: 306
-  unitSelectionSound: {fileID: 8300000, guid: 2cfd32935d22e304f8d0f15ef23d7970, type: 3}
   clickEffect: {fileID: 7681987688127664353, guid: 28dd834400ade56479ef5348c0b600f2,
     type: 3}
 --- !u!114 &1654287206
@@ -96,7 +95,6 @@ MonoBehaviour:
   _resource: 260
   _autoResourceGenerated: 5
   _autoResourceGeneratedInterval: 1
-  loseMoneySound: {fileID: 8300000, guid: 8aaf8a76b1ff1c541a90565c6fb813cd, type: 3}
 --- !u!114 &884850574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942773cf0f2c76e478dad39dfff9fb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitsVolumeGroup: {fileID: -4086930104016042620, guid: 113d2cf7a89e26a41b6e7f5e6b128b98,
+    type: 2}
+  uiVolumeGroup: {fileID: 2595931189394791185, guid: 113d2cf7a89e26a41b6e7f5e6b128b98,
+    type: 2}

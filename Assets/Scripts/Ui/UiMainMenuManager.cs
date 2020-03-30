@@ -3,19 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor.Animations;
+using TMPro;
 
 public class UiMainMenuManager : Manager<UiMainMenuManager> {
+
+    [SerializeField]
+    private List<string> _graphicsList;
+    [SerializeField]
+    private List<string> _resolutionList;
 
     private GameObject _mainMenuCanvas;
     private GameObject _fade;
     private GameObject _startMenu;
     private GameObject _optionMenu;
 
+    private TextMeshProUGUI _graphicsText;
+    private TextMeshProUGUI _resolutionText;
+
+    private int _graphicsIndex = 0;
+    private int _resolutionIndex = 0;
+
     void Start() {
         _mainMenuCanvas = GameObject.Find("MainMenuCanvas");
         _fade = _mainMenuCanvas.transform.GetChild(1).gameObject;
         _startMenu = _mainMenuCanvas.transform.GetChild(0).GetChild(0).gameObject;
         _optionMenu = _mainMenuCanvas.transform.GetChild(0).GetChild(1).gameObject;
+        _graphicsText = _optionMenu.transform.GetChild(2).GetChild(4).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+        
     }
 
     // For Main Buttons
@@ -48,13 +62,8 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
         StartCoroutine(LateBackToMain());
     }
 
-    public void SelectGraphics(int graphics) {
-        // TODO: Change quality settings
-        QualitySettings.SetQualityLevel(graphics + 3);
-    }
-
-    public void SelectScreenResolution(int resolution) {
-        // TODO: Add screen res
+    public void ApplyOptions() {
+        QualitySettings.SetQualityLevel(_graphicsIndex + 3);
     }
 
     private void DisappearMenu(GameObject buttonsGameObject) {
@@ -96,5 +105,20 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
         _startMenu.SetActive(true);
         ReappearMenu(_startMenu);
     }
+
+    // Button Spam
+    public void LeftGraphicsButton() {
+        _graphicsIndex -= 1;
+        if(_graphicsIndex < 0) {
+            _graphicsIndex = _graphicsList.Count - 1;
+        }
+    }
+
+    public void RightGraphicsButton() {
+        _graphicsIndex = (_graphicsIndex + 1) % (_graphicsList.Count - 1);
+        
+    }
+
+    
 
 }
