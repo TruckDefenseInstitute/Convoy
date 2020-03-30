@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(AudioSource))]
 public class UnitSoundController : MonoBehaviour {
@@ -6,13 +7,15 @@ public class UnitSoundController : MonoBehaviour {
     public float FiringVolume = 1;
     public AudioClip[] DieingSounds;
     public float DeathVolume = 1;
-    private AudioSource audioSource;
+    public AudioMixerGroup sfxVolume = null;
 
     public void Start() {
-        audioSource = GetComponent<AudioSource>();
+        sfxVolume = SoundManager.Instance.unitsVolumeGroup;
     }
 
     public void FireGun() {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = sfxVolume;
         audioSource.playOnAwake = false;
         audioSource.clip = FiringSounds[Random.Range(0, FiringSounds.Length)];
         audioSource.volume = FiringVolume * SoundManager.Instance.GetMultiplier(audioSource.clip);
@@ -20,10 +23,12 @@ public class UnitSoundController : MonoBehaviour {
         audioSource.rolloffMode = AudioRolloffMode.Linear;
         audioSource.maxDistance = 100f;
         audioSource.Play();
-        // Destroy(audioSource, audioSource.clip.length);
+        Destroy(audioSource, audioSource.clip.length);
     }
 
     public void Die() {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = sfxVolume;
         audioSource.playOnAwake = false;
         audioSource.clip = DieingSounds[Random.Range(0, DieingSounds.Length)];
         audioSource.volume = DeathVolume * SoundManager.Instance.GetMultiplier(audioSource.clip);
@@ -31,6 +36,6 @@ public class UnitSoundController : MonoBehaviour {
         audioSource.rolloffMode = AudioRolloffMode.Linear;
         audioSource.maxDistance = 100f;
         audioSource.Play();
-        // Destroy(audioSource, audioSource.clip.length);
+        Destroy(audioSource, audioSource.clip.length);
     }
 }
