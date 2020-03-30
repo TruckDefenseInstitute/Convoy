@@ -29,7 +29,12 @@ public class DefendTruckTutorialTextManager : MonoBehaviour, ITutorialTextManage
 
     public bool ClickAnywhere()
     {
-        if (index < _textObjects.Length - 1)
+        if (index == _textObjects.Length - 1)
+        {
+            return true;
+        }
+
+        if (index != 2)
         {
             _textObjects[index].SetActive(false);
             index++;
@@ -41,11 +46,13 @@ public class DefendTruckTutorialTextManager : MonoBehaviour, ITutorialTextManage
 
     public bool TrainButtonPress()
     {
-        if (index == _textObjects.Length - 1) 
+        if (index == 2) 
         {
-            return true;
+            _textObjects[index].SetActive(false);
+            index++;
+            _textObjects[index].SetActive(true);
         }
-        
+
         return false;
     }
 }
