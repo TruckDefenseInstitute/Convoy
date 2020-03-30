@@ -6,9 +6,12 @@ public class DefendTruckTutorialTextManager : MonoBehaviour, ITutorialTextManage
 {
     GameObject[] _textObjects;
     int index = 0;
+    TrainingUnitsPanelFlashingAnimation _trainingUnitsPanelFlashingAnimation;
 
     public void Start()
     {
+        _trainingUnitsPanelFlashingAnimation = GameObject.Find("TrainUnitsPanel").GetComponent<TrainingUnitsPanelFlashingAnimation>();
+
         _textObjects = new GameObject[gameObject.transform.childCount];
 
         for (int i = 0; i < gameObject.transform.childCount; i++)
@@ -40,6 +43,11 @@ public class DefendTruckTutorialTextManager : MonoBehaviour, ITutorialTextManage
             index++;
             _textObjects[index].SetActive(true);
         }
+
+        if (index == 2)
+        {
+            _trainingUnitsPanelFlashingAnimation.MakePanelFlash();
+        }
         
         return false;
     }
@@ -51,6 +59,7 @@ public class DefendTruckTutorialTextManager : MonoBehaviour, ITutorialTextManage
             _textObjects[index].SetActive(false);
             index++;
             _textObjects[index].SetActive(true);
+            _trainingUnitsPanelFlashingAnimation.MakePanelStopFlashing();
         }
 
         return false;
