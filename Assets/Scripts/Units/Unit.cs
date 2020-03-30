@@ -626,8 +626,8 @@ public class Unit : MonoBehaviour {
             Invoke("Destroy", 10);
             return;
         }
-        Invoke("Sink", 4);
-        Invoke("Destroy", 10);
+        Invoke("Sink", 2);
+        Invoke("Destroy", 8);
     }
 
     void Sink() {

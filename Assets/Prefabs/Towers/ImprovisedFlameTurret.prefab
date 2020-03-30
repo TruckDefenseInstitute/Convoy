@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 4870179576391715337}
   - component: {fileID: 6182704592015377145}
   - component: {fileID: 6236297839827493597}
+  - component: {fileID: 6402695465079596063}
   m_Layer: 0
   m_Name: ImprovisedFlameTurret
   m_TagString: Untagged
@@ -301,6 +302,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a1028908367c4843bf4bf434e96c434, type: 3}
   - {fileID: 8300000, guid: 97da0d179b5bcf140bb0661ad4d61a0c, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!114 &6236297839827493597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +327,19 @@ MonoBehaviour:
   Projectile: {fileID: 4110800054907853826, guid: 72d62f46128d7014cbf73f3f1c45dc4c,
     type: 3}
   ProjectileSpawnPoint: {fileID: 7022345717716750718}
+--- !u!65 &6402695465079596063
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641462430072818089}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 1.6, z: 0.8}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &4641621726480550707
 GameObject:
   m_ObjectHideFlags: 0

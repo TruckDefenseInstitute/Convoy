@@ -650,6 +650,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!1 &3058509849049786563
 GameObject:
   m_ObjectHideFlags: 0

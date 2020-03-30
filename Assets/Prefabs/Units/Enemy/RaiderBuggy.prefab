@@ -345,12 +345,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FiringSounds:
-  - {fileID: 8300000, guid: 9f8b52efc2aff614c97570fea59c5ca9, type: 3}
-  - {fileID: 8300000, guid: 33be076e1b190ba42a836e30d8da717f, type: 3}
-  - {fileID: 8300000, guid: 4176df13f942dda4e89e645996af8aa5, type: 3}
-  - {fileID: 8300000, guid: 18fc791a6065c3743befce7e1be28590, type: 3}
-  - {fileID: 8300000, guid: bb08a9bb197213a4591a6012f6cc416c, type: 3}
-  - {fileID: 8300000, guid: f1816c9b0690f9648b3c96ba30d8f804, type: 3}
+  - {fileID: 8300000, guid: 6c4feaf168d5d374da821ae66f0859f3, type: 3}
+  - {fileID: 8300000, guid: f0138592f9515014a86f1595a0ca9e32, type: 3}
+  - {fileID: 8300000, guid: 36b347b34c8362b43b176c3a81d23864, type: 3}
+  - {fileID: 8300000, guid: 0a1ca899ee310e244837248bfa1d8fb8, type: 3}
+  - {fileID: 8300000, guid: bc39a19071ba7af43b43fcc4372bf345, type: 3}
   FiringVolume: 0.4
   DieingSounds:
   - {fileID: 8300000, guid: 6580ee1a59682a54ba1db3dab3bad659, type: 3}
@@ -359,6 +358,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a1028908367c4843bf4bf434e96c434, type: 3}
   - {fileID: 8300000, guid: 97da0d179b5bcf140bb0661ad4d61a0c, type: 3}
   DeathVolume: 0.5
+  sfxVolume: {fileID: 0}
 --- !u!1 &3220722926005045436
 GameObject:
   m_ObjectHideFlags: 0

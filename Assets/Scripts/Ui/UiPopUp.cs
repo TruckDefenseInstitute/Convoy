@@ -13,7 +13,7 @@ public class UiPopUp : MonoBehaviour {
     [SerializeField]
     private float _fadeSpeed;
     [SerializeField]
-    private float _alphaUpperBound;
+    private float _alphaUpperBound = 0;
     private bool _hitUpperBound = false;
 
     // For setting up the box properly
