@@ -416,16 +416,6 @@ namespace Pathfinding.Util {
 				};
 			}
 
-			if (perturbate > 10) {
-				Debug.LogError("Too many perturbations aborting.\n" +
-					"This may cause a tile in the navmesh to become empty. " +
-					"Try to see see if any of your NavmeshCut or NavmeshAdd components use invalid custom meshes.");
-				return new CuttingResult {
-						   verts = verts,
-						   tris = tris
-				};
-			}
-
 			List<IntPoint> extraClipShape = null;
 
 			// Do not cut with extra shape if there is no extra shape
