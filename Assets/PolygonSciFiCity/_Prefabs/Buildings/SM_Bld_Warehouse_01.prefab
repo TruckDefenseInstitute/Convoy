@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 33938952247196656}
   - component: {fileID: 23832599520799756}
   - component: {fileID: 291560730}
-  - component: {fileID: 291560729}
+  - component: {fileID: 9103980643798440210}
+  - component: {fileID: 3361130293280840419}
+  - component: {fileID: 8099771040453106365}
   m_Layer: 0
   m_Name: SM_Bld_Warehouse_01
   m_TagString: Untagged
@@ -98,7 +100,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8b4bb575fa7c7514e8ce244267cefe40, type: 3}
---- !u!114 &291560729
+--- !u!114 &9103980643798440210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,12 +115,64 @@ MonoBehaviour:
   version: 1
   type: 0
   mesh: {fileID: 0}
-  rectangleSize: {x: 10, y: 16}
+  rectangleSize: {x: 1, y: 15}
   circleRadius: 1
   circleResolution: 6
-  height: 13
+  height: 8
   meshScale: 1
-  center: {x: -5, y: 0, z: -7.5}
+  center: {x: 0, y: 3, z: -7.5}
+  updateDistance: 0.4
+  isDual: 0
+  cutsAddedGeom: 1
+  updateRotationDistance: 10
+  useRotationAndScale: 1
+--- !u!114 &3361130293280840419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011468340392446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bee0a6fa1f5d4f4db481219040523c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  type: 0
+  mesh: {fileID: 0}
+  rectangleSize: {x: 1, y: 15}
+  circleRadius: 1
+  circleResolution: 6
+  height: 8
+  meshScale: 1
+  center: {x: -10, y: 3, z: -7.5}
+  updateDistance: 0.4
+  isDual: 0
+  cutsAddedGeom: 1
+  updateRotationDistance: 10
+  useRotationAndScale: 1
+--- !u!114 &8099771040453106365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011468340392446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bee0a6fa1f5d4f4db481219040523c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  type: 0
+  mesh: {fileID: 0}
+  rectangleSize: {x: 10, y: 1}
+  circleRadius: 1
+  circleResolution: 6
+  height: 8
+  meshScale: 1
+  center: {x: -5, y: 3, z: -15}
   updateDistance: 0.4
   isDual: 0
   cutsAddedGeom: 1
@@ -214,6 +268,7 @@ GameObject:
   - component: {fileID: 4723160019583388}
   - component: {fileID: 33369168230850092}
   - component: {fileID: 23476259756839754}
+  - component: {fileID: 5693163843839812037}
   m_Layer: 0
   m_Name: SM_Bld_Warehouse_Door_Bottom_01
   m_TagString: Untagged
@@ -283,6 +338,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5693163843839812037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572852701712084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bee0a6fa1f5d4f4db481219040523c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  type: 0
+  mesh: {fileID: 0}
+  rectangleSize: {x: 10, y: 1}
+  circleRadius: 1
+  circleResolution: 6
+  height: 10
+  meshScale: 1
+  center: {x: 0, y: 4, z: 0}
+  updateDistance: 0.4
+  isDual: 0
+  cutsAddedGeom: 1
+  updateRotationDistance: 10
+  useRotationAndScale: 1
 --- !u!1 &1928055988450310
 GameObject:
   m_ObjectHideFlags: 0

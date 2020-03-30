@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 40d41bc4ca4089145ba129bb92965979
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - AttackBike: {fileID: 59739696491603235, guid: 47ca758acc9e6aa4ab389f71ab3e690e,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

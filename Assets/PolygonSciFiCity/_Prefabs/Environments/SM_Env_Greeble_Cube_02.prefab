@@ -113,7 +113,7 @@ MonoBehaviour:
   rectangleSize: {x: 5, y: 5}
   circleRadius: 1
   circleResolution: 6
-  height: 11
+  height: 25
   meshScale: 1
   center: {x: 0, y: 0, z: 0}
   updateDistance: 0.4
