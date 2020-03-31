@@ -162,7 +162,7 @@ MonoBehaviour:
   Alignment: 0
   IsControllable: 1
   ThreatLevel: 1
-  Name: ZoneTrooper
+  Name: Zone Trooper
   MaxHealth: 960
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
@@ -361,6 +361,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!114 &846097987982119093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,8 +375,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: 51b74521b92d2bf46b61e6c6fde3fdea, type: 3}
-  _unitCost: 130
-  _unitTrainingTime: 10
+  _unitRamenCost: 130
+  _unitThymeCost: 2
   _unitDescription: Armoured Infantry Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
   _unitFlavourText: Those unable to keep up with the demands of the battlefield quickly
     die or desert. To graduate from the Khaganite Academy is but the highest praise

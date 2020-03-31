@@ -91,9 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9689d57e3fac62843a2f3480c7574fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resource: 260
-  _autoResourceGenerated: 5
-  _autoResourceGeneratedInterval: 1
+  _ramen: 200
+  _autoRamenGenerated: 10
+  _autoRamenGeneratedInterval: 0.2
 --- !u!114 &884850574
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,11 +8,13 @@ public class PauseManager : Manager<PauseManager> {
     [SerializeField]
     private KeyCode pauseButton;
     [SerializeField]
-    private GameObject _pauseScreenCanvas;
+    private GameObject _pauseScreenCanvas = null;
 
-    private GameObject _uiInGameCanvas;
-    private GameObject _uiInterfaceCanvas;
-    private GameObject _fade;
+    private GameObject _pauseMenu = null;
+    private GameObject _optionMenu = null;
+    private GameObject _uiInGameCanvas = null;
+    private GameObject _uiInterfaceCanvas = null;
+    private GameObject _fade = null;
 
     private bool _gamePaused = false;
     private float _originalTimeScale;
@@ -21,7 +23,9 @@ public class PauseManager : Manager<PauseManager> {
         _originalTimeScale = Time.timeScale;
         _uiInGameCanvas = GameObject.Find("UiInGameCanvas");
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
-        _fade = _pauseScreenCanvas.transform.GetChild(0).GetChild(5).gameObject;
+        _pauseMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(1).gameObject;
+        _optionMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(2).gameObject;
+        _fade = _pauseScreenCanvas.transform.GetChild(0).GetChild(2).gameObject;
     
     }
 
@@ -54,7 +58,9 @@ public class PauseManager : Manager<PauseManager> {
 
 
     public void OpenOptions() {
-
+        UiSoundManager.Instance.PlayButtonClickSound();
+        DisappearMenu(_pauseMenu);
+        StartCoroutine(LateOption());
     }
 
     public void ReturnToMainMenu() {
@@ -69,6 +75,22 @@ public class PauseManager : Manager<PauseManager> {
         StartCoroutine(LateQuitGame());
     }
 
+    private void DisappearMenu(GameObject menu) {
+        foreach(Transform buttons in menu.transform) {
+            Animator animator = buttons.GetComponent<Animator>();
+            animator.SetBool("Disappeared", true);
+            animator.SetTrigger("Disappear");
+        }
+    }
+
+    private void ReappearMenu(GameObject menu) {
+        foreach(Transform buttons in menu.transform) {
+            Animator animator = buttons.GetComponent<Animator>();
+            animator.SetBool("Disappeared", false);
+            animator.SetTrigger("Reappear");
+        }
+    }
+
     IEnumerator LateReturnToMainMenu() {
         yield return new WaitForSecondsRealtime(2.5f);
         SceneManager.LoadScene(0);
@@ -78,18 +100,12 @@ public class PauseManager : Manager<PauseManager> {
         yield return new WaitForSecondsRealtime(2.5f);
         Application.Quit();
     }
+
+    IEnumerator LateOption() {
+        yield return new WaitForSecondsRealtime(0.5f);
+        _pauseMenu.SetActive(false);
+        _optionMenu.SetActive(true);
+        ReappearMenu(_optionMenu);
+    }
 }
 
-
-// Old Code:
-
-/*
-
-        var temp = Resources.FindObjectsOfTypeAll<Canvas>();
-        foreach (var x in temp) {
-            if (x.name == "PauseScreenCanvas") {
-                _pauseScreenCanvas = x.gameObject;
-                break;
-            }
-        }
-*/

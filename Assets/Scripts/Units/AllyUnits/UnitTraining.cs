@@ -5,22 +5,22 @@ using UnityEngine;
 public class UnitTraining : MonoBehaviour {
     
     [SerializeField]
-    private Sprite _unitSprite = null;    
+    private Sprite _unitSprite = null; 
     [SerializeField]
-    private float _unitCost = 0;
+    private float _unitRamenCost = 0;
     [SerializeField]
-    private float _unitTrainingTime = 0;
+    private float _unitThymeCost = 0;
     [SerializeField]
     private string _unitDescription = "";
     [SerializeField]
     private string _unitFlavourText = "";
 
-    public float GetUnitCost() {
-        return _unitCost;
+    public float GetUnitRamenCost() {
+        return _unitRamenCost;
     }
 
-    public float GetUnitTrainingTime() {
-        return _unitTrainingTime;
+    public float GetUnitThymeCost() {
+        return _unitThymeCost;
     }
 
     public string GetUnitDescription() {

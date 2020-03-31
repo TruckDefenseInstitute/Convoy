@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// To be removed C# file.
 public class TrainingQueue : MonoBehaviour {
     
     private List<GameObject> queueIconList;
 
-    private int _maxQueueSize;
+    private int _maxQueueSize = 0;
 
     void Start() {
-        _maxQueueSize = TrainingUnitsQueueManager.Instance.GetMaxQueueSize();
+        // _maxQueueSize = TrainingUnitsQueueManager.Instance.GetMaxQueueSize();
         queueIconList = new List<GameObject>();
         for(int i = 0; i < _maxQueueSize; i++) {
             queueIconList.Add(transform.GetChild(i).gameObject);

@@ -391,6 +391,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!114 &7061815773503231016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,8 +405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: 0058f8c00697abf49ac67384e27707b4, type: 3}
-  _unitCost: 40
-  _unitTrainingTime: 4
+  _unitRamenCost: 40
+  _unitThymeCost: 1
   _unitDescription: Light Infantry Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
   _unitFlavourText: In addition to typical mercenary work, The Fennel Security Corps
     engage in numerous humanitarian and peacekeeping activities worldwide.

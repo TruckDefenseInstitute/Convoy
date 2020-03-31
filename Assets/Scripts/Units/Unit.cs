@@ -332,7 +332,7 @@ public class Unit : MonoBehaviour {
         else
         {
             DeathCallback = () => {
-                ResourceManager.Instance.IncreaseResource(OnEnemyDeathReward);
+                ResourceManager.Instance.IncreaseRamen(OnEnemyDeathReward);
             };
         }
 

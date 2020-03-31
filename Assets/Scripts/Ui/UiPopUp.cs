@@ -7,19 +7,19 @@ using UnityEngine.UI;
 
 public class UiPopUp : MonoBehaviour {
     // For fading
-    private float _timeSinceBirth;
+    private float _timeSinceBirth = 0;
     [SerializeField]
-    private float _timeStartFade;
+    private float _timeStartFade = 0;
     [SerializeField]
-    private float _fadeSpeed;
+    private float _fadeSpeed = 0;
     [SerializeField]
     private float _alphaUpperBound = 0;
     private bool _hitUpperBound = false;
 
     // For setting up the box properly
-    private TextMeshProUGUI _cost = null;
     private TextMeshProUGUI _name = null;
-    private TextMeshProUGUI _time = null;
+    private TextMeshProUGUI _ramenCost = null;
+    private TextMeshProUGUI _thymeCost = null;
     private TextMeshProUGUI _description = null;
     private TextMeshProUGUI _flavour = null;
 
@@ -34,8 +34,8 @@ public class UiPopUp : MonoBehaviour {
     // Can't use start
     void Awake() {
         _name = transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        _cost = transform.GetChild(1).GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-        _time = transform.GetChild(2).GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+        _thymeCost = transform.GetChild(1).GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+        _ramenCost = transform.GetChild(2).GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
         _description = transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>();
         _flavour = transform.GetChild(4).gameObject.GetComponent<TextMeshProUGUI>();
 
@@ -57,8 +57,8 @@ public class UiPopUp : MonoBehaviour {
         
         UnitTraining ut = unit.GetComponent<UnitTraining>();
         
-        _cost.text = ut.GetUnitCost().ToString("0");
-        _time.text = ut.GetUnitTrainingTime().ToString("0");
+        _ramenCost.text = ut.GetUnitRamenCost().ToString("0");
+        _thymeCost.text = ut.GetUnitThymeCost().ToString("0");
         _description.text = ut.GetUnitDescription();
         _flavour.text = ut.GetUnitFlavourText();
 
@@ -70,7 +70,8 @@ public class UiPopUp : MonoBehaviour {
 
         float boxHeight = _baseHeight + GetStringLines(_description.text) + GetStringLines(_flavour.text) * _heightPerLine;
         _rect.sizeDelta = new Vector2(_boxWidth, boxHeight);
-        _rect.localPosition = new Vector3(-_boxWidth / 2, boxHeight / 2);
+        print(_boxWidth);
+        _rect.anchoredPosition = new Vector3(-_boxWidth / 4 + 25, boxHeight / 2);
     }
 
     private int GetStringLines(string str) {
