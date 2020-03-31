@@ -20,7 +20,6 @@ public class PauseManager : Manager<PauseManager> {
     private float _originalTimeScale;
 
     void Start() {
-        _originalTimeScale = Time.timeScale;
         _uiInGameCanvas = GameObject.Find("UiInGameCanvas");
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
         _pauseMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(1).gameObject;
@@ -46,6 +45,7 @@ public class PauseManager : Manager<PauseManager> {
         _pauseScreenCanvas.SetActive(true);
         _uiInGameCanvas.SetActive(false);
         _uiInterfaceCanvas.SetActive(false);
+        _originalTimeScale = Time.timeScale;
         Time.timeScale = 0f;
     }
 
