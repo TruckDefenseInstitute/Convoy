@@ -5,16 +5,16 @@ using UnityEngine.Audio;
 
 public class UiSoundManager : Manager<UiSoundManager> {
     [SerializeField]
-    private AudioMixer audioMixer;
+    private AudioMixer audioMixer = null;
 
     [SerializeField]
-    private AudioClip _buttonSelectSound;
+    private AudioClip _buttonSelectSound = null;
     [SerializeField]
-    private AudioClip _buttonClickSound;
+    private AudioClip _buttonClickSound = null;
     [SerializeField]
-    private AudioClip _unitSelectionSound;
+    private AudioClip _unitSelectionSound = null;
     [SerializeField]
-    private AudioClip _purchaseUnitSound;   // Lose Unit sound
+    private AudioClip _purchaseUnitSound = null; // Lose Unit sound
 
     private AudioSource audioSource;
 

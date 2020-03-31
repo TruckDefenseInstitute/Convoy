@@ -13,6 +13,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     [SerializeField]
     private GameObject _popUpPrefab = null;
     [SerializeField]
+    private GameObject _resourcePopUpDescriptionPrefab = null;
+    [SerializeField]
     private GameObject _resourceGainPopupPrefab = null;
     [SerializeField]
     private GameObject _resourceLossPopupPrefab = null;
@@ -36,8 +38,10 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private GameObject _popUpPanel = null;
     private GameObject _unitStatus = null;
 
-    private TextMeshProUGUI _resourcesText = null;
-    private GameObject _resourceChange = null;
+    private TextMeshProUGUI _ramenText = null;
+    private TextMeshProUGUI _thymeText = null;
+    private GameObject _ramenChange = null;
+    private GameObject _thymeChange = null;
     private DeployedUnitDictionary _deployedUnitDictionary = null;
     
     // Others
@@ -57,8 +61,10 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _minimap = GameObject.Find("Minimap");
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
-        _resourcesText = GameObject.Find("ResourcesText").GetComponent<TextMeshProUGUI>();
-        _resourceChange = GameObject.Find("ResourceChange");
+        _ramenText = GameObject.Find("RamenText").GetComponent<TextMeshProUGUI>();
+        _thymeText = GameObject.Find("ThymeText").GetComponent<TextMeshProUGUI>();
+        _ramenChange = GameObject.Find("RamenChange");
+        _thymeChange = GameObject.Find("ThymeChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
         _unitStatus = GameObject.Find("UnitStatus");
         _popUpPanel = _uiInterfaceCanvas.transform.GetChild(6).gameObject;
@@ -149,13 +155,20 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         // Sort by cost then by name
         allyList.Sort(
             delegate(GameObject g1, GameObject g2) { 
-                float g1UnitCost = g1.GetComponent<UnitTraining>().GetUnitCost();
-                float g2UnitCost = g2.GetComponent<UnitTraining>().GetUnitCost();
+                float g1RamenCost = g1.GetComponent<UnitTraining>().GetUnitRamenCost();
+                float g2RamenCost = g2.GetComponent<UnitTraining>().GetUnitRamenCost();
                 
-                if(g1UnitCost == g2UnitCost) {
-                    return g1.GetComponent<Unit>().Name.CompareTo(g2.GetComponent<Unit>().Name);
+                if(g1RamenCost == g2RamenCost) {
+                    float g1ThymeCost = g1.GetComponent<UnitTraining>().GetUnitThymeCost();
+                    float g2ThymeCost = g2.GetComponent<UnitTraining>().GetUnitThymeCost();
+                    if(g1ThymeCost == g2ThymeCost) {
+                        return g1.GetComponent<Unit>().Name.CompareTo(g2.GetComponent<Unit>().Name);
+                    } else {
+                        return g2ThymeCost.CompareTo(g1ThymeCost);
+                    }
+                    
                 } else {
-                    return g2UnitCost.CompareTo(g1UnitCost);
+                    return g2RamenCost.CompareTo(g1RamenCost);
                 }
                 
             });
@@ -233,19 +246,27 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     /*================ Resources ================*/
 
-    public void UpdateResourcesText(float resources) {
-        _resourcesText.text = resources.ToString();
+    public void UpdateResourcesText(float thyme, float ramen) {
+        _thymeText.text = thyme.ToString();
+        _ramenText.text = ramen.ToString();
+        
     }
 
-    public void DisplayResourceDeduction(float resourcesDeducted) {
-        GameObject popup = Instantiate(_resourceLossPopupPrefab, _resourceChange.transform);        
-        ResourceLossPopup resourceLossPopup = popup.GetComponent<ResourceLossPopup>();
-        resourceLossPopup.Start();
-        resourceLossPopup.SetText(resourcesDeducted);
+    public void DisplayResourceDeduction(float thymeDeducted, float ramenDeducted) {
+        // For Ramen
+        GameObject ramenPopUp = Instantiate(_resourceLossPopupPrefab, _ramenChange.transform);        
+        ResourceLossPopup ramenLoss = ramenPopUp.GetComponent<ResourceLossPopup>();
+        ramenLoss.Start();
+        ramenLoss.SetText(ramenDeducted);
+
+        GameObject thymePopUp = Instantiate(_resourceLossPopupPrefab, _thymeChange.transform);        
+        ResourceLossPopup thymeLoss = thymePopUp.GetComponent<ResourceLossPopup>();
+        thymeLoss.Start();
+        thymeLoss.SetText(thymeDeducted);
     }
 
     public void DisplayResourceGain(float resourcesGained) {
-        GameObject popup = Instantiate(_resourceGainPopupPrefab, _resourceChange.transform);        
+        GameObject popup = Instantiate(_resourceGainPopupPrefab, _ramenChange.transform);        
         ResourceGainPopup resourceGainPopup = popup.GetComponent<ResourceGainPopup>();
         resourceGainPopup.Start();
         resourceGainPopup.SetText(resourcesGained);
@@ -279,11 +300,17 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         popUp.GetComponent<UiPopUp>().Configure(unit, _popUpPanel);
     }
 
-    public void RemoveUnitDescription(GameObject unit) {
+    public void PopUpResourceDescription(string name, string description) {
+        GameObject popUp = Instantiate(_resourcePopUpDescriptionPrefab);
+        popUp.GetComponent<UiResourcePopUp>().Configure(_popUpPanel, name, description);
+    }
+
+    public void RemovePopUp() {
         foreach(Transform child in _popUpPanel.transform) {
             Destroy(child.gameObject);
         }
     }
+
 
     /* =============== Other UI ================ */
     

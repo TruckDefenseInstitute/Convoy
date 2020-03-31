@@ -6206,6 +6206,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!114 &8764966794589614247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6219,8 +6220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: b819b86025c79a548bd02d0e3dbad66a, type: 3}
-  _unitCost: 100
-  _unitTrainingTime: 10
+  _unitRamenCost: 100
+  _unitThymeCost: 1
   _unitDescription: Light Infantry Unit.<br><color=#FF1A1A>Lethal</color> against
     <color=#FFFF00>Infantry</color>.
   _unitFlavourText: The artians of Cyanic Solutions make a killing from their art.
