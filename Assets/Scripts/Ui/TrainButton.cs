@@ -10,26 +10,26 @@ public class TrainButton : MonoBehaviour,
                             IPointerExitHandler {
     
     private GameObject _unitPrefab = null;
-    private GameObject _unitsInQueue = null;
-    private TextMeshProUGUI _unitsInQueueText = null;
-    private Image _trainingTimeImage = null;
     private Image _unitIcon = null;
+    private GameObject _unitsInQueue = null; // Dead Code
+    private Image _trainingTimeImage = null;    // Dead Code
+
+    private TextMeshProUGUI _thymeCost = null;
+    private TextMeshProUGUI _ramenCost = null;
 
     private int _amountOfUnitsQueued = 0;
     private float _trainingIntervals = 0;
     private bool _isCompleted = false;
     private bool _isTraining = false;
 
-    // Magic Numbers
-    private float ticksPerSecond;
+    // Dead Code
+    private float ticksPerSecond = 0;
 
     void Start() {
-        _unitIcon = transform.GetChild(0).GetComponent<Image>();
-        _unitsInQueue = transform.GetChild(2).gameObject;
-        _unitsInQueueText = _unitsInQueue.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        _trainingTimeImage = transform.GetChild(1).GetComponent<Image>();
+        // _unitsInQueue = transform.GetChild(2).gameObject;
+        // _trainingTimeImage = transform.GetChild(1).GetComponent<Image>();
 
-        ticksPerSecond = 1f / Time.deltaTime;
+        // ticksPerSecond = 1f / Time.deltaTime; // Dead Code
     }
 
     public void OnPointerEnter(PointerEventData eventdata) {
@@ -37,14 +37,12 @@ public class TrainButton : MonoBehaviour,
     }
 
     public void OnPointerExit(PointerEventData eventdata) {
-        UiOverlayManager.Instance.RemoveUnitDescription(_unitPrefab);
+        UiOverlayManager.Instance.RemovePopUp();
     }
 
     public void Configure(GameObject unit) {
         _unitPrefab = unit;
-        if(_unitIcon == null) {
-            _unitIcon = transform.GetChild(0).GetComponent<Image>();
-        }
+        _unitIcon = GetComponent<Image>();
         _unitIcon.sprite = unit.GetComponent<UnitTraining>().GetUnitSprite();
 
         RectTransform slotRect = GetComponent<RectTransform>();
@@ -53,12 +51,18 @@ public class TrainButton : MonoBehaviour,
         slotRect.offsetMax = new Vector2(0, 0);
         slotRect.sizeDelta = new Vector2(65, 65);
 
-        // 60 Ticks per second
-        _trainingIntervals = unit.GetComponent<UnitTraining>().GetUnitTrainingTime() / 60;
+        _thymeCost = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        _ramenCost = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
 
+        _thymeCost.text = unit.GetComponent<UnitTraining>().GetUnitThymeCost().ToString();
+        _ramenCost.text = unit.GetComponent<UnitTraining>().GetUnitRamenCost().ToString();
+
+        // Dead Code
+        // _trainingIntervals = unit.GetComponent<UnitTraining>().GetUnitTrainingTime() / 60;
+        
     }
 
-
+    // Dead Code
     IEnumerator TrainingDelay() {
         if(_trainingTimeImage.fillAmount <= 0) {
             _amountOfUnitsQueued--;
@@ -71,6 +75,8 @@ public class TrainButton : MonoBehaviour,
         }
     }
 
+
+    // Dead Code
     public void ResetTraining() {
         _isTraining = false;
         _isCompleted = false;
@@ -81,6 +87,7 @@ public class TrainButton : MonoBehaviour,
         }
     }
 
+    // Dead Code
     public void QueueTraining() {
         if(!_isTraining) {
             _trainingTimeImage.fillAmount = 1;
@@ -89,18 +96,13 @@ public class TrainButton : MonoBehaviour,
         CheckUnitsInQueue(_amountOfUnitsQueued);
     }
 
-    // A Unit can only be training or be in queue, not both at the same time.
-    public void StartTraining() {
-        _isTraining = true;
-        StartCoroutine(TrainingDelay());
-    }
-
+    // Dead Code
     public void CheckUnitsInQueue(int queuedUnits) {
         if(queuedUnits == 0) {
             _unitsInQueue.SetActive(false);    
         } else {
             _unitsInQueue.SetActive(true);
-            _unitsInQueueText.text = queuedUnits.ToString();
+            // _unitsInQueueText.text = queuedUnits.ToString();
         }
     }
 
@@ -117,8 +119,12 @@ public class TrainButton : MonoBehaviour,
         return _isTraining;
     }
 
-    public float GetUnitCost() {
-        return _unitPrefab.GetComponent<UnitTraining>().GetUnitCost();
+    public float GetUnitRamenCost() {
+        return _unitPrefab.GetComponent<UnitTraining>().GetUnitRamenCost();
+    }
+
+    public float GetUnitThymeCost() {
+        return _unitPrefab.GetComponent<UnitTraining>().GetUnitThymeCost();
     }
 
     

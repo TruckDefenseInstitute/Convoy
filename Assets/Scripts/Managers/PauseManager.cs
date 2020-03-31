@@ -8,10 +8,10 @@ public class PauseManager : Manager<PauseManager> {
     [SerializeField]
     private KeyCode pauseButton;
     [SerializeField]
-    private GameObject _pauseScreenCanvas;
+    private GameObject _pauseScreenCanvas = null;
 
-    private GameObject _uiInGameCanvas;
-    private GameObject _uiInterfaceCanvas;
+    private GameObject _uiInGameCanvas = null;
+    private GameObject _uiInterfaceCanvas = null;
     private GameObject _fade;
 
     private bool _gamePaused = false;
