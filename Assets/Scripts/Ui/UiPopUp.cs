@@ -16,66 +16,95 @@ public class UiPopUp : MonoBehaviour {
     private float _alphaUpperBound = 0;
     private bool _hitUpperBound = false;
 
-    // For setting up the box properly
-    private TextMeshProUGUI _name = null;
-    private TextMeshProUGUI _ramenCost = null;
-    private TextMeshProUGUI _thymeCost = null;
-    private TextMeshProUGUI _description = null;
-    private TextMeshProUGUI _flavour = null;
+    private GameObject _thyme;
+    private GameObject _ramen;
+
+    private GameObject _name = null;
+    private GameObject _description = null;
+    private GameObject _flavour = null;
 
     private Image _blackSurfaceBox = null;
-
     private RectTransform _rect;
 
-    private float _boxWidth = 500;
-    private float _baseHeight = 100;
-    private float _heightPerLine = 30f;
+    private float _fontHeight = 90.735f;     // Get from the font itself.
+    
+
 
     // Can't use start
     void Awake() {
-        _name = transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        _thymeCost = transform.GetChild(1).GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-        _ramenCost = transform.GetChild(2).GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-        _description = transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>();
-        _flavour = transform.GetChild(4).gameObject.GetComponent<TextMeshProUGUI>();
+        _name = transform.GetChild(0).gameObject;
+        _thyme = transform.GetChild(1).gameObject;
+        _ramen = transform.GetChild(2).gameObject;
+        _description = transform.GetChild(3).gameObject;
+        _flavour = transform.GetChild(4).gameObject;
 
         _rect = GetComponent<RectTransform>();
-
-        _boxWidth = _rect.sizeDelta.x;
-        _baseHeight = _rect.sizeDelta.y;
 
         _blackSurfaceBox = GetComponent<Image>();
     }
 
-    public void Configure(GameObject unit, GameObject parent) {
+    public void ConfigureUnitPopUp(GameObject parent, GameObject unit) {
+        UnitTraining ut = unit.GetComponent<UnitTraining>();
+        
+        _thyme.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = ut.GetUnitThymeCost().ToString("0");
+        _ramen.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = ut.GetUnitRamenCost().ToString("0");
+        
+        _name.GetComponent<TextMeshProUGUI>().text = unit.GetComponent<Unit>().Name;
+        _description.GetComponent<TextMeshProUGUI>().text = ut.GetUnitDescription();
+        _flavour.GetComponent<TextMeshProUGUI>().text = ut.GetUnitFlavourText();
+
+        Configure(parent);
+    }
+
+    public void ConfigureResourcePopUp(GameObject parent, string name, string description, string flavour) {
+        _thyme.SetActive(false);
+        _ramen.SetActive(false);
+
+        _name.GetComponent<TextMeshProUGUI>().text = name;
+        _description.GetComponent<TextMeshProUGUI>().text = description;
+        _flavour.GetComponent<TextMeshProUGUI>().text = flavour;
+
+        Configure(parent);
+    }
+
+    private void Configure(GameObject parent) {
         float minX = _rect.offsetMin.x;
         float minY = _rect.offsetMin.y;
         float maxX = _rect.offsetMax.x;
         float maxY = _rect.offsetMax.y;
         
-        _name.text = unit.GetComponent<Unit>().Name;
-        
-        UnitTraining ut = unit.GetComponent<UnitTraining>();
-        
-        _ramenCost.text = ut.GetUnitRamenCost().ToString("0");
-        _thymeCost.text = ut.GetUnitThymeCost().ToString("0");
-        _description.text = ut.GetUnitDescription();
-        _flavour.text = ut.GetUnitFlavourText();
-
         transform.SetParent(parent.transform);
 
         _rect.localScale = new Vector3(1, 1, 1);
         _rect.offsetMin = new Vector2(minX, maxX);
         _rect.offsetMax = new Vector2(minY, maxY);
 
-        float boxHeight = _baseHeight + GetStringLines(_description.text) + GetStringLines(_flavour.text) * _heightPerLine;
-        _rect.sizeDelta = new Vector2(_boxWidth, boxHeight);
-        _rect.anchoredPosition = new Vector3(-_boxWidth / 2, boxHeight / 2);
-    }
+        
+        // Get the size of the inside elements.
+        float boxHeight = 40; // Flat 40 for spacing
+        
+        TextMeshProUGUI nameText = _name.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI descriptionText = _description.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI flavourText = _flavour.GetComponent<TextMeshProUGUI>();
+        
+        nameText.ForceMeshUpdate();
+        descriptionText.ForceMeshUpdate();
+        flavourText.ForceMeshUpdate();
 
-    private int GetStringLines(string str) {
-        Regex rx = new Regex("<br>");
-        return rx.Matches(str).Count + str.Length / 40;
+        _flavour.GetComponent<RectTransform>().anchoredPosition = 
+                new Vector2(_flavour.GetComponent<RectTransform>().anchoredPosition.x, 
+                        _flavour.GetComponent<RectTransform>().anchoredPosition.y -
+                        (descriptionText.textInfo.lineCount - 1) * 
+                        descriptionText.textInfo.lineInfo[0].lineHeight -
+                        10);    // A flat 10 for spacing
+        
+        boxHeight += nameText.textInfo.lineCount * nameText.textInfo.lineInfo[0].lineHeight + 
+                descriptionText.textInfo.lineCount * descriptionText.textInfo.lineInfo[0].lineHeight +
+                flavourText.textInfo.lineCount * flavourText.textInfo.lineInfo[0].lineHeight;
+
+        _rect.sizeDelta = new Vector2(_rect.sizeDelta.x, boxHeight);
+        _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, boxHeight / 2);
+      
     }
 
     // Controls fading

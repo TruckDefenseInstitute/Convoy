@@ -1858,7 +1858,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Ramen
-  _description: A common currency found frequently as well as on dead bodies.
+  _description: A commonly used resource.
+  _flavour: Isn't this the same resource that college student's use as well?
 --- !u!1001 &284854132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4097,7 +4098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Thyme
-  _description: A long lost currency gained only waiting.
+  _description: A resource obtained by waiting.
+  _flavour: Thyme is money.
 --- !u!1 &884815815
 GameObject:
   m_ObjectHideFlags: 0
