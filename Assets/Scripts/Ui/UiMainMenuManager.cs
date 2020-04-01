@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor.Animations;
 using TMPro;
 
 public class UiMainMenuManager : Manager<UiMainMenuManager> {
@@ -77,8 +76,4 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
         yield return new WaitForSeconds(2.5f);
         Application.Quit();
     }
-    
-
-    
-
 }
