@@ -297,12 +297,12 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     public void PopUpUnitDescription(GameObject unit) {
         GameObject popUp = Instantiate(_popUpPrefab);
-        popUp.GetComponent<UiPopUp>().Configure(unit, _popUpPanel);
+        popUp.GetComponent<UiPopUp>().ConfigureUnitPopUp(_popUpPanel, unit);
     }
 
-    public void PopUpResourceDescription(string name, string description) {
-        GameObject popUp = Instantiate(_resourcePopUpDescriptionPrefab);
-        popUp.GetComponent<UiResourcePopUp>().Configure(_popUpPanel, name, description);
+    public void PopUpResourceDescription(string name, string description, string flavour) {
+        GameObject popUp = Instantiate(_popUpPrefab);
+        popUp.GetComponent<UiPopUp>().ConfigureResourcePopUp(_popUpPanel, name, description, flavour);
     }
 
     public void RemovePopUp() {

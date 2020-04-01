@@ -105,10 +105,10 @@ RectTransform:
   m_Father: {fileID: 8602817844057916299}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -102.8}
-  m_SizeDelta: {x: -10, y: -50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -88.1}
+  m_SizeDelta: {x: 490, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &392591304608871318
 CanvasRenderer:
@@ -146,8 +146,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290230199
-  m_fontColor: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+    rgba: 4291348680
+  m_fontColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -165,8 +165,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 11.918335, y: 0, z: 15.062805, w: 86.48045}
+  m_margin: {x: 0.64878845, y: 0, z: 0.1538086, w: 0.47590637}
   m_textInfo:
     textComponent: {fileID: 5922811430423574190}
     characterCount: 7
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 5180074480463182882}
   - component: {fileID: 1437492125947217249}
   m_Layer: 5
-  m_Name: PopUp
+  m_Name: HoverPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -707,10 +707,10 @@ RectTransform:
   m_Father: {fileID: 8602817844057916299}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: -10, y: -50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -60.98}
+  m_SizeDelta: {x: 490, y: 29.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8420852982520681299
 CanvasRenderer:
@@ -767,8 +767,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -805,7 +805,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 11.918335, y: 0, z: 15.062805, w: 86.48045}
+  m_margin: {x: 0.29696655, y: 0, z: -0.432312, w: 0.45962906}
   m_textInfo:
     textComponent: {fileID: 8420852982520681292}
     characterCount: 11
@@ -1192,8 +1192,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
