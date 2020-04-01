@@ -70,8 +70,7 @@ public class UiPopUp : MonoBehaviour {
 
         float boxHeight = _baseHeight + GetStringLines(_description.text) + GetStringLines(_flavour.text) * _heightPerLine;
         _rect.sizeDelta = new Vector2(_boxWidth, boxHeight);
-        print(_boxWidth);
-        _rect.anchoredPosition = new Vector3(-_boxWidth / 4 + 25, boxHeight / 2);
+        _rect.anchoredPosition = new Vector3(-_boxWidth / 2, boxHeight / 2);
     }
 
     private int GetStringLines(string str) {

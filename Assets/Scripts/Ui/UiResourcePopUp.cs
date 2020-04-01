@@ -39,7 +39,7 @@ public class UiResourcePopUp : MonoBehaviour {
         _rect.offsetMin = new Vector2(minX, maxX);
         _rect.offsetMax = new Vector2(minY, maxY);
 
-        _rect.anchoredPosition = new Vector2(0, maxY / 2);
+        _rect.anchoredPosition = new Vector2(minX / 2, maxY / 2);
 
         _name.text = name;
         _description.text = description;
