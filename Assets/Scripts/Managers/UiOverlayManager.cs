@@ -67,7 +67,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _thymeChange = GameObject.Find("ThymeChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
         _unitStatus = GameObject.Find("UnitStatus");
-        _popUpPanel = _uiInterfaceCanvas.transform.GetChild(6).gameObject;
+        _popUpPanel = GameObject.Find("PopUpPanel");
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
         // Others

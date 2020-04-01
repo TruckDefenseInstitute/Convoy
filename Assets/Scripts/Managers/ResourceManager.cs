@@ -25,7 +25,6 @@ public class ResourceManager : Manager<ResourceManager> {
     private float _maxRamen = 999999f;
 
     void Start() {
-        InvokeRepeating("AutoGenerateThyme", _thymeGeneratedInterval, _thymeGeneratedInterval);
         InvokeRepeating("AutoGenerateRamen", _ramenGeneratedInterval, _ramenGeneratedInterval);
     }
 
@@ -61,6 +60,7 @@ public class ResourceManager : Manager<ResourceManager> {
         UiOverlayManager.Instance.DisplayResourceGain(amountGained);
     }
 
+    // Auto generation found in UiThymeBarFill
     private void AutoGenerateRamen() {
         // Stop upon Victory, Loss, or Pause
         if(_ramen < _maxRamen) {
@@ -68,10 +68,13 @@ public class ResourceManager : Manager<ResourceManager> {
         }
     }
 
-    private void AutoGenerateThyme() {
-        // Stop upon Victory, Loss, or Pause
+    public void GenerateThyme() {
         if(_thyme < _maxThyme) {
             _thyme += _thymeGenerated;
         }
+    }
+
+    public float GetThymeGeneratedInterval() {
+        return _thymeGeneratedInterval;
     }
 }
