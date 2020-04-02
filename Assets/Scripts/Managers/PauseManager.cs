@@ -14,7 +14,6 @@ public class PauseManager : Manager<PauseManager> {
     private GameObject _optionMenu = null;
     private GameObject _uiInGameCanvas = null;
     private GameObject _uiInterfaceCanvas = null;
-    private GameObject _fade = null;
 
     private bool _gamePaused = false;
     private float _originalTimeScale;
@@ -24,8 +23,6 @@ public class PauseManager : Manager<PauseManager> {
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
         _pauseMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(1).gameObject;
         _optionMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(2).gameObject;
-        _fade = _pauseScreenCanvas.transform.GetChild(0).GetChild(2).gameObject;
-    
     }
 
     void Update() {
@@ -64,15 +61,18 @@ public class PauseManager : Manager<PauseManager> {
     }
 
     public void ReturnToMainMenu() {
-        _fade.SetActive(true);
-        _fade.GetComponent<Animator>().SetTrigger("FadeIn");
+        UiScreenEffectManager.Instance.FadeIn();
         StartCoroutine(LateReturnToMainMenu());
     }
 
     public void QuitGame() {
-        _fade.SetActive(true);
-        _fade.GetComponent<Animator>().SetTrigger("FadeIn");
+        UiScreenEffectManager.Instance.FadeIn();
         StartCoroutine(LateQuitGame());
+    }
+
+    public void RestartGame() {
+        UiScreenEffectManager.Instance.FadeIn();
+        StartCoroutine(LateRestart());
     }
 
     private void DisappearMenu(GameObject menu) {
@@ -106,6 +106,11 @@ public class PauseManager : Manager<PauseManager> {
         _pauseMenu.SetActive(false);
         _optionMenu.SetActive(true);
         ReappearMenu(_optionMenu);
+    }
+
+    IEnumerator LateRestart() {
+        yield return new WaitForSecondsRealtime(2.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
 

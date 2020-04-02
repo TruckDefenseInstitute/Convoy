@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2411142497566417259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2411142497566417258}
+  - component: {fileID: 7065461173274612548}
+  m_Layer: 0
+  m_Name: UiManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2411142497566417258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411142497566417259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 534.71497, y: 41.739376, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7065461173274612548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411142497566417259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf65c0c25584e145ada8430860641df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBarPrefab: {fileID: 109282, guid: 2b9babc0e49dd054797f369b54bc116a, type: 3}
+  _popUpPrefab: {fileID: 5367325828100496997, guid: 28e1d96e3f46bcd4287658e66e376f1f,
+    type: 3}
+  _resourcePopUpDescriptionPrefab: {fileID: 119781162060370912, guid: 3108cf7c15a0e884ba86ed39f9ffdeaa,
+    type: 3}
+  _resourceGainPopupPrefab: {fileID: 3635348176298860039, guid: 50a36d8fd6c622440adcbf33e61abe4a,
+    type: 3}
+  _resourceLossPopupPrefab: {fileID: 3635348176298860039, guid: 78ea76637cca38b4ca8608a58bded66d,
+    type: 3}
+  _trainButtonPrefab: {fileID: 8418034470593014249, guid: 87dfbbff7fb3dcf4e8658232bd3c022a,
+    type: 3}
+  _deployedButtonPrefab: {fileID: 1738896534840907197, guid: 7e2aa8a3d0667fc40a43b80c4326f0ef,
+    type: 3}
+  _deployedButtonMPrefab: {fileID: 1738896534840907197, guid: 01ca812aae4d80541a74a2917d22223e,
+    type: 3}

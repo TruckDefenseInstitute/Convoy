@@ -500,8 +500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: 332de3506c1afb54c9b6bb932335b296, type: 3}
-  _unitRamenCost: 250
-  _unitThymeCost: 3
+  _unitRamenCost: 1
+  _unitThymeCost: 0
   _unitDescription: 
   _unitFlavourText: 
 --- !u!1001 &597354458258842385

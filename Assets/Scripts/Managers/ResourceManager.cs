@@ -8,7 +8,7 @@ public class ResourceManager : Manager<ResourceManager> {
     [SerializeField]
     private float _ramen = 50f;
     [SerializeField]
-    private float _ramenGenerated = 2f;
+    private float _ramenGenerated = 10f;
     [SerializeField]
     private float _ramenGeneratedInterval = .5f;
 

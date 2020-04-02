@@ -7,6 +7,7 @@ TagManager:
   - AllyUnits
   - Selectables
   - Truck
+  - Ui
   layers:
   - Default
   - TransparentFX
