@@ -6,8 +6,8 @@ public class WinLossManager : Manager<WinLossManager>
 {
     UiOverlayManager _uiOverlayManager;
 
-    GameObject _winScreenCanvas;
-    GameObject _loseScreenCanvas;
+    GameObject _victoryCanvas;
+    GameObject _defeatCanvas;
     LevelStatus _levelStatus;
 
 
@@ -21,23 +21,23 @@ public class WinLossManager : Manager<WinLossManager>
     void Start()
     {
         _levelStatus = LevelStatus.Ongoing;
-        // _winScreenCanvas.SetActive(False);
+        // _victoryCanvas.SetActive(False);
         {
             var temp = Resources.FindObjectsOfTypeAll<Canvas>();
             foreach (var x in temp) {
-                if (x.name == "WinScreenCanvas") {
-                    _winScreenCanvas = x.gameObject;
+                if (x.name == "VictoryCanvas") {
+                    _victoryCanvas = x.gameObject;
                     break;
                 }
             }
         }
 
-        // _loseScreenCanvas.SetActive(False);
+        // _defeatCanvas.SetActive(False);
         {
             var temp = Resources.FindObjectsOfTypeAll<Canvas>();
             foreach (var x in temp) {
-                if (x.name == "LoseScreenCanvas") {
-                    _loseScreenCanvas = x.gameObject;
+                if (x.name == "DefeatCanvas") {
+                    _defeatCanvas = x.gameObject;
                     break;
                 }
             }
@@ -52,7 +52,7 @@ public class WinLossManager : Manager<WinLossManager>
     void WinGame()
     {
         _levelStatus = LevelStatus.Win;
-        _winScreenCanvas.SetActive(true);
+        _victoryCanvas.SetActive(true);
     }
 
 
@@ -64,7 +64,7 @@ public class WinLossManager : Manager<WinLossManager>
     void LoseGame()
     {
         _levelStatus = LevelStatus.Lose;
-        _loseScreenCanvas.SetActive(true);
+        _defeatCanvas.SetActive(true);
     }
 
     public bool GetGamePausable()

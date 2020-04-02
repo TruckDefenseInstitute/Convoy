@@ -7,7 +7,6 @@ using TMPro;
 public class UiMainMenuManager : Manager<UiMainMenuManager> {
 
     private GameObject _mainMenuCanvas;
-    private GameObject _fade;
     private GameObject _startMenu;
     private GameObject _optionMenu;
 
@@ -16,7 +15,6 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
 
     void Start() {
         _mainMenuCanvas = GameObject.Find("MainMenuCanvas");
-        _fade = _mainMenuCanvas.transform.GetChild(1).gameObject;
         _startMenu = _mainMenuCanvas.transform.GetChild(0).GetChild(0).gameObject;
         _optionMenu = _mainMenuCanvas.transform.GetChild(0).GetChild(1).gameObject;
     }
@@ -25,8 +23,7 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
     public void StartGame() {
         UiSoundManager.Instance.PlayButtonClickSound();
         DisappearMenu(_startMenu);
-        _fade.SetActive(true);
-        _fade.GetComponent<Animator>().SetTrigger("FadeIn");
+        UiScreenEffectManager.Instance.FadeIn();
         StartCoroutine(LateStartGame());
     }
 
@@ -39,8 +36,7 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
     public void Quit() {
         UiSoundManager.Instance.PlayButtonClickSound();
         DisappearMenu(_startMenu);
-        _fade.SetActive(true);
-        _fade.GetComponent<Animator>().SetTrigger("FadeIn");
+        UiScreenEffectManager.Instance.FadeIn();
         StartCoroutine(LateQuit());
     }
 

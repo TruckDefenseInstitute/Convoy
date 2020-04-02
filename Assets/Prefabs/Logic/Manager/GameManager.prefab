@@ -92,8 +92,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ramen: 200
-  _autoRamenGenerated: 10
-  _autoRamenGeneratedInterval: 0.2
+  _ramenGenerated: 10
+  _ramenGeneratedInterval: 0.5
+  _thyme: 0
+  _thymeGenerated: 1
+  _thymeGeneratedInterval: 5
+  _maxThyme: 10
 --- !u!114 &884850574
 MonoBehaviour:
   m_ObjectHideFlags: 0
