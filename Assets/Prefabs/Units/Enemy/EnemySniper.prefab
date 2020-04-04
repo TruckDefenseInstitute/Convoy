@@ -6004,7 +6004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3de4e06b6b000442836e77228e0e3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Alignment: 0
+  Alignment: 1
   IsControllable: 1
   ThreatLevel: 1
   Name: Sniper
