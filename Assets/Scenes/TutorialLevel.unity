@@ -10111,7 +10111,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -11489,6 +11489,11 @@ PrefabInstance:
       propertyPath: SleepTime
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 1755561174, guid: 703e6e655e225404782c95238413521c, type: 3}
+      propertyPath: UnitToSpawn
+      value: 
+      objectReference: {fileID: 7061815773503231191, guid: 3c33133f4ef1a0f4dade13ed67cb60df,
+        type: 3}
     - target: {fileID: 1774539447061380260, guid: 703e6e655e225404782c95238413521c,
         type: 3}
       propertyPath: m_Name
@@ -13563,7 +13568,7 @@ MonoBehaviour:
   SpawnEffects:
   - {fileID: 1342223931882650660, guid: 8f4dcbed714b6e44a9cd2d554d388bf4, type: 3}
   - {fileID: 9033001769987315228, guid: 374305771cf791c47ab9c872b9f7ec30, type: 3}
-  PrefabToBeSpawned: {fileID: 7061815773503231191, guid: 57853bd06bee0914e8f93e07df8b2827,
+  PrefabToBeSpawned: {fileID: 7061815773503231191, guid: 3c33133f4ef1a0f4dade13ed67cb60df,
     type: 3}
 --- !u!4 &601938037
 Transform:
@@ -19215,7 +19220,7 @@ MonoBehaviour:
   SpawnEffects:
   - {fileID: 1342223931882650660, guid: 8f4dcbed714b6e44a9cd2d554d388bf4, type: 3}
   - {fileID: 9033001769987315228, guid: 374305771cf791c47ab9c872b9f7ec30, type: 3}
-  PrefabToBeSpawned: {fileID: 605322507436367101, guid: 577afc4c354e67d488855fdfc700e3a0,
+  PrefabToBeSpawned: {fileID: 605322507436367101, guid: 7718ce4203f856c4cbb5c4f58b972813,
     type: 3}
 --- !u!4 &880244537
 Transform:
@@ -37259,7 +37264,7 @@ MonoBehaviour:
   SpawnEffects:
   - {fileID: 1342223931882650660, guid: 8f4dcbed714b6e44a9cd2d554d388bf4, type: 3}
   - {fileID: 9033001769987315228, guid: 374305771cf791c47ab9c872b9f7ec30, type: 3}
-  PrefabToBeSpawned: {fileID: 7061815773503231191, guid: 57853bd06bee0914e8f93e07df8b2827,
+  PrefabToBeSpawned: {fileID: 7061815773503231191, guid: 3c33133f4ef1a0f4dade13ed67cb60df,
     type: 3}
 --- !u!4 &1483529170
 Transform:
