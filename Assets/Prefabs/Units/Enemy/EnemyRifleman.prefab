@@ -352,7 +352,7 @@ MonoBehaviour:
   IsControllable: 1
   ThreatLevel: 1
   Name: Rifleman
-  MaxHealth: 450
+  MaxHealth: 350
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
   RetargetTime: 2

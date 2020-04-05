@@ -2816,7 +2816,7 @@ MonoBehaviour:
   IsControllable: 1
   ThreatLevel: 1
   Name: Rocketman
-  MaxHealth: 600
+  MaxHealth: 400
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
   RetargetTime: 2
@@ -2846,7 +2846,7 @@ MonoBehaviour:
   MaxShootAngle: 5
   DamageType: 2
   AttackDamage: 500
-  AttackRange: 35
+  AttackRange: 26.25
   AimTime: 0.5
   CooldownTime: 3.6
   CanMoveWhileAttacking: 0
