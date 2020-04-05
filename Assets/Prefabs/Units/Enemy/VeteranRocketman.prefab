@@ -2246,7 +2246,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73847fc4fb99162448a1fe0fd636c712, type: 2}
+  - {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2448,7 +2448,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73847fc4fb99162448a1fe0fd636c712, type: 2}
+  - {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2674,7 +2674,7 @@ GameObject:
   - component: {fileID: 7061815773503231017}
   - component: {fileID: 7061815773503231016}
   m_Layer: 0
-  m_Name: EnemyRocketman
+  m_Name: VeteranRocketman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2816,7 +2816,7 @@ MonoBehaviour:
   IsControllable: 1
   ThreatLevel: 1
   Name: Rocketman
-  MaxHealth: 400
+  MaxHealth: 600
   DestroyImmediately: 0
   Deathrattle: {fileID: 0}
   RetargetTime: 2
@@ -2846,7 +2846,7 @@ MonoBehaviour:
   MaxShootAngle: 5
   DamageType: 2
   AttackDamage: 500
-  AttackRange: 26.25
+  AttackRange: 35
   AimTime: 0.5
   CooldownTime: 3.6
   CanMoveWhileAttacking: 0

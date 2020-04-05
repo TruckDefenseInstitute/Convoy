@@ -1805,7 +1805,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 590c03f519d4cd04ebfa3c2dc671f0f0, type: 2}
+  - {fileID: 2100000, guid: 8aa6a9949527d4847b3b3d27c46b3775, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3765,7 +3765,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 82a7ccffd2fed3e47ae444f4d5b0e027, type: 2}
+  - {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5866,7 +5866,7 @@ GameObject:
   - component: {fileID: 1802400140696954698}
   - component: {fileID: 8764966794589614247}
   m_Layer: 0
-  m_Name: EnemySniper
+  m_Name: VeteranSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6037,7 +6037,7 @@ MonoBehaviour:
   RotationRoot: {fileID: 524654272129245434}
   MaxShootAngle: 5
   DamageType: 4
-  AttackDamage: 600
+  AttackDamage: 800
   AttackRange: 47
   AimTime: 1
   CooldownTime: 1.9

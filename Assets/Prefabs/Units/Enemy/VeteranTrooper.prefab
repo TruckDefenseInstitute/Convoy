@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 7188184467396091394}
   - component: {fileID: 846097987982119093}
   m_Layer: 0
-  m_Name: EnemyTrooper
+  m_Name: VeteranTrooper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   RotationRoot: {fileID: 5627378590140159107}
   MaxShootAngle: 5
   DamageType: 1
-  AttackDamage: 630
+  AttackDamage: 840
   AttackRange: 30
   AimTime: 2
   CooldownTime: 2.3
@@ -1096,7 +1096,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 09c76973314790040b9ef284977d7e81, type: 2}
+  - {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3179,7 +3179,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 09c76973314790040b9ef284977d7e81, type: 2}
+  - {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

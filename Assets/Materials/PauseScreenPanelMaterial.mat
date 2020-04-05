@@ -81,10 +81,10 @@ Material:
     - _SrcBlend: 1
     - _TintDegree: 0.15
     - _UVSec: 0
-    - _UnscaledTime: 83.631065
+    - _UnscaledTime: 32.638615
     - _ZWrite: 1
     m_Colors:
-    - _BarsUVOffset: {r: 0, g: 0.7208731, b: 0, a: 0}
+    - _BarsUVOffset: {r: 0, g: 0.6216129, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorTint: {r: 1, g: 0.14509803, b: 0.55616766, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
