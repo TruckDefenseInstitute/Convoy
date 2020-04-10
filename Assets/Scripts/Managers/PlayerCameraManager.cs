@@ -100,8 +100,8 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
             zoom.z = Mathf.Clamp(zoom.z, minY, maxY);
             CameraDolly.transform.localPosition = zoom;
 
-            pos.x = Mathf.Clamp(pos.x, -panLimit.x, panLimit.x);
-            pos.z = Mathf.Clamp(pos.z, -panLimit.y, panLimit.y);
+            pos.x = Mathf.Clamp(pos.x, _xMinimapPos - panLimit.x, _xMinimapPos + panLimit.x);
+            pos.z = Mathf.Clamp(pos.z, _zMinimapPos - panLimit.y, _zMinimapPos + panLimit.y);
 
             CameraRig.transform.position = pos;
 
