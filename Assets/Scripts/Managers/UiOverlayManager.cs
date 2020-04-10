@@ -323,14 +323,19 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     }
 
     private void MoveCameraThroughMinimap(Vector3 mousePos) {
-        // This are magic numbers because i have no idea how tf to make them work.
-        mousePos.x -= 10;
-        mousePos.y -= 10;
+        Debug.Log(_minimapCamera.pixelRect);
+        mousePos.x -= 20 * Screen.width / 1920f;
+        mousePos.y -= 20 * Screen.height / 1080f;
 
-        mousePos.x /= 1.5f;
-        mousePos.y /= 1.5f;
+        mousePos.x *= _minimapCamera.pixelWidth / 300f;
+        mousePos.y *= _minimapCamera.pixelHeight / 300f;
 
-        Vector3 worldPos = _minimapCamera.ScreenToWorldPoint(mousePos);
-        PlayerCameraManager.Instance.SetCameraPosition(worldPos);
+        Debug.Log(mousePos);
+
+        Ray ray = _minimapCamera.ScreenPointToRay(mousePos);
+        if (Physics.Raycast(ray, out RaycastHit hit)) {
+            PlayerCameraManager.Instance.SetCameraPosition(hit.point);
+        }
+        PlayerCameraManager.Instance.SetCameraPosition(_minimapCamera.ScreenToWorldPoint(mousePos));
     }
 }

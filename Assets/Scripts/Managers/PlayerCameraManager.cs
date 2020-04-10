@@ -118,7 +118,7 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
                 RaycastHit hit;
                 Physics.Raycast(p, out hit, 10000f, LayerMask.GetMask("Ground"));
                 Vector3 drawPoint = hit.point;
-                drawPoint.y = 10;
+                drawPoint.y = 45;
                 _minimapBoxRenderer.SetPosition(i++, drawPoint);
             }
 
