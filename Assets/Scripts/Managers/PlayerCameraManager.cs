@@ -10,13 +10,10 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
     public GameObject CameraGameObject;
     [HideInInspector]
     public Camera Camera;
-
-    [SerializeField]
-    private float _xMinimapPos = 0;
-    [SerializeField]
-    private float _yMinimapPos = 0;
-    [SerializeField]
-    private float _zMinimapPos = 0;
+    
+    public float _xMinimapPos = 0;
+    public float _yMinimapPos = 0;
+    public float _zMinimapPos = 0;
     [SerializeField]
     private float _miniMapSize = 50;
 
