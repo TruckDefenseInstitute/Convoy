@@ -11,13 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialLevel.unity
     guid: 5b46ec44d2a0b5449811ab7a0739cd28
-  - enabled: 0
-    path: Assets/Scenes/Demo.unity
-    guid: d00d7fa6c9c97e54cb4317da270fd96c
+  - enabled: 1
+    path: Assets/Scenes/Final Scene.unity
+    guid: 5c298aa4d835bf346b56a782737264f0
   - enabled: 1
     path: Assets/Scenes/UiOverlay.unity
     guid: a65a723fd6befae4e9bd9241c9395871
   - enabled: 1
     path: Assets/Scenes/TutorialOverlay.unity
     guid: 9675d46e0deff5847886621a213c7b36
+  - enabled: 0
+    path: Assets/Scenes/Demo.unity
+    guid: d00d7fa6c9c97e54cb4317da270fd96c
   m_configObjects: {}
