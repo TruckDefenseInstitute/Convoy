@@ -30,6 +30,10 @@ public class UnitCommandManager : Manager<UnitCommandManager> {
         _selectedAllies.ForEach(ab => ab.Stop());   
     }
 
+    public void FollowTruck(Unit truck) {
+        _selectedAllies.ForEach(ab => ab.Follow(truck));
+    }
+
     public void HoldGround() {
         _selectedAllies.ForEach(ab => ab.HoldGround());
     }
