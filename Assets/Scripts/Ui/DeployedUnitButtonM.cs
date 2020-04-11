@@ -1,16 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class DeployedUnitButtonM : MonoBehaviour {
+public class DeployedUnitButtonM : MonoBehaviour, 
+                                    IPointerEnterHandler,
+                                    IPointerExitHandler{
 
     private Image _unitIcon = null;
     private List<GameObject> _unitList = null;
 
     void Start() {
         _unitIcon = transform.GetChild(0).GetComponent<Image>();
+    }
+
+    public void OnPointerEnter(PointerEventData eventdata) {        
+        UiOverlayManager.Instance.PopUpUnitDescription(_unitList[1]);
+    }
+
+    public void OnPointerExit(PointerEventData eventdata) {
+        UiOverlayManager.Instance.RemovePopUp();
     }
 
     public void Configure(List<GameObject> unitList) {

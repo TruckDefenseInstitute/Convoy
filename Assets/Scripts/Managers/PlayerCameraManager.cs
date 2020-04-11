@@ -123,6 +123,10 @@ public class PlayerCameraManager : Manager<PlayerCameraManager> {
             }
 
         }
+
+        if(Input.GetKey(KeyCode.Space)) {
+            SetCameraPosition(RTSUnitManager.Instance.truck.transform.position);
+        }
     }
 
     public void SetCameraPosition(Vector3 position) {

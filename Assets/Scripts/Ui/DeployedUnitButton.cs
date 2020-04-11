@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DeployedUnitButton : MonoBehaviour {
+public class DeployedUnitButton : MonoBehaviour,
+                                    IPointerEnterHandler,
+                                    IPointerExitHandler{
 
     private GameObject _unit = null;
     private Image _unitIcon = null;
@@ -16,6 +19,14 @@ public class DeployedUnitButton : MonoBehaviour {
 
     void Update() {
         _healthBar.UpdateBar(_unitUnit.Health, _unitUnit.MaxHealth);
+    }
+
+    public void OnPointerEnter(PointerEventData eventdata) {
+        UiOverlayManager.Instance.PopUpUnitDescription(_unit);
+    }
+
+    public void OnPointerExit(PointerEventData eventdata) {
+        UiOverlayManager.Instance.RemovePopUp();
     }
 
     public void Configure(GameObject unit) {        

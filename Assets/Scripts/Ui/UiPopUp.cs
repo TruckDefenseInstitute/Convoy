@@ -22,6 +22,7 @@ public class UiPopUp : MonoBehaviour {
     private GameObject _name = null;
     private GameObject _description = null;
     private GameObject _flavour = null;
+    private GameObject _unitStatus = null;
 
     private Image _blackSurfaceBox = null;
     private RectTransform _rect;
@@ -37,6 +38,7 @@ public class UiPopUp : MonoBehaviour {
         _ramen = transform.GetChild(2).gameObject;
         _description = transform.GetChild(3).gameObject;
         _flavour = transform.GetChild(4).gameObject;
+        _unitStatus = transform.GetChild(5).gameObject;
 
         _rect = GetComponent<RectTransform>();
 
@@ -52,6 +54,7 @@ public class UiPopUp : MonoBehaviour {
         _name.GetComponent<TextMeshProUGUI>().text = unit.GetComponent<Unit>().Name;
         _description.GetComponent<TextMeshProUGUI>().text = ut.GetUnitDescription();
         _flavour.GetComponent<TextMeshProUGUI>().text = ut.GetUnitFlavourText();
+        _unitStatus.GetComponent<UiUnitStatusPopUp>().Configure(unit);
 
         Configure(parent);
     }
@@ -59,10 +62,23 @@ public class UiPopUp : MonoBehaviour {
     public void ConfigureResourcePopUp(GameObject parent, string name, string description, string flavour) {
         _thyme.SetActive(false);
         _ramen.SetActive(false);
+        _unitStatus.SetActive(false);
 
         _name.GetComponent<TextMeshProUGUI>().text = name;
         _description.GetComponent<TextMeshProUGUI>().text = description;
         _flavour.GetComponent<TextMeshProUGUI>().text = flavour;
+
+        Configure(parent);
+    }
+
+    public void ConfigureHealthPopUp(GameObject parent, string name, string description) {
+        _thyme.SetActive(false);
+        _ramen.SetActive(false);
+        _unitStatus.SetActive(false);
+
+        _name.GetComponent<TextMeshProUGUI>().text = name;
+        _description.GetComponent<TextMeshProUGUI>().text = description;
+        _flavour.GetComponent<TextMeshProUGUI>().text = "";
 
         Configure(parent);
     }
@@ -123,7 +139,9 @@ public class UiPopUp : MonoBehaviour {
                 _hitUpperBound = true;
             }
 
-            _blackSurfaceBox.color = new Color(_blackSurfaceBox.color.r, _blackSurfaceBox.color.g, _blackSurfaceBox.color.b, newAlpha);
+            Color nextColor = new Color(_blackSurfaceBox.color.r, _blackSurfaceBox.color.g, _blackSurfaceBox.color.b, newAlpha);
+            _blackSurfaceBox.color = nextColor;
+            _unitStatus.GetComponent<UiUnitStatusPopUp>().ChangeColor(nextColor);
         } else {
             _timeSinceBirth += Time.deltaTime;
         }

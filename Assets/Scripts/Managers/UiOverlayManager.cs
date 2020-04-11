@@ -36,7 +36,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     private GameObject _trainUnitsPanel = null;
     private GameObject _trainingQueue = null;
     private GameObject _popUpPanel = null;
-    private GameObject _unitStatus = null;
 
     private TextMeshProUGUI _ramenText = null;
     private TextMeshProUGUI _thymeText = null;
@@ -66,7 +65,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         _ramenChange = GameObject.Find("RamenChange");
         _thymeChange = GameObject.Find("ThymeChange");
         _trainingQueue = GameObject.Find("TrainingQueue");
-        _unitStatus = GameObject.Find("UnitStatus");
         _popUpPanel = GameObject.Find("PopUpPanel");
         _deployedUnitDictionary = GetComponent<DeployedUnitDictionary>();
 
@@ -147,7 +145,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         }
 
         if(allyList == null || allyList.Count == 0) {
-            _unitStatus.GetComponent<UiUnitStatus>().ClearUnitStatus();
             return;
         }
         
@@ -179,8 +176,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         } else {
             SelectGroupUnits(splitAllyList);
         }
-
-        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(allyList[0]);
     }
 
     private void SelectIndividualUnits(List<List<GameObject>> splitAllyList) {
@@ -224,24 +219,6 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         sameUnitsList.Add(currentUnitList);
 
         return sameUnitsList;
-    }
-
-    /*================ Units Status ================*/
-    public void CreateUnitStatus(DeployedUnitButton deployedButton) {
-        GameObject unit = deployedButton.GetUnit();
-        if(_unitStatus == null) {
-            _unitStatus = GameObject.Find("UnitStatus");
-        } 
-        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
-    }
-
-    public void CreateUnitStatus_M(DeployedUnitButtonM deployedButton) {
-        // Assumes the list is not empty
-        GameObject unit = deployedButton.GetUnitList()[0];
-        if(_unitStatus == null) {
-            _unitStatus = GameObject.Find("UnitStatus");
-        } 
-        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
     }
 
     /*================ Resources ================*/
@@ -305,12 +282,16 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         popUp.GetComponent<UiPopUp>().ConfigureResourcePopUp(_popUpPanel, name, description, flavour);
     }
 
+    public void PopUpHealthDescription(string name, string flavour) {
+        GameObject popUp = Instantiate(_popUpPrefab);
+        popUp.GetComponent<UiPopUp>().ConfigureHealthPopUp(_popUpPanel, name, flavour);
+    }
+
     public void RemovePopUp() {
         foreach(Transform child in _popUpPanel.transform) {
             Destroy(child.gameObject);
         }
     }
-
 
     /* =============== Other UI ================ */
     
@@ -339,3 +320,26 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         PlayerCameraManager.Instance.SetCameraPosition(_minimapCamera.ScreenToWorldPoint(mousePos));
     }
 }
+
+
+// Dead Code:
+
+    /*================ Units Status ================*/
+    /*
+    public void CreateUnitStatus(DeployedUnitButton deployedButton) {
+        GameObject unit = deployedButton.GetUnit();
+        if(_unitStatus == null) {
+            _unitStatus = GameObject.Find("UnitStatus");
+        } 
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
+    }
+
+    public void CreateUnitStatus_M(DeployedUnitButtonM deployedButton) {
+        // Assumes the list is not empty
+        GameObject unit = deployedButton.GetUnitList()[0];
+        if(_unitStatus == null) {
+            _unitStatus = GameObject.Find("UnitStatus");
+        } 
+        _unitStatus.GetComponent<UiUnitStatus>().ChangeUnitStatus(unit);
+    }
+    */
