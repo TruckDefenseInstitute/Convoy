@@ -40,6 +40,10 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     public GameObject clickEffect;
     GameObject _previousClickEffect;
 
+    // Truck
+
+    public Unit truck;    // Add in scene
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +59,8 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         {
             _markedUnitsMemory[i] = new List<GameObject>();
         }
+
+        truck = GameObject.Find("BulletTowerTruck").GetComponent<Unit>();
     }
 
     // Update is called once per frame
@@ -94,6 +100,11 @@ public class RTSUnitManager : Manager<RTSUnitManager>
                 if (Input.GetKey(KeyCode.S)) {
                     _unitCommandManager.Stop();
                 }
+
+                if (Input.GetKey(KeyCode.F)) {
+                    _unitCommandManager.FollowTruck(truck);    
+                }
+
                 if (Input.GetKey(KeyCode.G)) {
                     _unitCommandManager.HoldGround();
                 }

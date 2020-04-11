@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2411142497566417258}
   - component: {fileID: 7065461173274612548}
+  - component: {fileID: 1801300794}
+  - component: {fileID: 1801300795}
+  - component: {fileID: 1801300797}
   m_Layer: 0
   m_Name: UiManager
   m_TagString: Untagged
@@ -58,3 +61,43 @@ MonoBehaviour:
     type: 3}
   _deployedButtonMPrefab: {fileID: 1738896534840907197, guid: 01ca812aae4d80541a74a2917d22223e,
     type: 3}
+--- !u!114 &1801300794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411142497566417259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07efdff9955c54c41a5c697c77af2ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseButton: 112
+  _pauseScreenCanvas: {fileID: 0}
+--- !u!114 &1801300795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411142497566417259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8949d6ada29b214fa0c74b75b734c99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _optionMenu: {fileID: 0}
+  _previousMenu: {fileID: 0}
+--- !u!114 &1801300797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411142497566417259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a510f2bbe710b2544994d3a2f7c6840d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
