@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 6947077365938146198}
 --- !u!114 &6947077365938146198
 MonoBehaviour:
@@ -238,8 +239,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 6}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 2, z: 6}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &6947077365769503382
 PrefabInstance:
   m_ObjectHideFlags: 0

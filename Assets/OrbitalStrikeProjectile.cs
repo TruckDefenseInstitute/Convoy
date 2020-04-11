@@ -11,7 +11,7 @@ public class OrbitalStrikeProjectile : MonoBehaviour
     public GameObject Explosion;
     public GameObject Warning;
 
-    private float _blastRadius = 2.5f;
+    private float _blastRadius = 3.0f;
     private Alignment _alignment = Alignment.Hostile;
 
     bool exploded = false;

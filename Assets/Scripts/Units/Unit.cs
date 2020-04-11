@@ -551,8 +551,10 @@ public class Unit : MonoBehaviour {
                         SetDestination(transform.position);
                         AnimatorStopMoving();
                     } else if(dist >= 3f * radius) {
-                        SetDestination(_following.transform.position);
-                        AnimatorStartMoving();
+                        if (!_following.IsRVOLocked()) {
+                            SetDestination(_following.transform.position);
+                            AnimatorStartMoving();
+                        }
                     }
                 } else if (_movementMode == MovementMode.Attack){
                     SetDestination(_following.transform.position);
@@ -683,5 +685,9 @@ public class Unit : MonoBehaviour {
 
     public void LockMovement(bool locked) {
         _rvoRef.locked = locked;
+    }
+
+    public bool IsRVOLocked() {
+        return _rvoRef.locked;
     }
 }

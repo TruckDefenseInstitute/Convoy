@@ -3859,7 +3859,7 @@ MonoBehaviour:
   drawGizmos: 1
   detailedGizmos: 0
   startEndModifier:
-    addPoints: 0
+    addPoints: 1
     exactStartPoint: 3
     exactEndPoint: 3
     useRaycasting: 0
@@ -4049,9 +4049,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: c5c61bd4a1353974a8727a90701c6980, type: 3}
-  _unitCost: 50
-  _unitTrainingTime: 9
+  _unitRamenCost: 0
+  _unitThymeCost: 0
   _unitDescription: Good Tank against Rifles
+  _unitFlavourText: 
 --- !u!82 &964709052336829083
 AudioSource:
   m_ObjectHideFlags: 0

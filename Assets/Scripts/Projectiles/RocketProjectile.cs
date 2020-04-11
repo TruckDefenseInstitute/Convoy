@@ -56,6 +56,16 @@ public class RocketProjectile : MonoBehaviour {
         }
         if (_u != null && _u.IsAlive()) {
             _dest = _u.transform.position + Vector3.up;
+        } else {
+            if (Vector3.Distance(transform.position, _dest) < 1f){
+                _exploded = true;
+                if (HitSpawn != null) {
+                    Instantiate(HitSpawn, transform.position, transform.rotation);
+                }
+                Destroy(this);
+                Destroy(_rigidbody);
+                Destroy(transform.GetChild(0).gameObject);
+            }
         }
         var destFacing = _dest - transform.position;
 
@@ -75,7 +85,7 @@ public class RocketProjectile : MonoBehaviour {
 
         _rigidbody.MovePosition(transform.position + _velocity * Time.deltaTime);
 
-        if (transform.position.y < _dest.y) {
+        if (transform.position.y < 0) {
             _exploded = true;
             if (HitSpawn != null) {
                 Instantiate(HitSpawn, transform.position, transform.rotation);
@@ -96,6 +106,15 @@ public class RocketProjectile : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.isTrigger) {
             return;
+        }
+        if (other.tag == "Ground") {
+            _exploded = true;
+            if (HitSpawn != null) {
+                Instantiate(HitSpawn, transform.position, transform.rotation);
+            }
+            Destroy(this);
+            Destroy(_rigidbody);
+            Destroy(transform.GetChild(0).gameObject);
         }
         Unit u = other.GetComponentInParent<Unit>();
         if (u != null && u == _u && u.IsAlive()) {
