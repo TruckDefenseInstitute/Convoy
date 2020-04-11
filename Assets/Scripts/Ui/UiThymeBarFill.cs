@@ -13,6 +13,9 @@ public class UiThymeBarFill : MonoBehaviour {
     }
 
     private void FillBar() {
+        if(ResourceManager.Instance.IsThymeFull()) {
+            return;
+        }
         if(_thymeFillBar.fillAmount >= 1) {
             _thymeFillBar.fillAmount = 0;
             ResourceManager.Instance.GenerateThyme();

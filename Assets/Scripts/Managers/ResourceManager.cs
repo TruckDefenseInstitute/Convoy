@@ -6,7 +6,7 @@ public class ResourceManager : Manager<ResourceManager> {
     
     // Starting ramen should be initialize in inspector
     [SerializeField]
-    private float _ramen = 50f;
+    private float _ramen = 100f;
     [SerializeField]
     private float _ramenGenerated = 10f;
     [SerializeField]
@@ -18,7 +18,7 @@ public class ResourceManager : Manager<ResourceManager> {
     [SerializeField]
     private float _thymeGenerated = 1f;
     [SerializeField]
-    private float _thymeGeneratedInterval = 5f;
+    private float _thymeGeneratedInterval = 2f;
     [SerializeField]
     private float _maxThyme = 10;
 
@@ -76,5 +76,9 @@ public class ResourceManager : Manager<ResourceManager> {
 
     public float GetThymeGeneratedInterval() {
         return _thymeGeneratedInterval;
+    }
+
+    public bool IsThymeFull() {
+        return _thyme >= _maxThyme;
     }
 }
