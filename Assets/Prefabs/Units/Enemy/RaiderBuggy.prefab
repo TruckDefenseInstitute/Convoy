@@ -57,9 +57,9 @@ MonoBehaviour:
   drawGizmos: 1
   detailedGizmos: 0
   startEndModifier:
-    addPoints: 0
+    addPoints: 1
     exactStartPoint: 3
-    exactEndPoint: 3
+    exactEndPoint: 4
     useRaycasting: 0
     mask:
       serializedVersion: 2
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  radius: 0.75
+  radius: 1.5
   height: 1
   repathRate: 0.5
   canSearch: 1
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3de4e06b6b000442836e77228e0e3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Alignment: 0
+  Alignment: 1
   IsControllable: 1
   ThreatLevel: 1
   Name: Raider Buggy

@@ -57,9 +57,9 @@ MonoBehaviour:
   drawGizmos: 1
   detailedGizmos: 0
   startEndModifier:
-    addPoints: 0
+    addPoints: 1
     exactStartPoint: 3
-    exactEndPoint: 3
+    exactEndPoint: 4
     useRaycasting: 0
     mask:
       serializedVersion: 2
@@ -358,6 +358,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a1028908367c4843bf4bf434e96c434, type: 3}
   - {fileID: 8300000, guid: 97da0d179b5bcf140bb0661ad4d61a0c, type: 3}
   DeathVolume: 0.5
+  sfxVolume: {fileID: 0}
 --- !u!1 &571406759793054134
 GameObject:
   m_ObjectHideFlags: 0

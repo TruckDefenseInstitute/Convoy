@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SleepTime: 20
-  UnitToSpawn: {fileID: 7061815773503231191, guid: 57853bd06bee0914e8f93e07df8b2827,
+  UnitToSpawn: {fileID: 7061815773503231191, guid: 3c33133f4ef1a0f4dade13ed67cb60df,
     type: 3}
   SpawnPosition: {fileID: 875715013751432764}
   RallyPoint: {fileID: 2442891304625917056}
@@ -249,6 +249,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 241d569469facd44796f7c20d7df8f36, type: 3}
   - {fileID: 8300000, guid: 09031c1ff87300e4a9494b936ff218ab, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!114 &7534652730499293412
 MonoBehaviour:
   m_ObjectHideFlags: 0

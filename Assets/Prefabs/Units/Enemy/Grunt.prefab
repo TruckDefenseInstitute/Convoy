@@ -5933,9 +5933,9 @@ MonoBehaviour:
   drawGizmos: 1
   detailedGizmos: 0
   startEndModifier:
-    addPoints: 0
+    addPoints: 1
     exactStartPoint: 3
-    exactEndPoint: 3
+    exactEndPoint: 4
     useRaycasting: 0
     mask:
       serializedVersion: 2
@@ -6034,7 +6034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3de4e06b6b000442836e77228e0e3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Alignment: 0
+  Alignment: 1
   IsControllable: 1
   ThreatLevel: 1
   Name: Grunt
@@ -6240,6 +6240,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88bebe0604d27dc49aa65c545d6269ee, type: 3}
   - {fileID: 8300000, guid: 660049dd1c374ed40945f1eb9bd74426, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!1 &6913238769434683645
 GameObject:
   m_ObjectHideFlags: 0

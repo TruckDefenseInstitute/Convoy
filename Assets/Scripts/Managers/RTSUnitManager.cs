@@ -266,8 +266,8 @@ public class RTSUnitManager : Manager<RTSUnitManager>
 
         Physics.Raycast(mouseToWorldRay, out hit);
 
-        if (Mathf.Abs(hit.point.x) > PlayerCameraManager.Instance.panLimit.x
-            || Mathf.Abs(hit.point.z) > PlayerCameraManager.Instance.panLimit.y) {
+        if (Mathf.Abs(hit.point.x - PlayerCameraManager.Instance._xMinimapPos) > PlayerCameraManager.Instance.panLimit.x + 1
+            || Mathf.Abs(hit.point.z - PlayerCameraManager.Instance._zMinimapPos) > PlayerCameraManager.Instance.panLimit.y + 1) {
             return;
         }
 
@@ -366,6 +366,20 @@ public class RTSUnitManager : Manager<RTSUnitManager>
 
     public void RemoveUnit(GameObject unit) {
         _units.Remove(unit);
+    }
+
+    public bool TrySelectRandomFriendlyUnit(out GameObject outu, float probability = 1f) {
+        foreach (GameObject u in _units) {
+            Unit unit = u.GetComponent<Unit>();
+            if (unit.Alignment == Alignment.Friendly) {
+                if (UnityEngine.Random.Range(0f, 1f) < probability) {
+                    outu = u;
+                    return true;
+                }
+            }
+        }
+        outu = null;
+        return false;
     }
 }
 

@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ramen: 100
-  _ramenGenerated: 10
-  _ramenGeneratedInterval: 0.5
+  _ramenGenerated: 1
+  _ramenGeneratedInterval: 0.1
   _thyme: 0
   _thymeGenerated: 1
   _thymeGeneratedInterval: 2
