@@ -27,6 +27,13 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
         StartCoroutine(LateStartGame());
     }
 
+    public void StartTutorial() {
+        UiSoundManager.Instance.PlayButtonClickSound();
+        DisappearMenu(_startMenu);
+        UiScreenEffectManager.Instance.FadeIn();
+        StartCoroutine(LateStartTutorial());
+    }
+
     public void Options() {
         UiSoundManager.Instance.PlayButtonClickSound();
         DisappearMenu(_startMenu);
@@ -58,7 +65,12 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
 
     IEnumerator LateStartGame() {
         yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Final Scene");
+    }
+
+    IEnumerator LateStartTutorial() {
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene("TutorialLevel");
     }
 
     IEnumerator LateOption() {
