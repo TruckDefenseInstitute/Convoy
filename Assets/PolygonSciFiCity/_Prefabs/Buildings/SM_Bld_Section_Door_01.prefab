@@ -100,9 +100,9 @@ MonoBehaviour:
   circleResolution: 6
   height: 5
   meshScale: 1
-  center: {x: 2.5, y: 0, z: 2.5}
+  center: {x: -2.5, y: 0, z: -2.5}
   updateDistance: 0.4
   isDual: 0
   cutsAddedGeom: 1
   updateRotationDistance: 10
-  useRotationAndScale: 0
+  useRotationAndScale: 1
