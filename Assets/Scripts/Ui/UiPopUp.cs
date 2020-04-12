@@ -45,6 +45,20 @@ public class UiPopUp : MonoBehaviour {
         _blackSurfaceBox = GetComponent<Image>();
     }
 
+    public void ConfigureUnitPopUp(GameObject parent, GameObject unit, int number) {
+        UnitTraining ut = unit.GetComponent<UnitTraining>();
+        
+        _thyme.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = ut.GetUnitThymeCost().ToString("0");
+        _ramen.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = ut.GetUnitRamenCost().ToString("0");
+        
+        _name.GetComponent<TextMeshProUGUI>().text = unit.GetComponent<Unit>().Name + " (F" + number.ToString() + ")"; 
+        _description.GetComponent<TextMeshProUGUI>().text = ut.GetUnitDescription();
+        _flavour.GetComponent<TextMeshProUGUI>().text = ut.GetUnitFlavourText();
+        _unitStatus.GetComponent<UiUnitStatusPopUp>().Configure(unit);
+
+        Configure(parent);
+    }
+
     public void ConfigureUnitPopUp(GameObject parent, GameObject unit) {
         UnitTraining ut = unit.GetComponent<UnitTraining>();
         

@@ -203,6 +203,7 @@ MonoBehaviour:
   MoveSpeed: 5.5
   OnEnemyDeathReward: 10
   MaxRotatingSpeed: 360
+  selectRingSize: {x: 0.2, y: 0.2, z: 1}
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
     type: 3}
@@ -405,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: 0058f8c00697abf49ac67384e27707b4, type: 3}
-  _unitRamenCost: 60
+  _unitRamenCost: 70
   _unitThymeCost: 1
   _unitDescription: Light Infantry Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
   _unitFlavourText: In addition to typical mercenary work, The Fennel Security Corps

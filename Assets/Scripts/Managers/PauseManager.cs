@@ -38,6 +38,10 @@ public class PauseManager : Manager<PauseManager> {
         }
     }
 
+    public bool IsPaused() {
+        return _gamePaused;
+    }
+
     private void PauseGame() {
         _pauseScreenCanvas.SetActive(true);
         _uiInGameCanvas.SetActive(false);
