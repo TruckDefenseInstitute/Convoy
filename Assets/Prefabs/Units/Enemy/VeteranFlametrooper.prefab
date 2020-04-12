@@ -328,9 +328,9 @@ MonoBehaviour:
   drawGizmos: 1
   detailedGizmos: 0
   startEndModifier:
-    addPoints: 1
+    addPoints: 0
     exactStartPoint: 3
-    exactEndPoint: 3
+    exactEndPoint: 1
     useRaycasting: 0
     mask:
       serializedVersion: 2
@@ -438,7 +438,7 @@ MonoBehaviour:
   Deathrattle: {fileID: 7190217404225326594, guid: 1f618360230211d45bc187c8a80385c1,
     type: 3}
   RetargetTime: 2
-  DetectionRange: 23
+  DetectionRange: 30
   AMoveStopDistMultiplier: 1
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5

@@ -553,8 +553,8 @@ public class Unit : MonoBehaviour {
                         SetDestination(transform.position);
                         AnimatorStopMoving();
                     } else if(dist >= 3f * radius) {
+                        SetDestination(_following.transform.position);
                         if (!_following.IsRVOLocked()) {
-                            SetDestination(_following.transform.position);
                             AnimatorStartMoving();
                         }
                     }

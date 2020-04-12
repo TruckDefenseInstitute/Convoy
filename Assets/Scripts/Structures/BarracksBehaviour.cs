@@ -12,6 +12,8 @@ public class BarracksBehaviour : MonoBehaviour
     public Transform RallyPoint;
 
     public float CooldownTime;
+    public float ReduceCooldownPerSummon = 0f;
+    public float MinimumCooldown;
     Vector3 spawnPosition;
     Unit _unit;
     bool _enabled;
@@ -63,8 +65,11 @@ public class BarracksBehaviour : MonoBehaviour
         Unit unitScript = Instantiate(UnitToSpawn, SpawnPosition.position, SpawnPosition.rotation).GetComponent<Unit>();
         unitScript.Alignment = Alignment.Hostile;
 
+        CooldownTime -= ReduceCooldownPerSummon;
+        CooldownTime = Math.Max(CooldownTime, MinimumCooldown);
+
         unitScript.Start();
-        unitScript.Move(RallyPoint.position, MovementMode.Move);
+        unitScript.Move(RallyPoint.transform.position, MovementMode.Move);
         unitScript.ShiftFollow(TruckReferenceManager.Instance.TruckBehavior);
     }
 

@@ -113,6 +113,8 @@ MonoBehaviour:
   SpawnPosition: {fileID: 875715013751432764}
   RallyPoint: {fileID: 2442891304625917056}
   CooldownTime: 8
+  ReduceCooldownPerSummon: 0
+  MinimumCooldown: 0
 --- !u!114 &1448087854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +415,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1005620969, guid: 05cce10c53c896f4495809af7a45bbe1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 05cce10c53c896f4495809af7a45bbe1, type: 3}
 --- !u!1 &6114731195387485355 stripped
 GameObject:

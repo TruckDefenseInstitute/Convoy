@@ -9672,14 +9672,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sounds:
-  - {fileID: 8300000, guid: 07d718f3fffe517478f616506e25c6bc, type: 3}
-  - {fileID: 8300000, guid: dacb00a1bcf8f824aaa1ed161130d99b, type: 3}
-  - {fileID: 8300000, guid: d70cc9a7776ece54191252c9f1dac830, type: 3}
-  - {fileID: 8300000, guid: 720b369c981b3a64e8e1d30772c69eb5, type: 3}
-  - {fileID: 8300000, guid: 797f70ae9e24d23499114563d78b5b88, type: 3}
-  - {fileID: 8300000, guid: 4e090459498782f4b812200756c8cf09, type: 3}
-  - {fileID: 8300000, guid: 29490d000841d4349aa8bef6baa00056, type: 3}
+  - {fileID: 8300000, guid: 78d094d34e94352409af3a013e8002ce, type: 3}
+  - {fileID: 8300000, guid: a13b6cf594e3d954993bb45e4bcb0c13, type: 3}
+  - {fileID: 8300000, guid: 8fa6d574a3dd645409a7f41933490149, type: 3}
+  - {fileID: 8300000, guid: b78ea86f3c2afd04dbe1fe4f7873f0cb, type: 3}
+  - {fileID: 8300000, guid: 2cf98a297c5a42d459ce3cdc3fe5a75b, type: 3}
+  - {fileID: 8300000, guid: bd9ae6fb87accee4594e57747bb88ff0, type: 3}
+  - {fileID: 8300000, guid: 8c80e652c78eafc4ea4a31fe237129c4, type: 3}
   Volume: 1
+  sfxVolume: {fileID: 0}
 --- !u!82 &1972804017838489070
 AudioSource:
   m_ObjectHideFlags: 0

@@ -75,8 +75,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8, y: 2.2, z: 4.5}
-  m_Center: {x: 0, y: 1.5629468, z: 0.08681321}
+  m_Size: {x: 3.4, y: 2.3, z: 4.5}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!95 &597354459076636108
 Animator:
   serializedVersion: 3
@@ -326,7 +326,7 @@ MonoBehaviour:
   AimTime: 0.5
   CooldownTime: 2.3
   CanMoveWhileAttacking: 1
-  Projectile: {fileID: 5223907511035474348, guid: 102b27cbdb0be114a8087b0ff4633913,
+  Projectile: {fileID: 5223907511035474348, guid: 96ef3b38bc493044ab16e5880c657620,
     type: 3}
   ProjectileSpawnPoint: {fileID: 597354459167778891}
 --- !u!114 &2547072763294027782
@@ -474,12 +474,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FiringSounds:
-  - {fileID: 8300000, guid: 46787cdd12d11f144807221fc04282a8, type: 3}
-  - {fileID: 8300000, guid: 2b60edcf336882346aaf4c6a8b6ff4eb, type: 3}
-  - {fileID: 8300000, guid: 28f2c848f30920744b3aee6bc5683b16, type: 3}
-  - {fileID: 8300000, guid: 37563be262805f04aaf2b8a385db8e20, type: 3}
-  - {fileID: 8300000, guid: 1b9a482b2e8d5fe48aec03a63b61e5e7, type: 3}
-  FiringVolume: 0.4
+  - {fileID: 8300000, guid: 105bf759bf236c54abbc58e03bec8e0f, type: 3}
+  - {fileID: 8300000, guid: f49f04aea037a9c40831a3faf869787b, type: 3}
+  - {fileID: 8300000, guid: 0164510cf8da33e47b21cdfc0998f1cb, type: 3}
+  - {fileID: 8300000, guid: cfd0b69349f22d64682c92236512f846, type: 3}
+  - {fileID: 8300000, guid: b69c30f154117534a8ab89a5b205cc50, type: 3}
+  - {fileID: 8300000, guid: c723ec915582af444b5a9fe5d63005db, type: 3}
+  - {fileID: 8300000, guid: ef7653bd8437bcc4caac647d4f205b30, type: 3}
+  - {fileID: 8300000, guid: 52639f0a918b63d4a9f05ccdba65a49b, type: 3}
+  - {fileID: 8300000, guid: e45d4615311bb6044822dbe67145e184, type: 3}
+  - {fileID: 8300000, guid: 6a32857d84306844cb91dc739afad4e5, type: 3}
+  FiringVolume: 0.7
   DieingSounds:
   - {fileID: 8300000, guid: 6580ee1a59682a54ba1db3dab3bad659, type: 3}
   - {fileID: 8300000, guid: 95e32ff11b2c6b244903d728e5618896, type: 3}
@@ -501,9 +506,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: c11ed87373ed3114a841ae62faaf00f8, type: 3}
-  _unitRamenCost: 250
+  _unitRamenCost: 140
   _unitThymeCost: 3
-  _unitDescription: Tank Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
+  _unitDescription: Armored Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
   _unitFlavourText: A turtle? A tank? Is alchemy between the two even possible?
 --- !u!1001 &597354458258842385
 PrefabInstance:

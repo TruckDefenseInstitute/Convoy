@@ -162,6 +162,8 @@ MonoBehaviour:
   SpawnPosition: {fileID: 2944763925865779392}
   RallyPoint: {fileID: 2944763926250746023}
   CooldownTime: 12
+  ReduceCooldownPerSummon: 0
+  MinimumCooldown: 0
 --- !u!114 &7879922955203946036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +300,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 241d569469facd44796f7c20d7df8f36, type: 3}
   - {fileID: 8300000, guid: 09031c1ff87300e4a9494b936ff218ab, type: 3}
   DeathVolume: 1
+  sfxVolume: {fileID: 0}
 --- !u!114 &417544562528409598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,5 +525,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6709215374530679211, guid: 5f257b0a01530674191819b4bf513840, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f257b0a01530674191819b4bf513840, type: 3}
