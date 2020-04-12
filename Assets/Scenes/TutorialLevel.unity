@@ -2481,6 +2481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 880244536}
 --- !u!65 &108444486
 BoxCollider:
@@ -5782,6 +5783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 1483529169}
 --- !u!65 &246622447
 BoxCollider:
@@ -7951,6 +7953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 601938036}
 --- !u!65 &342785710
 BoxCollider:
@@ -10523,6 +10526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 469644662}
 --- !u!4 &469644661
 Transform:
@@ -11258,6 +11262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 496931628}
 --- !u!4 &496931631
 Transform:
@@ -12760,6 +12765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 553525768}
 --- !u!65 &553525770
 BoxCollider:
@@ -19361,6 +19367,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6479078846698226587, guid: 7dc9ec88f5f9254409fe980876638477,
+        type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: fb212d94c8ebf2b46a5972432e3420dd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dc9ec88f5f9254409fe980876638477, type: 3}
 --- !u!1 &884850573 stripped
@@ -24298,6 +24309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 1113532450}
 --- !u!4 &1113532448
 Transform:
@@ -24785,6 +24797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 2045578649}
 --- !u!1 &1128788254
 GameObject:
@@ -50984,6 +50997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 1837022481}
 --- !u!4 &1837022480
 Transform:
@@ -51777,6 +51791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 1837832317}
 --- !u!65 &1864260974
 BoxCollider:
@@ -59093,6 +59108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 1171777768}
 --- !u!65 &2144388190
 BoxCollider:
@@ -60322,6 +60338,7 @@ MonoBehaviour:
   MoveSpeed: 10
   OnEnemyDeathReward: 50
   MaxRotatingSpeed: 360
+  selectRingSize: {x: 0.2, y: 0.2, z: 1}
   EffectSpawningPoint: {fileID: 2854884619410105634}
   selectRingPrefab: {fileID: 0}
 --- !u!4 &3294120045181307597
@@ -60802,6 +60819,7 @@ MonoBehaviour:
   MoveSpeed: 10
   OnEnemyDeathReward: 1
   MaxRotatingSpeed: 360
+  selectRingSize: {x: 0.2, y: 0.2, z: 1}
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 0}
 --- !u!114 &6947077366260828920
@@ -60891,6 +60909,7 @@ MonoBehaviour:
   MoveSpeed: 10
   OnEnemyDeathReward: 1
   MaxRotatingSpeed: 360
+  selectRingSize: {x: 0.2, y: 0.2, z: 1}
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 0}
 --- !u!65 &6947077366260828924
@@ -60961,6 +60980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f434f0c54cc84db0a6e28bda506aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Event: {fileID: 6947077366995356841}
 --- !u!114 &6947077366995356841
 MonoBehaviour:

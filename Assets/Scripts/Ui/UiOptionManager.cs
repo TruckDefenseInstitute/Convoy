@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UiOptionManager : MonoBehaviour {
+public class UiOptionManager : Manager<UiOptionManager> {
 
     [SerializeField]
     private GameObject _optionMenu = null;
@@ -21,6 +21,21 @@ public class UiOptionManager : MonoBehaviour {
         _graphicsText = _optionMenu.transform.GetChild(2).GetChild(4).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
         _resolutionText =_optionMenu.transform.GetChild(2).GetChild(5).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
 
+        _graphicsList = new List<string>() {
+            "Very Low",
+            "Low",
+            "Medium",
+            "High",
+            "Very High",
+            "Ultra"
+        };
+
+        _resolutionList = new List<KeyValuePair<int, int>>() {
+            new KeyValuePair<int, int>(1280, 720),
+            new KeyValuePair<int, int>(1600, 900),
+            new KeyValuePair<int, int>(1920, 1080)
+        };
+
         ConfigureGraphicsOption();
         ConfigureResolutionOption();
     }
@@ -29,6 +44,7 @@ public class UiOptionManager : MonoBehaviour {
     public void BackToMain() {
         UiSoundManager.Instance.PlayButtonClickSound();
         DisappearMenu(_optionMenu);
+        ResetOptions();
         StartCoroutine(LateBackToMain());
     }
 
@@ -36,7 +52,13 @@ public class UiOptionManager : MonoBehaviour {
         QualitySettings.SetQualityLevel(_graphicsIndex);
         KeyValuePair<int, int> res = _resolutionList[_resolutionIndex];
         Screen.SetResolution(res.Key, res.Value, true);
+        
         BackToMain();
+    }
+
+    public void ResetOptions() {
+        ConfigureGraphicsOption();
+        ConfigureResolutionOption();
     }
 
     private void DisappearMenu(GameObject buttonsGameObject) {
@@ -56,25 +78,11 @@ public class UiOptionManager : MonoBehaviour {
     }
 
     private void ConfigureGraphicsOption() {
-        _graphicsList = new List<string>() {
-            "Very Low",
-            "Low",
-            "Medium",
-            "High",
-            "Very High",
-            "Ultra"
-        };
         _graphicsIndex = QualitySettings.GetQualityLevel();
         _graphicsText.text = _graphicsList[_graphicsIndex];
     }
 
     private void ConfigureResolutionOption() {
-        _resolutionList = new List<KeyValuePair<int, int>>() {
-            new KeyValuePair<int, int>(1024, 576),
-            new KeyValuePair<int, int>(1280, 720),
-            new KeyValuePair<int, int>(1600, 900),
-            new KeyValuePair<int, int>(1920, 1080)
-        };
         int width = Screen.currentResolution.width;
         int height = Screen.currentResolution.height;
         _resolutionIndex = _resolutionList.FindIndex(res => (res.Key == width) && (res.Value == height));
