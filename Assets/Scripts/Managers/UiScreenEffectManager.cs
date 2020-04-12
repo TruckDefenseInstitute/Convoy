@@ -13,18 +13,23 @@ public class UiScreenEffectManager : Manager<UiScreenEffectManager> {
         FadeOut();
     }
 
+    // Fade into darkness
     public void FadeIn() {
         _fade.SetActive(true);
         _fade.GetComponent<Animator>().SetTrigger("FadeIn");
+        // StartCoroutine(LateFade());
     }
 
+    // Fade out into the light
     private void FadeOut() {
+        _fade.SetActive(true);
         _fade.GetComponent<Animator>().SetTrigger("FadeOut");
-        StartCoroutine(LateFadeOut());
+        StartCoroutine(LateFade());
     }
 
-    IEnumerator LateFadeOut() {
-        yield return new WaitForSeconds(2f);
+    IEnumerator LateFade() {
+        yield return new WaitForSeconds(1f);
+        _fade = GameObject.Find("Fade");
         _fade.SetActive(false);
     }
 }
