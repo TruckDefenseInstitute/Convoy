@@ -61,15 +61,6 @@ public class TutorialOverlayManager : Manager<TutorialOverlayManager>
         _originalTimeScale = Time.timeScale;
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ClickAnywhere();
-        }
-    }
-
-
     public void ClickAnywhere()
     {
         bool tutorialShouldEnd = false;
