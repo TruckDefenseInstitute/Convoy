@@ -54,6 +54,7 @@ public class Unit : MonoBehaviour {
     // in degrees
     public float MaxRotatingSpeed = 360;
 
+    public Vector3 selectRingSize = new Vector3(0.2f, 0.2f, 1f);
     public GameObject EffectSpawningPoint;
     GameObject _healthBar;
     UiOverlayManager _uiOverlayManager;
@@ -338,6 +339,7 @@ public class Unit : MonoBehaviour {
 
         if (selectRingPrefab != null) {
             _selectRing = Instantiate(selectRingPrefab, gameObject.transform);
+            _selectRing.transform.localScale = selectRingSize;
         }
 
         if (_aiRef != null) {
