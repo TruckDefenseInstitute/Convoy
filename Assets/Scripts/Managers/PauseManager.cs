@@ -12,6 +12,7 @@ public class PauseManager : Manager<PauseManager> {
 
     private GameObject _pauseMenu = null;
     private GameObject _optionMenu = null;
+    private GameObject _controlsMenu = null;
     private GameObject _uiInGameCanvas = null;
     private GameObject _uiInterfaceCanvas = null;
 
@@ -23,6 +24,7 @@ public class PauseManager : Manager<PauseManager> {
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
         _pauseMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(1).gameObject;
         _optionMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(2).gameObject;
+        _controlsMenu = _pauseScreenCanvas.transform.GetChild(0).GetChild(3).gameObject;
     }
 
     void Update() {
@@ -51,6 +53,10 @@ public class PauseManager : Manager<PauseManager> {
     }
 
     public void UnpauseGame() {
+        UiOptionManager.Instance.ResetOptions();
+        _pauseMenu.SetActive(true);
+        _optionMenu.SetActive(false);
+        _controlsMenu.SetActive(false);
         _pauseScreenCanvas.SetActive(false);
         _uiInGameCanvas.SetActive(true);
         _uiInterfaceCanvas.SetActive(true);
@@ -62,6 +68,12 @@ public class PauseManager : Manager<PauseManager> {
         UiSoundManager.Instance.PlayButtonClickSound();
         DisappearMenu(_pauseMenu);
         StartCoroutine(LateOption());
+    }
+
+    public void OpenControls() {
+        UiSoundManager.Instance.PlayButtonClickSound();
+        DisappearMenu(_pauseMenu);
+        StartCoroutine(LateControls());
     }
 
     public void ReturnToMainMenu() {
@@ -77,6 +89,12 @@ public class PauseManager : Manager<PauseManager> {
     public void RestartGame() {
         UiScreenEffectManager.Instance.FadeIn();
         StartCoroutine(LateRestart());
+    }
+
+    public void BackToMain() {
+        UiSoundManager.Instance.PlayButtonClickSound();
+        DisappearMenu(_controlsMenu);
+        StartCoroutine(LateBackToMain());
     }
 
     private void DisappearMenu(GameObject menu) {
@@ -112,9 +130,24 @@ public class PauseManager : Manager<PauseManager> {
         ReappearMenu(_optionMenu);
     }
 
+    IEnumerator LateControls() {
+        yield return new WaitForSecondsRealtime(0.5f);
+        _pauseMenu.SetActive(false);
+        _controlsMenu.SetActive(true);
+        ReappearMenu(_controlsMenu);
+    }
+
     IEnumerator LateRestart() {
         yield return new WaitForSecondsRealtime(2.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    IEnumerator LateBackToMain() {
+        yield return new WaitForSecondsRealtime(1f);
+        _controlsMenu.SetActive(false);
+        _optionMenu.SetActive(false);
+        _pauseMenu.SetActive(true);
+        ReappearMenu(_pauseMenu);
     }
 }
 
