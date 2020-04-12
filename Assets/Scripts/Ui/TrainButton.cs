@@ -17,10 +17,13 @@ public class TrainButton : MonoBehaviour,
     private TextMeshProUGUI _thymeCost = null;
     private TextMeshProUGUI _ramenCost = null;
 
+    private KeyCode _keyCodeToTrain;
+
     private int _amountOfUnitsQueued = 0;
     private float _trainingIntervals = 0;
     private bool _isCompleted = false;
     private bool _isTraining = false;
+    private int _number = 0;
 
     // Dead Code
     private float ticksPerSecond = 0;
@@ -32,15 +35,23 @@ public class TrainButton : MonoBehaviour,
         // ticksPerSecond = 1f / Time.deltaTime; // Dead Code
     }
 
+    public void Update() {
+        if(!PauseManager.Instance.IsPaused()) {
+            if(Input.GetKeyDown(_keyCodeToTrain)) {
+                TrainingUnitsQueueManager.Instance.TrainUnit(this);
+            }
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventdata) {
-        UiOverlayManager.Instance.PopUpUnitDescription(_unitPrefab);
+        UiOverlayManager.Instance.PopUpUnitDescription(_unitPrefab, _number);
     }
 
     public void OnPointerExit(PointerEventData eventdata) {
         UiOverlayManager.Instance.RemovePopUp();
     }
 
-    public void Configure(GameObject unit) {
+    public void Configure(GameObject unit, int slot) {
         _unitPrefab = unit;
         _unitIcon = GetComponent<Image>();
         _unitIcon.sprite = unit.GetComponent<UnitTraining>().GetUnitSprite();
@@ -56,6 +67,9 @@ public class TrainButton : MonoBehaviour,
 
         _thymeCost.text = unit.GetComponent<UnitTraining>().GetUnitThymeCost().ToString();
         _ramenCost.text = unit.GetComponent<UnitTraining>().GetUnitRamenCost().ToString();
+
+        _number = slot + 1;
+        _keyCodeToTrain = (KeyCode) System.Enum.Parse(typeof(KeyCode), ("F" + _number.ToString()));
 
         // Dead Code
         // _trainingIntervals = unit.GetComponent<UnitTraining>().GetUnitTrainingTime() / 60;

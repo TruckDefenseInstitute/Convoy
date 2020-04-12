@@ -4161,7 +4161,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1024796633}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -9033,7 +9033,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1024796633}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

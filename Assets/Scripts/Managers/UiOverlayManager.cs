@@ -260,7 +260,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
             Transform unitSlot = _trainUnitsPanel.transform.GetChild(slot);
             GameObject trainButton = Instantiate(_trainButtonPrefab);
             trainButton.transform.SetParent(unitSlot);
-            trainButton.GetComponent<TrainButton>().Configure(unit);
+            trainButton.GetComponent<TrainButton>().Configure(unit, slot);
             slot++;
         }
     }
@@ -272,10 +272,16 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     
     /* =============== Pop Up ================= */
 
+    public void PopUpUnitDescription(GameObject unit, int number) {
+        GameObject popUp = Instantiate(_popUpPrefab);
+        popUp.GetComponent<UiPopUp>().ConfigureUnitPopUp(_popUpPanel, unit, number);
+    }
+
     public void PopUpUnitDescription(GameObject unit) {
         GameObject popUp = Instantiate(_popUpPrefab);
         popUp.GetComponent<UiPopUp>().ConfigureUnitPopUp(_popUpPanel, unit);
     }
+
 
     public void PopUpResourceDescription(string name, string description, string flavour) {
         GameObject popUp = Instantiate(_popUpPrefab);

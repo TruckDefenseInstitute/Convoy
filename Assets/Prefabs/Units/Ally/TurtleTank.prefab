@@ -301,6 +301,7 @@ MonoBehaviour:
   MoveSpeed: 6
   OnEnemyDeathReward: 15
   MaxRotatingSpeed: 90
+  selectRingSize: {x: 0.5, y: 0.5, z: 1}
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
     type: 3}
@@ -501,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitSprite: {fileID: 21300000, guid: c11ed87373ed3114a841ae62faaf00f8, type: 3}
   _unitRamenCost: 250
-  _unitThymeCost: 2
+  _unitThymeCost: 3
   _unitDescription: Tank Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
   _unitFlavourText: A turtle? A tank? Is alchemy between the two even possible?
 --- !u!1001 &597354458258842385

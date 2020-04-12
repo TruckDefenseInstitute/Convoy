@@ -98,7 +98,7 @@ MonoBehaviour:
   _ramenGeneratedInterval: 0.1
   _thyme: 0
   _thymeGenerated: 1
-  _thymeGeneratedInterval: 2
+  _thymeGeneratedInterval: 3
   _maxThyme: 10
 --- !u!114 &884850574
 MonoBehaviour:
