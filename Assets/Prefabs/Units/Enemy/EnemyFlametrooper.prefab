@@ -444,6 +444,7 @@ MonoBehaviour:
   MoveSpeed: 5
   OnEnemyDeathReward: 20
   MaxRotatingSpeed: 360
+  selectRingSize: {x: 0.2, y: 0.2, z: 1}
   EffectSpawningPoint: {fileID: 0}
   selectRingPrefab: {fileID: 7388027373866066033, guid: 4afb044a1b7ce74438bc96e180363470,
     type: 3}

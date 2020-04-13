@@ -8,9 +8,9 @@ public class ResourceManager : Manager<ResourceManager> {
     [SerializeField]
     private float _ramen = 100f;
     [SerializeField]
-    private float _ramenGenerated = 10f;
+    private float _ramenGenerated = 1f;
     [SerializeField]
-    private float _ramenGeneratedInterval = .5f;
+    private float _ramenGeneratedInterval = .1f;
 
     // Try not to change the thyme values. It should be small and remain small. Not more than 99 thyme.
     [SerializeField]

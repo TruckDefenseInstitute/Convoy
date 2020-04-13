@@ -116,7 +116,7 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
     }
 
     /*================ Health Bar ================*/
-    public GameObject CreateUnitHealthBar(float health, float maxHealth) {
+    public GameObject CreateUnitHealthBar(float health, float maxHealth, Alignment alignment) {
         _healthBarPanel = GameObject.Find("HealthBarPanel");
         GameObject healthBar = Instantiate(_healthBarPrefab, Vector3.zero, Quaternion.identity);
         healthBar.transform.SetParent(_healthBarPanel.transform);
@@ -124,8 +124,16 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         // Change the size of the health bar
         healthBar.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         
+        SimpleHealthBar hpBar = healthBar.transform.GetChild(0).GetComponent<SimpleHealthBar>();
+
+        if(alignment == Alignment.Friendly) {
+            hpBar.UpdateColor(new Color(0.275f, 0.94f, 0.275f, 1f));
+        } else {
+            hpBar.UpdateColor(new Color(0.94f, 0.275f, 0.275f, 1f));
+        }
+        
         // Change health bar itself
-        healthBar.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(health, maxHealth);
+        hpBar.UpdateBar(health, maxHealth);
 
         return healthBar;
     }
