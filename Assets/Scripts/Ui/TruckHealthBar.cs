@@ -13,7 +13,7 @@ public class TruckHealthBar : MonoBehaviour,
 
     public void Start() {
         _truckHealthBar = transform.GetChild(0).GetChild(0).GetComponent<SimpleHealthBar>();
-        _truckHealthBar.UpdateColor(new Color(0.94f, 0.27f, 0.27f, 1f));
+        _truckHealthBar.UpdateColor(new Color(0.275f, 0.94f, 0.275f, 1f));
 
         _truck = RTSUnitManager.Instance.truck;
     }

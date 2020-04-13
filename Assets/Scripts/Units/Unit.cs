@@ -321,7 +321,7 @@ public class Unit : MonoBehaviour {
         rigidbody.isKinematic = true;
 
         _uiOverlayManager = UiToGameManager.Instance.GetUiOverlayManager();
-        _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth);
+        _healthBar = _uiOverlayManager.CreateUnitHealthBar(Health, MaxHealth, this.Alignment);
 
 
         if (this.Alignment == Alignment.Friendly)

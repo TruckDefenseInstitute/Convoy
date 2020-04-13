@@ -17,7 +17,9 @@ public class DeployedUnitButtonM : MonoBehaviour,
     }
 
     public void OnPointerEnter(PointerEventData eventdata) {        
-        UiOverlayManager.Instance.PopUpUnitDescription(_unitList[1]);
+        if(_unitList.Count != 0) {
+            UiOverlayManager.Instance.PopUpUnitDescription(_unitList[0]);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventdata) {
