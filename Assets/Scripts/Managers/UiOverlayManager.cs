@@ -31,6 +31,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
     // UI Inteface Canvas
     private GameObject _uiInterfaceCanvas = null;
+    private float _uiInterfaceCanvasScaleX;
+    private float _uiInterfaceCanvasScaleY;
     private GameObject _minimap = null;
     private GameObject _deployedUnitsPanel = null;
     private GameObject _trainUnitsPanel = null;
@@ -57,6 +59,9 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
 
         // UI Interface Canvas
         _uiInterfaceCanvas = GameObject.Find("UiInterfaceCanvas");
+        RectTransform rectTransform = _uiInterfaceCanvas.GetComponent<RectTransform>();
+        _uiInterfaceCanvasScaleX = rectTransform.localScale.x;
+        _uiInterfaceCanvasScaleY = rectTransform.localScale.y;
         _minimap = GameObject.Find("Minimap");
         _deployedUnitsPanel = GameObject.Find("DeployedUnitsPanel");
         _trainUnitsPanel = GameObject.Find("TrainUnitsPanel");
@@ -314,8 +319,8 @@ public class UiOverlayManager : Manager<UiOverlayManager> {
         mousePos.x -= 20 * Screen.width / 1920f;
         mousePos.y -= 20 * Screen.height / 1080f;
 
-        mousePos.x *= _minimapCamera.pixelWidth / 300f;
-        mousePos.y *= _minimapCamera.pixelHeight / 300f;
+        mousePos.x *= _minimapCamera.pixelWidth / (300f * _uiInterfaceCanvasScaleX);
+        mousePos.y *= _minimapCamera.pixelHeight / (300f * _uiInterfaceCanvasScaleY);
 
         Debug.Log(mousePos);
 
