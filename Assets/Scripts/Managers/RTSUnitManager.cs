@@ -392,6 +392,22 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         outu = null;
         return false;
     }
+
+    public bool TryGetEnemyInfAndTankNumbers(out int infantryNumbers, out int tankNumbers) {
+        tankNumbers = 0;
+        infantryNumbers = 0;
+        foreach (GameObject u in _units) {
+            Unit unit = u.GetComponent<Unit>();
+            if (unit.Alignment == Alignment.Friendly) {
+                if (unit.MaxHealth >= 1500) {
+                    tankNumbers++;
+                } else {
+                    infantryNumbers++;
+                }
+            }
+        }
+        return infantryNumbers > tankNumbers;
+    }
 }
 
 /*

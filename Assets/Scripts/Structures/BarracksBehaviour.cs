@@ -7,7 +7,11 @@ using UnityEngine;
 public class BarracksBehaviour : MonoBehaviour
 {
     public float SleepTime;
+    public bool EnableAdaptiveSpawn = false;
     public GameObject UnitToSpawn;
+    public GameObject[] CounterInf;
+    public GameObject[] CounterTank;
+
     public Transform SpawnPosition;
     public Transform RallyPoint;
 
@@ -62,7 +66,18 @@ public class BarracksBehaviour : MonoBehaviour
             return;
         }
 
-        Unit unitScript = Instantiate(UnitToSpawn, SpawnPosition.position, SpawnPosition.rotation).GetComponent<Unit>();
+        GameObject uts;
+        if (EnableAdaptiveSpawn) {
+            if (RTSUnitManager.Instance.TryGetEnemyInfAndTankNumbers(out int inf, out int tnk)) {
+                uts = CounterInf[UnityEngine.Random.Range(0, CounterInf.Length)];
+            } else {
+                uts = CounterTank[UnityEngine.Random.Range(0, CounterTank.Length)];
+            }
+        } else {
+            uts = UnitToSpawn;
+        }
+
+        Unit unitScript = Instantiate(uts, SpawnPosition.position, SpawnPosition.rotation).GetComponent<Unit>();
         unitScript.Alignment = Alignment.Hostile;
 
         CooldownTime -= ReduceCooldownPerSummon;
