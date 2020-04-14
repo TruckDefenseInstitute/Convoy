@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 
-public class RTSUnitManager : Manager<RTSUnitManager>
-{
-    enum GameControlState
-    {
+public class RTSUnitManager : Manager<RTSUnitManager> {
+    enum GameControlState {
         Idle,
         Multiselect,
         Selected
@@ -31,8 +29,8 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     List<GameObject> _units = new List<GameObject>();
     List<GameObject>[] _markedUnitsMemory;
     public KeyCode controlGroupsButton = KeyCode.LeftControl;
-    
-    KeyCode[] _numberKeyMap = { KeyCode.Alpha0,  KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
+
+    KeyCode[] _numberKeyMap = { KeyCode.Alpha0, KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
     bool _numberKeyPressed = false;
     int _alphanum = 0;
 
@@ -45,8 +43,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     public Unit truck;    // Add in scene
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         _unitCommandManager = UnitCommandManager.Instance;
         _uiOverlayManager = UiOverlayManager.Instance;
         _ringVisibilityManager = RingVisibilityManager.Instance;
@@ -55,8 +52,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         _endingPoint = new Vector3();
 
         _markedUnitsMemory = new List<GameObject>[10];
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             _markedUnitsMemory[i] = new List<GameObject>();
         }
 
@@ -64,57 +60,56 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         IdentifyPressedNumberKey();
 
-        switch (_gameControlState)
-        {
+        switch (_gameControlState) {
             case GameControlState.Idle:
-                if (_numberKeyPressed) SwitchToRecordedAllies();
+                if (_numberKeyPressed)
+                    SwitchToRecordedAllies();
 
-                if (Input.GetMouseButton(0) && IsPointerNotOverUI()) IdleLeftMouseDown();
+                if (Input.GetMouseButton(0) && IsPointerNotOverUI())
+                    IdleLeftMouseDown();
+
+                if (Input.GetKey(controlGroupsButton) && Input.GetKey(KeyCode.A))
+                    SelectAllUnits();
                 break;
 
-            case GameControlState.Multiselect:              
-                if (Input.GetMouseButtonUp(0))
-                { 
+            case GameControlState.Multiselect:
+                if (Input.GetMouseButtonUp(0)) {
                     MultiselectLeftMouseUp();
-                }
-                else
-                {
+                } else {
                     MultiselectLeftMouseHeld();
                 }
                 break;
 
             case GameControlState.Selected:
-                if(Input.GetKey(controlGroupsButton))
-                {
-                    if (_numberKeyPressed) RecordCurrentlySelectedAllies();
+                if (Input.GetKey(controlGroupsButton)) {
+                    if (_numberKeyPressed)
+                        RecordCurrentlySelectedAllies();
+                } else {
+                    if (_numberKeyPressed)
+                        SwitchToRecordedAllies();
                 }
-                else
-                {
-                    if (_numberKeyPressed) SwitchToRecordedAllies();
-                }
+
+                if (Input.GetKey(controlGroupsButton) && Input.GetKey(KeyCode.A))
+                    SelectAllUnits();
 
                 if (Input.GetKey(KeyCode.S)) {
                     _unitCommandManager.Stop();
                 }
 
                 if (Input.GetKey(KeyCode.F)) {
-                    _unitCommandManager.FollowTruck(truck);    
+                    _unitCommandManager.FollowTruck(truck);
                 }
 
                 if (Input.GetKey(KeyCode.G)) {
                     _unitCommandManager.HoldGround();
                 }
 
-                if (Input.GetMouseButtonDown(1) && IsPointerNotOverUI())
-                {
+                if (Input.GetMouseButtonDown(1) && IsPointerNotOverUI()) {
                     SelectedRightMouseDown();
-                }
-                else if (Input.GetMouseButtonDown(0) && IsPointerNotOverUI())
-                {
+                } else if (Input.GetMouseButtonDown(0) && IsPointerNotOverUI()) {
                     if (Input.GetKey(KeyCode.LeftShift)) {
                         goto case GameControlState.Idle;
                     } else {
@@ -125,13 +120,10 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         }
     }
 
-    void IdentifyPressedNumberKey()
-    {
+    void IdentifyPressedNumberKey() {
         int i = 0;
-        while (i < 10)
-        {
-            if (Input.GetKeyDown(_numberKeyMap[i]))
-            {
+        while (i < 10) {
+            if (Input.GetKeyDown(_numberKeyMap[i])) {
                 _numberKeyPressed = true;
                 _alphanum = i;
                 return;
@@ -144,15 +136,11 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         _alphanum = 0;
     }
 
-    void SwitchToRecordedAllies()
-    {
-        if (_markedUnitsMemory[_alphanum].Count() == 0)
-        {
+    void SwitchToRecordedAllies() {
+        if (_markedUnitsMemory[_alphanum].Count() == 0) {
             _gameControlState = GameControlState.Idle;
             Debug.Log("Empty Slot, reverting to Idle");
-        }
-        else
-        {
+        } else {
             _selectedAllies = _markedUnitsMemory[_alphanum];
             _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
             _uiOverlayManager.SelectAllyUnits(_selectedAllies);
@@ -164,14 +152,12 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         }
     }
 
-    void RecordCurrentlySelectedAllies()
-    {
+    void RecordCurrentlySelectedAllies() {
         _markedUnitsMemory[_alphanum] = _selectedAllies;
         Debug.Log("Saved " + _alphanum);
     }
 
-    void IdleLeftMouseDown()
-    {
+    void IdleLeftMouseDown() {
         _startingPoint = Input.mousePosition;
         _gameControlState = GameControlState.Multiselect;
         return;
@@ -205,8 +191,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
             return;
         }
 
-        if (potentialAllies.FirstOrDefault() == null)
-        {
+        if (potentialAllies.FirstOrDefault() == null) {
             ExitMultiselectReturnToIdle();
             return;
         }
@@ -217,7 +202,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         } else {
             _selectedAllies = potentialAllies.ToList();
         }
-        
+
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
@@ -225,8 +210,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         _gameControlState = GameControlState.Selected;
     }
 
-    void MultiselectLeftMouseHeld()
-    {
+    void MultiselectLeftMouseHeld() {
         // This whole part is replicated from above
         var llc = Vector2.Min(_startingPoint, Input.mousePosition);
         var urc = Vector2.Max(_startingPoint, Input.mousePosition);
@@ -261,16 +245,29 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     }
 
 
-    void ExitMultiselectReturnToIdle()
-    {
+    void ExitMultiselectReturnToIdle() {
         _startingPoint = new Vector3();
         _endingPoint = new Vector3();
 
         _gameControlState = GameControlState.Idle;
     }
 
-    void SelectedRightMouseDown()
-    {
+    void SelectAllUnits() {
+        _selectedAllies = _units.Where(go => {
+            if (go.TryGetComponent<Unit>(out Unit u)) {
+                return u.Alignment == Alignment.Friendly && u.IsControllable;
+            } else {
+                return false;
+            }
+        }).ToList();
+        _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+        _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
+
+        _gameControlState = GameControlState.Selected;
+    }
+
+    void SelectedRightMouseDown() {
         Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
@@ -336,8 +333,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
     }
 
     // Make clciking such that it is on the Ui, not on the unit
-    private bool IsPointerNotOverUI() 
-    {
+    private bool IsPointerNotOverUI() {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         List<RaycastResult> results = new List<RaycastResult>();
@@ -345,29 +341,25 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         return results.Count == 0;
     }
 
-    public void ReportUnitDead(GameObject deadGameObject)
-    {
+    public void ReportUnitDead(GameObject deadGameObject) {
         _selectedAllies = _selectedAllies.Where(go => go != deadGameObject && go != null)
                                          .ToList();
 
         _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
         _uiOverlayManager.SelectAllyUnits(_selectedAllies);
         _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
-        
-        if (_selectedAllies.Count == 0)
-        {
+
+        if (_selectedAllies.Count == 0) {
             _gameControlState = GameControlState.Idle;
         }
 
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             _markedUnitsMemory[i] = _markedUnitsMemory[i].Where(go => go != deadGameObject && go != null)
                                                          .ToList();
         }
     }
 
-    public bool InPannableControlState()
-    {
+    public bool InPannableControlState() {
         return !(_gameControlState == GameControlState.Multiselect);
     }
 
@@ -408,6 +400,7 @@ public class RTSUnitManager : Manager<RTSUnitManager>
         }
         return infantryNumbers > tankNumbers;
     }
+
 }
 
 /*
