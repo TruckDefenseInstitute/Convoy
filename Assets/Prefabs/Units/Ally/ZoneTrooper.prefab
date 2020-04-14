@@ -378,7 +378,8 @@ MonoBehaviour:
   _unitSprite: {fileID: 21300000, guid: 51b74521b92d2bf46b61e6c6fde3fdea, type: 3}
   _unitRamenCost: 110
   _unitThymeCost: 1
-  _unitDescription: Armoured Infantry Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
+  _unitDescription: Armoured Infantry Unit.<br>Excellent vs <color=#8A2BE2>Vehicles</color>.<br>Good
+    vs <color=#1AFFFF>Structures</color>.
   _unitFlavourText: Those unable to keep up with the demands of the battlefield quickly
     die or desert. To graduate from the Khaganite Academy is but the highest praise
     of a soldier's ability.

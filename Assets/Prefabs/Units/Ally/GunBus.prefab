@@ -474,7 +474,8 @@ MonoBehaviour:
   _unitSprite: {fileID: 21300000, guid: a8c6e5bfc7991c2498d35586350bc1fd, type: 3}
   _unitRamenCost: 130
   _unitThymeCost: 3
-  _unitDescription: Armored Unit.<br>Strong against <color=#FFFF00>Infantry</color>.
+  _unitDescription: Armored Vehicular Unit.<br>Strong against <color=#FFFF00>Infantry</color>.<br>Weak
+    vs <color=#8A2BE2>Vehicles</color>.
   _unitFlavourText: 'Despite having the name bus, it can only hold up to a max of
     5 people. '
 --- !u!1 &8559177011538712489

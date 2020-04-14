@@ -508,7 +508,8 @@ MonoBehaviour:
   _unitSprite: {fileID: 21300000, guid: c11ed87373ed3114a841ae62faaf00f8, type: 3}
   _unitRamenCost: 140
   _unitThymeCost: 3
-  _unitDescription: Armored Unit.<br>Strong against <color=#1AFFFF>Structures</color>.
+  _unitDescription: Armored Vehicular Unit.<br>Excellent vs <color=#8A2BE2>Vehicles</color>.<br>Good
+    vs <color=#1AFFFF>Structures</color>.
   _unitFlavourText: A turtle? A tank? Is alchemy between the two even possible?
 --- !u!1001 &597354458258842385
 PrefabInstance:

@@ -360,7 +360,7 @@ MonoBehaviour:
   AMoveStopDistMultiplier: 0.75
   LoseVisionMultiplier: 1.1
   MoveSpeed: 5.7
-  OnEnemyDeathReward: 15
+  OnEnemyDeathReward: 10
   MaxRotatingSpeed: 360
   selectRingSize: {x: 0.2, y: 0.2, z: 1}
   EffectSpawningPoint: {fileID: 0}

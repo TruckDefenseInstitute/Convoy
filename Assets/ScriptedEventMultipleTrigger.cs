@@ -17,7 +17,11 @@ public class ScriptedEventMultipleTrigger : MonoBehaviour {
 
     void Trigger() {
         foreach (ScriptedEvent e in Events) {
-            e.Trigger();
+            try {
+                e.Trigger();
+            } catch {
+                
+            }
         }
     }
 }

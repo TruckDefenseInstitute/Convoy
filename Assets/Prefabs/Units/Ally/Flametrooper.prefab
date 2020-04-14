@@ -522,7 +522,8 @@ MonoBehaviour:
   _unitSprite: {fileID: 21300000, guid: a693ab45b7e0c244fbbd4214973bdb13, type: 3}
   _unitRamenCost: 90
   _unitThymeCost: 1
-  _unitDescription: Light Infantry Unit.<br>Deals AOE damage.
+  _unitDescription: Light Infantry Unit.<br>Deals AOE damage.<br>Excellent vs <color=#1AFFFF>Structures</color>
+    and <color=#FFFF00>Infantry</color>.
   _unitFlavourText: The Research and Application division of Dune Labs are forever
     enthused by new opportunities to test their latest equipment.
 --- !u!82 &3162706346676878027
