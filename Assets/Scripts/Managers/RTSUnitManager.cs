@@ -472,6 +472,21 @@ public class RTSUnitManager : Manager<RTSUnitManager> {
         return infantryNumbers > tankNumbers;
     }
 
+    public void AllEnemiesAttackTruck() {
+        foreach (GameObject u in _units) {
+            Unit unit = u.GetComponent<Unit>();
+            if (unit.Alignment == Alignment.Hostile) {
+                if (unit.TryGetComponent<Weapon>(out Weapon w)) {
+                    if (w.DamageType != DamageType.Sniper) {
+                        unit.Attack(TruckReferenceManager.Instance.TruckBehavior);
+                    } else {
+                        unit.Follow(TruckReferenceManager.Instance.TruckBehavior);
+                    }
+                        
+                }
+            }
+        }
+    }
 }
 
 /*
