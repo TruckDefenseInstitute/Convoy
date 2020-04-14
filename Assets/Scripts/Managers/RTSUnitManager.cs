@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 using System;
 
 public class RTSUnitManager : Manager<RTSUnitManager> {
+    private const float DOUBLE_CLICK_DELAY = 0.2f;
+
     enum GameControlState {
         Idle,
         Multiselect,
@@ -34,12 +36,13 @@ public class RTSUnitManager : Manager<RTSUnitManager> {
     bool _numberKeyPressed = false;
     int _alphanum = 0;
 
+    bool _readyForDoubleClick = false;
+
     // User feedback
     public GameObject clickEffect;
     GameObject _previousClickEffect;
 
     // Truck
-
     public Unit truck;    // Add in scene
 
     // Start is called before the first frame update
@@ -118,6 +121,20 @@ public class RTSUnitManager : Manager<RTSUnitManager> {
                 }
                 break;
         }
+
+        if (Input.GetMouseButtonDown(0)) {
+            if (_readyForDoubleClick) {
+                _readyForDoubleClick = false;
+                SelectSimilarUnitsUnderCursor();
+            } else {
+                _readyForDoubleClick = true;
+                Invoke("UnDoubleClick", DOUBLE_CLICK_DELAY);
+            }
+        }
+    }
+
+    void UnDoubleClick() {
+        _readyForDoubleClick = false;
     }
 
     void IdentifyPressedNumberKey() {
@@ -250,6 +267,60 @@ public class RTSUnitManager : Manager<RTSUnitManager> {
         _endingPoint = new Vector3();
 
         _gameControlState = GameControlState.Idle;
+    }
+
+    void SelectSimilarUnitsUnderCursor() {
+        var rect = Rect.MinMaxRect(0, 0, Screen.width, Screen.height);
+
+        Ray mouseToWorldRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(mouseToWorldRay, out hit);
+
+        Collider[] hitColliders = Physics.OverlapSphere(hit.point, 0.1f);
+
+        Unit[] underCursor = hitColliders
+            .Where(c => c.transform.parent != null)
+            .Select(c => c.transform.parent.gameObject)
+            .Where(unit => {
+                if (unit.TryGetComponent<Unit>(out var u)) {
+                    return u.Alignment == Alignment.Friendly && u.IsControllable;
+                } else {
+                    return false;
+                }
+            })
+            .Select(c => c.GetComponent<Unit>())
+            .ToArray();
+
+        if (underCursor.Length == 0) {
+            SelectedLeftMouseDownNoShift();
+            return;
+        }
+
+        var potentialAllies =
+            _units.FindAll(unit => rect.Contains(PlayerCameraManager.Instance.Camera.WorldToScreenPoint(unit.transform.position)));
+        
+
+        potentialAllies =
+            potentialAllies.FindAll(unit => {
+                if (unit.TryGetComponent<Unit>(out var u)) {
+                    return u.Alignment == Alignment.Friendly && u.IsControllable && u.Name == underCursor[0].Name;
+                } else {
+                    return false;
+                }
+            });
+
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            _selectedAllies.AddRange(potentialAllies.ToList());
+            _selectedAllies = _selectedAllies.Distinct().ToList();
+        } else {
+            _selectedAllies = potentialAllies.ToList();
+        }
+
+        _unitCommandManager.ChangeSelectedAllies(_selectedAllies);
+        _uiOverlayManager.SelectAllyUnits(_selectedAllies);
+        _ringVisibilityManager.ChangeSelectedAllies(_selectedAllies);
+
+        _gameControlState = GameControlState.Selected;
     }
 
     void SelectAllUnits() {
