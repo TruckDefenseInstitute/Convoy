@@ -42,6 +42,7 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
     public void Options() {
         UiSoundManager.Instance.PlayButtonClickSound();
         DisappearMenu(_startMenu);
+        print("Options");
         StartCoroutine(LateOption());
     }
 
@@ -94,6 +95,7 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
 
     IEnumerator LateOption() {
         yield return new WaitForSeconds(1f);
+        print("Late Options");
         _startMenu.SetActive(false);
         _optionMenu.SetActive(true);
         ReappearMenu(_optionMenu);

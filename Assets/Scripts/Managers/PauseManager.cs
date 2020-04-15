@@ -115,6 +115,7 @@ public class PauseManager : Manager<PauseManager> {
 
     IEnumerator LateReturnToMainMenu() {
         yield return new WaitForSecondsRealtime(2.5f);
+        UnpauseGame();
         SceneManager.LoadScene(0);
     }
 
@@ -139,6 +140,7 @@ public class PauseManager : Manager<PauseManager> {
 
     IEnumerator LateRestart() {
         yield return new WaitForSecondsRealtime(2.5f);
+        UnpauseGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
