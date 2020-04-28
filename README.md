@@ -5,9 +5,10 @@ Known as 'Convoy' before the Great Truckheaval.
 Truck is a relatively fast paced Real-Time Strategy game that features thrilling combat and deep strategic gameplay. Defend a truck against a relentless onslaught as it transports its precious cargo.
 
 ## Downloads
-You can download the latest release from [Releases](https://github.com/TruckDefenseInstitute/Convoy/releases)
-On the Releases page, download the file titled "SC4.1.1.zip"
-When the file has been unzipped, double-click on "Convoy.exe" to open the game
+You can download the latest release from [Releases](https://github.com/TruckDefenseInstitute/Convoy/releases).  
+
+1. On the Releases page, download the file titled "SC4.1.1.zip"
+2. When the file has been unzipped, double-click on "Convoy.exe" to open the game
 
 ## Team
 - [Jerrold](https://github.com/Wingedevil)
