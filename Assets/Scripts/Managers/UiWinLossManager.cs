@@ -24,11 +24,13 @@ public class UiWinLossManager : Manager<UiWinLossManager> {
     
     IEnumerator LateReturnToMainMenu() {
         yield return new WaitForSecondsRealtime(2.5f);
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
     IEnumerator LateQuitGame() {
         yield return new WaitForSecondsRealtime(2.5f);
+        Time.timeScale = 1f;
         Application.Quit();
     }
 

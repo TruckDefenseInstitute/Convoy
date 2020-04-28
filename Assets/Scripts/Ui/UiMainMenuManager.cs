@@ -22,6 +22,7 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
         _startMenu = _mainMenuCanvas.transform.GetChild(0).GetChild(0).gameObject;
         _optionMenu = _mainMenuCanvas.transform.GetChild(0).GetChild(1).gameObject;
         _controlsMenu = _mainMenuCanvas.transform.GetChild(0).GetChild(2).gameObject;
+        Time.timeScale = 1.0f;
     }
 
     // For Main Buttons
@@ -42,7 +43,7 @@ public class UiMainMenuManager : Manager<UiMainMenuManager> {
     public void Options() {
         UiSoundManager.Instance.PlayButtonClickSound();
         DisappearMenu(_startMenu);
-        print("Options");
+        print(Time.timeScale);
         StartCoroutine(LateOption());
     }
 
