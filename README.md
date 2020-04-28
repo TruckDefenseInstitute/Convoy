@@ -22,5 +22,6 @@ When the file has been unzipped, double-click on "Convoy.exe" to open the game
 - Used [Tup Wander's](http://www.tupwanders.nl) [Aaargh Font](https://www.dafont.com/aaargh.font)
 - Adapted AI code from Aron Granberg's [A* Pathfinding Project](https://arongranberg.com/astar/)
 - Used Synty Studio's [Sci-Fi City](https://assetstore.unity.com/packages/3d/environments/sci-fi/polygon-sci-fi-city-pack-115950),
+- Used Main Menu Photo by Alexander Popov on [Unsplash ](https://unsplash.com/photos/VbEvC_hZJsQ)
 [Sci-Fi Space](https://assetstore.unity.com/packages/3d/environments/sci-fi/polygon-sci-fi-space-pack-138857),
 [Apocalypse](https://assetstore.unity.com/packages/3d/environments/urban/polygon-apocalypse-pack-154193) and [War](https://assetstore.unity.com/packages/3d/environments/historic/polygon-war-pack-106992) packs.
