@@ -53,6 +53,7 @@ public class WinLossManager : Manager<WinLossManager>
     {
         _levelStatus = LevelStatus.Win;
         _victoryCanvas.SetActive(true);
+        Invoke("WaitForAwhileToPause", 5f);
     }
 
 
@@ -70,5 +71,9 @@ public class WinLossManager : Manager<WinLossManager>
     public bool GetGamePausable()
     {
         return _levelStatus == LevelStatus.Ongoing;
+    }
+
+    public void WaitForAwhileToPause() {
+        Time.timeScale = 0f;
     }
 }

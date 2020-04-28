@@ -121,6 +121,7 @@ public class PauseManager : Manager<PauseManager> {
 
     IEnumerator LateQuitGame() {
         yield return new WaitForSecondsRealtime(2.5f);
+        UnpauseGame();
         Application.Quit();
     }
 
